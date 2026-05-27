@@ -1,7 +1,7 @@
 .footer {
   background: #770016;
   color: #ffffff;
-  padding: 76px 32px 34px;
+  padding: 76px var(--layout-gutter) 34px;
 }
 
 .content {
@@ -91,7 +91,7 @@
 
 @media (max-width: 620px) {
   .footer {
-    padding: 52px 24px 30px;
+    padding-block: 52px 30px;
   }
 
   .top {

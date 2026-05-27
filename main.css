@@ -1,4 +1,6 @@
 :root {
+  --layout-gutter: 24px;
+
   background: #ffffff;
   color: #171014;
   font-family:
@@ -32,4 +34,10 @@ select {
 
 a {
   color: inherit;
+}
+
+@media (max-width: 620px) {
+  :root {
+    --layout-gutter: 20px;
+  }
 }

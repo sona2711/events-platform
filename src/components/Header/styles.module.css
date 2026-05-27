@@ -1,6 +1,6 @@
 .header {
   background: transparent;
-  padding: 28px 32px 24px;
+  padding: 28px var(--layout-gutter) 24px;
 }
 
 .navBar {
@@ -73,7 +73,7 @@
 
 @media (max-width: 820px) {
   .header {
-    padding: 20px 16px;
+    padding-block: 20px;
   }
 
   .navBar {
