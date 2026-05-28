@@ -21,9 +21,38 @@
 
 .table {
   width: 100%;
-  min-width: 920px;
+  min-width: 958px;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
+}
+
+.colCheckbox {
+  width: 48px;
+}
+
+.colUser {
+  width: 240px;
+}
+
+.colCategory {
+  width: 110px;
+}
+
+.colEvent {
+  width: 200px;
+}
+
+.colDate {
+  width: 120px;
+}
+
+.colStatus {
+  width: 120px;
+}
+
+.colActions {
+  width: 120px;
 }
 
 .tableHeadCell {
@@ -47,6 +76,20 @@
   line-height: 20px;
   color: #111827;
   vertical-align: middle;
+}
+
+.tableHeadCell:first-child,
+.tableBodyCell:first-child {
+  padding-left: 32px;
+}
+
+.tableHeadCell:last-child,
+.tableBodyCell:last-child {
+  padding-right: 36px;
+}
+
+.tableHeadCell:last-child {
+  text-align: right;
 }
 
 .checkboxCell {
@@ -167,6 +210,11 @@
   gap: 12px;
 }
 
+.tableBodyCell:last-child .actions {
+  width: 100%;
+  justify-content: flex-end;
+}
+
 .actionButton {
   border: none;
   padding: 0;
@@ -190,6 +238,11 @@
   color: #9f1239;
 }
 
+.actionButtonCancelled,
+.actionButtonCancelled:hover {
+  color: rgba(214, 214, 214, 1);
+}
+
 .lastRowCell {
   border-bottom: none;
 }
@@ -209,5 +262,15 @@
   .tableHeadCell,
   .tableBodyCell {
     padding: 14px 10px;
+  }
+
+  .tableHeadCell:first-child,
+  .tableBodyCell:first-child {
+    padding-left: 24px;
+  }
+
+  .tableHeadCell:last-child,
+  .tableBodyCell:last-child {
+    padding-right: 28px;
   }
 }

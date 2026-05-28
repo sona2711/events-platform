@@ -8,6 +8,7 @@ import { CategoriesPage } from '@/pages/categoriesPage'
 import { MainPage } from '@/pages/mainPage'
 import { PasswordRecoveryPage } from '@/pages/passwordRecovery'
 import { UserProfilePage } from '@/pages/userProfile'
+import { RegistrationsTable } from '@/components/RegistrationsTable'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
           <Route path="admin" element={<AdminPage />} />
+          <Route path="registrations-preview" element={<RegistrationsTable />} />
           <Route path="password-recovery" element={<PasswordRecoveryPage />} />
           <Route path="profile" element={<UserProfilePage />} />
           <Route path="*" element={<NotFoundPage />} />

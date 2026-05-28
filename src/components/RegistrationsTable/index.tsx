@@ -7,6 +7,15 @@ export function RegistrationsTable() {
     <section className={styles.tableSection} aria-label="Registrations table">
       <div className={styles.tableScroll}>
         <table className={styles.table}>
+          <colgroup>
+            <col className={styles.colCheckbox} />
+            <col className={styles.colUser} />
+            <col className={styles.colCategory} />
+            <col className={styles.colEvent} />
+            <col className={styles.colDate} />
+            <col className={styles.colStatus} />
+            <col className={styles.colActions} />
+          </colgroup>
           <thead>
             <tr>
               <th className={`${styles.tableHeadCell} ${styles.checkboxCell}`}>
@@ -95,7 +104,9 @@ export function RegistrationsTable() {
                         <EditOutlined />
                       </button>
                       <button
-                        className={`${styles.actionButton} ${styles.actionButtonDanger}`}
+                        className={`${styles.actionButton} ${styles.actionButtonDanger} ${
+                          registration.status === 'Cancelled' ? styles.actionButtonCancelled : ''
+                        }`}
                         type="button"
                         aria-label="Cancel registration"
                       >
