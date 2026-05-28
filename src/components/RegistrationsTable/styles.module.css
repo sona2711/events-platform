@@ -27,6 +27,7 @@
 
 .tableTitle {
   margin: 0;
+  font-family: 'Bricolage Grotesque Variable';
   font-size: 18px;
   font-weight: 600;
   color: #111827;
@@ -35,7 +36,7 @@
 
 .tableTitleCount {
   color: #6b7280;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .exportButton {
