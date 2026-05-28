@@ -1,10 +1,19 @@
-import { EditOutlined, StopOutlined } from '@ant-design/icons'
+import { DownloadOutlined, EditOutlined, StopOutlined } from '@ant-design/icons'
 import { REGISTRATIONS_DATA, STATUS_CLASS_BY_VALUE } from './consts'
 import styles from './styles.module.css'
 
 export function RegistrationsTable() {
   return (
     <section className={styles.tableSection} aria-label="Registrations table">
+      <div className={styles.tableHeader}>
+        <h2 className={styles.tableTitle}>
+          Total Registrations <span className={styles.tableTitleCount}>(248)</span>
+        </h2>
+        <button className={styles.exportButton} type="button">
+          <DownloadOutlined className={styles.exportIcon} aria-hidden="true" />
+          Export to CSV
+        </button>
+      </div>
       <div className={styles.tableScroll}>
         <table className={styles.table}>
           <colgroup>

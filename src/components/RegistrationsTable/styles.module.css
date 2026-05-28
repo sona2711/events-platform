@@ -1,6 +1,6 @@
 .tableSection {
   width: 100%;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(217, 217, 217, 1);
   border-radius: 14px;
   background: #ffffff;
   overflow: hidden;
@@ -12,6 +12,58 @@
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 62px;
+  padding: 0 24px 0 32px;
+  background-color: rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(229, 231, 235, 1);
+}
+
+.tableTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 24px;
+}
+
+.tableTitleCount {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.exportButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border: 1px solid rgba(209, 213, 219, 1);
+  border-radius: 9999px;
+  background: #ffffff;
+  color: rgba(11, 28, 48, 1);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.exportButton:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.exportIcon {
+  font-size: 14px;
 }
 
 .tableScroll {
@@ -32,11 +84,11 @@
 }
 
 .colUser {
-  width: 240px;
+  width: 220px;
 }
 
 .colCategory {
-  width: 110px;
+  width: 130px;
 }
 
 .colEvent {
@@ -56,20 +108,27 @@
 }
 
 .tableHeadCell {
-  padding: 14px 12px;
+  box-sizing: border-box;
+  height: 62px;
+  padding: 0 12px;
+  background-color: rgba(247, 250, 255, 1);
   border-bottom: 1px solid #e5e7eb;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #6b7280;
   text-align: left;
+  vertical-align: middle;
   white-space: nowrap;
 }
 
 .tableBodyCell {
-  padding: 16px 12px;
+  box-sizing: border-box;
+  height: 68px;
+  padding: 0 12px;
+  background-color: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   font-size: 14px;
   font-weight: 400;
@@ -129,7 +188,7 @@
 }
 
 .userName {
-  font-weight: 700;
+  font-weight: 600;
   color: #111827;
 }
 
@@ -196,7 +255,7 @@
 }
 
 .statusCancelled {
-  background: #e5e7eb;
+  background: rgba(237, 237, 238, 1);
   color: #4b5563;
 }
 
@@ -261,7 +320,7 @@
 @media (max-width: 1024px) {
   .tableHeadCell,
   .tableBodyCell {
-    padding: 14px 10px;
+    padding: 0 10px;
   }
 
   .tableHeadCell:first-child,
