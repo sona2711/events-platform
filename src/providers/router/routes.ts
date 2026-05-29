@@ -64,5 +64,4 @@ export const appRoutes: RouteObject[] = [
       { path: '*', element: createElement(NotFoundPage) },
     ],
   },
-  notFoundPageRoute,
 ]
