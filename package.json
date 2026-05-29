@@ -26,10 +26,10 @@
     "antd": "^5",
     "axios": "^1",
     "firebase": "^11",
-    "i18next": "^25",
+    "i18next": "^25.10.10",
     "react": "^18",
-    "react-i18next": "^15",
     "react-dom": "^18",
+    "react-i18next": "^15.7.4",
     "react-redux": "^9",
     "react-router-dom": "^7",
     "zod": "^3"
@@ -62,10 +62,17 @@
     "vite": "^6"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-    "src/**/*.{json,css,md}": ["prettier --write"]
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
   },
   "msw": {
-    "workerDirectory": ["public"]
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
