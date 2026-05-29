@@ -1,0 +1,58 @@
+{
+  "brand": "Yerevan Pulsar",
+  "nav": {
+    "allEvents": "Все события",
+    "categories": "Категории"
+  },
+  "auth": {
+    "login": "Вход",
+    "signUp": "Регистрация"
+  },
+  "languages": {
+    "label": "Язык",
+    "en": "Английский",
+    "hy": "Армянский",
+    "ru": "Русский"
+  },
+  "aria": {
+    "primaryNav": "Основная навигация"
+  },
+  "footer": {
+    "copyright": "Авторское право © 2026. Все права защищены.",
+    "groups": {
+      "features": {
+        "title": "Возможности",
+        "links": {
+          "blog": "Блог и ресурсы",
+          "about": "О нас",
+          "integrations": "Интеграции",
+          "crisisSupport": "Экстренная поддержка"
+        }
+      },
+      "product": {
+        "title": "Продукт",
+        "links": {
+          "pricing": "Цены",
+          "chat": "Чат",
+          "voiceAgents": "Голосовые агенты",
+          "voiceDesign": "Голосовой дизайн"
+        }
+      },
+      "company": {
+        "title": "Компания",
+        "links": {
+          "viewCatalog": "Просмотреть каталог",
+          "browseDatasets": "Просмотреть наборы данных",
+          "requestDataset": "Запросить индивидуальный набор данных"
+        }
+      },
+      "resources": {
+        "title": "Ресурсы",
+        "links": {
+          "privacy": "Политика конфиденциальности",
+          "terms": "Условия обслуживания"
+        }
+      }
+    }
+  }
+}

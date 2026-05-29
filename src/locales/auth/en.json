@@ -1,0 +1,14 @@
+{
+  "login": {
+    "title": "Login",
+    "description": "Access your account to manage event registrations and saved events."
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "description": "Create an account to publish, discover, and follow events."
+  },
+  "passwordRecovery": {
+    "title": "Password Recovery",
+    "description": "Reset your password and get back to your Yerevan Pulsar account."
+  }
+}

@@ -1,10 +1,5 @@
-import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
 
 export function MainPage() {
-  return (
-    <PagePlaceholder
-      title="All Events"
-      description="Discover upcoming gatherings, talks, and community events across Yerevan."
-    />
-  )
+  return <PagePlaceholder namespace="home" titleKey="title" descriptionKey="description" />
 }

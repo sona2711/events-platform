@@ -1,10 +1,7 @@
-import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
 
 export function LoginPage() {
   return (
-    <PagePlaceholder
-      title="Login"
-      description="Access your account to manage event registrations and saved events."
-    />
+    <PagePlaceholder namespace="auth" titleKey="login.title" descriptionKey="login.description" />
   )
 }

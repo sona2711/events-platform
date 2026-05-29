@@ -1,10 +1,5 @@
-import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
 
 export function CategoriesPage() {
-  return (
-    <PagePlaceholder
-      title="Categories"
-      description="Explore events by interest, format, and community topic."
-    />
-  )
+  return <PagePlaceholder namespace="categories" titleKey="title" descriptionKey="description" />
 }

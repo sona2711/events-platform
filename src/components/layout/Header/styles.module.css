@@ -1,0 +1,94 @@
+.header {
+  background: transparent;
+  padding: 28px var(--layout-gutter) 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navBar {
+  align-items: center;
+  background: var(--color-surface-card);
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgb(var(--color-burgundy-700-rgb) / 0.16);
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1180px;
+  min-height: 68px;
+  padding: 0 18px 0 32px;
+}
+
+.brand {
+  color: var(--color-brand-primary);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.primaryLinks,
+.authLinks {
+  align-items: center;
+  display: flex;
+}
+
+.primaryLinks {
+  gap: 38px;
+}
+
+.authLinks {
+  gap: 22px;
+}
+
+.navLink,
+.authLink {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  text-decoration: none;
+}
+
+.navLink {
+  padding: 23px 0;
+}
+
+.activeNavLink::after {
+  background: var(--color-brand-primary);
+  border-radius: 999px;
+  bottom: 14px;
+  content: '';
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.authLinkFilled {
+  background: var(--color-brand-primary);
+  border-radius: 999px;
+  color: var(--color-text-on-brand);
+  padding: 14px 24px;
+}
+
+@media (max-width: 820px) {
+  .header {
+    padding-block: 20px;
+  }
+
+  .navBar {
+    align-items: flex-start;
+    border-radius: 28px;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+  }
+
+  .primaryLinks,
+  .authLinks {
+    flex-wrap: wrap;
+  }
+}
