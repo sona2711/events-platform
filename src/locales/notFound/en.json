@@ -1,5 +1,6 @@
 {
   "eyebrow": "404",
   "title": "Page Not Found",
-  "description": "The page you are looking for does not exist or may have moved."
+  "description": "The page you are looking for does not exist or may have moved.",
+  "homeLink": "Back to main page"
 }
