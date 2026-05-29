@@ -1,0 +1,110 @@
+---
+alwaysApply: true
+---
+# Project Standards
+
+## Stack and style
+- Use TypeScript for all app logic and React functional components.
+- Keep components and pages simple, readable, and focused on one responsibility.
+- Prefer existing project patterns before introducing new abstractions.
+
+## UI and layout
+- Prefer Ant Design components where possible instead of pure HTML tags.
+- Keep semantic HTML structure and accessible labels, headings, and link text.
+- Ensure responsive behavior for mobile and desktop when changing layout.
+
+## Component structure
+- Each component must be in its own folder named after the component.
+- The component entry file must be `index.tsx`.
+- Keep styles in a `styles.module.css` file.
+- Keep constants in a `consts` file.
+- Keep helpers in a `utils` file.
+- Keep component-specific types in `types.ts` when needed.
+- Keep related tests next to the component (`index.test.tsx`).
+- Declare components as named exports using arrow functions.
+- Type component props explicitly (no implicit `any` props).
+
+### Component grouping by usage
+- Group all components by usage inside `src/components/`.
+- Use `src/components/_shared/` for reusable generic components (for example `Button`, `Input`, `Modal`).
+- Use `src/components/layout/` for layout structure components (for example `Header`, `Footer`, `Sidebar`, `Main`).
+- Use `src/components/features/` for feature-specific components (for example `PostCard`, `UserList`).
+- Do not mix categories: each component must live in exactly one of these folders.
+
+### Component declaration style
+
+```tsx
+import type { ButtonProps } from './types';
+
+export const Button = (props: ButtonProps) => {
+  return <button>{props.children}</button>;
+};
+```
+
+### Expected component layout
+
+```text
+MyComponent/
+  index.tsx
+  styles.module.css
+  consts.ts
+  utils.ts
+  types.ts
+  index.test.tsx
+```
+
+## Pages as composition layers
+- Pages must act as composition and orchestration layers only.
+
+### Page structure
+- Each page must be in its own folder inside `src/pages/`, named after the page.
+- The entry file must be `index.tsx`.
+- Add `consts.ts`, `utils.ts`, and `types.ts` only when needed.
+
+```text
+pages/
+  PageName/
+    index.tsx
+    styles.module.css
+    consts.ts
+    utils.ts
+    types.ts
+```
+
+### Page rules
+- Build pages by composing components only.
+- Do not implement UI directly in pages (no raw HTML or UI library components).
+- Move all UI, markup, and styles into components.
+- Pages should handle data flow, state, and layout composition only.
+- Keep pages clean, minimal, and free of complex JSX.
+- Declare pages as named exports using arrow functions.
+- Type props explicitly (no `any`).
+
+## Routing structure
+- All routing logic must be placed inside `src/providers/router/`.
+- Do not define routes inside `App.tsx` or inside page components.
+- Use a dedicated `routes.ts` file for route configuration.
+- Use `index.tsx` for router setup and router provider wiring.
+- Use lazy loading for route components via `React.lazy`.
+- Wrap lazy-loaded routes with `Suspense` and provide a clear loading fallback.
+- Keep one route object per page/feature and compose routes in `routes.ts`.
+- Prefer route-level code splitting to reduce initial bundle size.
+- Handle unknown routes with a dedicated `NotFound` route.
+
+### Expected router files
+
+```text
+src/providers/router/
+  index.tsx
+  routes.ts
+```
+
+## Code quality
+- Favor small helper functions over repeated JSX or duplicated logic.
+- Do not add dependencies unless they are clearly needed for the request.
+
+
+## Safety checks before finishing
+- Run or suggest relevant checks for changed code (build, lint, or type-check).
+- Keep edits scoped to the request; do not refactor unrelated parts.
+- Preserve existing user content and routes unless the request says otherwise.

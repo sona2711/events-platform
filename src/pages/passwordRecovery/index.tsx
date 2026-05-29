@@ -1,10 +1,11 @@
-import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
 
 export function PasswordRecoveryPage() {
   return (
     <PagePlaceholder
-      title="Password Recovery"
-      description="Reset your password and get back to your Yerevan Pulsar account."
+      namespace="auth"
+      titleKey="passwordRecovery.title"
+      descriptionKey="passwordRecovery.description"
     />
   )
 }

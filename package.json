@@ -21,13 +21,16 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@ant-design/icons": "^5",
     "@reduxjs/toolkit": "^2",
     "antd": "^5",
     "axios": "^1",
     "firebase": "^11",
+    "i18next": "^25.10.10",
     "react": "^18",
     "react-dom": "^18",
+    "react-i18next": "^15.7.4",
     "react-redux": "^9",
     "react-router-dom": "^7",
     "swiper": "^12.2.0",

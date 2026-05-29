@@ -1,8 +1,30 @@
 :root {
   --layout-gutter: 24px;
 
-  background: #ffffff;
-  color: #171014;
+  /* primitive palette */
+  --color-burgundy-700: #770016;
+  --color-burgundy-700-rgb: 119 0 22;
+  --color-blue-600: #2665d6;
+  --color-orange-500: #f28906;
+  --color-lime-400: #d0e626;
+  --color-white: #ffffff;
+  --color-white-rgb: 255 255 255;
+  --color-neutral-950: #1a1a1a;
+
+  /* semantic aliases */
+  --color-brand-primary: var(--color-burgundy-700);
+  --color-action-primary: var(--color-blue-600);
+  --color-accent-warm: var(--color-orange-500);
+  --color-accent-bright: var(--color-lime-400);
+  --color-surface-page: var(--color-white);
+  --color-surface-card: var(--color-white);
+  --color-surface-brand: var(--color-burgundy-700);
+  --color-text-primary: var(--color-neutral-950);
+  --color-text-secondary: #5b4a51;
+  --color-text-on-brand: var(--color-white);
+
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
   font-family:
     Inter,
     ui-sans-serif,

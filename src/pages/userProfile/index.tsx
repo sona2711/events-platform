@@ -1,4 +1,4 @@
-import { PagePlaceholder } from '@/components/PagePlaceholder'
+import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
 
 export function UserProfilePage() {
   return (
