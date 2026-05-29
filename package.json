@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-redux": "^9",
     "react-router-dom": "^7",
+    "swiper": "^12.2.0",
     "zod": "^3"
   },
   "devDependencies": {
@@ -60,10 +61,17 @@
     "vite": "^6"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": ["eslint --fix", "prettier --write"],
-    "src/**/*.{json,css,md}": ["prettier --write"]
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
   },
   "msw": {
-    "workerDirectory": ["public"]
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

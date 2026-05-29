@@ -1,13 +1,15 @@
 .hero {
   position: relative;
-  width: 100%;
+  left: 50%;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 150px 96px 80px;
+  transform: translateX(-50%);
+  padding: 150px 96px 96px;
   overflow: hidden;
   background: radial-gradient(circle, #a80a22 0%, #770016 100%);
 }
@@ -15,9 +17,9 @@
 .background {
   position: absolute;
   top: -120px;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: calc(100% + 120px);
   background-image: url('../../assets/svg/fireworks.png');
   background-size: cover;
   background-position: center;
@@ -66,7 +68,7 @@
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 80px;
+  margin-bottom: 88px;
 }
 
 .btnPrimary,
@@ -152,15 +154,50 @@
 
 @media (max-width: 820px) {
   .hero {
-    padding-inline: 24px;
+    min-height: 760px;
+    padding: 190px 24px 96px;
   }
 
   .background {
     top: -170px;
-    height: calc(100% + 170px);
+  }
+
+  .title {
+    letter-spacing: -1px;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .actions {
+    margin-bottom: 72px;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    max-width: 320px;
   }
 
   .tickerText {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 700px;
+    padding: 180px 20px 88px;
+  }
+
+  .ticker {
+    padding: 8px 0;
+  }
+
+  .tickerText {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
   }
 }

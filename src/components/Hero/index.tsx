@@ -1,7 +1,5 @@
 import styles from './styles.module.css'
-
-const TICKER_TEXT =
-  'Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar Yerevan Pulsar'
+import { TICKER_TEXT } from './consts'
 
 export function Hero() {
   return (
