@@ -1,25 +1,24 @@
 import type { ChangeEvent, FormEvent } from 'react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { EMAIL_PATTERN, SUBSCRIBE_COPY } from './consts'
 import styles from './styles.module.css'
+import { saveSubscriptionEmail } from './utils'
 
 export function SubscribeBanner() {
-  const [email, setEmail] = useState('')
+  const emailInputRef = useRef<HTMLInputElement>(null)
   const [emailError, setEmailError] = useState('')
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value)
-
-    if (emailError) {
+    if (emailError && EMAIL_PATTERN.test(event.target.value.trim())) {
       setEmailError('')
     }
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const normalizedEmail = email.trim()
+    const normalizedEmail = emailInputRef.current?.value.trim().toLowerCase() ?? ''
 
     if (!EMAIL_PATTERN.test(normalizedEmail)) {
       setEmailError(SUBSCRIBE_COPY.invalidEmailMessage)
@@ -31,13 +30,26 @@ export function SubscribeBanner() {
       return
     }
 
-    setEmail('')
-    setEmailError('')
-    showNotification({
-      title: SUBSCRIBE_COPY.successTitle,
-      message: SUBSCRIBE_COPY.successMessage,
-      variant: 'success',
-    })
+    try {
+      await saveSubscriptionEmail(normalizedEmail)
+
+      if (emailInputRef.current) {
+        emailInputRef.current.value = ''
+      }
+
+      setEmailError('')
+      showNotification({
+        title: SUBSCRIBE_COPY.successTitle,
+        message: SUBSCRIBE_COPY.successMessage,
+        variant: 'success',
+      })
+    } catch {
+      showNotification({
+        title: SUBSCRIBE_COPY.saveErrorTitle,
+        message: SUBSCRIBE_COPY.saveErrorMessage,
+        variant: 'error',
+      })
+    }
   }
 
   return (
@@ -56,10 +68,10 @@ export function SubscribeBanner() {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
             <input
+              ref={emailInputRef}
               className={emailError ? `${styles.input} ${styles.inputError}` : styles.input}
               type="email"
               name="email"
-              value={email}
               placeholder={SUBSCRIBE_COPY.emailPlaceholder}
               aria-label="Email address"
               aria-invalid={Boolean(emailError)}

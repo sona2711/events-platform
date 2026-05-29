@@ -10,6 +10,10 @@ export const SUBSCRIBE_COPY = {
   invalidEmailMessage: 'Please enter a valid email address, for example name@example.com.',
   successTitle: 'Subscription successful',
   successMessage: 'You will be notified about upcoming events.',
+  saveErrorTitle: 'Subscription failed',
+  saveErrorMessage: 'Please try subscribing again in a moment.',
 } as const
 
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+export const SUBSCRIPTIONS_ENDPOINT = '/api/subscriptions'
