@@ -1,0 +1,407 @@
+/* ─────────────────────────────────────────
+   Card shell
+───────────────────────────────────────── */
+.sidebar {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(23, 16, 20, 0.09);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────
+   Sections
+───────────────────────────────────────── */
+.section {
+  border-bottom: 1px solid #f0e8ec;
+  padding-bottom: 22px;
+  padding-top: 22px;
+}
+
+.section:first-child {
+  padding-top: 0;
+}
+
+.section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sectionTitle {
+  color: #171014;
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────
+   Date
+───────────────────────────────────────── */
+.dateInput {
+  border: 1.5px solid #e0d6da;
+  border-radius: 8px;
+  color: #171014;
+  font-size: 14px;
+  padding: 10px 12px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dateInput:focus {
+  border-color: #770016;
+  box-shadow: 0 0 0 3px rgba(119, 0, 22, 0.1);
+  outline: none;
+}
+
+/* ─────────────────────────────────────────
+   Price range slider
+───────────────────────────────────────── */
+.priceDisplay {
+  color: #171014;
+  display: flex;
+  font-size: 13px;
+  font-weight: 600;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sliderWrapper {
+  height: 28px;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+/* Coloured fill bar — driven by CSS custom props set from JS */
+.sliderTrack {
+  background: linear-gradient(
+    to right,
+    #e0d6da var(--range-min, 0%),
+    #770016 var(--range-min, 0%),
+    #770016 var(--range-max, 100%),
+    #e0d6da var(--range-max, 100%)
+  );
+  border-radius: 3px;
+  height: 4px;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rangeInput {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 28px;
+  left: 0;
+  margin: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Thumb — Webkit (Chrome, Safari, Edge) */
+.rangeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #770016;
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(119, 0, 22, 0.35);
+  cursor: grab;
+  height: 20px;
+  pointer-events: auto;
+  transition:
+    box-shadow 0.15s,
+    transform 0.1s;
+  width: 20px;
+}
+
+.rangeInput::-webkit-slider-thumb:active {
+  box-shadow: 0 0 0 6px rgba(119, 0, 22, 0.15);
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+/* Thumb — Firefox */
+.rangeInput::-moz-range-thumb {
+  background: #770016;
+  border: 2.5px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(119, 0, 22, 0.35);
+  cursor: grab;
+  height: 20px;
+  pointer-events: auto;
+  transition:
+    box-shadow 0.15s,
+    transform 0.1s;
+  width: 20px;
+}
+
+.rangeInput::-moz-range-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+/* Remove Firefox default track */
+.rangeInput::-moz-range-track {
+  background: transparent;
+}
+
+/* Z-index: max thumb sits on top; when min is pushed near 100 % it gets promoted */
+.rangeMin {
+  z-index: 2;
+}
+
+.rangeMax {
+  z-index: 3;
+}
+
+.rangeMinTop {
+  z-index: 4;
+}
+
+.priceLabels {
+  color: #a08a94;
+  display: flex;
+  font-size: 11px;
+  justify-content: space-between;
+}
+
+/* ─────────────────────────────────────────
+   Categories
+───────────────────────────────────────── */
+.categoryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoryPill {
+  background: transparent;
+  border: 1.5px solid #e0d6da;
+  border-radius: 999px;
+  color: #5b4a51;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  transition:
+    border-color 0.15s,
+    color 0.15s,
+    background 0.15s;
+}
+
+.categoryPill:hover {
+  border-color: #770016;
+  color: #770016;
+}
+
+.categoryPillActive {
+  background: #770016;
+  border-color: #770016;
+  color: #ffffff;
+}
+
+.categoryPillActive:hover {
+  background: #5e0011;
+  border-color: #5e0011;
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────
+   Location dropdown
+───────────────────────────────────────── */
+.locationDropdown {
+  position: relative;
+}
+
+.locationInputWrapper {
+  align-items: center;
+  background: #ffffff;
+  border: 1.5px solid #e0d6da;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.locationInputWrapperOpen,
+.locationInputWrapper:focus-within {
+  border-color: #770016;
+  box-shadow: 0 0 0 3px rgba(119, 0, 22, 0.1);
+}
+
+.locationInput {
+  background: transparent;
+  border: none;
+  color: #171014;
+  flex: 1;
+  font-size: 14px;
+  min-width: 0;
+  outline: none;
+  padding: 0;
+}
+
+.locationInput::placeholder {
+  color: #a08a94;
+}
+
+.locationChevron {
+  color: #5b4a51;
+  flex-shrink: 0;
+  font-size: 9px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.locationList {
+  background: #ffffff;
+  border: 1.5px solid #e8e0e3;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(23, 16, 20, 0.12);
+  list-style: none;
+  margin: 5px 0 0;
+  max-height: 210px;
+  overflow-y: auto;
+  padding: 4px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+.locationItem {
+  align-items: center;
+  border-radius: 6px;
+  color: #171014;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 8px;
+  padding: 9px 12px;
+  transition: background 0.12s;
+}
+
+.locationItem:hover {
+  background: #faf4f6;
+}
+
+.locationItemActive {
+  background: #fdf0f2;
+  color: #770016;
+  font-weight: 600;
+}
+
+.locationItemActive:hover {
+  background: #fae8ec;
+}
+
+/* Small filled dot shown beside the selected venue */
+.locationCheck {
+  background: #770016;
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 7px;
+  width: 7px;
+}
+
+.locationNoResults {
+  color: #a08a94;
+  font-size: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────
+   Actions
+───────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.applyButton {
+  background: #770016;
+  border: none;
+  border-radius: 999px;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 20px;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+.applyButton:hover {
+  background: #5e0011;
+  box-shadow: 0 4px 14px rgba(119, 0, 22, 0.3);
+}
+
+.applyButton:active {
+  background: #4a000d;
+}
+
+.resetButton {
+  background: transparent;
+  border: 1.5px solid #e0d6da;
+  border-radius: 999px;
+  color: #5b4a51;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 18px;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.resetButton:hover {
+  border-color: #770016;
+  color: #770016;
+}
+
+/* ─────────────────────────────────────────
+   Responsive
+───────────────────────────────────────── */
+@media (max-width: 620px) {
+  .sidebar {
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .categoryGrid {
+    gap: 6px;
+  }
+
+  .categoryPill {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .resetButton {
+    text-align: center;
+    width: 100%;
+  }
+}

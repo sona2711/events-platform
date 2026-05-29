@@ -5,6 +5,7 @@ import { LoginPage } from '@/pages/LoginPage'
 import { SignUpPage } from '@/pages/SignUpPage'
 import { AdminPage } from '@/pages/adminPage'
 import { CategoriesPage } from '@/pages/categoriesPage'
+import { ExploreEventsInYerevanPage } from '@/pages/explore-events-in-yerevan'
 import { MainPage } from '@/pages/mainPage'
 import { PasswordRecoveryPage } from '@/pages/passwordRecovery'
 import { UserProfilePage } from '@/pages/userProfile'
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<MainPage />} />
+          <Route path="explore-events" element={<ExploreEventsInYerevanPage />} />
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
