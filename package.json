@@ -21,6 +21,7 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@ant-design/icons": "^5",
     "@reduxjs/toolkit": "^2",
     "antd": "^5",
