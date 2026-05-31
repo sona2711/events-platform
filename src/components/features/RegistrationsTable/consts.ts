@@ -53,5 +53,5 @@ export const STATUS_CLASS_BY_VALUE: Record<RegistrationStatus, string> = {
   Cancelled: 'statusCancelled',
 }
 
-export const TOTAL_COUNT = REGISTRATIONS_DATA.length
+export const TOTAL_COUNT = 248
 export const PAGE_SIZE = 20
