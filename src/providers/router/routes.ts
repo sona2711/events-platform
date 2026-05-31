@@ -1,4 +1,5 @@
 import { createElement, lazy } from 'react'
+import { Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import { AppLayout } from '@/components/layout/AppLayout'
 
@@ -60,8 +61,13 @@ export const signUpPageRoute: RouteObject = {
   element: createElement(SignUpPage),
 }
 
-export const adminPageRoute: RouteObject = {
+export const adminRedirectRoute: RouteObject = {
   path: 'admin',
+  element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
+}
+
+export const adminPageRoute: RouteObject = {
+  path: 'admin/registrations',
   element: createElement(AdminPage),
 }
 
@@ -92,6 +98,7 @@ export const appRoutes: RouteObject[] = [
       userProfilePageRoute,
     ],
   },
+  adminRedirectRoute,
   adminPageRoute,
   notFoundPageRoute,
 ]
