@@ -208,30 +208,30 @@
 
   .mobileToggle:global(.ant-btn) {
     align-items: center;
-    background: #ffffff;
-    border: 1.5px solid #2665d6;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(38, 101, 214, 0.15);
-    color: #2665d6;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+    color: #770016;
     display: inline-flex;
-    font-size: 20px;
+    font-size: 22px;
     height: 40px;
     justify-content: center;
     left: 16px;
     position: fixed;
     top: 16px;
     transition:
-      background 0.18s,
-      box-shadow 0.18s;
+      color 0.18s,
+      background 0.18s;
     width: 40px;
     z-index: 201;
   }
 
   .mobileToggle:global(.ant-btn:hover),
   .mobileToggle:global(.ant-btn:active) {
-    background: #eef3fd;
-    box-shadow: 0 4px 14px rgba(38, 101, 214, 0.22);
-    color: #2665d6;
+    background: rgba(119, 0, 22, 0.08);
+    box-shadow: none;
+    color: #770016;
   }
 
   .mobileClose:global(.ant-btn) {
