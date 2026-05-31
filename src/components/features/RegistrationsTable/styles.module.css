@@ -373,7 +373,8 @@
   border: 0;
 }
 
-@media (max-width: 1024px) {
+/* Tablet + Mobile (≤ 1280px): tighter cell padding since sidebar is hidden */
+@media (max-width: 1280px) {
   .tableHeadCell,
   .tableBodyCell {
     padding: 0 10px;
@@ -390,7 +391,8 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile only (< 768px): wrap table header/footer */
+@media (max-width: 767px) {
   .tableHeader {
     height: auto;
     flex-wrap: wrap;

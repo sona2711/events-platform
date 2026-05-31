@@ -80,34 +80,15 @@
   color: #d97706;
 }
 
-@media (max-width: 1024px) {
+/* Tablet (768px – 1280px): 2 columns */
+@media (max-width: 1280px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .card {
-    padding: 16px 20px;
-    height: 88px;
-  }
-
-  .label {
-    font-size: 14px;
-  }
-
-  .value {
-    font-size: 22px;
-  }
-
-  .iconWrapper {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 600px) {
+/* Mobile (< 768px): 1 column + tighter sizing */
+@media (max-width: 767px) {
   .grid {
     grid-template-columns: 1fr;
   }

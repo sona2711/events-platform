@@ -9,7 +9,7 @@
   padding: 32px 24px;
   position: fixed;
   top: 0;
-  width: 256px;
+  width: 280px;
   z-index: 200;
 }
 
@@ -195,8 +195,8 @@
   z-index: 199;
 }
 
-/* ─── Mobile breakpoint ─────────────────────────────────────── */
-@media (max-width: 768px) {
+/* ─── Tablet + Mobile breakpoint (sidebar hidden below 1280px) ─ */
+@media (max-width: 1280px) {
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.25s ease;
