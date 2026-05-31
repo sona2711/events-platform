@@ -15,7 +15,7 @@ export const AdminHeader = ({ title, notificationCount = 0 }: AdminHeaderProps) 
           prefix={<SearchOutlined />}
         />
 
-        <Badge count={notificationCount} size="small">
+        <Badge count={notificationCount} offset={[-6, 8]}>
           <button type="button" className={styles.iconButton} aria-label="Notifications">
             <BellOutlined />
           </button>
