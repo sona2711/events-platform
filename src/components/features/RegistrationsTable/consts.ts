@@ -52,3 +52,6 @@ export const STATUS_CLASS_BY_VALUE: Record<RegistrationStatus, string> = {
   Pending: 'statusPending',
   Cancelled: 'statusCancelled',
 }
+
+export const TOTAL_COUNT = 248
+export const PAGE_SIZE = 20

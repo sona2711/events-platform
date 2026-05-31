@@ -1,13 +1,47 @@
+import { useEffect, useRef, useState } from 'react'
+import { Button, Pagination } from 'antd'
 import { DownloadOutlined, EditOutlined, StopOutlined } from '@ant-design/icons'
-import { REGISTRATIONS_DATA, STATUS_CLASS_BY_VALUE } from './consts'
+import { REGISTRATIONS_DATA, STATUS_CLASS_BY_VALUE, TOTAL_COUNT, PAGE_SIZE } from './consts'
 import styles from './styles.module.css'
 
 export const RegistrationsTable = () => {
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [currentPage, setCurrentPage] = useState(1)
+  const selectAllRef = useRef<HTMLInputElement>(null)
+
+  const allIds = REGISTRATIONS_DATA.map((r) => r.id)
+  const allSelected = allIds.length > 0 && allIds.every((id) => selectedIds.has(id))
+  const someSelected = allIds.some((id) => selectedIds.has(id)) && !allSelected
+  const hasSelection = selectedIds.size > 0
+
+  useEffect(() => {
+    if (selectAllRef.current) {
+      selectAllRef.current.indeterminate = someSelected
+    }
+  }, [someSelected])
+
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedIds(e.target.checked ? new Set(allIds) : new Set())
+  }
+
+  const handleSelectRow = (id: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const next = new Set(selectedIds)
+    if (e.target.checked) {
+      next.add(id)
+    } else {
+      next.delete(id)
+    }
+    setSelectedIds(next)
+  }
+
+  const pageStart = (currentPage - 1) * PAGE_SIZE + 1
+  const pageEnd = Math.min(currentPage * PAGE_SIZE, TOTAL_COUNT)
+
   return (
     <section className={styles.tableSection} aria-label="Registrations table">
       <div className={styles.tableHeader}>
         <h2 className={styles.tableTitle}>
-          Total Registrations <span className={styles.tableTitleCount}>(248)</span>
+          Total Registrations <span className={styles.tableTitleCount}>({TOTAL_COUNT})</span>
         </h2>
         <button className={styles.exportButton} type="button">
           <DownloadOutlined className={styles.exportIcon} aria-hidden="true" />
@@ -32,9 +66,12 @@ export const RegistrationsTable = () => {
                   Select all registrations
                 </label>
                 <input
+                  ref={selectAllRef}
                   id="select-all-registrations"
                   className={styles.rowCheckbox}
                   type="checkbox"
+                  checked={allSelected}
+                  onChange={handleSelectAll}
                   aria-label="Select all registrations"
                 />
               </th>
@@ -64,6 +101,8 @@ export const RegistrationsTable = () => {
                       id={`registration-${registration.id}`}
                       className={styles.rowCheckbox}
                       type="checkbox"
+                      checked={selectedIds.has(registration.id)}
+                      onChange={handleSelectRow(registration.id)}
                     />
                   </td>
 
@@ -128,6 +167,26 @@ export const RegistrationsTable = () => {
             })}
           </tbody>
         </table>
+      </div>
+
+      <div className={styles.tableFooter}>
+        <div className={styles.footerLeft}>
+          <Button className={styles.cancelButton} shape="round" danger disabled={!hasSelection}>
+            Cancel Selected
+          </Button>
+        </div>
+        <div className={styles.footerRight}>
+          <span className={styles.showingText}>
+            Showing {pageStart}–{pageEnd} of {TOTAL_COUNT}
+          </span>
+          <Pagination
+            current={currentPage}
+            total={TOTAL_COUNT}
+            pageSize={PAGE_SIZE}
+            onChange={setCurrentPage}
+            showSizeChanger={false}
+          />
+        </div>
       </div>
     </section>
   )
