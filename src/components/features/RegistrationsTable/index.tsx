@@ -2,7 +2,7 @@ import { DownloadOutlined, EditOutlined, StopOutlined } from '@ant-design/icons'
 import { REGISTRATIONS_DATA, STATUS_CLASS_BY_VALUE } from './consts'
 import styles from './styles.module.css'
 
-export function RegistrationsTable() {
+export const RegistrationsTable = () => {
   return (
     <section className={styles.tableSection} aria-label="Registrations table">
       <div className={styles.tableHeader}>

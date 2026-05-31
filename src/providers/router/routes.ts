@@ -40,12 +40,6 @@ const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
 
-const AdminPreviewPage = lazy(() =>
-  import('@/pages/adminPreview').then((module) => ({
-    default: module.AdminPreviewPage,
-  })),
-)
-
 export const mainPageRoute: RouteObject = {
   index: true,
   element: createElement(MainPage),
@@ -81,11 +75,6 @@ export const userProfilePageRoute: RouteObject = {
   element: createElement(UserProfilePage),
 }
 
-export const adminPreviewPageRoute: RouteObject = {
-  path: 'admin-preview',
-  element: createElement(AdminPreviewPage),
-}
-
 export const notFoundPageRoute: RouteObject = {
   path: '*',
   element: createElement(NotFoundPage),
@@ -104,6 +93,5 @@ export const appRoutes: RouteObject[] = [
     ],
   },
   adminPageRoute,
-  adminPreviewPageRoute,
   notFoundPageRoute,
 ]

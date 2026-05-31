@@ -1,4 +1,4 @@
-import { RegistrationsTable } from '@/components/RegistrationsTable'
+import { RegistrationsTable } from '@/components/features/RegistrationsTable'
 import { AdminLayout } from '@/components/layout/AdminLayout'
 
 export const AdminPage = () => {
