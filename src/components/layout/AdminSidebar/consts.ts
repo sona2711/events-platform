@@ -6,7 +6,10 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import adminProfileAvatar from '@/assets/images/admin-profile.png'
 import type { AdminNavLink } from './types'
+
+export const ADMIN_PROFILE_AVATAR_SRC = adminProfileAvatar
 
 export const ADMIN_NAV_LINKS: AdminNavLink[] = [
   { labelKey: 'adminNav.dashboard', to: '/admin', Icon: AppstoreOutlined, end: true },

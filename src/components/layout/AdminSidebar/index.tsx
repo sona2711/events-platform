@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Button } from 'antd'
 import { CloseOutlined, LogoutOutlined, MenuOutlined, PlusOutlined } from '@ant-design/icons'
-import { ADMIN_NAV_LINKS } from './consts'
+import { ADMIN_NAV_LINKS, ADMIN_PROFILE_AVATAR_SRC } from './consts'
 import styles from './styles.module.css'
 
 export const AdminSidebar = () => {
@@ -59,9 +59,12 @@ export const AdminSidebar = () => {
           </Button>
 
           <div className={styles.avatarRow}>
-            <Avatar size={36} className={styles.avatar}>
-              AN
-            </Avatar>
+            <Avatar
+              size={36}
+              className={styles.avatar}
+              src={ADMIN_PROFILE_AVATAR_SRC}
+              alt={t('adminSidebar.adminName')}
+            />
             <span className={styles.adminName}>{t('adminSidebar.adminName')}</span>
           </div>
 

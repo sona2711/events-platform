@@ -24,10 +24,10 @@
 
 .brand {
   color: #ffffff;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   letter-spacing: 0;
-  line-height: 24px;
+  line-height: 30px;
   margin: 0;
 }
 
@@ -140,11 +140,7 @@
 }
 
 .avatar:global(.ant-avatar) {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
   flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 600;
 }
 
 .adminName {
