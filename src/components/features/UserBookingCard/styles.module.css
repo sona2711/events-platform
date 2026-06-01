@@ -1,0 +1,132 @@
+.card {
+  align-items: center;
+  background: var(--color-surface-card);
+  border: 1px solid rgb(var(--color-burgundy-700-rgb) / 8%);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgb(var(--color-burgundy-700-rgb) / 6%);
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  padding: 16px 20px;
+}
+
+.cardNoActions {
+  grid-template-columns: 120px minmax(0, 1fr);
+}
+
+.media {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.media :global(.ant-image) {
+  display: block;
+  line-height: 0;
+}
+
+.image {
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+  height: 80px;
+  object-fit: cover;
+  width: 120px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.category {
+  background: rgb(var(--color-burgundy-700-rgb) / 6%);
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin: 0;
+  padding: 3px 10px;
+  width: fit-content;
+}
+
+.title {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.meta {
+  align-items: center;
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  gap: 16px;
+}
+
+.metaItem {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+.actions {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 10px;
+  width: 132px;
+}
+
+.actions :global(.ant-btn) {
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 600;
+  height: 40px;
+  padding: 0 18px;
+  width: 100%;
+}
+
+.actions :global(.ant-btn-primary) {
+  background: var(--color-action-primary);
+  border-color: var(--color-action-primary);
+}
+
+.actions :global(.ant-btn-default) {
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+@media (max-width: 720px) {
+  .card {
+    align-items: stretch;
+    grid-template-columns: 1fr;
+  }
+
+  .media :global(.ant-image),
+  .image {
+    height: auto;
+    width: 100%;
+  }
+
+  .image {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+
+  .actions {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 14px 16px;
+  }
+}

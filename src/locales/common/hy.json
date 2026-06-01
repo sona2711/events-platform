@@ -16,7 +16,24 @@
     "ru": "Ռուսերեն"
   },
   "aria": {
-    "primaryNav": "Հիմնական նավիգացիա"
+    "primaryNav": "Հիմնական նավիգացիա",
+    "adminNav": "Ադմինի նավիգացիա"
+  },
+  "adminNav": {
+    "dashboard": "Վահանակ",
+    "events": "Միջոցառումներ",
+    "registrations": "Գրանցումներ",
+    "finances": "Ֆինանսներ",
+    "users": "Օգտատերեր",
+    "settings": "Կարգավորումներ",
+    "createEvent": "Ստեղծել միջոցառում",
+    "logout": "Ելք"
+  },
+  "adminSidebar": {
+    "subtitle": "Ադմինի վահանակ",
+    "adminName": "Artur Petrosyan",
+    "toggleMenu": "Բացել նավիգացիոն ցանկը",
+    "closeMenu": "Փակել նավիգացիոն ցանկը"
   },
   "footer": {
     "copyright": "Հեղինակային իրավունք © 2026. Բոլոր իրավունքները պաշտպանված են։",

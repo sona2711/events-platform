@@ -1,4 +1,5 @@
 import { createElement, lazy } from 'react'
+import { Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
 import { AppLayout } from '@/components/layout/AppLayout'
 
@@ -28,6 +29,12 @@ const SignUpPage = lazy(() =>
 
 const AdminPage = lazy(() =>
   import('@/pages/adminPage').then((module) => ({ default: module.AdminPage })),
+)
+
+const AdminComingSoonPage = lazy(() =>
+  import('@/pages/adminComingSoonPage').then((module) => ({
+    default: module.AdminComingSoonPage,
+  })),
 )
 
 const PasswordRecoveryPage = lazy(() =>
@@ -71,9 +78,34 @@ export const signUpPageRoute: RouteObject = {
   element: createElement(SignUpPage),
 }
 
-export const adminPageRoute: RouteObject = {
+export const adminRedirectRoute: RouteObject = {
   path: 'admin',
+  element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
+}
+
+export const adminPageRoute: RouteObject = {
+  path: 'admin/registrations',
   element: createElement(AdminPage),
+}
+
+export const adminEventsRoute: RouteObject = {
+  path: 'admin/events',
+  element: createElement(AdminComingSoonPage),
+}
+
+export const adminFinancesRoute: RouteObject = {
+  path: 'admin/finances',
+  element: createElement(AdminComingSoonPage),
+}
+
+export const adminUsersRoute: RouteObject = {
+  path: 'admin/users',
+  element: createElement(AdminComingSoonPage),
+}
+
+export const adminSettingsRoute: RouteObject = {
+  path: 'admin/settings',
+  element: createElement(AdminComingSoonPage),
 }
 
 export const passwordRecoveryPageRoute: RouteObject = {
@@ -100,10 +132,15 @@ export const appRoutes: RouteObject[] = [
       categoriesPageRoute,
       loginPageRoute,
       signUpPageRoute,
-      adminPageRoute,
       passwordRecoveryPageRoute,
       userProfilePageRoute,
-      notFoundPageRoute,
     ],
   },
+  adminRedirectRoute,
+  adminPageRoute,
+  adminEventsRoute,
+  adminFinancesRoute,
+  adminUsersRoute,
+  adminSettingsRoute,
+  notFoundPageRoute,
 ]

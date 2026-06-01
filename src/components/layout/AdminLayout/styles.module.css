@@ -1,0 +1,36 @@
+.layout {
+  min-height: 100vh;
+}
+
+.content {
+  background: #f7f7f8;
+  display: flex;
+  flex-direction: column;
+  margin-left: 280px;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+  padding: 0 32px 32px;
+  background-color: rgb(240, 238, 238);
+}
+
+@media (max-width: 1280px) {
+  .content {
+    margin-left: 0;
+  }
+
+  .main {
+    padding: 16px 24px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 0 16px 16px;
+  }
+}

@@ -1,0 +1,14 @@
+import type { Dayjs } from 'dayjs'
+
+export interface SelectOption {
+  label: string
+  value: string
+}
+
+export interface RegistrationsFilterValues {
+  category: string
+  event: string
+  status: string
+  dateRange: [Dayjs, Dayjs] | null
+  search: string
+}

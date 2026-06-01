@@ -18,8 +18,7 @@ alwaysApply: true
 ```text
 ComponentName/
   index.tsx
-  styles.ts
+  styles.module.css
   consts.ts
-  utils.ts
   index.test.tsx
 ```
