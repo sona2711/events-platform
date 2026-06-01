@@ -1,0 +1,92 @@
+{
+  "user": {
+    "fullName": "Aram Khachatryan",
+    "location": "Yerevan, Armenia"
+  },
+  "nav": {
+    "bookings": "My Bookings",
+    "saved": "Saved/Flagged",
+    "feedback": "Feedback",
+    "settings": "Settings"
+  },
+  "alert": {
+    "title": "Upcoming Event Alert",
+    "description": "No upcoming event reminders yet.",
+    "dynamicDescription": "{{title}} starts in {{count}} days!",
+    "startsToday": "{{title}} starts today!",
+    "startsTomorrow": "{{title}} starts tomorrow!",
+    "action": "Set Reminder",
+    "actionReminderSet": "Reminder Set",
+    "reminderSet": "Reminder set successfully"
+  },
+  "bookings": {
+    "aria": "User bookings",
+    "tabs": {
+      "upcoming": "Upcoming Bookings",
+      "past": "Past/Attended Events",
+      "cancelled": "Cancelled Tickets"
+    },
+    "empty": "No bookings in this section yet.",
+    "actions": {
+      "payTickets": "Pay / Tickets",
+      "cancel": "Cancel",
+      "viewTicket": "View Ticket",
+      "leaveFeedback": "Leave Feedback"
+    },
+    "categories": {
+      "music": "MUSIC",
+      "culinary": "CULINARY",
+      "sports": "SPORTS"
+    },
+    "items": {
+      "jazzFest": {
+        "title": "Yerevan Jazz Fest 2026",
+        "dateTime": "Jun 02, 2026 · 19:30",
+        "location": "Cascade Complex"
+      },
+      "feast": {
+        "title": "Traditional Armenian Feast",
+        "dateTime": "Jul 14, 2026 · 18:00",
+        "location": "Republic Square"
+      },
+      "marathon": {
+        "title": "Yerevan Marathon 2026",
+        "dateTime": "Aug 20, 2026 · 09:00",
+        "location": "Northern Avenue"
+      },
+      "wineTasting": {
+        "title": "Armenian Wine Tasting",
+        "dateTime": "Mar 10, 2026 · 17:00",
+        "location": "Saryan Street"
+      }
+    }
+  },
+  "sections": {
+    "saved": {
+      "title": "Saved / Flagged",
+      "description": "Your saved and flagged events will appear here."
+    },
+    "feedback": {
+      "title": "Feedback",
+      "description": "Share your feedback about events and the platform here."
+    }
+  },
+  "form": {
+    "title": "Profile Details",
+    "editDetails": "Edit Details",
+    "saveChanges": "Save All Changes",
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "preferredLanguage": "Preferred Language"
+    }
+  },
+  "sidebar": {
+    "aria": {
+      "navigation": "Profile navigation",
+      "accountSections": "Account sections",
+      "editPhoto": "Edit profile photo"
+    }
+  }
+}

@@ -19,6 +19,9 @@ import adminRu from '@/locales/admin/ru.json'
 import notFoundEn from '@/locales/notFound/en.json'
 import notFoundHy from '@/locales/notFound/hy.json'
 import notFoundRu from '@/locales/notFound/ru.json'
+import profileEn from '@/locales/profile/en.json'
+import profileHy from '@/locales/profile/hy.json'
+import profileRu from '@/locales/profile/ru.json'
 
 export const LANGUAGE_STORAGE_KEY = 'events-platform-language'
 
@@ -43,6 +46,7 @@ export const resources = {
     auth: authEn,
     admin: adminEn,
     notFound: notFoundEn,
+    profile: profileEn,
   },
   hy: {
     common: commonHy,
@@ -51,6 +55,7 @@ export const resources = {
     auth: authHy,
     admin: adminHy,
     notFound: notFoundHy,
+    profile: profileHy,
   },
   ru: {
     common: commonRu,
@@ -59,6 +64,7 @@ export const resources = {
     auth: authRu,
     admin: adminRu,
     notFound: notFoundRu,
+    profile: profileRu,
   },
 } as const
 
@@ -67,7 +73,7 @@ void i18n.use(initReactI18next).init({
   lng: getStoredLanguage(),
   fallbackLng: DEFAULT_LANGUAGE,
   defaultNS: 'common',
-  ns: ['common', 'home', 'categories', 'auth', 'admin', 'notFound'],
+  ns: ['common', 'home', 'categories', 'auth', 'admin', 'notFound', 'profile'],
   interpolation: {
     escapeValue: false,
   },

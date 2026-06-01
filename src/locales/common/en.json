@@ -15,7 +15,24 @@
     "ru": "Russian"
   },
   "aria": {
-    "primaryNav": "Primary navigation"
+    "primaryNav": "Primary navigation",
+    "adminNav": "Admin navigation"
+  },
+  "adminNav": {
+    "dashboard": "Dashboard",
+    "events": "Events",
+    "registrations": "Registrations",
+    "finances": "Finances",
+    "users": "Users",
+    "settings": "Settings",
+    "createEvent": "Create Event",
+    "logout": "Logout"
+  },
+  "adminSidebar": {
+    "subtitle": "Admin Console",
+    "adminName": "Artur Petrosyan",
+    "toggleMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "footer": {
     "copyright": "Copyright © 2026. All rights reserved.",

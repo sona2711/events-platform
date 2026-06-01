@@ -2,7 +2,7 @@ import type { Config } from 'jest'
 
 const config: Config = {
   testEnvironment: 'jsdom',
-  setupFilesAfterFramework: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': [
       'ts-jest',
@@ -29,7 +29,7 @@ const config: Config = {
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
-    '!src/mocks/**',
+    '!src/mock-api/**',
     '!src/__mocks__/**',
     '!src/main.tsx',
     '!src/lib/firebase.ts',

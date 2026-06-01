@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { server } from './src/mocks/server'
+import { server } from './src/mock-api/server'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }))
 afterEach(() => server.resetHandlers())
