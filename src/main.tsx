@@ -2,13 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+import '@/assets/fonts'
 import '@/i18n'
 import App from './App'
 import '../main.css'
 
 async function enableMocking() {
   if (!import.meta.env.DEV) return
-  const { worker } = await import('./mocks/browser')
+  const { worker } = await import('./mock-api/browser')
   return worker.start()
 }
 

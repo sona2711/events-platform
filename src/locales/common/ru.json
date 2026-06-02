@@ -15,7 +15,24 @@
     "ru": "Русский"
   },
   "aria": {
-    "primaryNav": "Основная навигация"
+    "primaryNav": "Основная навигация",
+    "adminNav": "Навигация администратора"
+  },
+  "adminNav": {
+    "dashboard": "Дашборд",
+    "events": "События",
+    "registrations": "Регистрации",
+    "finances": "Финансы",
+    "users": "Пользователи",
+    "settings": "Настройки",
+    "createEvent": "Создать событие",
+    "logout": "Выход"
+  },
+  "adminSidebar": {
+    "subtitle": "Консоль администратора",
+    "adminName": "Artur Petrosyan",
+    "toggleMenu": "Открыть меню навигации",
+    "closeMenu": "Закрыть меню навигации"
   },
   "footer": {
     "copyright": "Авторское право © 2026. Все права защищены.",
