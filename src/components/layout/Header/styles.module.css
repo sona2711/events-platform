@@ -21,6 +21,11 @@
   padding: 0 18px 0 32px;
 }
 
+.navRow {
+  align-items: center;
+  display: contents;
+}
+
 .brand {
   color: var(--color-brand-primary);
   font-family: 'Bricolage Grotesque Variable';
@@ -29,6 +34,15 @@
   letter-spacing: 0;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.navPanel {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 32px;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .primaryLinks,
@@ -83,21 +97,132 @@
   padding: 12px 24px;
 }
 
+.menuToggle:global(.ant-btn) {
+  display: none;
+}
+
+.overlay {
+  display: none;
+}
+
 @media (max-width: 820px) {
   .header {
     padding-block: 20px;
   }
 
   .navBar {
-    align-items: flex-start;
+    align-items: stretch;
     border-radius: 9999px;
     flex-direction: column;
-    gap: 18px;
-    padding: 24px;
+    gap: 0;
+    padding: 16px 20px;
+    position: relative;
+    z-index: 101;
+  }
+
+  .navBarOpen {
+    border-radius: 28px;
+  }
+
+  .navRow {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .brand {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .menuToggle:global(.ant-btn) {
+    align-items: center;
+    color: var(--color-brand-primary);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 22px;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+  }
+
+  .menuToggle:global(.ant-btn.ant-btn-text:hover),
+  .menuToggle:global(.ant-btn.ant-btn-text:focus),
+  .menuToggle:global(.ant-btn.ant-btn-variant-text:hover),
+  .menuToggle:global(.ant-btn.ant-btn-variant-text:focus),
+  .menuToggle:global(.ant-btn:active) {
+    background: rgb(var(--color-burgundy-700-rgb) / 8%);
+    color: var(--color-brand-primary);
+  }
+
+  .navPanel {
+    display: none;
+    flex-direction: column;
+    flex: initial;
+    gap: 20px;
+    padding-top: 0;
+    width: 100%;
+  }
+
+  .navPanelOpen {
+    border-top: 1px solid rgb(var(--color-burgundy-700-rgb) / 12%);
+    display: flex;
+    margin-top: 16px;
+    padding-top: 20px;
   }
 
   .primaryLinks,
   .authLinks {
-    flex-wrap: wrap;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .navLink {
+    font-size: 17px;
+    padding: 12px 0;
+  }
+
+  .underlinedNavLink::after {
+    bottom: 8px;
+  }
+
+  .authLinks {
+    gap: 16px;
+  }
+
+  .authLinkFilled {
+    text-align: center;
+  }
+
+  .overlay {
+    background: rgb(0 0 0 / 45%);
+    display: block;
+    height: 100vh;
+    inset: 0;
+    position: fixed;
+    z-index: 99;
+  }
+}
+
+@media (max-width: 480px) {
+  .navBar {
+    padding: 14px 16px;
+  }
+
+  .navBarOpen {
+    border-radius: 24px;
+  }
+
+  .navPanelOpen {
+    gap: 16px;
+    margin-top: 12px;
+    padding-top: 16px;
+  }
+
+  .navLink {
+    font-size: 16px;
+    padding: 10px 0;
   }
 }

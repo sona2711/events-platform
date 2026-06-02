@@ -1,5 +1,6 @@
 .tabs {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  min-width: 0;
   width: 100%;
 }
 
@@ -21,6 +22,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: 10px;
   min-width: 88px;
   padding: 0;
@@ -41,6 +43,8 @@
 .label {
   font-size: 14px;
   font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .tabButtonActive .label {
@@ -52,14 +56,97 @@
   color: var(--color-surface-card);
 }
 
-@media (max-width: 720px) {
+.scrollHint {
+  display: none;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
   .list {
-    gap: 24px 36px;
+    gap: 24px 40px;
+  }
+
+  .tabButton {
+    min-width: 80px;
+  }
+
+  .iconCircle {
+    font-size: 21px;
+    height: 54px;
+    width: 54px;
+  }
+}
+
+@media (max-width: 820px) {
+  .tabs {
+    position: relative;
+  }
+
+  .scrollHint {
+    background: linear-gradient(to right, transparent, var(--color-surface-muted));
+    display: block;
+    inset-block: 0;
+    inset-inline-end: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 32px;
+    z-index: 1;
+  }
+
+  .list {
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 4px 4px 8px;
+    scroll-padding-inline: 4px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .list li {
+    scroll-snap-align: start;
+  }
+
+  .tabButton {
+    gap: 8px;
+    min-width: 72px;
   }
 
   .iconCircle {
     font-size: 20px;
     height: 52px;
     width: 52px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .list {
+    gap: 16px;
+  }
+
+  .tabButton {
+    min-width: 64px;
+  }
+
+  .iconCircle {
+    font-size: 18px;
+    height: 48px;
+    width: 48px;
+  }
+
+  .label {
+    font-size: 12px;
   }
 }

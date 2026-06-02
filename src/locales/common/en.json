@@ -18,6 +18,10 @@
     "primaryNav": "Primary navigation",
     "adminNav": "Admin navigation"
   },
+  "header": {
+    "toggleMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
+  },
   "adminNav": {
     "dashboard": "Dashboard",
     "events": "Events",

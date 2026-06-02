@@ -1,4 +1,6 @@
 {
   "title": "Categories",
-  "description": "Explore events by interest, format, and community topic."
+  "description": "Explore events by interest, format, and community topic.",
+  "emptyState": "No events found in this category.",
+  "loadMore": "Load More"
 }
