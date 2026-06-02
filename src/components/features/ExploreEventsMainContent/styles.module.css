@@ -55,14 +55,14 @@
 
 .loadMoreWrap {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .loadMoreButton:global(.ant-btn) {
   border-radius: 999px;
   box-shadow: none;
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   height: 48px;
   min-width: 180px;
   padding: 0 32px;
