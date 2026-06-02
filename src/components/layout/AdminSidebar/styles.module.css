@@ -180,6 +180,10 @@
   display: none;
 }
 
+.mobileToggleHidden:global(.ant-btn) {
+  display: none !important;
+}
+
 .mobileClose:global(.ant-btn) {
   display: none;
 }
@@ -227,7 +231,10 @@
     z-index: 201;
   }
 
-  .mobileToggle:global(.ant-btn:hover),
+  .mobileToggle:global(.ant-btn.ant-btn-text:hover),
+  .mobileToggle:global(.ant-btn.ant-btn-text:focus),
+  .mobileToggle:global(.ant-btn.ant-btn-variant-text:hover),
+  .mobileToggle:global(.ant-btn.ant-btn-variant-text:focus),
   .mobileToggle:global(.ant-btn:active) {
     background: rgba(119, 0, 22, 0.08);
     box-shadow: none;
@@ -239,8 +246,12 @@
     display: inline-flex;
   }
 
-  .mobileClose:global(.ant-btn:hover) {
+  .mobileClose:global(.ant-btn.ant-btn-text:hover),
+  .mobileClose:global(.ant-btn.ant-btn-text:focus),
+  .mobileClose:global(.ant-btn.ant-btn-variant-text:hover),
+  .mobileClose:global(.ant-btn.ant-btn-variant-text:focus) {
     background: rgba(255, 255, 255, 0.1);
+    border-color: transparent;
     color: #ffffff;
   }
 }

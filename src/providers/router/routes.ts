@@ -75,18 +75,13 @@ export const appRoutes: RouteObject[] = [
     ],
   },
   {
-    element: createElement(ProtectedRoute),
-    children: [
-      {
-        path: 'admin',
-        element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
-      },
-      { path: 'admin/registrations', element: createElement(AdminPage) },
-      { path: 'admin/events', element: createElement(AdminComingSoonPage) },
-      { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
-      { path: 'admin/users', element: createElement(AdminComingSoonPage) },
-      { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
-    ],
+    path: 'admin',
+    element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
   },
+  { path: 'admin/registrations', element: createElement(AdminPage) },
+  { path: 'admin/events', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/users', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
   { path: '*', element: createElement(NotFoundPage) },
 ]
