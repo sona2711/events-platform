@@ -250,11 +250,17 @@
   position: relative;
 }
 
+/* Above .actions (z-index: 2) so the venue list is not hidden behind Apply/Reset */
+.locationDropdownOpen {
+  z-index: 5;
+}
+
 .locationInputWrapper {
   align-items: center;
   background: #ffffff;
   border: 1.5px solid #e0d6da;
   border-radius: 8px;
+  cursor: text;
   display: flex;
   gap: 8px;
   padding: 10px 12px;
@@ -273,11 +279,12 @@
   background: transparent;
   border: none;
   color: #171014;
-  flex: 1;
+  flex: 1 1 auto;
   font-size: 14px;
   min-width: 0;
   outline: none;
   padding: 0;
+  width: 100%;
 }
 
 .locationInput::placeholder {

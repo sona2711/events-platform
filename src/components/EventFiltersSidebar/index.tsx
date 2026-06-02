@@ -18,6 +18,7 @@ export const EventFiltersSidebar = ({
   const id = useId()
   const trackRef = useRef<HTMLDivElement>(null)
   const locationRef = useRef<HTMLDivElement>(null)
+  const locationInputRef = useRef<HTMLInputElement>(null)
 
   const [locationQuery, setLocationQuery] = useState('')
   const [locationOpen, setLocationOpen] = useState(false)
@@ -65,6 +66,12 @@ export const EventFiltersSidebar = ({
     })
   }
 
+  const openLocationDropdown = useCallback(() => {
+    setLocationQuery('')
+    setLocationOpen(true)
+    locationInputRef.current?.focus()
+  }, [])
+
   const handleLocationFocus = () => {
     setLocationQuery('')
     setLocationOpen(true)
@@ -75,10 +82,29 @@ export const EventFiltersSidebar = ({
     setLocationOpen(true)
   }
 
+  const handleLocationClear = () => {
+    onFiltersChange({ ...filters, location: '' })
+    setLocationQuery('')
+    setLocationOpen(false)
+  }
+
   const handleLocationSelect = (loc: string) => {
     onFiltersChange({ ...filters, location: filters.location === loc ? '' : loc })
     setLocationQuery('')
     setLocationOpen(false)
+  }
+
+  const handleLocationWrapperClick = () => {
+    if (!locationOpen) {
+      openLocationDropdown()
+    }
+  }
+
+  const handleLocationKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') {
+      setLocationOpen(false)
+      locationInputRef.current?.blur()
+    }
   }
 
   const handleReset = () => {
@@ -178,15 +204,24 @@ export const EventFiltersSidebar = ({
         <label htmlFor={locationId} className={styles.sectionTitle}>
           Location
         </label>
-        <div className={styles.locationDropdown} ref={locationRef}>
+        <div
+          className={
+            locationOpen
+              ? `${styles.locationDropdown} ${styles.locationDropdownOpen}`
+              : styles.locationDropdown
+          }
+          ref={locationRef}
+        >
           <div
             className={
               locationOpen
                 ? `${styles.locationInputWrapper} ${styles.locationInputWrapperOpen}`
                 : styles.locationInputWrapper
             }
+            onClick={handleLocationWrapperClick}
           >
             <input
+              ref={locationInputRef}
               id={locationId}
               type="text"
               className={styles.locationInput}
@@ -194,7 +229,10 @@ export const EventFiltersSidebar = ({
               value={locationInputValue}
               onFocus={handleLocationFocus}
               onChange={handleLocationSearch}
+              onKeyDown={handleLocationKeyDown}
               autoComplete="off"
+              role="combobox"
+              aria-autocomplete="list"
               aria-haspopup="listbox"
               aria-expanded={locationOpen}
               aria-controls={`${id}-location-list`}
@@ -211,6 +249,20 @@ export const EventFiltersSidebar = ({
               role="listbox"
               aria-label="Available venues"
             >
+              <li
+                role="option"
+                aria-selected={!filters.location}
+                className={
+                  !filters.location
+                    ? `${styles.locationItem} ${styles.locationItemActive}`
+                    : styles.locationItem
+                }
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={handleLocationClear}
+              >
+                {!filters.location && <span className={styles.locationCheck} aria-hidden="true" />}
+                All locations
+              </li>
               {filteredLocations.map((loc) => {
                 const isSelected = filters.location === loc
                 return (

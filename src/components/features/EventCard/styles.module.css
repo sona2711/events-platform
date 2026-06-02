@@ -40,6 +40,20 @@
   right: 14px;
   top: 14px;
   width: 36px;
+  z-index: 2;
+}
+
+.wishlistButton:hover {
+  transform: scale(1.05);
+}
+
+.wishlistButton:focus-visible {
+  outline: 2px solid var(--color-action-primary);
+  outline-offset: 2px;
+}
+
+.wishlistButtonActive {
+  color: var(--color-brand-primary);
 }
 
 .content {

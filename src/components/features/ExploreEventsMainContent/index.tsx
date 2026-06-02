@@ -44,7 +44,12 @@ export const ExploreEventsMainContent = ({
 
         {canLoadMore && (
           <div className={styles.loadMoreWrap}>
-            <Button type="primary" className={styles.loadMoreButton} onClick={onLoadMore}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={styles.loadMoreButton}
+              onClick={onLoadMore}
+            >
               {LOAD_MORE_BUTTON_LABEL}
             </Button>
           </div>

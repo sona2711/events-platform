@@ -45,16 +45,26 @@
   justify-content: center;
 }
 
-.loadMoreButton:global(.ant-btn-primary) {
-  background: var(--color-action-primary);
-  border-color: var(--color-action-primary);
-  border-radius: 14px;
+.loadMoreButton:global(.ant-btn) {
+  border-radius: 999px;
   box-shadow: none;
   font-size: 15px;
   font-weight: 700;
   height: 48px;
   min-width: 180px;
   padding: 0 32px;
+}
+
+.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary) {
+  background: transparent;
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):hover {
+  background: rgb(var(--color-burgundy-700-rgb) / 6%);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
 }
 
 @media (min-width: 768px) {
