@@ -18,7 +18,9 @@ export const AdminSidebar = () => {
   return (
     <>
       <Button
-        className={styles.mobileToggle}
+        className={
+          mobileOpen ? `${styles.mobileToggle} ${styles.mobileToggleHidden}` : styles.mobileToggle
+        }
         icon={<MenuOutlined />}
         onClick={() => setMobileOpen(true)}
         aria-label={t('adminSidebar.toggleMenu')}
