@@ -1,7 +1,13 @@
-export const NAV_LINKS = [
+type NavLinkItem = {
+  readonly labelKey: 'nav.allEvents' | 'nav.categories'
+  readonly to: '/' | '/categories'
+  readonly alwaysUnderlined?: boolean
+}
+
+export const NAV_LINKS: readonly NavLinkItem[] = [
   { labelKey: 'nav.allEvents', to: '/' },
   { labelKey: 'nav.categories', to: '/categories', alwaysUnderlined: true },
-] as const
+]
 
 export const AUTH_LINKS = [
   { labelKey: 'auth.login', to: '/login', variant: 'plain' },
