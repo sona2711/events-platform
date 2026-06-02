@@ -7,17 +7,8 @@ import { LanguageSwitcher } from '@/components/_shared/LanguageSwitcher'
 import { AUTH_LINKS, NAV_LINKS } from './consts'
 import styles from './styles.module.css'
 
-const getNavLinkClassName =
-  (underlined: boolean) =>
-  ({ isActive }: { isActive: boolean }) => {
-    const classes = [styles.navLink]
-
-    if (isActive || underlined) {
-      classes.push(styles.underlinedNavLink)
-    }
-
-    return classes.join(' ')
-  }
+const getNavLinkClassName = ({ isActive }: { isActive: boolean }) =>
+  isActive ? `${styles.navLink} ${styles.underlinedNavLink}` : styles.navLink
 
 export function Header() {
   const { t } = useTranslation('common')
@@ -65,7 +56,7 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <NavLink
                 key={link.to}
-                className={getNavLinkClassName('underlined' in link && link.underlined)}
+                className={getNavLinkClassName}
                 to={link.to}
                 end={link.to === '/'}
                 onClick={closeMobile}
