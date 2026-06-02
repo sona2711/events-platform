@@ -43,6 +43,15 @@
   font-weight: 600;
 }
 
+.tabButtonActive .label {
+  font-weight: 700;
+}
+
+.iconCircleActive {
+  background: var(--color-brand-primary);
+  color: var(--color-surface-card);
+}
+
 @media (max-width: 720px) {
   .list {
     gap: 20px 24px;

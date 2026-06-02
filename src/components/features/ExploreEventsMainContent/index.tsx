@@ -1,32 +1,54 @@
 import { Button } from 'antd'
 import { EventFiltersSidebar } from '@/components/EventFiltersSidebar'
 import { EventCard } from '@/components/features/EventCard'
-import { LOAD_MORE_BUTTON_LABEL, MOCK_EXPLORE_EVENTS } from './consts'
+import { EMPTY_STATE_MESSAGE, LOAD_MORE_BUTTON_LABEL } from './consts'
+import type { ExploreEventsMainContentProps } from './types'
 import styles from './styles.module.css'
 
-const handleApplyFilters = () => undefined
+export const ExploreEventsMainContent = ({
+  events,
+  canLoadMore,
+  onLoadMore,
+  filters,
+  onFiltersChange,
+  onApply,
+  onReset,
+}: ExploreEventsMainContentProps) => {
+  const hasEvents = events.length > 0
 
-export const ExploreEventsMainContent = () => {
   return (
     <section className={styles.content} aria-label="Explore events listings">
       <div className={styles.sidebarColumn}>
-        <EventFiltersSidebar onApply={handleApplyFilters} />
+        <EventFiltersSidebar
+          filters={filters}
+          onFiltersChange={onFiltersChange}
+          onApply={onApply}
+          onReset={onReset}
+        />
       </div>
 
       <div className={styles.results}>
-        <ul className={styles.grid}>
-          {MOCK_EXPLORE_EVENTS.map((event) => (
-            <li key={event.id}>
-              <EventCard event={event} />
-            </li>
-          ))}
-        </ul>
+        {hasEvents ? (
+          <ul className={styles.grid}>
+            {events.map((event) => (
+              <li key={event.id}>
+                <EventCard event={event} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.emptyState} role="status">
+            {EMPTY_STATE_MESSAGE}
+          </p>
+        )}
 
-        <div className={styles.loadMoreWrap}>
-          <Button type="primary" className={styles.loadMoreButton}>
-            {LOAD_MORE_BUTTON_LABEL}
-          </Button>
-        </div>
+        {canLoadMore && (
+          <div className={styles.loadMoreWrap}>
+            <Button type="primary" className={styles.loadMoreButton} onClick={onLoadMore}>
+              {LOAD_MORE_BUTTON_LABEL}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )

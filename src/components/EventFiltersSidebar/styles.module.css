@@ -183,36 +183,64 @@
 }
 
 .categoryPill {
-  background-color: rgba(227, 236, 250, 1);
+  appearance: none;
+  background-color: #e3ecfa;
   border: 1.5px solid #d9ddef;
   border-radius: 999px;
   color: #5b4a51;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
+  outline: none;
   padding: 6px 14px;
   transition:
+    background-color 0.15s,
     border-color 0.15s,
     color 0.15s,
-    background 0.15s;
+    box-shadow 0.15s;
 }
 
 .categoryPill:hover {
-  border-color: var(--color-blue-600);
-  color: var(--color-blue-600);
+  background-color: #eaf1fb;
+  border-color: #d4ddef;
+  color: #5b4a51;
+}
+
+.categoryPill:active {
+  background-color: #eef3fc;
+  border-color: #2665d6;
+  box-shadow: none;
+  color: #2665d6;
+}
+
+.categoryPill:focus-visible {
+  box-shadow: 0 0 0 2px rgb(38 101 214 / 0.15);
+  outline: none;
 }
 
 .categoryPillActive {
-  background: #eef3fc;
-  border-color: var(--color-blue-600);
-  color: var(--color-blue-600);
+  background-color: #eef3fc;
+  border-color: #2665d6;
+  color: #2665d6;
   font-weight: 600;
 }
 
 .categoryPillActive:hover {
-  background: #e3ecfa;
-  border-color: var(--color-blue-700);
-  color: var(--color-blue-700);
+  background-color: #f2f6fc;
+  border-color: #2665d6;
+  color: #2665d6;
+}
+
+.categoryPillActive:active {
+  background-color: #e3ecfa;
+  border-color: #2665d6;
+  box-shadow: none;
+  color: #2665d6;
+}
+
+.categoryPillActive:focus-visible {
+  box-shadow: 0 0 0 2px rgb(38 101 214 / 0.15);
+  outline: none;
 }
 
 /* ─────────────────────────────────────────
@@ -327,11 +355,15 @@
 .actions {
   display: flex;
   gap: 10px;
+  isolation: isolate;
   margin-top: 22px;
+  position: relative;
+  z-index: 2;
 }
 
 .applyButton {
-  background: var(--color-blue-600);
+  appearance: none;
+  background-color: #2665d6;
   border: none;
   border-radius: 999px;
   color: #ffffff;
@@ -339,38 +371,54 @@
   flex: 1;
   font-size: 15px;
   font-weight: 600;
+  outline: none;
   padding: 13px 20px;
-  transition:
-    background 0.15s,
-    box-shadow 0.15s;
+  transition: background-color 0.15s;
 }
 
 .applyButton:hover {
-  background: var(--color-blue-700);
-  box-shadow: 0 4px 14px rgb(var(--color-blue-600-rgb) / 0.3);
+  background-color: #3274dc;
 }
 
 .applyButton:active {
-  background: var(--color-blue-800);
+  background-color: #2665d6;
+}
+
+.applyButton:focus-visible {
+  box-shadow: 0 0 0 2px rgb(38 101 214 / 0.25);
+  outline: none;
 }
 
 .resetButton {
-  background: transparent;
+  appearance: none;
+  background-color: #ffffff;
   border: 1.5px solid #e0d6da;
   border-radius: 999px;
   color: #5b4a51;
   cursor: pointer;
+  flex-shrink: 0;
   font-size: 15px;
   font-weight: 600;
   padding: 13px 18px;
+  outline: none;
   transition:
-    border-color 0.15s,
-    color 0.15s;
+    background-color 0.15s,
+    border-color 0.15s;
 }
 
 .resetButton:hover {
-  border-color: var(--color-blue-600);
-  color: var(--color-blue-600);
+  background-color: #fafbfc;
+  border-color: #e0d6da;
+}
+
+.resetButton:focus-visible {
+  box-shadow: 0 0 0 2px rgb(38 101 214 / 0.15);
+  outline: none;
+}
+
+.resetButton:active {
+  background-color: #f5f8fd;
+  border-color: #d9ddef;
 }
 
 /* ─────────────────────────────────────────
