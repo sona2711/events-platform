@@ -1,18 +1,15 @@
 import type { EventCardData } from '@/components/features/EventCard/types'
-
-const UNSPLASH_IMAGE_PARAMS = 'w=800&auto=format&fit=crop&q=80'
-
-const EVENT_IMAGE_MODERN_ART = `https://images.unsplash.com/photo-1549887534-1541e9326642?${UNSPLASH_IMAGE_PARAMS}`
-const EVENT_IMAGE_VAN_GOGH = `https://images.unsplash.com/photo-1577083552431-6e0b4eccfcc7?${UNSPLASH_IMAGE_PARAMS}`
-const EVENT_IMAGE_CLASSICAL_NIGHT = `https://images.unsplash.com/photo-1507839093338-47a6b5132071?${UNSPLASH_IMAGE_PARAMS}`
-const EVENT_IMAGE_RENAISSANCE = `https://images.unsplash.com/photo-1598488035139-bdbafb223fbe?${UNSPLASH_IMAGE_PARAMS}`
-const EVENT_IMAGE_JAZZ_NIGHTS = `https://images.unsplash.com/photo-1415201364774-f6f0ff293ae1?${UNSPLASH_IMAGE_PARAMS}`
-const EVENT_IMAGE_CLASSICAL_PARK = `https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?${UNSPLASH_IMAGE_PARAMS}`
+import modernArtImage from '@/assets/images/modernArtsExhibition.jpg'
+import classicalNightImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
+import gastroFestImage from '@/assets/images/ArmenianGastroFest.JPG'
+import dilijanImage from '@/assets/images/DilijanWeekendRetreat.JPG'
+import startupImage from '@/assets/images/StratupPitchDeckReport.png'
+import hikingImage from '@/assets/images/HikingToGarniTemple.jpg'
 
 export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   {
     id: 'event-modern-art',
-    imageUrl: EVENT_IMAGE_MODERN_ART,
+    imageUrl: modernArtImage,
     categoryLabel: 'ART',
     title: 'Modern Art Exhibiti...',
     location: 'Cafesjian Center',
@@ -20,49 +17,49 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
     priceLabel: '2,000 AMD',
   },
   {
-    id: 'event-van-gogh',
-    imageUrl: EVENT_IMAGE_VAN_GOGH,
-    categoryLabel: 'ART',
-    title: 'Van Gogh in Yerevan',
-    location: 'Cafesjian Center',
-    date: 'Nov 20, 2026',
-    priceLabel: '1,500 AMD',
-  },
-  {
-    id: 'event-vivaldi',
-    imageUrl: EVENT_IMAGE_CLASSICAL_NIGHT,
+    id: 'event-classical-night',
+    imageUrl: classicalNightImage,
     categoryLabel: 'CLASSICAL',
     title: 'Classical Night at O...',
-    location: 'Komitas Chamber Music Hall',
-    date: 'Dec 19, 2026',
+    location: 'Opera House',
+    date: 'Oct 12, 2026',
+    priceLabel: '10,000 AMD',
+  },
+  {
+    id: 'event-gastro-fest',
+    imageUrl: gastroFestImage,
+    categoryLabel: 'FESTIVAL',
+    title: 'Armenian Gastro F...',
+    location: 'Republic Square',
+    date: 'Oct 12, 2026',
     priceLabel: '5,000 AMD',
   },
   {
-    id: 'event-renaissance',
-    imageUrl: EVENT_IMAGE_RENAISSANCE,
-    categoryLabel: 'CLASSICAL',
-    title: 'Renaissance Masters Talk',
-    location: 'National Gallery of Armenia',
-    date: 'Mar 18, 2027',
+    id: 'event-dilijan-retreat',
+    imageUrl: dilijanImage,
+    categoryLabel: 'RETREAT',
+    title: 'Dilijan Weekend Re...',
+    location: 'Dilijan Forest',
+    date: 'Oct 12, 2026',
+    priceLabel: '15,000 AMD',
+  },
+  {
+    id: 'event-startup-pitch',
+    imageUrl: startupImage,
+    categoryLabel: 'EDUCATION',
+    title: 'Startup Pitch Deck...',
+    location: 'Yerevan Startup Hub',
+    date: 'Oct 12, 2026',
     priceLabel: 'Free',
   },
   {
-    id: 'event-jazz-nights',
-    imageUrl: EVENT_IMAGE_JAZZ_NIGHTS,
-    categoryLabel: 'FESTIVAL',
-    title: 'Yerevan Jazz Nights',
-    location: 'Republic Square',
-    date: 'Apr 25, 2026',
-    priceLabel: '3,500 AMD',
-  },
-  {
-    id: 'event-classical-park',
-    imageUrl: EVENT_IMAGE_CLASSICAL_PARK,
-    categoryLabel: 'MUSIC',
-    title: 'Classical in the Park',
-    location: "Lovers' Park",
-    date: 'Sep 08, 2026',
-    priceLabel: 'Free',
+    id: 'event-hiking-garni',
+    imageUrl: hikingImage,
+    categoryLabel: 'TECH',
+    title: 'Hiking to Garni Tem...',
+    location: 'Garni Village',
+    date: 'Oct 12, 2026',
+    priceLabel: '8,000 AMD',
   },
 ]
 
