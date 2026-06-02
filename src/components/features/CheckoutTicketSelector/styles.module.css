@@ -1,0 +1,138 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.card {
+  align-items: center;
+  background: var(--color-surface-card);
+  border: 1px solid rgb(var(--color-burgundy-700-rgb) / 8%);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgb(var(--color-burgundy-700-rgb) / 4%);
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  list-style: none;
+  min-width: 0;
+  padding: 20px 24px;
+}
+
+.details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.name {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.description {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.price {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 700;
+  margin: 8px 0 0;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.actions :global(.ant-btn) {
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  height: 40px;
+  min-width: 88px;
+  padding: 0 24px;
+}
+
+.actions :global(.ant-btn-default) {
+  background: var(--color-surface-card);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.actions :global(.ant-btn-default:hover),
+.actions :global(.ant-btn-default:focus) {
+  background: rgb(38 101 214 / 8%);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.quantityControl {
+  align-items: center;
+  background: rgb(38 101 214 / 10%);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 4px;
+  min-height: 40px;
+  padding: 4px 8px;
+}
+
+.quantityButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-action-primary);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 600;
+  height: 32px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 32px;
+  padding: 0;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background: rgb(38 101 214 / 12%);
+}
+
+.quantityButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.quantityValue {
+  color: var(--color-action-primary);
+  font-size: 16px;
+  font-weight: 700;
+  min-width: 28px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .card {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 20px;
+  }
+
+  .actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+}

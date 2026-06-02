@@ -1,0 +1,87 @@
+{
+  "steps": {
+    "tickets": {
+      "title": "Տոմսերի ընտրություն",
+      "aria": "Տոմսերի ընտրություն"
+    },
+    "contact": {
+      "title": "Կոնտակտային տվյալներ",
+      "aria": "Կոնտակտային տվյալներ"
+    },
+    "payment": {
+      "title": "Վճարում",
+      "aria": "Վճարման տվյալներ"
+    }
+  },
+  "event": {
+    "jazzNight": {
+      "title": "Ջազային գիշեր Երևանում",
+      "location": "Կասկադ համալիր"
+    }
+  },
+  "tickets": {
+    "generalAdmission": {
+      "name": "Ընդհանուր մուտք",
+      "description": "Ստանդարտ մուտք և հարկի մուտք։"
+    },
+    "vipBackstage": {
+      "name": "VIP Backstage Pass",
+      "description": "Հանդիպում խմբի հետ + 2 անվճար ըմպելիք։"
+    },
+    "add": "Ավելացնել",
+    "decreaseQuantity": "Նվազեցնել քանակը՝ {{ticket}}",
+    "increaseQuantity": "Ավելացնել քանակը՝ {{ticket}}"
+  },
+  "contact": {
+    "fields": {
+      "fullName": "Ամբողջական անուն",
+      "email": "Էլ. փոստ"
+    },
+    "validation": {
+      "fullNameRequired": "Մուտքագրեք ձեր ամբողջական անունը",
+      "fullNameMin": "Անունը պետք է լինի առնվազն 2 նիշ",
+      "emailRequired": "Մուտքագրեք ձեր էլ. փոստը",
+      "emailInvalid": "Մուտքագրեք վավեր էլ. փոստ"
+    }
+  },
+  "payment": {
+    "fields": {
+      "cardNumber": "Քարտի համար",
+      "expiryDate": "Ժամկետ",
+      "cvv": "CVV"
+    },
+    "placeholders": {
+      "cardNumber": "1234 5678 9012 3456",
+      "expiryDate": "ԱԱ/ՏՏ",
+      "cvv": "***"
+    },
+    "validation": {
+      "cardNumberRequired": "Մուտքագրեք քարտի համարը",
+      "cardNumberInvalid": "Մուտքագրեք վավեր քարտի համար",
+      "expiryRequired": "Մուտքագրեք ժամկետը",
+      "expiryInvalid": "Օգտագործեք ԱԱ/ՏՏ ձևաչափը",
+      "cvvRequired": "Մուտքագրեք CVV-ն",
+      "cvvInvalid": "Մուտքագրեք վավեր CVV"
+    },
+    "secureNote": "Անվտանգ 256-բիթ SSL գաղտնագրում"
+  },
+  "summary": {
+    "aria": "Պատվերի ամփոփում",
+    "serviceFee": "Սպասարկման վճար",
+    "processingFee": "Մշակման վճար",
+    "total": "Ընդամենը",
+    "placeOrder": "Հաստատել պատվերը",
+    "lineItem": "{{name}} (x{{count}})"
+  },
+  "messages": {
+    "orderSuccess": "Ձեր պատվերը հաջողությամբ է գրանցվել։",
+    "orderError": "Հնարավոր չէ հաստատել պատվերը։ Խնդրում ենք կրկին փորձել։",
+    "eventNotFound": "Այս միջոցառման համար գնումը հասանելի չէ։"
+  },
+  "defaults": {
+    "contact": {
+      "fullName": "Ալեքս Ռիվերս",
+      "email": "alex.rivers@example.com"
+    }
+  }
+}

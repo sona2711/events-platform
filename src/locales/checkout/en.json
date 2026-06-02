@@ -1,0 +1,87 @@
+{
+  "steps": {
+    "tickets": {
+      "title": "Ticket Selection",
+      "aria": "Ticket selection"
+    },
+    "contact": {
+      "title": "Contact Information",
+      "aria": "Contact information"
+    },
+    "payment": {
+      "title": "Payment",
+      "aria": "Payment details"
+    }
+  },
+  "event": {
+    "jazzNight": {
+      "title": "Jazz Night Yerevan",
+      "location": "Cascade Complex"
+    }
+  },
+  "tickets": {
+    "generalAdmission": {
+      "name": "General Admission",
+      "description": "Includes standard entry and floor access."
+    },
+    "vipBackstage": {
+      "name": "VIP Backstage Pass",
+      "description": "Meet the band + 2 complimentary drinks."
+    },
+    "add": "Add",
+    "decreaseQuantity": "Decrease quantity for {{ticket}}",
+    "increaseQuantity": "Increase quantity for {{ticket}}"
+  },
+  "contact": {
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address"
+    },
+    "validation": {
+      "fullNameRequired": "Enter your full name",
+      "fullNameMin": "Name must be at least 2 characters",
+      "emailRequired": "Enter your email address",
+      "emailInvalid": "Enter a valid email address"
+    }
+  },
+  "payment": {
+    "fields": {
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV"
+    },
+    "placeholders": {
+      "cardNumber": "1234 5678 9012 3456",
+      "expiryDate": "MM/YY",
+      "cvv": "***"
+    },
+    "validation": {
+      "cardNumberRequired": "Enter your card number",
+      "cardNumberInvalid": "Enter a valid card number",
+      "expiryRequired": "Enter expiry date",
+      "expiryInvalid": "Use MM/YY format",
+      "cvvRequired": "Enter CVV",
+      "cvvInvalid": "Enter a valid CVV"
+    },
+    "secureNote": "Secure 256-bit SSL Encrypted Payment"
+  },
+  "summary": {
+    "aria": "Order summary",
+    "serviceFee": "Service Fee",
+    "processingFee": "Processing Fee",
+    "total": "Total",
+    "placeOrder": "Place Order",
+    "lineItem": "{{name}} (x{{count}})"
+  },
+  "messages": {
+    "orderSuccess": "Your order was placed successfully!",
+    "orderError": "Unable to place your order. Please try again.",
+    "eventNotFound": "This event checkout is not available."
+  },
+  "defaults": {
+    "contact": {
+      "fullName": "Alex Rivers",
+      "email": "alex.rivers@example.com"
+    }
+  }
+}

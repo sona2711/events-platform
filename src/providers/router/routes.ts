@@ -43,6 +43,12 @@ const UserProfilePage = lazy(() =>
   })),
 )
 
+const CheckoutPage = lazy(() =>
+  import('@/pages/checkout').then((module) => ({
+    default: module.CheckoutPage,
+  })),
+)
+
 const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -107,6 +113,11 @@ export const userProfilePageRoute: RouteObject = {
   element: createElement(UserProfilePage),
 }
 
+export const checkoutPageRoute: RouteObject = {
+  path: 'checkout/:eventId',
+  element: createElement(CheckoutPage),
+}
+
 export const notFoundPageRoute: RouteObject = {
   path: '*',
   element: createElement(NotFoundPage),
@@ -122,6 +133,7 @@ export const appRoutes: RouteObject[] = [
       signUpPageRoute,
       passwordRecoveryPageRoute,
       userProfilePageRoute,
+      checkoutPageRoute,
     ],
   },
   adminRedirectRoute,
