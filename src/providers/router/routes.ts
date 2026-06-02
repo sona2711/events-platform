@@ -54,17 +54,17 @@ export const appRoutes: RouteObject[] = [
       { index: true, element: createElement(MainPage) },
       { path: 'categories', element: createElement(CategoriesPage) },
       {
-        element: createElement(GuestRoute),
-        children: [
-          { path: 'login', element: createElement(LazyLoginPage) },
-          { path: 'sign-up', element: createElement(LazySignUpPage) },
-          { path: 'password-recovery', element: createElement(PasswordRecoveryPage) },
-        ],
-      },
-      {
         element: createElement(ProtectedRoute),
         children: [{ path: 'profile', element: createElement(UserProfilePage) }],
       },
+    ],
+  },
+  {
+    element: createElement(GuestRoute),
+    children: [
+      { path: 'login', element: createElement(LazyLoginPage) },
+      { path: 'sign-up', element: createElement(LazySignUpPage) },
+      { path: 'password-recovery', element: createElement(PasswordRecoveryPage) },
     ],
   },
   {
