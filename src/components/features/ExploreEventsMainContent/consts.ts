@@ -1,15 +1,18 @@
-import carolineAttwoodImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.jpg'
-import ewanBuckImage from '@/assets/images/ewan-buck-xc9B3i-1QiI-unsplash.jpg'
-import headwayImage from '@/assets/images/headway-F2KRf_QfCqw-unsplash.jpg'
-import larisaBirtaImage from '@/assets/images/larisa-birta-slbOcNlWNHA-unsplash.jpg'
-import markusSpiskeImage from '@/assets/images/markus-spiske-RmvlD0oTsAo-unsplash.jpg'
-import simonEnglishImage from '@/assets/images/simon-english-48nerZQCHgo-unsplash.jpg'
 import type { EventCardData } from '@/components/features/EventCard/types'
+
+const UNSPLASH_IMAGE_PARAMS = 'w=800&auto=format&fit=crop&q=80'
+
+const EVENT_IMAGE_MODERN_ART = `https://images.unsplash.com/photo-1549887534-1541e9326642?${UNSPLASH_IMAGE_PARAMS}`
+const EVENT_IMAGE_VAN_GOGH = `https://images.unsplash.com/photo-1577083552431-6e0b4eccfcc7?${UNSPLASH_IMAGE_PARAMS}`
+const EVENT_IMAGE_CLASSICAL_NIGHT = `https://images.unsplash.com/photo-1507839093338-47a6b5132071?${UNSPLASH_IMAGE_PARAMS}`
+const EVENT_IMAGE_RENAISSANCE = `https://images.unsplash.com/photo-1598488035139-bdbafb223fbe?${UNSPLASH_IMAGE_PARAMS}`
+const EVENT_IMAGE_JAZZ_NIGHTS = `https://images.unsplash.com/photo-1415201364774-f6f0ff293ae1?${UNSPLASH_IMAGE_PARAMS}`
+const EVENT_IMAGE_CLASSICAL_PARK = `https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?${UNSPLASH_IMAGE_PARAMS}`
 
 export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   {
     id: 'event-modern-art',
-    imageUrl: headwayImage,
+    imageUrl: EVENT_IMAGE_MODERN_ART,
     categoryLabel: 'ART',
     title: 'Modern Art Exhibiti...',
     location: 'Cafesjian Center',
@@ -18,7 +21,7 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   },
   {
     id: 'event-van-gogh',
-    imageUrl: ewanBuckImage,
+    imageUrl: EVENT_IMAGE_VAN_GOGH,
     categoryLabel: 'ART',
     title: 'Van Gogh in Yerevan',
     location: 'Cafesjian Center',
@@ -27,7 +30,7 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   },
   {
     id: 'event-vivaldi',
-    imageUrl: carolineAttwoodImage,
+    imageUrl: EVENT_IMAGE_CLASSICAL_NIGHT,
     categoryLabel: 'CLASSICAL',
     title: 'Classical Night at O...',
     location: 'Komitas Chamber Music Hall',
@@ -36,7 +39,7 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   },
   {
     id: 'event-renaissance',
-    imageUrl: larisaBirtaImage,
+    imageUrl: EVENT_IMAGE_RENAISSANCE,
     categoryLabel: 'CLASSICAL',
     title: 'Renaissance Masters Talk',
     location: 'National Gallery of Armenia',
@@ -45,7 +48,7 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   },
   {
     id: 'event-jazz-nights',
-    imageUrl: simonEnglishImage,
+    imageUrl: EVENT_IMAGE_JAZZ_NIGHTS,
     categoryLabel: 'FESTIVAL',
     title: 'Yerevan Jazz Nights',
     location: 'Republic Square',
@@ -54,7 +57,7 @@ export const MOCK_EXPLORE_EVENTS: EventCardData[] = [
   },
   {
     id: 'event-classical-park',
-    imageUrl: markusSpiskeImage,
+    imageUrl: EVENT_IMAGE_CLASSICAL_PARK,
     categoryLabel: 'MUSIC',
     title: 'Classical in the Park',
     location: "Lovers' Park",
