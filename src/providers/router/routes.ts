@@ -7,6 +7,12 @@ const MainPage = lazy(() =>
   import('@/pages/mainPage').then((module) => ({ default: module.MainPage })),
 )
 
+const ExploreEventsPage = lazy(() =>
+  import('@/pages/explore-events-in-yerevan').then((module) => ({
+    default: module.ExploreEventsPage,
+  })),
+)
+
 const CategoriesPage = lazy(() =>
   import('@/pages/categoriesPage').then((module) => ({
     default: module.CategoriesPage,
@@ -50,6 +56,11 @@ const NotFoundPage = lazy(() =>
 export const mainPageRoute: RouteObject = {
   index: true,
   element: createElement(MainPage),
+}
+
+export const exploreEventsPageRoute: RouteObject = {
+  path: 'explore-events-in-yerevan',
+  element: createElement(ExploreEventsPage),
 }
 
 export const categoriesPageRoute: RouteObject = {
@@ -117,6 +128,7 @@ export const appRoutes: RouteObject[] = [
     element: createElement(AppLayout),
     children: [
       mainPageRoute,
+      exploreEventsPageRoute,
       categoriesPageRoute,
       loginPageRoute,
       signUpPageRoute,
