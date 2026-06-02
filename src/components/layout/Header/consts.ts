@@ -1,6 +1,6 @@
 export const NAV_LINKS = [
   { labelKey: 'nav.allEvents', to: '/' },
-  { labelKey: 'nav.categories', to: '/categories' },
+  { labelKey: 'nav.categories', to: '/categories', alwaysUnderlined: true },
 ] as const
 
 export const AUTH_LINKS = [
