@@ -1,9 +1,9 @@
 import type { ProfileNavItem, UserBookingSeed } from './types'
 import avatar from '@/assets/images/avatar.jpg'
-import jazzFestImage from '@/assets/images/simon-english-48nerZQCHgo-unsplash.jpg'
-import feastImage from '@/assets/images/kelsey-knight-udj2tD3WKsY-unsplash.jpg'
-import marathonImage from '@/assets/images/markus-spiske-RmvlD0oTsAo-unsplash.jpg'
-import wineTastingImage from '@/assets/images/close-up-wine-stain-detail.jpg'
+import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
+import feastImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.jpg'
+import marathonImage from '@/assets/images/HikingToGarniTemple.jpg'
+import wineTastingImage from '@/assets/images/wine-stain-detail.jpg'
 
 export const MOCK_USER_AVATAR = avatar
 
