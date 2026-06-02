@@ -7,7 +7,7 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px 56px;
+  gap: 32px 68px;
   justify-content: center;
   list-style: none;
   margin: 0;
@@ -63,7 +63,7 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .list {
-    gap: 24px 40px;
+    gap: 24px 48px;
   }
 
   .tabButton {
@@ -95,7 +95,7 @@
 
   .list {
     flex-wrap: nowrap;
-    gap: 20px;
+    gap: 24px;
     justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
@@ -133,7 +133,7 @@
 /* Mobile */
 @media (max-width: 480px) {
   .list {
-    gap: 16px;
+    gap: 20px;
   }
 
   .tabButton {
