@@ -6,7 +6,8 @@
   },
   "auth": {
     "login": "Login",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "logout": "Logout"
   },
   "languages": {
     "label": "Language",

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Alert, Button, Form, Input, Typography } from 'antd'
+import { Button, Form, Input, Typography } from 'antd'
 import { ArrowLeftOutlined, ReloadOutlined } from '@ant-design/icons'
+import { hideNotification, showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { AuthCard } from '@/components/shared/AuthCard'
+import { FormItem } from '@/components/shared/FormItem'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearError, sendPasswordReset } from '@/store/authSlice'
 import type { PasswordRecoveryFormValues } from '@/types'
+import { PASSWORD_RECOVERY_NOTIFICATION_COPY } from './consts'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -16,8 +19,29 @@ export function PasswordRecoveryPage() {
   const [emailSent, setEmailSent] = useState(false)
 
   useEffect(() => {
+    if (!error) return
+
+    showNotification({
+      title: PASSWORD_RECOVERY_NOTIFICATION_COPY.errorTitle,
+      message: error,
+      variant: 'error',
+    })
+  }, [error])
+
+  useEffect(() => {
+    if (!emailSent) return
+
+    showNotification({
+      title: PASSWORD_RECOVERY_NOTIFICATION_COPY.successTitle,
+      message: PASSWORD_RECOVERY_NOTIFICATION_COPY.successMessage,
+      variant: 'success',
+    })
+  }, [emailSent])
+
+  useEffect(() => {
     return () => {
       dispatch(clearError())
+      hideNotification()
     }
   }, [dispatch])
 
@@ -38,24 +62,12 @@ export function PasswordRecoveryPage() {
         <Title level={4} className={styles.title}>
           Forgot your password?
         </Title>
-        <Text type="secondary" className={styles.subtitle}>
+        <Text className={styles.subtitle}>
           Enter your email and we&apos;ll send a reset link to your inbox.
         </Text>
 
-        {error && <Alert message={error} type="error" showIcon closable className={styles.alert} />}
-
-        {emailSent && (
-          <Alert
-            message="Email sent!"
-            description="Check your inbox for further instructions."
-            type="success"
-            showIcon
-            className={styles.alert}
-          />
-        )}
-
         <Form layout="vertical" onFinish={handleSubmit} requiredMark={false}>
-          <Form.Item
+          <FormItem
             label="Email address"
             name="email"
             rules={[
@@ -64,9 +76,9 @@ export function PasswordRecoveryPage() {
             ]}
           >
             <Input size="large" placeholder="you@example.com" />
-          </Form.Item>
+          </FormItem>
 
-          <Form.Item className={styles.submitItem}>
+          <FormItem className={styles.submitItem}>
             <Button
               type="primary"
               htmlType="submit"
@@ -78,7 +90,7 @@ export function PasswordRecoveryPage() {
             >
               Send reset link
             </Button>
-          </Form.Item>
+          </FormItem>
         </Form>
 
         <Link to="/login" className={styles.backLink}>
