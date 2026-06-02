@@ -1,0 +1,80 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #eee6e7;
+  background-image: url('../../assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #ede9fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #5b21b6;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 8px !important;
+}
+
+.subtitle {
+  display: block;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.alert {
+  margin-bottom: 16px;
+}
+
+.submitItem {
+  margin-bottom: 8px !important;
+}
+
+.submitButton {
+  border-radius: 24px !important;
+  background-color: #3b5bdb !important;
+  border-color: #3b5bdb !important;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  color: #555;
+  font-size: 14px;
+}
+
+.backLink:hover {
+  color: #3b5bdb;
+}

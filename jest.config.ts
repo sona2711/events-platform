@@ -7,15 +7,13 @@ const config: Config = {
     '^.+\\.(ts|tsx|js|jsx)$': [
       'ts-jest',
       {
-        tsconfig: {
-          jsx: 'react-jsx',
-          esModuleInterop: true,
-          module: 'CommonJS',
-        },
+        tsconfig: '<rootDir>/tsconfig.jest.json',
       },
     ],
   },
   moduleNameMapper: {
+    '^@/(.*)\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '^@/(.*)\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/src/__mocks__/fileMock.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/src/__mocks__/fileMock.ts',

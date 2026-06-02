@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from '@/store'
 import '@/assets/fonts'
 import '@/i18n'
+import { AuthProvider } from '@/providers/auth'
 import App from './App'
 import '../main.css'
 
@@ -17,7 +18,9 @@ enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <Provider store={store}>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </Provider>
     </StrictMode>,
   )

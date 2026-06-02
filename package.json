@@ -21,7 +21,6 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "@ant-design/icons": "^5",
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",
     "@fontsource/libre-caslon-text": "^5.2.7",
