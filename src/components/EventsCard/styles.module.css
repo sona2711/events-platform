@@ -17,9 +17,75 @@
   overflow: visible;
 }
 
-.mySwiper :global(.swiper-button-prev),
-.mySwiper :global(.swiper-button-next) {
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navigationButtons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.navigationButtons :global(.events-prev-button),
+.navigationButtons :global(.events-next-button) {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  background: transparent;
   color: #ffffff;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navigationButtons :global(.events-prev-button::after),
+.navigationButtons :global(.events-next-button::after) {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.navigationButtons :global(.events-prev-button::after) {
+  transform: translate(-35%, -50%) rotate(-135deg);
+}
+
+.navigationButtons :global(.events-next-button::after) {
+  transform: translate(-65%, -50%) rotate(45deg);
+}
+
+.navigationButtons :global(.events-prev-button:hover),
+.navigationButtons :global(.events-next-button:hover) {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.navigationButtons :global(.events-prev-button:focus-visible),
+.navigationButtons :global(.events-next-button:focus-visible) {
+  outline: 3px solid #d2e823;
+  outline-offset: 2px;
+}
+
+.navigationButtons :global(.swiper-button-disabled) {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
 .mySwiper :global(.swiper-slide) {
@@ -64,8 +130,8 @@
 }
 
 .title {
-  margin: 0 0 20px;
-  text-align: center;
+  margin: 0;
+  text-align: left;
   font-family: Bricolage Grotesque;
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
@@ -210,10 +276,6 @@
     padding-inline: 0;
   }
 
-  .title {
-    margin-bottom: 14px;
-  }
-
   .description {
     font-size: 1rem;
     margin-bottom: 28px;
@@ -223,8 +285,7 @@
     height: 200px;
   }
 
-  .mySwiper :global(.swiper-button-prev),
-  .mySwiper :global(.swiper-button-next) {
+  .navigationButtons {
     display: none;
   }
 }

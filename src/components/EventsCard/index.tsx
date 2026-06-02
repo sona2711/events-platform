@@ -5,14 +5,28 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { EVENTS, SLIDER_BREAKPOINTS } from './consts'
+import {
+  EVENTS,
+  EVENTS_NEXT_BUTTON_CLASS,
+  EVENTS_NEXT_BUTTON_SELECTOR,
+  EVENTS_PREV_BUTTON_CLASS,
+  EVENTS_PREV_BUTTON_SELECTOR,
+  SLIDER_BREAKPOINTS,
+} from './consts'
 
 export function EventsGrid() {
   return (
     <section className={styles.container} aria-labelledby="events-grid-title">
-      <h2 className={styles.title} id="events-grid-title">
-        Upcoming Events in Yerevan
-      </h2>
+      <div className={styles.sectionHeader}>
+        <h2 className={styles.title} id="events-grid-title">
+          Upcoming Events in Yerevan
+        </h2>
+
+        <div className={styles.navigationButtons} aria-label="Events carousel navigation">
+          <button className={EVENTS_PREV_BUTTON_CLASS} type="button" aria-label="Previous events" />
+          <button className={EVENTS_NEXT_BUTTON_CLASS} type="button" aria-label="Next events" />
+        </div>
+      </div>
 
       <p className={styles.description}>
         The most anticipated gatherings happening this month and beyond
@@ -21,7 +35,10 @@ export function EventsGrid() {
       <Swiper
         modules={[Navigation]}
         breakpoints={SLIDER_BREAKPOINTS}
-        navigation
+        navigation={{
+          prevEl: EVENTS_PREV_BUTTON_SELECTOR,
+          nextEl: EVENTS_NEXT_BUTTON_SELECTOR,
+        }}
         className={styles.mySwiper}
       >
         {EVENTS.map((event) => (
