@@ -7,7 +7,8 @@
   },
   "auth": {
     "login": "Մուտք",
-    "signUp": "Գրանցվել"
+    "signUp": "Գրանցվել",
+    "logout": "Ելք"
   },
   "languages": {
     "label": "Լեզու",

@@ -46,13 +46,16 @@
 }
 
 .subtitle {
+  color: #565e74;
   display: block;
-  text-align: center;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 21px;
   margin-bottom: 24px;
-}
-
-.alert {
-  margin-bottom: 16px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .submitItem {
@@ -66,13 +69,20 @@
 }
 
 .backLink {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 16px;
-  color: #555;
+  color: #565e74;
+  display: flex;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
+  font-weight: 400;
+  gap: 6px;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .backLink:hover {
