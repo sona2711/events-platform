@@ -12,3 +12,9 @@ export interface RegistrationsFilterValues {
   dateRange: [Dayjs, Dayjs] | null
   search: string
 }
+
+export interface RegistrationsFilterBarProps {
+  filters: RegistrationsFilterValues
+  onFiltersChange: (patch: Partial<RegistrationsFilterValues>) => void
+  onReset: () => void
+}

@@ -1,0 +1,42 @@
+.wrapper {
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+
+.bars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.empty {
+  background-color: #e0e0e0;
+}
+
+.weak {
+  background-color: #e53935;
+}
+
+.fair {
+  background-color: #fb8c00;
+}
+
+.good {
+  background-color: #fdd835;
+}
+
+.strong {
+  background-color: #43a047;
+}
+
+.label {
+  font-size: 12px;
+  color: #757575;
+}

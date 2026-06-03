@@ -1,8 +1,8 @@
-import type { StatCard } from './types'
+import type { StatCardMeta } from './types'
 
-export const STAT_CARDS: StatCard[] = [
-  { id: 'total', label: 'Total registrations', value: '2,482' },
-  { id: 'active', label: 'Active/confirmed', value: '1,840' },
-  { id: 'cancelled', label: 'Cancelled', value: '342' },
-  { id: 'pending', label: 'Pending', value: '300' },
+export const STAT_CARD_META: StatCardMeta[] = [
+  { id: 'total', label: 'Total registrations' },
+  { id: 'active', label: 'Active/confirmed' },
+  { id: 'cancelled', label: 'Cancelled' },
+  { id: 'pending', label: 'Pending' },
 ]
