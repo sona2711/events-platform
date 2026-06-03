@@ -1,0 +1,163 @@
+import modernArtImage from '@/assets/images/modernArtsExhibition.jpg'
+import classicalNightImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
+import gastroFestImage from '@/assets/images/ArmenianGastroFest.JPG'
+import dilijanImage from '@/assets/images/DilijanWeekendRetreat.JPG'
+import startupImage from '@/assets/images/StratupPitchDeckReport.png'
+import hikingImage from '@/assets/images/HikingToGarniTemple.jpg'
+import wineImage from '@/assets/images/wine.jpg'
+import headwayImage from '@/assets/images/headway-F2KRf_QfCqw-unsplash.jpg'
+import ewanBuckImage from '@/assets/images/ewan-buck-xc9B3i-1QiI-unsplash.jpg'
+import carolineImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.jpg'
+import dennyImage from '@/assets/images/denny-muller-z_disLOcoKM-unsplash.jpg'
+import wineStainImage from '@/assets/images/wine-stain-detail.jpg'
+import type { ExploreEvent } from './types'
+
+export const MOCK_EXPLORE_EVENTS: ExploreEvent[] = [
+  {
+    id: 'event-modern-art',
+    imageUrl: modernArtImage,
+    categoryLabel: 'ART',
+    title: 'Modern Art Exhibiti...',
+    location: 'Cafesjian Center',
+    date: 'Oct 12, 2026',
+    priceLabel: '2,000 AMD',
+    category: 'Arts',
+    priceAmd: 2_000,
+    dateIso: '2026-10-12',
+  },
+  {
+    id: 'event-classical-night',
+    imageUrl: classicalNightImage,
+    categoryLabel: 'CLASSICAL',
+    title: 'Classical Night at O...',
+    location: 'Opera House',
+    date: 'Oct 12, 2026',
+    priceLabel: '10,000 AMD',
+    category: 'Music',
+    priceAmd: 10_000,
+    dateIso: '2026-10-12',
+  },
+  {
+    id: 'event-gastro-fest',
+    imageUrl: gastroFestImage,
+    categoryLabel: 'FESTIVAL',
+    title: 'Armenian Gastro F...',
+    location: 'Republic Square',
+    date: 'Oct 14, 2026',
+    priceLabel: '5,000 AMD',
+    category: 'Food & Drink',
+    priceAmd: 5_000,
+    dateIso: '2026-10-14',
+  },
+  {
+    id: 'event-dilijan-retreat',
+    imageUrl: dilijanImage,
+    categoryLabel: 'RETREAT',
+    title: 'Dilijan Weekend Re...',
+    location: 'Dilijan Forest',
+    date: 'Oct 18, 2026',
+    priceLabel: '15,000 AMD',
+    category: 'Health',
+    priceAmd: 15_000,
+    dateIso: '2026-10-18',
+  },
+  {
+    id: 'event-startup-pitch',
+    imageUrl: startupImage,
+    categoryLabel: 'EDUCATION',
+    title: 'Startup Pitch Deck...',
+    location: 'Yerevan Startup Hub',
+    date: 'Oct 20, 2026',
+    priceLabel: 'Free',
+    category: 'Business',
+    priceAmd: 0,
+    dateIso: '2026-10-20',
+  },
+  {
+    id: 'event-hiking-garni',
+    imageUrl: hikingImage,
+    categoryLabel: 'OUTDOORS',
+    title: 'Hiking to Garni Tem...',
+    location: 'Garni Village',
+    date: 'Oct 22, 2026',
+    priceLabel: '8,000 AMD',
+    category: 'Health',
+    priceAmd: 8_000,
+    dateIso: '2026-10-22',
+  },
+  {
+    id: 'event-wine-tasting',
+    imageUrl: wineImage,
+    categoryLabel: 'TASTING',
+    title: 'Armenian Wine Tasting',
+    location: 'Cascade Complex',
+    date: 'Oct 12, 2026',
+    priceLabel: '12,000 AMD',
+    category: 'Food & Drink',
+    priceAmd: 12_000,
+    dateIso: '2026-10-12',
+  },
+  {
+    id: 'event-jazz-night',
+    imageUrl: headwayImage,
+    categoryLabel: 'JAZZ',
+    title: 'Jazz Night at Republic',
+    location: 'Republic Square',
+    date: 'Oct 15, 2026',
+    priceLabel: '7,500 AMD',
+    category: 'Music',
+    priceAmd: 7_500,
+    dateIso: '2026-10-15',
+  },
+  {
+    id: 'event-night-market',
+    imageUrl: ewanBuckImage,
+    categoryLabel: 'MARKET',
+    title: 'Vernissage Night Market',
+    location: 'Vernissage Market',
+    date: 'Oct 16, 2026',
+    priceLabel: 'Free',
+    category: 'Nightlife',
+    priceAmd: 0,
+    dateIso: '2026-10-16',
+  },
+  {
+    id: 'event-farm-to-table',
+    imageUrl: carolineImage,
+    categoryLabel: 'DINING',
+    title: 'Farm to Table Dinner',
+    location: 'Matenadaran',
+    date: 'Oct 17, 2026',
+    priceLabel: '18,000 AMD',
+    category: 'Food & Drink',
+    priceAmd: 18_000,
+    dateIso: '2026-10-17',
+  },
+  {
+    id: 'event-rooftop-party',
+    imageUrl: dennyImage,
+    categoryLabel: 'PARTY',
+    title: 'Rooftop Sunset Party',
+    location: 'Cascade Complex',
+    date: 'Oct 19, 2026',
+    priceLabel: '6,000 AMD',
+    category: 'Nightlife',
+    priceAmd: 6_000,
+    dateIso: '2026-10-19',
+  },
+  {
+    id: 'event-tech-meetup',
+    imageUrl: wineStainImage,
+    categoryLabel: 'TECH',
+    title: 'Yerevan Tech Meetup',
+    location: 'Yerevan Startup Hub',
+    date: 'Oct 21, 2026',
+    priceLabel: '3,000 AMD',
+    category: 'Business',
+    priceAmd: 3_000,
+    dateIso: '2026-10-21',
+  },
+]
+
+export const LOAD_MORE_BUTTON_LABEL = 'Load More'
+export const EMPTY_STATE_MESSAGE = 'No events found for these criteria'

@@ -1,0 +1,22 @@
+.header {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  margin-top: 24px;
+}
+
+.title {
+  color: rgba(24, 24, 24, 1);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.description {
+  color: rgba(24, 24, 24, 1);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 640px;
+}
