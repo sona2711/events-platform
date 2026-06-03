@@ -1,7 +1,8 @@
-import { Button } from 'antd'
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Card, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { MIN_TICKET_QUANTITY } from '@/pages/checkout/consts'
-import { formatCurrency } from '@/pages/checkout/utils'
+import { MIN_TICKET_QUANTITY } from '@/pages/CheckoutPage/consts'
+import { formatCurrency } from '@/pages/CheckoutPage/utils'
 import type { CheckoutTicketSelectorProps } from './types'
 import styles from './styles.module.css'
 
@@ -13,7 +14,7 @@ export const CheckoutTicketSelector = ({
   const { t } = useTranslation('checkout')
 
   return (
-    <ul className={styles.list}>
+    <Flex vertical gap={16} className={styles.list}>
       {tiers.map((tier) => {
         const quantity = selection[tier.id] ?? 0
         const ticketName = t(tier.nameKey)
@@ -21,47 +22,53 @@ export const CheckoutTicketSelector = ({
         const isAtMax = quantity >= tier.maxQuantity
 
         return (
-          <li key={tier.id} className={styles.card}>
-            <div className={styles.details}>
-              <h3 className={styles.name}>{ticketName}</h3>
-              <p className={styles.description}>{t(tier.descriptionKey)}</p>
-              <p className={styles.price}>{formatCurrency(tier.priceAmd)}</p>
-            </div>
+          <Card key={tier.id} className={styles.card} variant="outlined">
+            <Flex align="center" justify="space-between" gap={16} className={styles.cardInner}>
+              <Flex vertical gap={6} className={styles.details}>
+                <Typography.Title level={5} className={styles.name}>
+                  {ticketName}
+                </Typography.Title>
+                <Typography.Text type="secondary" className={styles.description}>
+                  {t(tier.descriptionKey)}
+                </Typography.Text>
+                <Typography.Text strong className={styles.price}>
+                  {formatCurrency(tier.priceAmd)}
+                </Typography.Text>
+              </Flex>
 
-            <div className={styles.actions}>
-              {quantity > 0 ? (
-                <div className={styles.quantityControl}>
-                  <button
-                    type="button"
-                    className={styles.quantityButton}
-                    aria-label={t('tickets.decreaseQuantity', { ticket: ticketName })}
-                    disabled={isAtMin}
-                    onClick={() => onQuantityChange(tier.id, quantity - 1)}
-                  >
-                    −
-                  </button>
-                  <span className={styles.quantityValue} aria-live="polite">
-                    {quantity}
-                  </span>
-                  <button
-                    type="button"
-                    className={styles.quantityButton}
-                    aria-label={t('tickets.increaseQuantity', { ticket: ticketName })}
-                    disabled={isAtMax}
-                    onClick={() => onQuantityChange(tier.id, quantity + 1)}
-                  >
-                    +
-                  </button>
-                </div>
-              ) : (
-                <Button type="default" onClick={() => onQuantityChange(tier.id, 1)}>
-                  {t('tickets.add')}
-                </Button>
-              )}
-            </div>
-          </li>
+              <Flex align="center" className={styles.actions}>
+                {quantity > 0 ? (
+                  <Flex align="center" className={styles.quantityControl}>
+                    <Button
+                      type="text"
+                      icon={<MinusOutlined aria-hidden />}
+                      aria-label={t('tickets.decreaseQuantity', { ticket: ticketName })}
+                      disabled={isAtMin}
+                      className={styles.quantityButton}
+                      onClick={() => onQuantityChange(tier.id, quantity - 1)}
+                    />
+                    <Typography.Text strong className={styles.quantityValue} aria-live="polite">
+                      {quantity}
+                    </Typography.Text>
+                    <Button
+                      type="text"
+                      icon={<PlusOutlined aria-hidden />}
+                      aria-label={t('tickets.increaseQuantity', { ticket: ticketName })}
+                      disabled={isAtMax}
+                      className={styles.quantityButton}
+                      onClick={() => onQuantityChange(tier.id, quantity + 1)}
+                    />
+                  </Flex>
+                ) : (
+                  <Button type="default" onClick={() => onQuantityChange(tier.id, 1)}>
+                    {t('tickets.add')}
+                  </Button>
+                )}
+              </Flex>
+            </Flex>
+          </Card>
         )
       })}
-    </ul>
+    </Flex>
   )
 }

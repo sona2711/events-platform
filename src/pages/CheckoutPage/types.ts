@@ -5,6 +5,7 @@ export type CheckoutEvent = {
   titleKey: string
   locationKey: string
   imageUrl: string
+  ticketTiers: TicketTier[]
 }
 
 export type TicketTier = {
@@ -49,3 +50,7 @@ export type CheckoutReadiness = {
   hasPayment: boolean
   isReady: boolean
 }
+
+export type CheckoutStepNumber = 1 | 2 | 3
+
+export type CheckoutStepStatus = 'active' | 'completed' | 'pending'

@@ -1,4 +1,4 @@
-import type { CheckoutContactValues } from '@/pages/checkout/types'
+import type { CheckoutContactValues } from '@/pages/CheckoutPage/types'
 
 export type CheckoutContactFormProps = {
   initialValues: CheckoutContactValues

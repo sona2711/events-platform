@@ -3,6 +3,8 @@ import type {
   CheckoutContactValues,
   CheckoutPaymentValues,
   CheckoutReadiness,
+  CheckoutStepNumber,
+  CheckoutStepStatus,
   OrderTotals,
   TicketSelection,
   TicketTier,
@@ -58,7 +60,7 @@ export const buildOrderTotals = (selection: TicketSelection, tiers: TicketTier[]
 export const formatCurrency = (amountAmd: number): string =>
   `${amountAmd.toLocaleString('en-US')} AMD`
 
-export const normalizeCardNumber = (value: string): string => value.replace(/\D/g, '')
+export const normalizeCardNumber = (value = ''): string => value.replace(/\D/g, '')
 
 export const isValidContactValues = (values: CheckoutContactValues | null): boolean => {
   if (!values) {
@@ -68,18 +70,19 @@ export const isValidContactValues = (values: CheckoutContactValues | null): bool
   return values.fullName.trim().length >= 2 && EMAIL_PATTERN.test(values.email.trim())
 }
 
-export const isValidPaymentValues = (values: CheckoutPaymentValues | null): boolean => {
+export const isValidPaymentValues = (values: Partial<CheckoutPaymentValues> | null): boolean => {
   if (!values) {
     return false
   }
 
   const cardDigits = normalizeCardNumber(values.cardNumber)
-  const cvvDigits = values.cvv.replace(/\D/g, '')
+  const expiryDate = values.expiryDate?.trim() ?? ''
+  const cvvDigits = (values.cvv ?? '').replace(/\D/g, '')
 
   return (
     cardDigits.length >= 13 &&
     cardDigits.length <= 19 &&
-    EXPIRY_PATTERN.test(values.expiryDate.trim()) &&
+    EXPIRY_PATTERN.test(expiryDate) &&
     cvvDigits.length >= 3 &&
     cvvDigits.length <= 4
   )
@@ -107,3 +110,38 @@ export const isCheckoutReady = (
   contactValues: CheckoutContactValues | null,
   paymentValues: CheckoutPaymentValues | null,
 ): boolean => getCheckoutReadiness(selection, contactValues, paymentValues).isReady
+
+export const getActiveCheckoutStep = (readiness: CheckoutReadiness): CheckoutStepNumber => {
+  if (!readiness.hasTickets) {
+    return 1
+  }
+
+  if (!readiness.hasContact) {
+    return 2
+  }
+
+  return 3
+}
+
+export const getCheckoutStepStatus = (
+  stepNumber: CheckoutStepNumber,
+  readiness: CheckoutReadiness,
+): CheckoutStepStatus => {
+  if (stepNumber === 1) {
+    return readiness.hasTickets ? 'completed' : 'active'
+  }
+
+  if (stepNumber === 2) {
+    if (!readiness.hasTickets) {
+      return 'pending'
+    }
+
+    return readiness.hasContact ? 'completed' : 'active'
+  }
+
+  if (!readiness.hasTickets || !readiness.hasContact) {
+    return 'pending'
+  }
+
+  return readiness.hasPayment ? 'completed' : 'active'
+}

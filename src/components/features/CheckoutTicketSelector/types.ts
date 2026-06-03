@@ -1,4 +1,4 @@
-import type { TicketSelection, TicketTier } from '@/pages/checkout/types'
+import type { TicketSelection, TicketTier } from '@/pages/CheckoutPage/types'
 
 export type CheckoutTicketSelectorProps = {
   tiers: TicketTier[]

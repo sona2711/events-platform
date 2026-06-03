@@ -1,60 +1,50 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin: 0;
   min-width: 0;
-  padding: 0;
+  width: 100%;
 }
 
-.card {
-  align-items: center;
+.card:global(.ant-card) {
   background: var(--color-surface-card);
-  border: 1px solid rgb(var(--color-burgundy-700-rgb) / 8%);
+  border-color: rgb(var(--color-burgundy-700-rgb) / 8%);
   border-radius: 16px;
   box-shadow: 0 4px 16px rgb(var(--color-burgundy-700-rgb) / 4%);
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
-  list-style: none;
-  min-width: 0;
+}
+
+.card:global(.ant-card) :global(.ant-card-body) {
   padding: 20px 24px;
 }
 
+.cardInner {
+  min-width: 0;
+  width: 100%;
+}
+
 .details {
-  display: flex;
   flex: 1;
-  flex-direction: column;
-  gap: 6px;
   min-width: 0;
 }
 
-.name {
+.name:global(.ant-typography) {
   color: var(--color-text-primary);
   font-size: 16px;
   font-weight: 700;
   margin: 0;
 }
 
-.description {
-  color: var(--color-text-secondary);
+.description:global(.ant-typography) {
   font-size: 14px;
   line-height: 1.45;
   margin: 0;
 }
 
-.price {
+.price:global(.ant-typography) {
   color: var(--color-text-primary);
   font-size: 15px;
-  font-weight: 700;
   margin: 8px 0 0;
 }
 
 .actions {
-  align-items: center;
-  display: flex;
   flex-shrink: 0;
-  gap: 12px;
 }
 
 .actions :global(.ant-btn) {
@@ -81,22 +71,19 @@
 }
 
 .quantityControl {
-  align-items: center;
   background: rgb(38 101 214 / 10%);
   border-radius: 999px;
-  display: inline-flex;
   gap: 4px;
   min-height: 40px;
   padding: 4px 8px;
 }
 
-.quantityButton {
+.quantityControl :global(.ant-btn) {
   align-items: center;
   background: transparent;
   border: 0;
   border-radius: 999px;
   color: var(--color-action-primary);
-  cursor: pointer;
   display: inline-flex;
   font-size: 18px;
   font-weight: 600;
@@ -105,30 +92,33 @@
   line-height: 1;
   min-width: 32px;
   padding: 0;
+  width: 32px;
 }
 
-.quantityButton:hover:not(:disabled) {
+.quantityControl :global(.ant-btn:hover:not(:disabled)) {
   background: rgb(38 101 214 / 12%);
+  color: var(--color-action-primary);
 }
 
-.quantityButton:disabled {
-  cursor: not-allowed;
+.quantityControl :global(.ant-btn:disabled) {
   opacity: 0.4;
 }
 
-.quantityValue {
+.quantityValue:global(.ant-typography) {
   color: var(--color-action-primary);
   font-size: 16px;
-  font-weight: 700;
   min-width: 28px;
   text-align: center;
 }
 
 @media (max-width: 640px) {
-  .card {
+  .card:global(.ant-card) :global(.ant-card-body) {
+    padding: 16px 20px;
+  }
+
+  .cardInner {
     align-items: flex-start;
     flex-direction: column;
-    padding: 16px 20px;
   }
 
   .actions {

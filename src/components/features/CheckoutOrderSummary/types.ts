@@ -1,4 +1,4 @@
-import type { CheckoutEvent, OrderTotals } from '@/pages/checkout/types'
+import type { CheckoutEvent, OrderTotals } from '@/pages/CheckoutPage/types'
 
 export type CheckoutOrderSummaryProps = {
   event: CheckoutEvent

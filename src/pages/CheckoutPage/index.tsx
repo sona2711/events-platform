@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react'
-import { message } from 'antd'
+import { useEffect, useMemo, useState } from 'react'
+import { Empty, Flex, message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { CheckoutContactForm } from '@/components/features/CheckoutContactForm'
@@ -11,8 +11,7 @@ import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
 import {
   CHECKOUT_SUBMIT_DELAY_MS,
-  CHECKOUT_TICKET_TIERS,
-  DEFAULT_TICKET_SELECTION,
+  createDefaultTicketSelection,
   getCheckoutEventById,
 } from './consts'
 import type {
@@ -21,7 +20,7 @@ import type {
   OrderStatus,
   TicketSelection,
 } from './types'
-import { buildOrderTotals, getCheckoutReadiness } from './utils'
+import { buildOrderTotals, getCheckoutReadiness, getCheckoutStepStatus } from './utils'
 import styles from './styles.module.css'
 
 export const CheckoutPage = () => {
@@ -29,11 +28,24 @@ export const CheckoutPage = () => {
   const { eventId = '' } = useParams<{ eventId: string }>()
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
+  const ticketTiers = event?.ticketTiers ?? []
 
-  const [ticketSelection, setTicketSelection] = useState<TicketSelection>(DEFAULT_TICKET_SELECTION)
+  const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
+    event ? createDefaultTicketSelection(event.ticketTiers) : {},
+  )
   const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(null)
   const [paymentValues, setPaymentValues] = useState<CheckoutPaymentValues | null>(null)
   const [orderStatus, setOrderStatus] = useState<OrderStatus>('idle')
+
+  useEffect(() => {
+    const checkoutEvent = getCheckoutEventById(eventId)
+    if (checkoutEvent) {
+      setTicketSelection(createDefaultTicketSelection(checkoutEvent.ticketTiers))
+      setContactValues(null)
+      setPaymentValues(null)
+      setOrderStatus('idle')
+    }
+  }, [eventId])
 
   const contactInitialValues = useMemo<CheckoutContactValues>(
     () => ({
@@ -44,8 +56,8 @@ export const CheckoutPage = () => {
   )
 
   const totals = useMemo(
-    () => buildOrderTotals(ticketSelection, CHECKOUT_TICKET_TIERS),
-    [ticketSelection],
+    () => buildOrderTotals(ticketSelection, ticketTiers),
+    [ticketSelection, ticketTiers],
   )
 
   const readiness = useMemo(
@@ -80,21 +92,28 @@ export const CheckoutPage = () => {
   }
 
   if (!event) {
-    return <p className={styles.notFound}>{t('messages.eventNotFound')}</p>
+    return (
+      <Empty
+        className={styles.notFound}
+        description={t('messages.eventNotFound')}
+        image={Empty.PRESENTED_IMAGE_SIMPLE}
+      />
+    )
   }
 
   const isSubmitting = orderStatus === 'submitting'
 
   return (
-    <div className={styles.page}>
-      <div className={styles.main}>
+    <Flex gap={32} className={styles.page}>
+      <Flex vertical gap={32} className={styles.main}>
         <CheckoutStepSection
           stepNumber={1}
           title={t('steps.tickets.title')}
           ariaLabel={t('steps.tickets.aria')}
+          status={getCheckoutStepStatus(1, readiness)}
         >
           <CheckoutTicketSelector
-            tiers={CHECKOUT_TICKET_TIERS}
+            tiers={ticketTiers}
             selection={ticketSelection}
             onQuantityChange={handleQuantityChange}
           />
@@ -104,6 +123,7 @@ export const CheckoutPage = () => {
           stepNumber={2}
           title={t('steps.contact.title')}
           ariaLabel={t('steps.contact.aria')}
+          status={getCheckoutStepStatus(2, readiness)}
         >
           <CheckoutContactForm
             initialValues={contactInitialValues}
@@ -115,12 +135,13 @@ export const CheckoutPage = () => {
           stepNumber={3}
           title={t('steps.payment.title')}
           ariaLabel={t('steps.payment.aria')}
+          status={getCheckoutStepStatus(3, readiness)}
         >
           <CheckoutPaymentForm onValidChange={setPaymentValues} />
         </CheckoutStepSection>
-      </div>
+      </Flex>
 
-      <div className={styles.sidebar}>
+      <Flex className={styles.sidebar}>
         <CheckoutOrderSummary
           event={event}
           totals={totals}
@@ -130,7 +151,7 @@ export const CheckoutPage = () => {
             void handlePlaceOrder()
           }}
         />
-      </div>
-    </div>
+      </Flex>
+    </Flex>
   )
 }

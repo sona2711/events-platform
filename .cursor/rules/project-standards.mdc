@@ -9,8 +9,13 @@ alwaysApply: true
 - Prefer existing project patterns before introducing new abstractions.
 
 ## UI and layout
-- Prefer Ant Design components where possible instead of pure HTML tags.
-- Keep semantic HTML structure and accessible labels, headings, and link text.
+- Use Ant Design components as the default for UI primitives whenever Ant Design provides a suitable component.
+- Prefer Ant Design `Button`, `Form`, `Input`, `Select`, `Card`, `List`, `Typography`, `Flex`, `Row`, `Col`, `Divider`, `Avatar`, `Tag`, `Image`, `Empty`, `Modal`, and similar components over custom HTML/CSS implementations.
+- Use plain HTML tags only when they provide semantic document structure that Ant Design does not replace well, such as `main`, `section`, `article`, `header`, `footer`, `nav`, or accessible landmark wrappers.
+- Do not use raw `<button>`, `<input>`, `<select>`, `<textarea>`, `<hr>`, or heading/paragraph tags for styled UI when an Ant Design equivalent is available.
+- Layout should prefer Ant Design `Flex`, `Space`, `Row`, and `Col` before custom CSS grid/flex wrappers, unless the layout is too specific for Ant Design primitives.
+- Text UI should prefer Ant Design `Typography.Title`, `Typography.Text`, and `Typography.Paragraph` before raw `h1`-`h6`, `p`, or `span`, except where a semantic heading is required for accessibility.
+- Keep accessible labels, headings, and link text. If using Ant Design components, still provide `aria-label`, `htmlType`, `alt`, `title`, and semantic wrappers where needed.
 - Ensure responsive behavior for mobile and desktop when changing layout.
 
 ## Component structure
@@ -34,10 +39,11 @@ alwaysApply: true
 ### Component declaration style
 
 ```tsx
+import { Button as AntButton } from 'antd';
 import type { ButtonProps } from './types';
 
 export const Button = (props: ButtonProps) => {
-  return <button>{props.children}</button>;
+  return <AntButton {...props}>{props.children}</AntButton>;
 };
 ```
 

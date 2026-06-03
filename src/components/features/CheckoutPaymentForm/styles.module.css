@@ -1,25 +1,8 @@
-.formGrid {
-  display: grid;
-  gap: 20px 24px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  min-width: 0;
-}
-
-.fullWidth {
-  grid-column: 1 / -1;
-}
-
 .secureNote {
-  align-items: center;
-  color: var(--color-text-secondary);
-  display: flex;
-  font-size: 12px;
-  gap: 8px;
-  margin: 4px 0 0;
+  margin-top: 4px;
 }
 
-@media (max-width: 720px) {
-  .formGrid {
-    grid-template-columns: 1fr;
-  }
+.secureNoteText:global(.ant-typography) {
+  font-size: 12px;
+  margin: 0;
 }

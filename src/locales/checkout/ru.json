@@ -14,19 +14,63 @@
     }
   },
   "event": {
-    "jazzNight": {
-      "title": "Джазовая ночь в Ереване",
+    "jazzFest": {
+      "title": "Джазовый фестиваль в Ереване 2026",
       "location": "Комплекс Каскад"
+    },
+    "feast": {
+      "title": "Традиционный армянский праздник",
+      "location": "Площадь Республики"
+    },
+    "marathon": {
+      "title": "Ереванский марафон 2026",
+      "location": "Северный проспект"
+    },
+    "wineTasting": {
+      "title": "Дегустация армянских вин",
+      "location": "Улица Сарьяна"
     }
   },
   "tickets": {
-    "generalAdmission": {
-      "name": "Общий вход",
-      "description": "Стандартный вход и доступ на танцпол."
+    "jazzFest": {
+      "generalAdmission": {
+        "name": "Общий вход",
+        "description": "Стандартный вход и доступ на танцпол."
+      },
+      "vipBackstage": {
+        "name": "VIP Backstage Pass",
+        "description": "Встреча с группой + 2 бесплатных напитка."
+      }
     },
-    "vipBackstage": {
-      "name": "VIP Backstage Pass",
-      "description": "Встреча с группой + 2 бесплатных напитка."
+    "feast": {
+      "standardSeat": {
+        "name": "Стандартное место",
+        "description": "Зарезервированное место с полным ужином."
+      },
+      "premiumTable": {
+        "name": "Премиум-стол",
+        "description": "Стол в первом ряду для компании до 4 гостей."
+      }
+    },
+    "marathon": {
+      "runner": {
+        "name": "Участие бегуна",
+        "description": "Стартовый номер, чип хронометража и медаль финишёра."
+      },
+      "spectator": {
+        "name": "Билет зрителя",
+        "description": "Доступ к зонам просмотра вдоль трассы."
+      }
+    },
+    "wineTasting": {
+      "tastingPass": {
+        "name": "Дегустационный билет",
+        "description": "6 региональных вин с пояснениями дегустатора."
+      },
+      "sommelier": {
+        "name": "Опыт с сомелье",
+        "description": "Индивидуальная дегустация с сертифицированным сомелье."
+      }
     },
     "add": "Добавить",
     "decreaseQuantity": "Уменьшить количество: {{ticket}}",

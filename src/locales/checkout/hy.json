@@ -14,19 +14,63 @@
     }
   },
   "event": {
-    "jazzNight": {
-      "title": "Ջազային գիշեր Երևանում",
+    "jazzFest": {
+      "title": "Երևանի Ջազային փառատոն 2026",
       "location": "Կասկադ համալիր"
+    },
+    "feast": {
+      "title": "Ավանդական հայկական խնջույք",
+      "location": "Հանրապետության հրապարակ"
+    },
+    "marathon": {
+      "title": "Երևանի մարաթոն 2026",
+      "location": "Հյուսիսային պրոսպեկտ"
+    },
+    "wineTasting": {
+      "title": "Հայկական գինու համտեսություն",
+      "location": "Սարյան փողոց"
     }
   },
   "tickets": {
-    "generalAdmission": {
-      "name": "Ընդհանուր մուտք",
-      "description": "Ստանդարտ մուտք և հարկի մուտք։"
+    "jazzFest": {
+      "generalAdmission": {
+        "name": "Ընդհանուր մուտք",
+        "description": "Ստանդարտ մուտք և հարկի մուտք։"
+      },
+      "vipBackstage": {
+        "name": "VIP Backstage Pass",
+        "description": "Հանդիպում խմբի հետ + 2 անվճար ըմպելիք։"
+      }
     },
-    "vipBackstage": {
-      "name": "VIP Backstage Pass",
-      "description": "Հանդիպում խմբի հետ + 2 անվճար ըմպելիք։"
+    "feast": {
+      "standardSeat": {
+        "name": "Ստանդարտ նստատեղ",
+        "description": "Պահված նստատեղ ամբողջական ընթրիքի սպասարկմամբ։"
+      },
+      "premiumTable": {
+        "name": "Premium սեղան",
+        "description": "Առջևի շարքի սեղան մինչև 4 հյուրերի համար։"
+      }
+    },
+    "marathon": {
+      "runner": {
+        "name": "Վազորդի մուտք",
+        "description": "Պաշտոնական համար, ժամանակաչափ և ավարտողի մեդալ։"
+      },
+      "spectator": {
+        "name": "Դիտորդի տոմս",
+        "description": "Մուտք դիտման հարթակներ՝ մրցավազքի երթուղու երկայնքով։"
+      }
+    },
+    "wineTasting": {
+      "tastingPass": {
+        "name": "Համտեսության տոմս",
+        "description": "6 տարածաշրջanakan ginineri hamtesutyun ughetsogh nshumnerov։"
+      },
+      "sommelier": {
+        "name": "Sommelier փորձ",
+        "description": "Անհատական համտեսություն հավաստագրված sommelier-ի հետ։"
+      }
     },
     "add": "Ավելացնել",
     "decreaseQuantity": "Նվազեցնել քանակը՝ {{ticket}}",

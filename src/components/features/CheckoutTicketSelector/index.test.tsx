@@ -6,8 +6,8 @@ import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSele
 import '@/i18n'
 import i18n from '@/i18n'
 import checkoutEn from '@/locales/checkout/en.json'
-import { CHECKOUT_TICKET_TIERS, DEFAULT_TICKET_SELECTION } from '@/pages/checkout/consts'
-import type { TicketSelection } from '@/pages/checkout/types'
+import { CHECKOUT_TICKET_TIERS, DEFAULT_TICKET_SELECTION } from '@/pages/CheckoutPage/consts'
+import type { TicketSelection } from '@/pages/CheckoutPage/types'
 
 const renderSelector = (selection: TicketSelection, onQuantityChange = jest.fn()) =>
   render(

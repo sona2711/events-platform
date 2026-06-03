@@ -44,7 +44,7 @@ const UserProfilePage = lazy(() =>
 )
 
 const CheckoutPage = lazy(() =>
-  import('@/pages/checkout').then((module) => ({
+  import('@/pages/CheckoutPage').then((module) => ({
     default: module.CheckoutPage,
   })),
 )
