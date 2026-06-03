@@ -1,4 +1,4 @@
-import { filterCategoryEvents } from './utils'
+import { filterCategoryEvents, withTabCategoryFilter } from './utils'
 import { DEFAULT_FILTERS } from './consts'
 import type { CategoryEvent } from './types'
 
@@ -28,6 +28,17 @@ const events: CategoryEvent[] = [
     dateIso: '2026-11-01',
   },
 ]
+
+describe('withTabCategoryFilter', () => {
+  it('applies tab category without mutating the sidebar filter object', () => {
+    const sidebarFilters = { ...DEFAULT_FILTERS, categories: ['Arts'] as const }
+
+    const effectiveFilters = withTabCategoryFilter(sidebarFilters, 'Music')
+
+    expect(sidebarFilters.categories).toEqual(['Arts'])
+    expect(effectiveFilters.categories).toEqual(['Music'])
+  })
+})
 
 describe('filterCategoryEvents', () => {
   it('filters events by location', () => {

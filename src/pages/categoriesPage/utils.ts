@@ -7,17 +7,23 @@ const labelToTabId = Object.fromEntries(
   CATEGORY_TAB_ITEMS.map((item) => [item.label, item.id]),
 ) as Record<string, string>
 
-export const getActiveCategoryTabId = (filters: FilterState): string | null => {
-  if (filters.categories.length !== 1) {
+export const getActiveCategoryTabId = (tabCategory: string | null): string | null => {
+  if (!tabCategory) {
     return null
   }
 
-  const [category] = filters.categories
-  if (category === 'All') {
-    return null
+  return labelToTabId[tabCategory] ?? null
+}
+
+export const withTabCategoryFilter = (
+  filters: FilterState,
+  tabCategory: string | null,
+): FilterState => {
+  if (!tabCategory) {
+    return filters
   }
 
-  return labelToTabId[category] ?? null
+  return { ...filters, categories: [tabCategory] }
 }
 
 export const getCategoryLabelFromTabId = (tabId: string): string | null => {
