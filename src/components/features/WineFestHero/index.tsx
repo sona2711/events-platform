@@ -31,27 +31,29 @@ export function WineFestHero() {
 
   return (
     <section className={styles.section}>
-      <div className={styles.left}>
-        <h2 className={styles.title}>Armenia Wine Fest 2026</h2>
+      <div className={styles.layout}>
+        <div className={styles.left}>
+          <h2 className={styles.title}>Armenia Wine Fest 2026</h2>
 
-        <div className={styles.countdown}>
-          {UNITS.map((label, i) => (
-            <div key={label} className={styles.unit}>
-              <span className={styles.number}>{pad(values[i])}</span>
-              <span className={styles.unitLabel}>{label}</span>
-            </div>
-          ))}
+          <div className={styles.countdown}>
+            {UNITS.map((label, i) => (
+              <div key={label} className={styles.unit}>
+                <span className={styles.number}>{pad(values[i])}</span>
+                <span className={styles.unitLabel}>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <Link to="/login" className={styles.btn}>
+            Get Tickets
+          </Link>
         </div>
 
-        <Link to="/login" className={styles.btn}>
-          Get Tickets
-        </Link>
-      </div>
-
-      <div className={styles.right}>
-        <div className={styles.imageFrame}>
-          <img src={wineImg} alt="Armenia Wine Fest 2026" className={styles.wineImg} />
-          <img src={rectangleStain} alt="" aria-hidden="true" className={styles.stain} />
+        <div className={styles.right}>
+          <div className={styles.imageFrame}>
+            <img src={wineImg} alt="Armenia Wine Fest 2026" className={styles.wineImg} />
+            <img src={rectangleStain} alt="" aria-hidden="true" className={styles.stain} />
+          </div>
         </div>
       </div>
     </section>

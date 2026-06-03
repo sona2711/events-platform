@@ -9,7 +9,7 @@
   justify-content: center;
   text-align: center;
   transform: translateX(-50%);
-  padding: 150px 96px 96px;
+  padding: 150px var(--layout-padding-inline) var(--layout-padding-inline);
   overflow: hidden;
   background: radial-gradient(circle, #a80a22 0%, #770016 100%);
 }
@@ -31,7 +31,9 @@
 .content {
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  margin: 0 auto;
+  max-width: var(--layout-max-width);
+  width: min(100%, var(--layout-max-width));
 }
 
 .title {
@@ -155,7 +157,7 @@
 @media (max-width: 820px) {
   .hero {
     min-height: 760px;
-    padding: 190px 24px 96px;
+    padding: 190px var(--layout-padding-inline) var(--layout-padding-inline);
   }
 
   .background {
@@ -189,7 +191,7 @@
 @media (max-width: 480px) {
   .hero {
     min-height: 700px;
-    padding: 180px 20px 88px;
+    padding: 180px var(--layout-padding-inline) 88px;
   }
 
   .ticker {

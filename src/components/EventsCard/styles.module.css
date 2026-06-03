@@ -4,14 +4,18 @@
   width: 100vw;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #123d6b 0%, #1a4a82 50%, #245b99 100%);
-  padding: 80px 50px 96px;
+  padding: var(--layout-padding-inline);
   color: white;
+}
+
+.layout {
+  margin: 0 auto;
+  max-width: var(--layout-max-width);
+  width: min(100%, var(--layout-max-width));
 }
 
 .mySwiper {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   padding: 20px 56px 52px;
   overflow: visible;
 }
@@ -208,7 +212,7 @@
 
 @media (max-width: 820px) {
   .container {
-    padding: 64px 24px 84px;
+    padding: 64px var(--layout-padding-inline) 84px;
   }
 
   .mySwiper {
@@ -236,7 +240,7 @@
 
 @media (max-width: 480px) {
   .container {
-    padding: 56px 16px 72px;
+    padding: 56px var(--layout-padding-inline) 72px;
   }
 
   .card {

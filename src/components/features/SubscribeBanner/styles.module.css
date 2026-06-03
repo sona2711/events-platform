@@ -1,6 +1,6 @@
 .section {
   background: var(--color-surface-page);
-  padding: 96px 0 96px;
+  padding: var(--layout-padding-inline);
 }
 
 .banner {
@@ -13,7 +13,8 @@
   margin: 0 auto;
   min-height: 313px;
   padding: 48px 96px;
-  width: min(100%, 1248px);
+  max-width: var(--layout-max-width);
+  width: min(100%, var(--layout-max-width));
 }
 
 .content {
@@ -118,7 +119,7 @@
 
 @media (max-width: 640px) {
   .section {
-    padding-bottom: 64px;
+    padding: var(--layout-padding-inline);
   }
 
   .banner {
