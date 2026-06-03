@@ -15,12 +15,6 @@ const CategoriesPage = lazy(() =>
   })),
 )
 
-const ExploreEventsInYerevanPage = lazy(() =>
-  import('@/pages/explore-events-in-yerevan').then((module) => ({
-    default: module.ExploreEventsInYerevanPage,
-  })),
-)
-
 const LazyLoginPage = lazy(() => import('@/pages/LoginPage') as Promise<{ default: ComponentType }>)
 
 const LazySignUpPage = lazy(
@@ -58,7 +52,10 @@ export const appRoutes: RouteObject[] = [
     element: createElement(AppLayout),
     children: [
       { index: true, element: createElement(MainPage) },
-      { path: 'explore-events', element: createElement(ExploreEventsInYerevanPage) },
+      {
+        path: 'explore-events',
+        element: createElement(Navigate, { to: '/categories', replace: true }),
+      },
       { path: 'categories', element: createElement(CategoriesPage) },
       {
         element: createElement(ProtectedRoute),

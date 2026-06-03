@@ -1,33 +1,25 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { EventFiltersSidebar } from '@/components/EventFiltersSidebar'
+import type { FilterState } from '@/components/EventFiltersSidebar/types'
 import { CategoryTabs } from '@/components/features/CategoryTabs'
 import { CategoriesEventsGrid } from '@/components/features/CategoriesEventsGrid'
 import { CategoriesPageHeader } from '@/components/features/CategoriesPageHeader'
-import { MOCK_EXPLORE_EVENTS } from '@/components/features/ExploreEventsMainContent/consts'
-import type { EventCategory } from '@/components/features/ExploreEventsMainContent/types'
-import { INITIAL_VISIBLE_COUNT, LOAD_MORE_BATCH } from './consts'
-import { getCategoryLabelFromTabId } from './utils'
+import { DEFAULT_FILTERS, INITIAL_VISIBLE_COUNT, LOAD_MORE_BATCH } from './consts'
+import { MOCK_CATEGORY_EVENTS } from './mockEvents'
+import { filterCategoryEvents, getActiveCategoryTabId, getCategoryLabelFromTabId } from './utils'
 import styles from './styles.module.css'
 
 export const CategoriesPage = () => {
   const { t } = useTranslation('categories')
-  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null)
+  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS)
+  const [appliedFilters, setAppliedFilters] = useState<FilterState>(DEFAULT_FILTERS)
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT)
 
-  const activeCategoryLabel = useMemo(
-    () => (activeCategoryId ? getCategoryLabelFromTabId(activeCategoryId) : null),
-    [activeCategoryId],
+  const filteredEvents = useMemo(
+    () => filterCategoryEvents(MOCK_CATEGORY_EVENTS, appliedFilters),
+    [appliedFilters],
   )
-
-  const filteredEvents = useMemo(() => {
-    if (!activeCategoryLabel) {
-      return MOCK_EXPLORE_EVENTS
-    }
-
-    return MOCK_EXPLORE_EVENTS.filter(
-      (event) => event.category === (activeCategoryLabel as EventCategory),
-    )
-  }, [activeCategoryLabel])
 
   const displayedEvents = useMemo(
     () => filteredEvents.slice(0, visibleCount),
@@ -36,8 +28,14 @@ export const CategoriesPage = () => {
 
   const canLoadMore = visibleCount < filteredEvents.length
 
-  const handleCategorySelect = useCallback((tabId: string) => {
-    setActiveCategoryId((current) => (current === tabId ? null : tabId))
+  const handleApply = useCallback(() => {
+    setAppliedFilters(filters)
+    setVisibleCount(INITIAL_VISIBLE_COUNT)
+  }, [filters])
+
+  const handleReset = useCallback(() => {
+    setFilters(DEFAULT_FILTERS)
+    setAppliedFilters(DEFAULT_FILTERS)
     setVisibleCount(INITIAL_VISIBLE_COUNT)
   }, [])
 
@@ -45,19 +43,49 @@ export const CategoriesPage = () => {
     setVisibleCount((current) => Math.min(current + LOAD_MORE_BATCH, filteredEvents.length))
   }, [filteredEvents.length])
 
+  const handleCategoryTabSelect = useCallback((tabId: string) => {
+    const label = getCategoryLabelFromTabId(tabId)
+    if (!label) {
+      return
+    }
+
+    setFilters((current) => {
+      const isAlreadyActive = current.categories.length === 1 && current.categories[0] === label
+      return {
+        ...current,
+        categories: isAlreadyActive ? ['All'] : [label],
+      }
+    })
+  }, [])
+
   return (
     <div className={styles.page}>
       <div className={styles.tabsSection}>
-        <CategoryTabs activeCategoryId={activeCategoryId} onCategorySelect={handleCategorySelect} />
+        <CategoryTabs
+          activeCategoryId={getActiveCategoryTabId(filters)}
+          onCategorySelect={handleCategoryTabSelect}
+        />
       </div>
       <CategoriesPageHeader />
-      <CategoriesEventsGrid
-        events={displayedEvents}
-        canLoadMore={canLoadMore}
-        onLoadMore={handleLoadMore}
-        emptyMessage={t('emptyState')}
-        loadMoreLabel={t('loadMore')}
-      />
+      <div className={styles.mainContent}>
+        <aside className={styles.sidebarColumn}>
+          <EventFiltersSidebar
+            filters={filters}
+            onFiltersChange={setFilters}
+            onApply={handleApply}
+            onReset={handleReset}
+          />
+        </aside>
+        <div className={styles.resultsColumn}>
+          <CategoriesEventsGrid
+            events={displayedEvents}
+            canLoadMore={canLoadMore}
+            onLoadMore={handleLoadMore}
+            emptyMessage={t('emptyState')}
+            loadMoreLabel={t('loadMore')}
+          />
+        </div>
+      </div>
     </div>
   )
 }

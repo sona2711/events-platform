@@ -21,10 +21,36 @@
   overflow: hidden;
 }
 
+.mainContent {
+  align-items: start;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+}
+
+.sidebarColumn {
+  position: sticky;
+  top: 120px;
+}
+
+.resultsColumn {
+  min-width: 0;
+}
+
 @media (max-width: 1024px) {
   .page {
     gap: 28px;
     padding-bottom: 64px;
+  }
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarColumn {
+    position: static;
   }
 }
 
