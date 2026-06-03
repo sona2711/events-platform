@@ -5,6 +5,12 @@ import TechImage from '@/assets/svg/TechSummit.png'
 import WineImage from '@/assets/svg/WineTasting.png'
 import type { EventCardItem, SliderBreakpointConfig } from './types'
 
+export const EVENTS_PREV_BUTTON_CLASS = 'events-prev-button'
+export const EVENTS_NEXT_BUTTON_CLASS = 'events-next-button'
+
+export const EVENTS_PREV_BUTTON_SELECTOR = `.${EVENTS_PREV_BUTTON_CLASS}`
+export const EVENTS_NEXT_BUTTON_SELECTOR = `.${EVENTS_NEXT_BUTTON_CLASS}`
+
 export const EVENTS: EventCardItem[] = [
   {
     id: 1,
