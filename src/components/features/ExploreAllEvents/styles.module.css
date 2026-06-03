@@ -4,7 +4,7 @@
   width: 100vw;
   transform: translateX(-50%);
   background-color: #f28906;
-  padding: var(--layout-padding-inline);
+  padding: 80px var(--layout-padding-inline);
 }
 
 .layout {
@@ -18,9 +18,9 @@
 
 .title {
   margin: 0;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 800;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
 }
@@ -199,24 +199,12 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .section {
-    padding: 64px var(--layout-padding-inline);
-  }
-
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 56px var(--layout-padding-inline);
-  }
-
-  .layout {
-    gap: 32px;
-  }
-
   .grid {
     grid-template-columns: 1fr;
   }
