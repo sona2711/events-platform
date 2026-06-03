@@ -31,7 +31,7 @@ const events: CategoryEvent[] = [
 
 describe('withTabCategoryFilter', () => {
   it('applies tab category without mutating the sidebar filter object', () => {
-    const sidebarFilters = { ...DEFAULT_FILTERS, categories: ['Arts'] as const }
+    const sidebarFilters = { ...DEFAULT_FILTERS, categories: ['Arts'] }
 
     const effectiveFilters = withTabCategoryFilter(sidebarFilters, 'Music')
 
