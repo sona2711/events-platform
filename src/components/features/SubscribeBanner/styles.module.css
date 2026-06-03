@@ -19,31 +19,40 @@
 
 .content {
   color: var(--color-brand-primary);
-  max-width: 390px;
+  width: 430px;
 }
 
 .title {
   color: var(--color-brand-primary);
-  font-size: clamp(42px, 4.2vw, 56px);
-  font-weight: 800;
-  letter-spacing: -0.05em;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.28px;
   line-height: 0.98;
   margin: 0;
 }
 
 .accent {
   color: var(--color-action-primary);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Libre Caslon Text', ui-serif, Georgia, 'Times New Roman', serif;
+  font-size: 64px;
   font-style: italic;
   font-weight: 400;
+  letter-spacing: -1.28px;
+  line-height: 72px;
 }
 
 .description {
   color: var(--color-brand-primary);
-  font-size: 14px;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
   line-height: 1.55;
-  margin: 28px 0 0;
-  max-width: 360px;
+  margin: 16px 0 0;
+  width: 100%;
 }
 
 .form {
@@ -59,7 +68,12 @@
   border-radius: 9999px;
   color: var(--color-brand-primary);
   flex: 0 0 350px;
-  font-size: 14px;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
   height: 60px;
   outline: none;
   padding: 16px 32px 15px;
@@ -102,8 +116,13 @@
   border-radius: 9999px;
   color: var(--color-text-on-brand);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 800;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 500;
   height: 60px;
   padding: 18px 40px;
   width: 169px;
