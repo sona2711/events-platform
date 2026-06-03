@@ -22,8 +22,9 @@
   --color-action-primary: var(--color-blue-600);
   --color-accent-warm: var(--color-orange-500);
   --color-accent-bright: var(--color-lime-400);
-  --color-surface-page: var(--color-white);
+  --color-surface-page: #e8e7e7;
   --color-surface-card: var(--color-white);
+  --color-surface-muted: #e8e7e7;
   --color-surface-brand: var(--color-burgundy-700);
   --color-text-primary: var(--color-neutral-950);
   --color-text-secondary: #5b4a51;
