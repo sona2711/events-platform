@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CalendarOutlined, EnvironmentOutlined, HeartOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 import { TicketPaymentModal } from '@/components/features/TicketPaymentModal'
 import { EXPLORE_EVENTS } from './consts'
 import styles from './styles.module.css'
@@ -58,9 +59,9 @@ export function ExploreAllEvents() {
         </div>
 
         <div className={styles.seeMoreWrapper}>
-          <button className={styles.seeMoreBtn} type="button">
+          <Link className={styles.seeMoreBtn} to="/explore-events">
             See More
-          </button>
+          </Link>
         </div>
       </section>
 
