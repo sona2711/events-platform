@@ -6,14 +6,13 @@
   background: linear-gradient(135deg, #123d6b 0%, #1a4a82 50%, #245b99 100%);
   padding: 80px 50px 96px;
   color: white;
-  overflow: hidden;
 }
 
 .mySwiper {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px 8px 52px;
+  padding: 20px 56px 52px;
   overflow: visible;
 }
 

@@ -1,6 +1,8 @@
-import { createElement, lazy } from 'react'
+import { createElement, lazy, type ComponentType } from 'react'
 import { Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
+import { GuestRoute } from '@/components/_shared/GuestRoute'
+import { ProtectedRoute } from '@/components/_shared/ProtectedRoute'
 import { AppLayout } from '@/components/layout/AppLayout'
 
 const MainPage = lazy(() =>
@@ -13,12 +15,10 @@ const CategoriesPage = lazy(() =>
   })),
 )
 
-const LoginPage = lazy(() =>
-  import('@/pages/LoginPage').then((module) => ({ default: module.LoginPage })),
-)
+const LazyLoginPage = lazy(() => import('@/pages/LoginPage') as Promise<{ default: ComponentType }>)
 
-const SignUpPage = lazy(() =>
-  import('@/pages/SignUpPage').then((module) => ({ default: module.SignUpPage })),
+const LazySignUpPage = lazy(
+  () => import('@/pages/SignUpPage') as Promise<{ default: ComponentType }>,
 )
 
 const AdminPage = lazy(() =>
@@ -47,88 +47,34 @@ const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
 
-export const mainPageRoute: RouteObject = {
-  index: true,
-  element: createElement(MainPage),
-}
-
-export const categoriesPageRoute: RouteObject = {
-  path: 'categories',
-  element: createElement(CategoriesPage),
-}
-
-export const loginPageRoute: RouteObject = {
-  path: 'login',
-  element: createElement(LoginPage),
-}
-
-export const signUpPageRoute: RouteObject = {
-  path: 'sign-up',
-  element: createElement(SignUpPage),
-}
-
-export const adminRedirectRoute: RouteObject = {
-  path: 'admin',
-  element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
-}
-
-export const adminPageRoute: RouteObject = {
-  path: 'admin/registrations',
-  element: createElement(AdminPage),
-}
-
-export const adminEventsRoute: RouteObject = {
-  path: 'admin/events',
-  element: createElement(AdminComingSoonPage),
-}
-
-export const adminFinancesRoute: RouteObject = {
-  path: 'admin/finances',
-  element: createElement(AdminComingSoonPage),
-}
-
-export const adminUsersRoute: RouteObject = {
-  path: 'admin/users',
-  element: createElement(AdminComingSoonPage),
-}
-
-export const adminSettingsRoute: RouteObject = {
-  path: 'admin/settings',
-  element: createElement(AdminComingSoonPage),
-}
-
-export const passwordRecoveryPageRoute: RouteObject = {
-  path: 'password-recovery',
-  element: createElement(PasswordRecoveryPage),
-}
-
-export const userProfilePageRoute: RouteObject = {
-  path: 'profile',
-  element: createElement(UserProfilePage),
-}
-
-export const notFoundPageRoute: RouteObject = {
-  path: '*',
-  element: createElement(NotFoundPage),
-}
-
 export const appRoutes: RouteObject[] = [
   {
     element: createElement(AppLayout),
     children: [
-      mainPageRoute,
-      categoriesPageRoute,
-      loginPageRoute,
-      signUpPageRoute,
-      passwordRecoveryPageRoute,
-      userProfilePageRoute,
+      { index: true, element: createElement(MainPage) },
+      { path: 'categories', element: createElement(CategoriesPage) },
+      {
+        element: createElement(ProtectedRoute),
+        children: [{ path: 'profile', element: createElement(UserProfilePage) }],
+      },
     ],
   },
-  adminRedirectRoute,
-  adminPageRoute,
-  adminEventsRoute,
-  adminFinancesRoute,
-  adminUsersRoute,
-  adminSettingsRoute,
-  notFoundPageRoute,
+  {
+    element: createElement(GuestRoute),
+    children: [
+      { path: 'login', element: createElement(LazyLoginPage) },
+      { path: 'sign-up', element: createElement(LazySignUpPage) },
+      { path: 'password-recovery', element: createElement(PasswordRecoveryPage) },
+    ],
+  },
+  {
+    path: 'admin',
+    element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
+  },
+  { path: 'admin/registrations', element: createElement(AdminPage) },
+  { path: 'admin/events', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/users', element: createElement(AdminComingSoonPage) },
+  { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
+  { path: '*', element: createElement(NotFoundPage) },
 ]
