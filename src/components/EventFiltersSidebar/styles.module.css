@@ -8,6 +8,7 @@
   box-shadow: none;
   display: flex;
   flex-direction: column;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   padding: 24px;
   width: 100%;
 }
@@ -33,7 +34,6 @@
 .sectionTitle {
   color: #171014;
   display: block;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
@@ -183,10 +183,10 @@
 }
 
 .categoryPill {
-  background-color: rgba(227, 236, 250, 1);
-  border: 1.5px solid #d9ddef;
+  background-color: #eceef2;
+  border: 1.5px solid #d5dae3;
   border-radius: 999px;
-  color: #5b4a51;
+  color: #4a4550;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
@@ -194,25 +194,39 @@
   transition:
     border-color 0.15s,
     color 0.15s,
-    background 0.15s;
+    background-color 0.15s;
 }
 
 .categoryPill:hover {
+  background-color: #f0f6fd;
+  border-color: rgb(var(--color-blue-600-rgb) / 0.45);
+  color: var(--color-blue-600);
+}
+
+.categoryPill:active {
+  background-color: #e3edfc;
   border-color: var(--color-blue-600);
   color: var(--color-blue-600);
 }
 
 .categoryPillActive {
-  background: #eef3fc;
+  background-color: #eef4fc;
   border-color: var(--color-blue-600);
   color: var(--color-blue-600);
   font-weight: 600;
 }
 
 .categoryPillActive:hover {
-  background: #e3ecfa;
-  border-color: var(--color-blue-700);
-  color: var(--color-blue-700);
+  background-color: #f2f7fd;
+  border-color: rgb(var(--color-blue-600-rgb) / 0.55);
+  color: var(--color-blue-600);
+}
+
+.categoryPillActive:active {
+  background-color: #d9e8fc;
+  border-color: var(--color-blue-600);
+  box-shadow: 0 0 0 1px rgb(var(--color-blue-600-rgb) / 0.12);
+  color: var(--color-blue-600);
 }
 
 /* ─────────────────────────────────────────
@@ -256,12 +270,29 @@
   color: #a08a94;
 }
 
-.locationChevron {
+.locationChevronButton {
+  align-items: center;
+  background: transparent;
+  border: 0;
   color: #5b4a51;
+  cursor: pointer;
+  display: inline-flex;
   flex-shrink: 0;
-  font-size: 9px;
-  pointer-events: none;
+  height: 20px;
+  justify-content: center;
+  line-height: 0;
+  padding: 0;
   user-select: none;
+  width: 20px;
+}
+
+.locationChevronIcon {
+  font-size: 12px;
+}
+
+.locationChevronButton:focus-visible {
+  outline: 2px solid var(--color-blue-600);
+  outline-offset: 2px;
 }
 
 .locationList {

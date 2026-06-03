@@ -2,20 +2,22 @@
   background: var(--color-surface-muted);
   display: flex;
   flex-direction: column;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   gap: 32px;
   margin: 0 calc(-1 * var(--layout-gutter));
   max-width: none;
-  padding: 24px var(--layout-gutter) 72px;
+  padding: 96px var(--layout-gutter) 96px;
   width: calc(100% + 2 * var(--layout-gutter));
 }
 
 .page > * {
   margin-inline: auto;
-  max-width: 1180px;
+  max-width: 1248px;
   width: 100%;
 }
 
 .tabsSection {
+  margin-top: 48px;
   max-width: none;
   min-width: 0;
   overflow: hidden;
@@ -40,7 +42,6 @@
 @media (max-width: 1024px) {
   .page {
     gap: 28px;
-    padding-bottom: 64px;
   }
 }
 
@@ -57,13 +58,12 @@
 @media (max-width: 767px) {
   .page {
     gap: 24px;
-    padding-block: 16px 56px;
+    padding-block: 96px;
   }
 }
 
 @media (max-width: 480px) {
   .page {
     gap: 20px;
-    padding-bottom: 48px;
   }
 }

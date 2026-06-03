@@ -1,3 +1,4 @@
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { CATEGORIES, LOCATIONS, MAX_PRICE, MIN_PRICE, PRICE_STEP } from './consts'
 import type { EventFiltersSidebarProps } from './types'
@@ -18,6 +19,7 @@ export const EventFiltersSidebar = ({
   const id = useId()
   const trackRef = useRef<HTMLDivElement>(null)
   const locationRef = useRef<HTMLDivElement>(null)
+  const locationInputRef = useRef<HTMLInputElement>(null)
 
   const [locationQuery, setLocationQuery] = useState('')
   const [locationOpen, setLocationOpen] = useState(false)
@@ -65,6 +67,12 @@ export const EventFiltersSidebar = ({
     })
   }
 
+  const openLocationDropdown = useCallback(() => {
+    setLocationQuery('')
+    setLocationOpen(true)
+    locationInputRef.current?.focus()
+  }, [])
+
   const handleLocationFocus = () => {
     setLocationQuery('')
     setLocationOpen(true)
@@ -75,10 +83,33 @@ export const EventFiltersSidebar = ({
     setLocationOpen(true)
   }
 
+  const handleLocationWrapperMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === locationInputRef.current) {
+      return
+    }
+
+    e.preventDefault()
+    openLocationDropdown()
+  }
+
+  const handleLocationToggle = () => {
+    if (locationOpen) {
+      setLocationOpen(false)
+      locationInputRef.current?.blur()
+      return
+    }
+
+    openLocationDropdown()
+  }
+
   const handleLocationSelect = (loc: string) => {
-    onFiltersChange({ ...filters, location: filters.location === loc ? '' : loc })
+    const nextLocation = loc === '' ? '' : filters.location === loc ? '' : loc
+    const nextFilters = { ...filters, location: nextLocation }
+
+    onFiltersChange(nextFilters)
     setLocationQuery('')
     setLocationOpen(false)
+    onApply(nextFilters)
   }
 
   const handleReset = () => {
@@ -185,8 +216,10 @@ export const EventFiltersSidebar = ({
                 ? `${styles.locationInputWrapper} ${styles.locationInputWrapperOpen}`
                 : styles.locationInputWrapper
             }
+            onMouseDown={handleLocationWrapperMouseDown}
           >
             <input
+              ref={locationInputRef}
               id={locationId}
               type="text"
               className={styles.locationInput}
@@ -199,9 +232,19 @@ export const EventFiltersSidebar = ({
               aria-expanded={locationOpen}
               aria-controls={`${id}-location-list`}
             />
-            <span className={styles.locationChevron} aria-hidden="true">
-              {locationOpen ? '▲' : '▼'}
-            </span>
+            <button
+              type="button"
+              className={styles.locationChevronButton}
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={handleLocationToggle}
+              aria-label={locationOpen ? 'Close location list' : 'Open location list'}
+            >
+              {locationOpen ? (
+                <UpOutlined className={styles.locationChevronIcon} aria-hidden="true" />
+              ) : (
+                <DownOutlined className={styles.locationChevronIcon} aria-hidden="true" />
+              )}
+            </button>
           </div>
 
           {locationOpen && (
@@ -211,6 +254,24 @@ export const EventFiltersSidebar = ({
               role="listbox"
               aria-label="Available venues"
             >
+              {!locationQuery && (
+                <li
+                  role="option"
+                  aria-selected={filters.location === ''}
+                  className={
+                    filters.location === ''
+                      ? `${styles.locationItem} ${styles.locationItemActive}`
+                      : styles.locationItem
+                  }
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => handleLocationSelect('')}
+                >
+                  {filters.location === '' && (
+                    <span className={styles.locationCheck} aria-hidden="true" />
+                  )}
+                  All locations
+                </li>
+              )}
               {filteredLocations.map((loc) => {
                 const isSelected = filters.location === loc
                 return (
@@ -245,7 +306,7 @@ export const EventFiltersSidebar = ({
         <button type="button" className={styles.resetButton} onClick={handleReset}>
           Reset
         </button>
-        <button type="button" className={styles.applyButton} onClick={onApply}>
+        <button type="button" className={styles.applyButton} onClick={() => onApply()}>
           Apply Filters
         </button>
       </div>

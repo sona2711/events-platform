@@ -28,10 +28,13 @@ export const CategoriesPage = () => {
 
   const canLoadMore = visibleCount < filteredEvents.length
 
-  const handleApply = useCallback(() => {
-    setAppliedFilters(filters)
-    setVisibleCount(INITIAL_VISIBLE_COUNT)
-  }, [filters])
+  const handleApply = useCallback(
+    (override?: FilterState) => {
+      setAppliedFilters(override ?? filters)
+      setVisibleCount(INITIAL_VISIBLE_COUNT)
+    },
+    [filters],
+  )
 
   const handleReset = useCallback(() => {
     setFilters(DEFAULT_FILTERS)
@@ -43,20 +46,24 @@ export const CategoriesPage = () => {
     setVisibleCount((current) => Math.min(current + LOAD_MORE_BATCH, filteredEvents.length))
   }, [filteredEvents.length])
 
-  const handleCategoryTabSelect = useCallback((tabId: string) => {
-    const label = getCategoryLabelFromTabId(tabId)
-    if (!label) {
-      return
-    }
+  const handleCategoryTabSelect = useCallback(
+    (tabId: string) => {
+      const label = getCategoryLabelFromTabId(tabId)
+      if (!label) {
+        return
+      }
 
-    setFilters((current) => {
-      const isAlreadyActive = current.categories.length === 1 && current.categories[0] === label
-      return {
-        ...current,
+      const isAlreadyActive = filters.categories.length === 1 && filters.categories[0] === label
+      const nextFilters: FilterState = {
+        ...filters,
         categories: isAlreadyActive ? ['All'] : [label],
       }
-    })
-  }, [])
+
+      setFilters(nextFilters)
+      handleApply(nextFilters)
+    },
+    [filters, handleApply],
+  )
 
   return (
     <div className={styles.page}>

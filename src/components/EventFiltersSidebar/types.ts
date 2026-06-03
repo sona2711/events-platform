@@ -9,7 +9,7 @@ export type FilterState = {
 export type EventFiltersSidebarProps = {
   filters: FilterState
   onFiltersChange: (filters: FilterState) => void
-  onApply: () => void
+  onApply: (appliedFilters?: FilterState) => void
   onReset: () => void
   className?: string
 }
