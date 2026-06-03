@@ -2,6 +2,7 @@
   "brand": "Yerevan Pulsar",
   "nav": {
     "allEvents": "All Events",
+    "exploreEvents": "Explore Events",
     "categories": "Categories"
   },
   "auth": {
@@ -18,6 +19,10 @@
   "aria": {
     "primaryNav": "Primary navigation",
     "adminNav": "Admin navigation"
+  },
+  "header": {
+    "toggleMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu"
   },
   "adminNav": {
     "dashboard": "Dashboard",

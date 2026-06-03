@@ -1,0 +1,8 @@
+.formItem :global(.ant-form-item-label > label) {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.28px;
+  line-height: 14px;
+  vertical-align: middle;
+}

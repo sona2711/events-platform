@@ -2,6 +2,7 @@
   "brand": "Yerevan Pulsar",
   "nav": {
     "allEvents": "Բոլոր միջոցառումները",
+    "exploreEvents": "Ուսումնասիրել միջոցառումները",
     "categories": "Կատեգորիաներ"
   },
   "auth": {
@@ -18,6 +19,10 @@
   "aria": {
     "primaryNav": "Հիմնական նավիգացիա",
     "adminNav": "Ադմինի նավիգացիա"
+  },
+  "header": {
+    "toggleMenu": "Բացել նավիգացիոն մենյուն",
+    "closeMenu": "Փակել նավիգացիոն մենյուն"
   },
   "adminNav": {
     "dashboard": "Վահանակ",
