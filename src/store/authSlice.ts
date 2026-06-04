@@ -10,13 +10,14 @@ import {
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
 import type { AuthState, AuthUser } from '@/types'
+import { AUTH_ERROR_MESSAGES, toAuthRejectValue } from './authErrors'
 
 const googleProvider = new GoogleAuthProvider()
 
 export const loginWithEmail = createAsyncThunk<
   AuthUser,
   { email: string; password: string },
-  { rejectValue: string }
+  { rejectValue: string | null }
 >('auth/loginWithEmail', async ({ email, password }, { rejectWithValue }) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password)
@@ -27,11 +28,11 @@ export const loginWithEmail = createAsyncThunk<
       photoURL: user.photoURL,
     }
   } catch (err) {
-    return rejectWithValue(err instanceof Error ? err.message : 'Login failed')
+    return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.loginFailed))
   }
 })
 
-export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: string }>(
+export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: string | null }>(
   'auth/loginWithGoogle',
   async (_, { rejectWithValue }) => {
     try {
@@ -43,7 +44,7 @@ export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: s
         photoURL: user.photoURL,
       }
     } catch (err) {
-      return rejectWithValue(err instanceof Error ? err.message : 'Google sign-in failed')
+      return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.googleSignInFailed))
     }
   },
 )
@@ -51,7 +52,7 @@ export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: s
 export const registerWithEmail = createAsyncThunk<
   AuthUser,
   { email: string; password: string; displayName: string },
-  { rejectValue: string }
+  { rejectValue: string | null }
 >('auth/registerWithEmail', async ({ email, password, displayName }, { rejectWithValue }) => {
   try {
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
@@ -67,28 +68,28 @@ export const registerWithEmail = createAsyncThunk<
       photoURL: user.photoURL,
     }
   } catch (err) {
-    return rejectWithValue(err instanceof Error ? err.message : 'Registration failed')
+    return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.registrationFailed))
   }
 })
 
-export const sendPasswordReset = createAsyncThunk<void, string, { rejectValue: string }>(
+export const sendPasswordReset = createAsyncThunk<void, string, { rejectValue: string | null }>(
   'auth/sendPasswordReset',
   async (email, { rejectWithValue }) => {
     try {
       await sendPasswordResetEmail(auth, email)
     } catch (err) {
-      return rejectWithValue(err instanceof Error ? err.message : 'Password reset failed')
+      return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.passwordResetFailed))
     }
   },
 )
 
-export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
+export const logout = createAsyncThunk<void, void, { rejectValue: string | null }>(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
       await signOut(auth)
     } catch (err) {
-      return rejectWithValue(err instanceof Error ? err.message : 'Logout failed')
+      return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.logoutFailed))
     }
   },
 )
@@ -117,9 +118,14 @@ const authSlice = createSlice({
       state.loading = true
       state.error = null
     }
-    const rejectedReducer = (state: AuthState, action: PayloadAction<string | undefined>) => {
+    const rejectedReducer = (
+      state: AuthState,
+      action: PayloadAction<string | null | undefined>,
+    ) => {
       state.loading = false
-      state.error = action.payload ?? 'An unexpected error occurred'
+      if (action.payload) {
+        state.error = action.payload
+      }
     }
 
     builder
