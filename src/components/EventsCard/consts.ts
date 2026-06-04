@@ -7,9 +7,15 @@ import type { EventCardItem, SliderBreakpointConfig } from './types'
 
 export const EVENTS_PREV_BUTTON_CLASS = 'events-prev-button'
 export const EVENTS_NEXT_BUTTON_CLASS = 'events-next-button'
+export const SWIPER_NO_SWIPING_CLASS = 'swiper-no-swiping'
 
-export const EVENTS_PREV_BUTTON_SELECTOR = `.${EVENTS_PREV_BUTTON_CLASS}`
-export const EVENTS_NEXT_BUTTON_SELECTOR = `.${EVENTS_NEXT_BUTTON_CLASS}`
+export const EVENTS_LAYOUT = {
+  sectionPaddingTop: 80,
+  sectionPaddingBottom: 80,
+  rowWidth: 1248,
+  cardWidth: 400,
+  cardGap: 24,
+} as const
 
 export const EVENTS: EventCardItem[] = [
   {
@@ -69,7 +75,7 @@ export const SLIDER_BREAKPOINTS: SliderBreakpointConfig = {
     spaceBetween: 18,
   },
   1024: {
-    slidesPerView: 3,
-    spaceBetween: 20,
+    slidesPerView: 'auto',
+    spaceBetween: EVENTS_LAYOUT.cardGap,
   },
 }
