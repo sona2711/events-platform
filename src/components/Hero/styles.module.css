@@ -11,7 +11,7 @@
   transform: translateX(-50%);
   padding: 150px var(--layout-padding-inline) var(--layout-padding-inline);
   overflow: hidden;
-  background: radial-gradient(circle, #a80a22 0%, #770016 100%);
+  background-color: rgba(119, 0, 22, 1);
 }
 
 .background {
@@ -37,13 +37,22 @@
 }
 
 .title {
-  font-family: Bricolage Grotesque;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 80px;
   font-weight: 800;
-  line-height: 1.05;
+  line-height: 80px;
+  letter-spacing: -3.2px;
   color: #ffffff;
-  margin-bottom: 24px;
-  letter-spacing: -2px;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.titleLine {
+  display: block;
+}
+
+.descriptionLine {
+  display: block;
 }
 
 .pulseWord {
@@ -59,9 +68,9 @@
   font-weight: 400;
   max-width: 700px;
   margin: 0 auto 40px;
-  font-size: 1.1rem;
+  font-size: 18px;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 1);
 }
 
 .actions {
@@ -75,41 +84,58 @@
 
 .btnPrimary,
 .btnSecondary {
-  border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 28px;
+  margin: 0;
+  padding: 18px 40px;
+  height: 60px;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: 600;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition:
     transform 0.25s ease,
     background 0.25s ease,
     color 0.25s ease,
-    border 0.25s ease;
+    border-color 0.25s ease;
 }
 
 .btnPrimary {
-  background: #d2e823;
-  color: white;
-  box-shadow: 0 10px 30px rgba(255, 92, 122, 0.35);
+  border: none;
+  background-color: rgba(210, 232, 35, 1);
+  color: rgba(119, 0, 22, 1);
+  gap: 10px;
+}
+
+.btnPrimaryLabel {
+  line-height: 1;
+}
+
+.btnPrimaryIcon {
+  flex-shrink: 0;
+  display: block;
 }
 
 .btnPrimary:hover {
   transform: translateY(-2px);
-  background: #ff7690;
+  background-color: #e8f65c;
 }
 
 .btnSecondary {
-  background: transparent;
-  color: white;
-  border: 1px solid white;
-  backdrop-filter: blur(6px);
+  background-color: transparent;
+  color: #d2e823;
+  border: 2px solid #d2e823;
 }
 
 .btnSecondary:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.5);
+  color: #e8f65c;
+  border-color: #e8f65c;
+  background-color: rgba(210, 232, 35, 0.14);
 }
 
 .ticker {
@@ -163,7 +189,7 @@
 
 @media (max-width: 820px) {
   .hero {
-    min-height: 760px;
+    min-height: 800px;
     padding: 190px var(--layout-padding-inline) var(--layout-padding-inline);
   }
 
@@ -172,7 +198,8 @@
   }
 
   .title {
-    letter-spacing: -1px;
+    font-size: clamp(2.5rem, 10vw, 80px);
+    line-height: 0.98;
   }
 
   .description {
