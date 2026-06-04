@@ -118,7 +118,7 @@
   left: 0;
   width: 100%;
   overflow: hidden;
-  padding: 10px 0;
+  padding: 16px 0;
   z-index: 2;
   background-color: #ffffff;
 }
@@ -132,14 +132,21 @@
 .tickerText {
   display: inline-block;
   padding-right: 40px;
-  background-image: linear-gradient(60deg, #770016 0%, #f28906 50%, #2665d6, #d2e823 100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(119, 0, 22, 1) 0%,
+    rgba(242, 137, 6, 1) 33%,
+    rgba(38, 101, 214, 1) 66%,
+    rgba(210, 232, 35, 1) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: Bricolage Grotesque;
-  font-size: 3.5rem;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 102px;
   font-weight: 800;
-  letter-spacing: 4px;
+  letter-spacing: -3.2px;
+  line-height: 1;
   text-transform: capitalize;
   white-space: nowrap;
 }
@@ -184,7 +191,8 @@
   }
 
   .tickerText {
-    font-size: 2.5rem;
+    font-size: 72px;
+    letter-spacing: -2.2px;
   }
 }
 
@@ -199,7 +207,7 @@
   }
 
   .tickerText {
-    font-size: 1.8rem;
-    letter-spacing: 2px;
+    font-size: 52px;
+    letter-spacing: -1.6px;
   }
 }
