@@ -64,8 +64,7 @@
         "title": "Компания",
         "links": {
           "viewCatalog": "Просмотреть каталог",
-          "browseDatasets": "Просмотреть наборы данных",
-          "requestDataset": "Запросить индивидуальный набор данных"
+          "browseDatasets": "Просмотреть наборы данных"
         }
       },
       "resources": {

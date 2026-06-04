@@ -53,18 +53,26 @@
 }
 
 .title {
-  color: var(--color-text-primary);
-  font-size: 16px;
-  font-weight: 700;
   margin: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-burgundy-700);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .meta {
   align-items: center;
-  color: var(--color-text-secondary);
+  color: #1a1a1a;
   display: flex;
   flex-wrap: wrap;
-  font-size: 13px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   gap: 16px;
 }
 

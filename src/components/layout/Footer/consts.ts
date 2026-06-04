@@ -25,7 +25,6 @@ export const FOOTER_LINK_GROUPS = [
     linkKeys: [
       'footer.groups.company.links.viewCatalog',
       'footer.groups.company.links.browseDatasets',
-      'footer.groups.company.links.requestDataset',
     ],
   },
   {
@@ -35,8 +34,12 @@ export const FOOTER_LINK_GROUPS = [
   },
 ] as const
 
+import facebookIcon from '@/assets/images/footer-social-facebook.png'
+import instagramIcon from '@/assets/images/footer-social-instagram.png'
+import linkedinIcon from '@/assets/images/footer-social-linkedin.png'
+
 export const SOCIAL_LINKS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com' },
-  { label: 'Instagram', href: 'https://www.instagram.com' },
-  { label: 'Facebook', href: 'https://www.facebook.com' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com', iconSrc: linkedinIcon },
+  { label: 'Instagram', href: 'https://www.instagram.com', iconSrc: instagramIcon },
+  { label: 'Facebook', href: 'https://www.facebook.com', iconSrc: facebookIcon },
 ] as const

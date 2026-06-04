@@ -64,8 +64,7 @@
         "title": "Company",
         "links": {
           "viewCatalog": "View Catalog",
-          "browseDatasets": "Browse Datasets",
-          "requestDataset": "Request a Custom Dataset"
+          "browseDatasets": "Browse Datasets"
         }
       },
       "resources": {
