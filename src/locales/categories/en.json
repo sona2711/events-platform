@@ -1,6 +1,6 @@
 {
-  "title": "Categories",
-  "description": "Explore events by interest, format, and community topic.",
-  "emptyState": "No events found in this category.",
+  "title": "Explore Events in Yerevan",
+  "description": "Curated experiences from jazz nights to tech meetups in the heart of Armenia.",
+  "emptyState": "No events found for these criteria.",
   "loadMore": "Load More"
 }

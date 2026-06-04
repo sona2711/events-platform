@@ -1,7 +1,7 @@
-import type { ExploreEvent } from '@/components/features/ExploreEventsMainContent/types'
+import type { CategoryEvent } from '@/pages/categoriesPage/types'
 
 export type CategoriesEventsGridProps = {
-  events: ExploreEvent[]
+  events: CategoryEvent[]
   canLoadMore: boolean
   onLoadMore: () => void
   emptyMessage: string

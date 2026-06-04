@@ -10,9 +10,9 @@ import ewanBuckImage from '@/assets/images/ewan-buck-xc9B3i-1QiI-unsplash.jpg'
 import carolineImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.jpg'
 import dennyImage from '@/assets/images/denny-muller-z_disLOcoKM-unsplash.jpg'
 import wineStainImage from '@/assets/images/wine-stain-detail.jpg'
-import type { ExploreEvent } from './types'
+import type { CategoryEvent } from './types'
 
-export const MOCK_EXPLORE_EVENTS: ExploreEvent[] = [
+export const MOCK_CATEGORY_EVENTS: CategoryEvent[] = [
   {
     id: 'event-modern-art',
     imageUrl: modernArtImage,
@@ -158,6 +158,3 @@ export const MOCK_EXPLORE_EVENTS: ExploreEvent[] = [
     dateIso: '2026-10-21',
   },
 ]
-
-export const LOAD_MORE_BUTTON_LABEL = 'Load More'
-export const EMPTY_STATE_MESSAGE = 'No events found for these criteria'

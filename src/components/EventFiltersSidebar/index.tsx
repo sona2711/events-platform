@@ -1,34 +1,26 @@
+import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { CATEGORIES, LOCATIONS, MAX_PRICE, MIN_PRICE, PRICE_STEP } from './consts'
-import type { EventFiltersSidebarProps, FilterState } from './types'
+import type { EventFiltersSidebarProps } from './types'
 import styles from './styles.module.css'
 
-const DEFAULT_FILTERS: FilterState = {
-  date: '',
-  priceMin: MIN_PRICE,
-  priceMax: MAX_PRICE,
-  categories: ['All'],
-  location: '',
-}
-
-function formatPrice(value: number): string {
+const formatPrice = (value: number): string => {
   if (value >= MAX_PRICE) return '100,000+ AMD'
   return `${value.toLocaleString()} AMD`
 }
 
-export function EventFiltersSidebar({
+export const EventFiltersSidebar = ({
+  filters,
+  onFiltersChange,
   onApply,
-  initialFilters,
+  onReset,
   className,
-}: EventFiltersSidebarProps) {
+}: EventFiltersSidebarProps) => {
   const id = useId()
   const trackRef = useRef<HTMLDivElement>(null)
   const locationRef = useRef<HTMLDivElement>(null)
+  const locationInputRef = useRef<HTMLInputElement>(null)
 
-  const [filters, setFilters] = useState<FilterState>({
-    ...DEFAULT_FILTERS,
-    ...initialFilters,
-  })
   const [locationQuery, setLocationQuery] = useState('')
   const [locationOpen, setLocationOpen] = useState(false)
 
@@ -54,26 +46,32 @@ export function EventFiltersSidebar({
 
   const handlePriceMinChange = (raw: number) => {
     const value = Math.min(raw, filters.priceMax - PRICE_STEP)
-    setFilters((f) => ({ ...f, priceMin: value }))
+    onFiltersChange({ ...filters, priceMin: value })
   }
 
   const handlePriceMaxChange = (raw: number) => {
     const value = Math.max(raw, filters.priceMin + PRICE_STEP)
-    setFilters((f) => ({ ...f, priceMax: value }))
+    onFiltersChange({ ...filters, priceMax: value })
   }
 
   const handleCategoryToggle = (category: string) => {
     if (category === 'All') {
-      setFilters((f) => ({ ...f, categories: ['All'] }))
+      onFiltersChange({ ...filters, categories: ['All'] })
       return
     }
-    setFilters((f) => {
-      const without = f.categories.filter((c) => c !== 'All' && c !== category)
-      const isActive = f.categories.includes(category)
-      const next = isActive ? without : [...without, category]
-      return { ...f, categories: next.length === 0 ? ['All'] : next }
+
+    const isActive = filters.categories.includes(category)
+    onFiltersChange({
+      ...filters,
+      categories: isActive ? ['All'] : [category],
     })
   }
+
+  const openLocationDropdown = useCallback(() => {
+    setLocationQuery('')
+    setLocationOpen(true)
+    locationInputRef.current?.focus()
+  }, [])
 
   const handleLocationFocus = () => {
     setLocationQuery('')
@@ -85,22 +83,40 @@ export function EventFiltersSidebar({
     setLocationOpen(true)
   }
 
-  const handleLocationSelect = (loc: string) => {
-    setFilters((f) => ({ ...f, location: f.location === loc ? '' : loc }))
-    setLocationQuery('')
-    setLocationOpen(false)
+  const handleLocationWrapperMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === locationInputRef.current) {
+      return
+    }
+
+    e.preventDefault()
+    openLocationDropdown()
   }
 
-  const handleApply = () => {
-    onApply(filters)
+  const handleLocationToggle = () => {
+    if (locationOpen) {
+      setLocationOpen(false)
+      locationInputRef.current?.blur()
+      return
+    }
+
+    openLocationDropdown()
+  }
+
+  const handleLocationSelect = (loc: string) => {
+    const nextLocation = loc === '' ? '' : filters.location === loc ? '' : loc
+    const nextFilters = { ...filters, location: nextLocation }
+
+    onFiltersChange(nextFilters)
+    setLocationQuery('')
+    setLocationOpen(false)
+    onApply(nextFilters)
   }
 
   const handleReset = () => {
-    const reset = { ...DEFAULT_FILTERS }
-    setFilters(reset)
     setLocationQuery('')
     setLocationOpen(false)
     updateSliderFill(MIN_PRICE, MAX_PRICE)
+    onReset()
   }
 
   const filteredLocations = LOCATIONS.filter((loc) =>
@@ -109,8 +125,6 @@ export function EventFiltersSidebar({
 
   const locationInputValue = locationOpen ? locationQuery : filters.location
 
-  // When priceMin is pushed near the top of the range the min thumb should
-  // sit above the max thumb so the user can drag it back down.
   const minThumbOnTop = filters.priceMin / MAX_PRICE > 0.9
 
   const sidebarClass = [styles.sidebar, className].filter(Boolean).join(' ')
@@ -119,7 +133,6 @@ export function EventFiltersSidebar({
 
   return (
     <aside className={sidebarClass} aria-label="Event filters">
-      {/* ── Date ── */}
       <section className={styles.section}>
         <label htmlFor={dateId} className={styles.sectionTitle}>
           Select Date
@@ -129,11 +142,10 @@ export function EventFiltersSidebar({
           type="date"
           className={styles.dateInput}
           value={filters.date}
-          onChange={(e) => setFilters((f) => ({ ...f, date: e.target.value }))}
+          onChange={(e) => onFiltersChange({ ...filters, date: e.target.value })}
         />
       </section>
 
-      {/* ── Price Range ── */}
       <section className={styles.section}>
         <p className={styles.sectionTitle}>Price Range (AMD)</p>
         <div className={styles.sliderWrapper} ref={trackRef}>
@@ -169,7 +181,6 @@ export function EventFiltersSidebar({
         </div>
       </section>
 
-      {/* ── Categories ── */}
       <section className={styles.section}>
         <p className={styles.sectionTitle}>Categories</p>
         <div className={styles.categoryGrid} role="group" aria-label="Filter by category">
@@ -194,7 +205,6 @@ export function EventFiltersSidebar({
         </div>
       </section>
 
-      {/* ── Location ── */}
       <section className={styles.section}>
         <label htmlFor={locationId} className={styles.sectionTitle}>
           Location
@@ -206,8 +216,10 @@ export function EventFiltersSidebar({
                 ? `${styles.locationInputWrapper} ${styles.locationInputWrapperOpen}`
                 : styles.locationInputWrapper
             }
+            onMouseDown={handleLocationWrapperMouseDown}
           >
             <input
+              ref={locationInputRef}
               id={locationId}
               type="text"
               className={styles.locationInput}
@@ -220,9 +232,19 @@ export function EventFiltersSidebar({
               aria-expanded={locationOpen}
               aria-controls={`${id}-location-list`}
             />
-            <span className={styles.locationChevron} aria-hidden="true">
-              {locationOpen ? '▲' : '▼'}
-            </span>
+            <button
+              type="button"
+              className={styles.locationChevronButton}
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={handleLocationToggle}
+              aria-label={locationOpen ? 'Close location list' : 'Open location list'}
+            >
+              {locationOpen ? (
+                <UpOutlined className={styles.locationChevronIcon} aria-hidden="true" />
+              ) : (
+                <DownOutlined className={styles.locationChevronIcon} aria-hidden="true" />
+              )}
+            </button>
           </div>
 
           {locationOpen && (
@@ -232,6 +254,24 @@ export function EventFiltersSidebar({
               role="listbox"
               aria-label="Available venues"
             >
+              {!locationQuery && (
+                <li
+                  role="option"
+                  aria-selected={filters.location === ''}
+                  className={
+                    filters.location === ''
+                      ? `${styles.locationItem} ${styles.locationItemActive}`
+                      : styles.locationItem
+                  }
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => handleLocationSelect('')}
+                >
+                  {filters.location === '' && (
+                    <span className={styles.locationCheck} aria-hidden="true" />
+                  )}
+                  All locations
+                </li>
+              )}
               {filteredLocations.map((loc) => {
                 const isSelected = filters.location === loc
                 return (
@@ -262,12 +302,11 @@ export function EventFiltersSidebar({
         </div>
       </section>
 
-      {/* ── Actions ── */}
       <div className={styles.actions}>
         <button type="button" className={styles.resetButton} onClick={handleReset}>
           Reset
         </button>
-        <button type="button" className={styles.applyButton} onClick={handleApply}>
+        <button type="button" className={styles.applyButton} onClick={() => onApply()}>
           Apply Filters
         </button>
       </div>
