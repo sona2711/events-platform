@@ -33,7 +33,11 @@ export function WineFestHero() {
     <section className={styles.section}>
       <div className={styles.layout}>
         <div className={styles.left}>
-          <h2 className={styles.title}>Armenia Wine Fest 2026</h2>
+          <h2 className={styles.title}>
+            <span className={styles.titleLine}>Armenia</span>
+            <span className={styles.titleLine}>Wine Fest</span>
+            <span className={styles.titleLine}>2026</span>
+          </h2>
 
           <div className={styles.countdown}>
             {UNITS.map((label, i) => (
