@@ -1,0 +1,90 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: #eee6e7;
+  background-image: url('../../assets/images/background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+
+.page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #ede9fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #5b21b6;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 8px !important;
+}
+
+.subtitle {
+  color: #565e74;
+  display: block;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-bottom: 24px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.submitItem {
+  margin-bottom: 8px !important;
+}
+
+.submitButton {
+  border-radius: 24px !important;
+  background-color: #3b5bdb !important;
+  border-color: #3b5bdb !important;
+}
+
+.backLink {
+  align-items: center;
+  color: #565e74;
+  display: flex;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  gap: 6px;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: 21px;
+  margin-top: 16px;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.backLink:hover {
+  color: #3b5bdb;
+}

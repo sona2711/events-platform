@@ -1,5 +1,12 @@
-export const NAV_LINKS = [
+type NavLinkItem = {
+  readonly labelKey: 'nav.allEvents' | 'nav.exploreEvents' | 'nav.categories'
+  readonly to: '/' | '/explore-events' | '/categories'
+  readonly alwaysUnderlined?: boolean
+}
+
+export const NAV_LINKS: readonly NavLinkItem[] = [
   { labelKey: 'nav.allEvents', to: '/' },
+  { labelKey: 'nav.exploreEvents', to: '/explore-events' },
   { labelKey: 'nav.categories', to: '/categories' },
 ] as const
 

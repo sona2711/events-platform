@@ -1,10 +1,16 @@
-import { PagePlaceholder } from '@/components/_shared/PagePlaceholder'
+import { EventsGrid } from '@/components/EventsCard'
+import { Hero } from '@/components/Hero'
 import { SubscribeBanner } from '@/components/features/SubscribeBanner'
+import { WineFestHero } from '@/components/features/WineFestHero'
+import { ExploreAllEvents } from '@/components/features/ExploreAllEvents'
 
 export function MainPage() {
   return (
     <>
-      <PagePlaceholder namespace="home" titleKey="title" descriptionKey="description" />
+      <Hero />
+      <EventsGrid />
+      <WineFestHero />
+      <ExploreAllEvents />
       <SubscribeBanner />
     </>
   )

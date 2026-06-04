@@ -21,7 +21,6 @@
     "test:e2e:report": "playwright show-report"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "@ant-design/icons": "^5",
     "@fontsource-variable/bricolage-grotesque": "^5.2.10",
     "@fontsource/libre-caslon-text": "^5.2.7",
@@ -36,6 +35,8 @@
     "react-i18next": "^15.7.4",
     "react-redux": "^9",
     "react-router-dom": "^7",
+    "sonner": "^2.0.7",
+    "swiper": "^12.2.0",
     "zod": "^3"
   },
   "devDependencies": {

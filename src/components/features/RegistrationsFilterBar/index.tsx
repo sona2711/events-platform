@@ -1,56 +1,23 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Button, DatePicker, Input, Select } from 'antd'
-import dayjs from 'dayjs'
-import { useState } from 'react'
-import {
-  CATEGORY_OPTIONS,
-  EVENT_OPTIONS,
-  FILTER_BAR_DEFAULT_VALUES,
-  SEARCH_PLACEHOLDER,
-  STATUS_OPTIONS,
-} from './consts'
+import type { Dayjs } from 'dayjs'
+import { CATEGORY_OPTIONS, EVENT_OPTIONS, SEARCH_PLACEHOLDER, STATUS_OPTIONS } from './consts'
 import styles from './styles.module.css'
-import type { RegistrationsFilterValues } from './types'
+import type { RegistrationsFilterBarProps } from './types'
 
 const { RangePicker } = DatePicker
 
-const DEFAULT_DATE_RANGE: [dayjs.Dayjs, dayjs.Dayjs] = [dayjs('2026-10-01'), dayjs('2026-10-31')]
-
-export const RegistrationsFilterBar = () => {
-  const [filters, setFilters] = useState<RegistrationsFilterValues>({
-    ...FILTER_BAR_DEFAULT_VALUES,
-    dateRange: DEFAULT_DATE_RANGE,
-  })
-
-  const handleCategoryChange = (value: string) => {
-    setFilters((prev) => ({ ...prev, category: value }))
-  }
-
-  const handleEventChange = (value: string) => {
-    setFilters((prev) => ({ ...prev, event: value }))
-  }
-
-  const handleStatusChange = (value: string) => {
-    setFilters((prev) => ({ ...prev, status: value }))
-  }
-
-  const handleDateRangeChange = (dates: [dayjs.Dayjs | null, dayjs.Dayjs | null] | null) => {
+export const RegistrationsFilterBar = ({
+  filters,
+  onFiltersChange,
+  onReset,
+}: RegistrationsFilterBarProps) => {
+  const handleDateRangeChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
     if (dates && dates[0] && dates[1]) {
-      setFilters((prev) => ({ ...prev, dateRange: [dates[0]!, dates[1]!] }))
+      onFiltersChange({ dateRange: [dates[0], dates[1]] })
     } else {
-      setFilters((prev) => ({ ...prev, dateRange: null }))
+      onFiltersChange({ dateRange: null })
     }
-  }
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilters((prev) => ({ ...prev, search: e.target.value }))
-  }
-
-  const handleReset = () => {
-    setFilters({
-      ...FILTER_BAR_DEFAULT_VALUES,
-      dateRange: DEFAULT_DATE_RANGE,
-    })
   }
 
   return (
@@ -59,7 +26,7 @@ export const RegistrationsFilterBar = () => {
         <Select
           className={styles.filterSelect}
           value={filters.category}
-          onChange={handleCategoryChange}
+          onChange={(value) => onFiltersChange({ category: value })}
           options={CATEGORY_OPTIONS}
           labelRender={({ label }) => `Category: ${label}`}
           aria-label="Filter by category"
@@ -68,7 +35,7 @@ export const RegistrationsFilterBar = () => {
         <Select
           className={styles.filterSelect}
           value={filters.event}
-          onChange={handleEventChange}
+          onChange={(value) => onFiltersChange({ event: value })}
           options={EVENT_OPTIONS}
           labelRender={({ label }) => `Event: ${label}`}
           aria-label="Filter by event"
@@ -77,7 +44,7 @@ export const RegistrationsFilterBar = () => {
         <Select
           className={styles.filterSelect}
           value={filters.status}
-          onChange={handleStatusChange}
+          onChange={(value) => onFiltersChange({ status: value })}
           options={STATUS_OPTIONS}
           labelRender={({ label }) => `Status: ${label}`}
           aria-label="Filter by status"
@@ -95,7 +62,7 @@ export const RegistrationsFilterBar = () => {
 
       <Button
         className={styles.resetButton}
-        onClick={handleReset}
+        onClick={onReset}
         type="default"
         aria-label="Reset all filters"
       >
@@ -105,7 +72,7 @@ export const RegistrationsFilterBar = () => {
       <Input
         className={styles.searchInput}
         value={filters.search}
-        onChange={handleSearchChange}
+        onChange={(e) => onFiltersChange({ search: e.target.value })}
         prefix={<SearchOutlined />}
         placeholder={SEARCH_PLACEHOLDER}
         aria-label="Search registrations by name or email"
