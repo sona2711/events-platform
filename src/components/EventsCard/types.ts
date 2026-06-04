@@ -11,7 +11,7 @@ export type EventCardItem = {
 export type SliderBreakpointConfig = Record<
   number,
   {
-    slidesPerView: number | 'auto'
+    slidesPerView: number
     spaceBetween: number
   }
 >

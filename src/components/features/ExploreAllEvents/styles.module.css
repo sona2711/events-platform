@@ -25,154 +25,12 @@
   letter-spacing: -0.02em;
 }
 
-/* ── Grid ── */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-/* ── Card ── */
-.card {
-  background: #ffffff;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
-}
-
-/* ── Image ── */
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  flex-shrink: 0;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.category {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: #444;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.heartBtn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.heartBtn:hover {
-  transform: scale(1.15);
-}
-
-/* ── Card body ── */
-.cardBody {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-
-.eventTitle {
-  margin: 0;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--color-burgundy-700);
-  line-height: 1.25;
-}
-
-.location,
-.date {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-  color: #4a4a4a;
-  font-weight: 500;
-}
-
-.metaIcon {
-  color: #2665d6;
-  flex-shrink: 0;
-}
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 8px;
-}
-
-.price {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #2665d6;
-}
-
-.priceFree {
-  font-size: 1rem;
-  font-weight: 800;
-  color: #16a34a;
-}
-
-.bookBtn {
-  padding: 8px 24px;
-  border: none;
-  border-radius: 999px;
-  background-color: #2665d6;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.bookBtn:hover {
-  background-color: #1a4faa;
-}
-
-/* ── See More ── */
 .seeMoreWrapper {
   display: flex;
   justify-content: center;
@@ -208,7 +66,6 @@
   text-decoration: none;
 }
 
-/* ── Responsive ── */
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);

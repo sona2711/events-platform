@@ -4,65 +4,100 @@ import {
   HeartFilled,
   HeartOutlined,
 } from '@ant-design/icons'
-import { Button, Image } from 'antd'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { selectIsEventFavorite, toggleFavorite } from '@/store/favorites'
 import type { EventCardProps } from './types'
 import styles from './styles.module.css'
 
-export const EventCard = ({ event, onBook }: EventCardProps) => {
+type EventCardFavoriteButtonProps = {
+  eventId: string
+  eventTitle: string
+  className: string
+}
+
+const EventCardFavoriteButton = ({
+  eventId,
+  eventTitle,
+  className,
+}: EventCardFavoriteButtonProps) => {
   const dispatch = useAppDispatch()
-  const isFavorite = useAppSelector(selectIsEventFavorite(event.id))
+  const isFavorite = useAppSelector(selectIsEventFavorite(eventId))
 
   const handleToggleFavorite = () => {
-    dispatch(toggleFavorite(event.id))
+    dispatch(toggleFavorite(eventId))
   }
 
-  const wishlistButtonClassName = isFavorite
-    ? `${styles.wishlistButton} ${styles.wishlistButtonActive}`
-    : styles.wishlistButton
+  const favoriteButtonClassName = isFavorite
+    ? `${className} ${styles.favoriteButtonActive}`
+    : className
 
-  const wishlistLabel = isFavorite
-    ? `Remove ${event.title} from wishlist`
-    : `Save ${event.title} to wishlist`
+  const ariaLabel = isFavorite
+    ? `Remove ${eventTitle} from favorites`
+    : `Save ${eventTitle} to favorites`
 
   return (
-    <article className={styles.card}>
-      <div className={styles.media}>
-        <Image className={styles.image} src={event.imageUrl} alt={event.title} preview={false} />
-        <button
-          type="button"
-          className={wishlistButtonClassName}
-          aria-label={wishlistLabel}
-          aria-pressed={isFavorite}
-          onClick={handleToggleFavorite}
-        >
-          {isFavorite ? <HeartFilled aria-hidden /> : <HeartOutlined aria-hidden />}
-        </button>
+    <button
+      type="button"
+      className={favoriteButtonClassName}
+      aria-label={ariaLabel}
+      aria-pressed={isFavorite}
+      onClick={handleToggleFavorite}
+    >
+      {isFavorite ? <HeartFilled aria-hidden /> : <HeartOutlined aria-hidden />}
+    </button>
+  )
+}
+
+export const EventCard = ({
+  event,
+  variant = 'default',
+  onBook,
+  noSwipeClassName,
+}: EventCardProps) => {
+  const isFreePrice = event.priceLabel === 'Free'
+  const priceClassName = isFreePrice ? styles.priceFree : styles.price
+  const favoriteButtonClassName = [styles.favoriteButton, noSwipeClassName]
+    .filter(Boolean)
+    .join(' ')
+  const bookButtonClassName = [styles.bookButton, noSwipeClassName].filter(Boolean).join(' ')
+
+  const cardClassName = variant === 'default' ? `${styles.card} ${styles.cardDefault}` : styles.card
+
+  const card = (
+    <article className={cardClassName}>
+      <div className={styles.imageWrapper}>
+        <img src={event.imageUrl} alt={event.title} className={styles.image} loading="lazy" />
+        <EventCardFavoriteButton
+          eventId={event.id}
+          eventTitle={event.title}
+          className={favoriteButtonClassName}
+        />
       </div>
 
-      <div className={styles.content}>
+      <div className={styles.cardBody}>
         <span className={styles.category}>{event.categoryLabel}</span>
         <h3 className={styles.title}>{event.title}</h3>
-
-        <div className={styles.meta}>
-          <span className={styles.metaItem}>
-            <EnvironmentOutlined aria-hidden />
-            {event.location}
-          </span>
-          <span className={styles.metaItem}>
-            <CalendarOutlined aria-hidden />
-            {event.date}
-          </span>
-        </div>
-
+        <p className={styles.location}>
+          <EnvironmentOutlined className={styles.metaIcon} aria-hidden />
+          {event.location}
+        </p>
+        <p className={styles.date}>
+          <CalendarOutlined className={styles.metaIcon} aria-hidden />
+          {event.date}
+        </p>
         <div className={styles.footer}>
-          <span className={styles.price}>{event.priceLabel}</span>
-          <Button type="primary" className={styles.bookButton} onClick={() => onBook?.(event.id)}>
+          <span className={priceClassName}>{event.priceLabel}</span>
+          <button type="button" className={bookButtonClassName} onClick={() => onBook?.(event.id)}>
             Book
-          </Button>
+          </button>
         </div>
       </div>
     </article>
   )
+
+  if (variant === 'carousel') {
+    return <div className={styles.hoverShell}>{card}</div>
+  }
+
+  return card
 }

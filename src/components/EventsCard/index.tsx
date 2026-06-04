@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import styles from './styles.module.css'
-import { CalendarOutlined, EnvironmentOutlined, HeartOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { EventCard } from '@/components/features/EventCard'
+import { toEventCardData } from '@/components/features/EventCard/utils'
 import { TicketPaymentModal } from '@/components/features/TicketPaymentModal'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
@@ -87,52 +87,12 @@ export function EventsGrid() {
             >
               {EVENTS.map((event) => (
                 <SwiperSlide key={event.id} className={styles.slide}>
-                  <div className={styles.cardHoverShell}>
-                    <article className={styles.card}>
-                      <div className={styles.imageWrapper}>
-                        <img
-                          src={event.image}
-                          alt={event.title}
-                          className={styles.image}
-                          loading="lazy"
-                        />
-                        <span className={styles.category}>{event.category}</span>
-                        <button
-                          className={`${styles.heartIcon} ${SWIPER_NO_SWIPING_CLASS}`}
-                          type="button"
-                          aria-label={`Save ${event.title}`}
-                        >
-                          <HeartOutlined />
-                        </button>
-                      </div>
-
-                      <div className={styles.content}>
-                        <h3 className={styles.eventTitle}>{event.title}</h3>
-                        <p className={styles.location}>
-                          <EnvironmentOutlined className={styles.metaIcon} />
-                          {event.location}
-                        </p>
-
-                        <div className={styles.footer}>
-                          <span className={styles.date}>
-                            <CalendarOutlined className={styles.metaIcon} />
-                            {event.date}
-                          </span>
-                        </div>
-
-                        <div className={styles.actionSection}>
-                          <span className={styles.price}>{event.price}</span>
-                          <Button
-                            type="primary"
-                            className={`${styles.bookButton} ${SWIPER_NO_SWIPING_CLASS}`}
-                            onClick={() => setSelectedEvent(event)}
-                          >
-                            Book
-                          </Button>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
+                  <EventCard
+                    event={toEventCardData(event)}
+                    variant="carousel"
+                    noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
+                    onBook={() => setSelectedEvent(event)}
+                  />
                 </SwiperSlide>
               ))}
             </Swiper>
