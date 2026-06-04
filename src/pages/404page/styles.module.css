@@ -70,6 +70,12 @@
   text-decoration: none;
 }
 
+.homeLink:hover,
+.homeLink:focus-visible {
+  background: var(--color-brand-primary-hover);
+  text-decoration: none;
+}
+
 @media (max-width: 640px) {
   .page {
     min-height: 420px;

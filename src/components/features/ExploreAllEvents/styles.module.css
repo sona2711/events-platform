@@ -179,22 +179,33 @@
 }
 
 .seeMoreBtn {
-  padding: 14px 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-left: 40px;
+  margin-right: 40px;
+  padding: 0 40px;
   border: none;
   border-radius: 999px;
   background-color: var(--color-burgundy-700);
   color: #ffffff;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
 }
 
-.seeMoreBtn:hover {
-  background-color: #5a0012;
-  transform: translateY(-2px);
+.seeMoreBtn:hover,
+.seeMoreBtn:focus-visible {
+  background-color: var(--color-brand-primary-hover);
+  text-decoration: none;
 }
 
 /* ── Responsive ── */

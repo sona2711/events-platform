@@ -6,6 +6,8 @@
   /* primitive palette */
   --color-burgundy-700: #770016;
   --color-burgundy-700-rgb: 119 0 22;
+  --color-burgundy-600: #a80a22;
+  --color-burgundy-600-rgb: 168 10 34;
   --color-blue-600: #2665d6;
   --color-blue-600-rgb: 38 101 214;
   --color-blue-700: #1a52b8;
@@ -19,6 +21,7 @@
 
   /* semantic aliases */
   --color-brand-primary: var(--color-burgundy-700);
+  --color-brand-primary-hover: var(--color-burgundy-600);
   --color-action-primary: var(--color-blue-600);
   --color-accent-warm: var(--color-orange-500);
   --color-accent-bright: var(--color-lime-400);

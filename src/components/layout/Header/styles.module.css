@@ -104,6 +104,11 @@
   padding: 12px 24px;
 }
 
+.authLinkFilled:hover,
+.authLinkFilled:focus-visible {
+  background: var(--color-brand-primary-hover);
+}
+
 .menuToggle:global(.ant-btn) {
   display: none;
 }
@@ -154,8 +159,9 @@
   opacity: 0.7;
 }
 
-.logoutButton:hover:not(:disabled) {
-  background: #5c0012;
+.logoutButton:hover:not(:disabled),
+.logoutButton:focus-visible:not(:disabled) {
+  background: var(--color-brand-primary-hover);
 }
 
 @media (max-width: 820px) {
