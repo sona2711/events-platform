@@ -1,7 +1,7 @@
-import feastImage from '@/assets/images/kelsey-knight-udj2tD3WKsY-unsplash.jpg'
-import marathonImage from '@/assets/images/markus-spiske-RmvlD0oTsAo-unsplash.jpg'
-import jazzFestImage from '@/assets/images/simon-english-48nerZQCHgo-unsplash.jpg'
-import wineTastingImage from '@/assets/images/close-up-wine-stain-detail.jpg'
+import feastImage from '@/assets/images/ArmenianGastroFest.JPG'
+import marathonImage from '@/assets/images/HikingToGarniTemple.jpg'
+import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
+import wineTastingImage from '@/assets/images/wine-stain-detail.jpg'
 import type { CheckoutEvent, TicketSelection, TicketTier } from './types'
 
 export const CHECKOUT_EVENTS: CheckoutEvent[] = [
