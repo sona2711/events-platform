@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
   GoogleAuthProvider,
 } from 'firebase/auth'
 import { auth } from '@/lib/firebase'
@@ -49,15 +50,20 @@ export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: s
 
 export const registerWithEmail = createAsyncThunk<
   AuthUser,
-  { email: string; password: string },
+  { email: string; password: string; displayName: string },
   { rejectValue: string }
->('auth/registerWithEmail', async ({ email, password }, { rejectWithValue }) => {
+>('auth/registerWithEmail', async ({ email, password, displayName }, { rejectWithValue }) => {
   try {
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
+    const trimmedDisplayName = displayName.trim()
+
+    await updateProfile(user, { displayName: trimmedDisplayName })
+    await user.reload()
+
     return {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName: user.displayName ?? trimmedDisplayName,
       photoURL: user.photoURL,
     }
   } catch (err) {

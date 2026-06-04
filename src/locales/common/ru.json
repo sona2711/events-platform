@@ -7,7 +7,8 @@
   },
   "auth": {
     "login": "Вход",
-    "signUp": "Регистрация"
+    "signUp": "Регистрация",
+    "logout": "Выход"
   },
   "languages": {
     "label": "Язык",

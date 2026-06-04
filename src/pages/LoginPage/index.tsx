@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Alert, Button, Checkbox, Form, Input, Typography } from 'antd'
+import { Button, Checkbox, Form, Input, Typography } from 'antd'
+import { hideNotification, showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { MailOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { AuthCard } from '@/components/shared/AuthCard'
 import { AuthDivider } from '@/components/shared/AuthDivider'
@@ -9,6 +10,7 @@ import { GoogleAuthButton } from '@/components/shared/GoogleAuthButton'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearError, loginWithEmail, loginWithGoogle } from '@/store/authSlice'
 import type { LoginFormValues } from '@/types'
+import { LOGIN_NOTIFICATION_COPY } from './consts'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -18,8 +20,19 @@ export default function LoginPage() {
   const auth = useAppSelector((state) => state.auth)
 
   useEffect(() => {
+    if (!auth.error) return
+
+    showNotification({
+      title: LOGIN_NOTIFICATION_COPY.errorTitle,
+      message: auth.error,
+      variant: 'error',
+    })
+  }, [auth.error])
+
+  useEffect(() => {
     return () => {
       dispatch(clearError())
+      hideNotification()
     }
   }, [dispatch])
 
@@ -40,17 +53,11 @@ export default function LoginPage() {
         <Title level={4} className={styles.title}>
           Welcome back
         </Title>
-        <Text type="secondary" className={styles.subtitle}>
-          Sign in to your account
-        </Text>
+        <Text className={styles.subtitle}>Sign in to your account</Text>
 
         <GoogleAuthButton loading={auth.loading} onClick={handleGoogleLogin} />
 
         <AuthDivider />
-
-        {auth.error && (
-          <Alert message={auth.error} type="error" showIcon closable className={styles.alert} />
-        )}
 
         <Form layout="vertical" onFinish={handleLogin} requiredMark={false}>
           <FormItem
@@ -99,7 +106,7 @@ export default function LoginPage() {
           </FormItem>
         </Form>
 
-        <Text type="secondary" className={styles.footer}>
+        <Text className={styles.footer}>
           Don&apos;t have an account?{' '}
           <Link to="/sign-up" className={styles.link}>
             Sign up

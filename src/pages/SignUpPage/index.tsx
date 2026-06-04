@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Alert, Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd'
+import { Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd'
+import { hideNotification, showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { AuthCard } from '@/components/shared/AuthCard'
 import { AuthDivider } from '@/components/shared/AuthDivider'
 import { FormItem } from '@/components/shared/FormItem'
@@ -9,6 +10,7 @@ import { PasswordStrengthBar } from '@/components/shared/PasswordStrengthBar'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearError, loginWithGoogle, registerWithEmail } from '@/store/authSlice'
 import type { SignUpFormValues } from '@/types'
+import { SIGN_UP_NOTIFICATION_COPY } from './consts'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -19,13 +21,32 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('')
 
   useEffect(() => {
+    if (!auth.error) return
+
+    showNotification({
+      title: SIGN_UP_NOTIFICATION_COPY.errorTitle,
+      message: auth.error,
+      variant: 'error',
+    })
+  }, [auth.error])
+
+  useEffect(() => {
     return () => {
       dispatch(clearError())
+      hideNotification()
     }
   }, [dispatch])
 
   const handleRegister = async (values: SignUpFormValues) => {
-    await dispatch(registerWithEmail({ email: values.email, password: values.password }))
+    const displayName = `${values.firstName.trim()} ${values.lastName.trim()}`.trim()
+
+    await dispatch(
+      registerWithEmail({
+        email: values.email,
+        password: values.password,
+        displayName,
+      }),
+    )
   }
 
   const handleGoogleSignUp = async () => {
@@ -35,7 +56,6 @@ export default function SignUpPage() {
   return (
     <div className={styles.page}>
       <AuthCard>
-        <Text className={styles.step}>STEP 1 OF 3</Text>
         <Title level={4} className={styles.title}>
           Create your account
         </Title>
@@ -43,10 +63,6 @@ export default function SignUpPage() {
         <GoogleAuthButton loading={auth.loading} onClick={handleGoogleSignUp} />
 
         <AuthDivider />
-
-        {auth.error && (
-          <Alert message={auth.error} type="error" showIcon closable className={styles.alert} />
-        )}
 
         <Form layout="vertical" onFinish={handleRegister} requiredMark={false}>
           <Row gutter={12}>
@@ -155,7 +171,7 @@ export default function SignUpPage() {
           </FormItem>
         </Form>
 
-        <Text type="secondary" className={styles.footer}>
+        <Text className={styles.footer}>
           Already have an account?{' '}
           <Link to="/login" className={styles.link}>
             Sign in
