@@ -8,6 +8,7 @@ import { FormItem } from '@/components/shared/FormItem'
 import { GoogleAuthButton } from '@/components/shared/GoogleAuthButton'
 import { PasswordStrengthBar } from '@/components/shared/PasswordStrengthBar'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { isEmailExistsAuthError } from '@/store/authErrors'
 import { clearError, loginWithGoogle, registerWithEmail } from '@/store/authSlice'
 import type { SignUpFormValues } from '@/types'
 import { SIGN_UP_NOTIFICATION_COPY } from './consts'
@@ -24,7 +25,9 @@ export default function SignUpPage() {
     if (!auth.error) return
 
     showNotification({
-      title: SIGN_UP_NOTIFICATION_COPY.errorTitle,
+      title: isEmailExistsAuthError(auth.error)
+        ? SIGN_UP_NOTIFICATION_COPY.emailExistsTitle
+        : SIGN_UP_NOTIFICATION_COPY.errorTitle,
       message: auth.error,
       variant: 'error',
     })
