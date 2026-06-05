@@ -1,0 +1,37 @@
+.root {
+  width: 100%;
+}
+
+.placeholder {
+  width: 100%;
+}
+
+.placeholderEvents {
+  composes: placeholder;
+  min-height: 520px;
+}
+
+.placeholderWineFest {
+  composes: placeholder;
+  min-height: 480px;
+}
+
+.placeholderExplore {
+  composes: placeholder;
+  min-height: 720px;
+}
+
+.placeholderSubscribe {
+  composes: placeholder;
+  min-height: 280px;
+}
+
+@media (max-width: 820px) {
+  .placeholderEvents {
+    min-height: 460px;
+  }
+
+  .placeholderExplore {
+    min-height: 640px;
+  }
+}

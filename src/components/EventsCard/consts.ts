@@ -1,9 +1,11 @@
-import ArtImage from '@/assets/svg/Art.png'
-import HikingImage from '@/assets/svg/Hiking.png'
-import JazzImage from '@/assets/svg/JazzNight.png'
-import TechImage from '@/assets/svg/TechSummit.png'
-import WineImage from '@/assets/svg/WineTasting.png'
-import type { EventCardItem, SliderBreakpointConfig } from './types'
+import ArtImage from '@/assets/svg/Art.webp'
+import HikingImage from '@/assets/svg/Hiking.webp'
+import JazzImage from '@/assets/svg/JazzNight.webp'
+import TechImage from '@/assets/svg/TechSummit.webp'
+import WineImage from '@/assets/svg/WineTasting.webp'
+import { mapEventsToCardData } from '@/components/features/EventCard/utils'
+import type { ListingEventInput } from '@/components/features/EventCard/types'
+import type { SliderBreakpointConfig } from './types'
 
 export const EVENTS_PREV_BUTTON_CLASS = 'events-prev-button'
 export const EVENTS_NEXT_BUTTON_CLASS = 'events-next-button'
@@ -17,7 +19,7 @@ export const EVENTS_LAYOUT = {
   cardGap: 24,
 } as const
 
-export const EVENTS: EventCardItem[] = [
+export const EVENTS: ListingEventInput[] = [
   {
     id: 1,
     title: 'Jazz Night at Cascade',
@@ -64,6 +66,10 @@ export const EVENTS: EventCardItem[] = [
     image: ArtImage,
   },
 ]
+
+export const EVENTS_CARD_DATA = mapEventsToCardData(EVENTS)
+
+export const EVENT_BY_ID = new Map(EVENTS.map((event) => [String(event.id), event]))
 
 export const SLIDER_BREAKPOINTS: SliderBreakpointConfig = {
   0: {

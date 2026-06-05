@@ -5,6 +5,8 @@
   transform: translateX(-50%);
   background-color: #f28906;
   padding: 80px var(--layout-padding-inline);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
 }
 
 .layout {

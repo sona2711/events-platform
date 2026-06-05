@@ -1,6 +1,8 @@
 .section {
   background: var(--color-surface-page);
   padding: var(--layout-padding-inline);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 280px;
 }
 
 .banner {

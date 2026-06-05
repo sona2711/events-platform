@@ -9,10 +9,12 @@
   background-color: #fff;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
-    url('../../../assets/images/wine-stain-detail.jpg');
+    url('../../../assets/images/wine-stain-detail.webp');
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 710px;
 }
 
 .layout {

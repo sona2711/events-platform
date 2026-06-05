@@ -1,17 +1,52 @@
-import { EventsGrid } from '@/components/EventsCard'
+import { lazy, Suspense } from 'react'
 import { Hero } from '@/components/Hero'
-import { SubscribeBanner } from '@/components/features/SubscribeBanner'
-import { WineFestHero } from '@/components/features/WineFestHero'
-import { ExploreAllEvents } from '@/components/features/ExploreAllEvents'
+import { LazySection } from '@/components/_shared/LazySection'
+import { SectionSkeleton } from '@/components/_shared/SectionSkeleton'
+
+const EventsGrid = lazy(() =>
+  import('@/components/EventsCard').then((module) => ({ default: module.EventsGrid })),
+)
+
+const WineFestHero = lazy(() =>
+  import('@/components/features/WineFestHero').then((module) => ({ default: module.WineFestHero })),
+)
+
+const ExploreAllEvents = lazy(() =>
+  import('@/components/features/ExploreAllEvents').then((module) => ({
+    default: module.ExploreAllEvents,
+  })),
+)
+
+const SubscribeBanner = lazy(() =>
+  import('@/components/features/SubscribeBanner').then((module) => ({
+    default: module.SubscribeBanner,
+  })),
+)
 
 export function MainPage() {
   return (
     <>
       <Hero />
-      <EventsGrid />
-      <WineFestHero />
-      <ExploreAllEvents />
-      <SubscribeBanner />
+      <LazySection placeholderSize="events">
+        <Suspense fallback={<SectionSkeleton size="events" />}>
+          <EventsGrid />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholderSize="wineFest">
+        <Suspense fallback={<SectionSkeleton size="wineFest" />}>
+          <WineFestHero />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholderSize="explore">
+        <Suspense fallback={<SectionSkeleton size="explore" />}>
+          <ExploreAllEvents />
+        </Suspense>
+      </LazySection>
+      <LazySection placeholderSize="subscribe">
+        <Suspense fallback={<SectionSkeleton size="subscribe" />}>
+          <SubscribeBanner />
+        </Suspense>
+      </LazySection>
     </>
   )
 }

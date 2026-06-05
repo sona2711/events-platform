@@ -1,14 +1,26 @@
-import { useState } from 'react'
+import { lazy, Suspense, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { EventCard } from '@/components/features/EventCard'
-import { toEventCardData } from '@/components/features/EventCard/utils'
-import { TicketPaymentModal } from '@/components/features/TicketPaymentModal'
-import { EXPLORE_EVENTS } from './consts'
+import type { ListingEventInput } from '@/components/features/EventCard/types'
+import { EXPLORE_EVENT_BY_ID, EXPLORE_EVENTS_CARD_DATA } from './consts'
 import styles from './styles.module.css'
-import type { ExploreEventItem } from './consts'
+
+const TicketPaymentModal = lazy(() =>
+  import('@/components/features/TicketPaymentModal').then((module) => ({
+    default: module.TicketPaymentModal,
+  })),
+)
 
 export function ExploreAllEvents() {
-  const [selectedEvent, setSelectedEvent] = useState<ExploreEventItem | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
+
+  const handleBook = useCallback((eventId: string) => {
+    setSelectedEvent(EXPLORE_EVENT_BY_ID.get(eventId) ?? null)
+  }, [])
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedEvent(null)
+  }, [])
 
   return (
     <>
@@ -19,12 +31,8 @@ export function ExploreAllEvents() {
           </h2>
 
           <div className={styles.grid}>
-            {EXPLORE_EVENTS.map((event) => (
-              <EventCard
-                key={event.id}
-                event={toEventCardData(event)}
-                onBook={() => setSelectedEvent(event)}
-              />
+            {EXPLORE_EVENTS_CARD_DATA.map((event) => (
+              <EventCard key={event.id} event={event} onBook={handleBook} />
             ))}
           </div>
 
@@ -36,11 +44,11 @@ export function ExploreAllEvents() {
         </div>
       </section>
 
-      <TicketPaymentModal
-        event={selectedEvent}
-        open={selectedEvent !== null}
-        onClose={() => setSelectedEvent(null)}
-      />
+      {selectedEvent !== null ? (
+        <Suspense fallback={null}>
+          <TicketPaymentModal event={selectedEvent} open onClose={handleCloseModal} />
+        </Suspense>
+      ) : null}
     </>
   )
 }

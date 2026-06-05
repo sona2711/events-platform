@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import wineImg from '@/assets/images/wine.jpg'
-import rectangleStain from '@/assets/images/Rectangle 1.png'
+import wineImg from '@/assets/images/wine.webp'
+import rectangleStain from '@/assets/images/Rectangle 1.webp'
 import styles from './styles.module.css'
 
 const TARGET = new Date('2026-06-10T16:00:00')
+const COUNTDOWN_INTERVAL_MS = 60_000
 
 function getTimeLeft() {
   const diff = TARGET.getTime() - Date.now()
@@ -22,7 +23,7 @@ export function WineFestHero() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)
 
   useEffect(() => {
-    const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    const id = setInterval(() => setTimeLeft(getTimeLeft()), COUNTDOWN_INTERVAL_MS)
     return () => clearInterval(id)
   }, [])
 
@@ -55,8 +56,21 @@ export function WineFestHero() {
 
         <div className={styles.right}>
           <div className={styles.imageFrame}>
-            <img src={wineImg} alt="Armenia Wine Fest 2026" className={styles.wineImg} />
-            <img src={rectangleStain} alt="" aria-hidden="true" className={styles.stain} />
+            <img
+              src={wineImg}
+              alt="Armenia Wine Fest 2026"
+              className={styles.wineImg}
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src={rectangleStain}
+              alt=""
+              aria-hidden="true"
+              className={styles.stain}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
