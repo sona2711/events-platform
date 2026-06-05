@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { saveReminder } from '@/components/features/UpcomingEventAlert/utils'
 import { ProfileDetailsForm } from '@/components/features/ProfileDetailsForm'
@@ -15,6 +16,7 @@ import styles from './styles.module.css'
 
 export const UserProfilePage = () => {
   const { t } = useTranslation('profile')
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const profile = useAppSelector(selectProfile)
   const { profileNavItemIds, upcomingBookings, pastBookings, cancelledBookings, languageOptions } =
@@ -47,6 +49,10 @@ export const UserProfilePage = () => {
     })
   }
 
+  const handlePayTickets = (eventId: string) => {
+    navigate(`/checkout/${eventId}`)
+  }
+
   const navItems = useMemo(
     () =>
       profileNavItemIds.map((id) => ({
@@ -64,6 +70,7 @@ export const UserProfilePage = () => {
             upcomingBookings={upcomingBookings}
             pastBookings={pastBookings}
             cancelledBookings={cancelledBookings}
+            onPayTickets={handlePayTickets}
           />
         )
       case 'settings':

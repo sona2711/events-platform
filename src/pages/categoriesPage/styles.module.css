@@ -6,7 +6,7 @@
   gap: 32px;
   margin: 0 calc(-1 * var(--layout-gutter));
   max-width: none;
-  padding: 96px var(--layout-gutter) 96px;
+  padding: 32px var(--layout-gutter) 96px;
   width: calc(100% + 2 * var(--layout-gutter));
 }
 
@@ -17,7 +17,6 @@
 }
 
 .tabsSection {
-  margin-top: 48px;
   max-width: none;
   min-width: 0;
   overflow: hidden;
@@ -42,6 +41,7 @@
 @media (max-width: 1024px) {
   .page {
     gap: 28px;
+    padding-top: 28px;
   }
 }
 
@@ -58,12 +58,13 @@
 @media (max-width: 767px) {
   .page {
     gap: 24px;
-    padding-block: 96px;
+    padding-block: 24px 96px;
   }
 }
 
 @media (max-width: 480px) {
   .page {
     gap: 20px;
+    padding-top: 20px;
   }
 }

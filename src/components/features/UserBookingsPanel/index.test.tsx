@@ -76,6 +76,28 @@ describe('UserBookingsPanel', () => {
     expect(screen.queryByText('Armenian Wine Tasting')).not.toBeInTheDocument()
   })
 
+  it('calls onPayTickets with booking eventId when pay button is clicked', async () => {
+    const user = userEvent.setup()
+    const onPayTickets = jest.fn()
+
+    render(
+      <I18nextProvider i18n={i18n}>
+        <ConfigProvider>
+          <UserBookingsPanel
+            upcomingBookings={upcomingBookings}
+            pastBookings={pastBookings}
+            cancelledBookings={cancelledBookings}
+            onPayTickets={onPayTickets}
+          />
+        </ConfigProvider>
+      </I18nextProvider>,
+    )
+
+    await user.click(screen.getByRole('button', { name: profileEn.bookings.actions.payTickets }))
+
+    expect(onPayTickets).toHaveBeenCalledWith('event-jazz-fest')
+  })
+
   it('shows past booking actions when the past tab is selected', async () => {
     const user = userEvent.setup()
     renderPanel()

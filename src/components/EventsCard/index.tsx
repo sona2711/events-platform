@@ -1,26 +1,39 @@
-import { useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useRef, useState } from 'react'
 import styles from './styles.module.css'
 import { EventCard } from '@/components/features/EventCard'
-import { toEventCardData } from '@/components/features/EventCard/utils'
-import { TicketPaymentModal } from '@/components/features/TicketPaymentModal'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperInstance } from 'swiper'
+import type { ListingEventInput } from '@/components/features/EventCard/types'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
-  EVENTS,
+  EVENTS_CARD_DATA,
+  EVENT_BY_ID,
   EVENTS_NEXT_BUTTON_CLASS,
   EVENTS_PREV_BUTTON_CLASS,
   SLIDER_BREAKPOINTS,
   SWIPER_NO_SWIPING_CLASS,
 } from './consts'
-import type { EventCardItem } from './types'
+
+const TicketPaymentModal = lazy(() =>
+  import('@/components/features/TicketPaymentModal').then((module) => ({
+    default: module.TicketPaymentModal,
+  })),
+)
 
 export function EventsGrid() {
-  const [selectedEvent, setSelectedEvent] = useState<EventCardItem | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
+
+  const handleBook = useCallback((eventId: string) => {
+    setSelectedEvent(EVENT_BY_ID.get(eventId) ?? null)
+  }, [])
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedEvent(null)
+  }, [])
 
   const bindCarouselNavigation = (swiper: SwiperInstance) => {
     const navigation = swiper.params.navigation
@@ -85,13 +98,13 @@ export function EventsGrid() {
               onInit={bindCarouselNavigation}
               className={styles.mySwiper}
             >
-              {EVENTS.map((event) => (
+              {EVENTS_CARD_DATA.map((event) => (
                 <SwiperSlide key={event.id} className={styles.slide}>
                   <EventCard
-                    event={toEventCardData(event)}
+                    event={event}
                     variant="carousel"
                     noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
-                    onBook={() => setSelectedEvent(event)}
+                    onBook={handleBook}
                   />
                 </SwiperSlide>
               ))}
@@ -100,11 +113,11 @@ export function EventsGrid() {
         </div>
       </section>
 
-      <TicketPaymentModal
-        event={selectedEvent}
-        open={selectedEvent !== null}
-        onClose={() => setSelectedEvent(null)}
-      />
+      {selectedEvent !== null ? (
+        <Suspense fallback={null}>
+          <TicketPaymentModal event={selectedEvent} open onClose={handleCloseModal} />
+        </Suspense>
+      ) : null}
     </>
   )
 }

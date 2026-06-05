@@ -12,4 +12,19 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/swiper')) {
+            return 'swiper'
+          }
+
+          if (id.includes('node_modules/antd') || id.includes('node_modules/@ant-design')) {
+            return 'antd-vendor'
+          }
+        },
+      },
+    },
+  },
 })

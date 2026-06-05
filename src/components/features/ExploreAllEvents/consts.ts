@@ -1,21 +1,13 @@
-import modernArtImage from '@/assets/images/modernArtsExhibition.jpg'
-import classicalNightImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
-import gastroFestImage from '@/assets/images/ArmenianGastroFest.JPG'
-import dilijanImage from '@/assets/images/DilijanWeekendRetreat.JPG'
-import startupImage from '@/assets/images/StratupPitchDeckReport.png'
-import hikingImage from '@/assets/images/HikingToGarniTemple.jpg'
+import modernArtImage from '@/assets/images/modernArtsExhibition.webp'
+import classicalNightImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
+import gastroFestImage from '@/assets/images/ArmenianGastroFest.webp'
+import dilijanImage from '@/assets/images/DilijanWeekendRetreat.webp'
+import startupImage from '@/assets/images/StratupPitchDeckReport.webp'
+import hikingImage from '@/assets/images/HikingToGarniTemple.webp'
+import { mapEventsToCardData } from '@/components/features/EventCard/utils'
+import type { ListingEventInput } from '@/components/features/EventCard/types'
 
-export type ExploreEventItem = {
-  id: number
-  title: string
-  category: string
-  location: string
-  date: string
-  price: string
-  image: string
-}
-
-export const EXPLORE_EVENTS: ExploreEventItem[] = [
+export const EXPLORE_EVENTS: ListingEventInput[] = [
   {
     id: 1,
     title: 'Modern Art Exhibition',
@@ -71,3 +63,7 @@ export const EXPLORE_EVENTS: ExploreEventItem[] = [
     image: hikingImage,
   },
 ]
+
+export const EXPLORE_EVENTS_CARD_DATA = mapEventsToCardData(EXPLORE_EVENTS)
+
+export const EXPLORE_EVENT_BY_ID = new Map(EXPLORE_EVENTS.map((event) => [String(event.id), event]))

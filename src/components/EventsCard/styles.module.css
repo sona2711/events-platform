@@ -13,6 +13,8 @@
   padding: var(--events-section-padding-top) var(--events-section-padding-inline)
     var(--events-section-padding-bottom);
   color: white;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
 }
 
 .layout {

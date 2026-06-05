@@ -43,6 +43,12 @@ const UserProfilePage = lazy(() =>
   })),
 )
 
+const CheckoutPage = lazy(() =>
+  import('@/pages/CheckoutPage').then((module) => ({
+    default: module.CheckoutPage,
+  })),
+)
+
 const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -59,7 +65,10 @@ export const appRoutes: RouteObject[] = [
       { path: 'categories', element: createElement(CategoriesPage) },
       {
         element: createElement(ProtectedRoute),
-        children: [{ path: 'profile', element: createElement(UserProfilePage) }],
+        children: [
+          { path: 'profile', element: createElement(UserProfilePage) },
+          { path: 'checkout/:eventId', element: createElement(CheckoutPage) },
+        ],
       },
     ],
   },

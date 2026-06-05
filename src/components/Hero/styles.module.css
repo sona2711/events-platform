@@ -20,7 +20,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  background-image: url('../../assets/svg/fireworks.png');
+  background-image: url('../../assets/svg/fireworks.webp');
   background-size: cover;
   background-position: center;
   opacity: 0.2;

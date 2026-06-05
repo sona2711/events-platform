@@ -362,28 +362,24 @@
 }
 
 .applyButton {
-  background: var(--color-blue-600);
+  background-color: var(--color-action-primary);
   border: none;
   border-radius: 999px;
-  color: #ffffff;
+  color: var(--color-text-on-brand);
   cursor: pointer;
   flex: 1;
   font-size: 15px;
   font-weight: 600;
   padding: 13px 20px;
-  transition:
-    background 0.15s,
-    box-shadow 0.15s;
+  transition: background-color 0.2s ease;
 }
 
 .applyButton:hover {
-  background: color-mix(in srgb, var(--color-blue-600) 84%, white);
-  box-shadow: 0 4px 14px rgb(var(--color-blue-600-rgb) / 0.22);
+  background-color: var(--color-blue-700);
 }
 
 .applyButton:active {
-  background: var(--color-blue-700);
-  box-shadow: 0 2px 8px rgb(var(--color-blue-600-rgb) / 0.18);
+  background-color: var(--color-blue-800);
 }
 
 .resetButton {

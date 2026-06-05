@@ -1,0 +1,131 @@
+{
+  "steps": {
+    "tickets": {
+      "title": "Выбор билетов",
+      "aria": "Выбор билетов"
+    },
+    "contact": {
+      "title": "Контактная информация",
+      "aria": "Контактная информация"
+    },
+    "payment": {
+      "title": "Оплата",
+      "aria": "Платёжные данные"
+    }
+  },
+  "event": {
+    "jazzFest": {
+      "title": "Джазовый фестиваль в Ереване 2026",
+      "location": "Комплекс Каскад"
+    },
+    "feast": {
+      "title": "Традиционный армянский праздник",
+      "location": "Площадь Республики"
+    },
+    "marathon": {
+      "title": "Ереванский марафон 2026",
+      "location": "Северный проспект"
+    },
+    "wineTasting": {
+      "title": "Дегустация армянских вин",
+      "location": "Улица Сарьяна"
+    }
+  },
+  "tickets": {
+    "jazzFest": {
+      "generalAdmission": {
+        "name": "Общий вход",
+        "description": "Стандартный вход и доступ на танцпол."
+      },
+      "vipBackstage": {
+        "name": "VIP Backstage Pass",
+        "description": "Встреча с группой + 2 бесплатных напитка."
+      }
+    },
+    "feast": {
+      "standardSeat": {
+        "name": "Стандартное место",
+        "description": "Зарезервированное место с полным ужином."
+      },
+      "premiumTable": {
+        "name": "Премиум-стол",
+        "description": "Стол в первом ряду для компании до 4 гостей."
+      }
+    },
+    "marathon": {
+      "runner": {
+        "name": "Участие бегуна",
+        "description": "Стартовый номер, чип хронометража и медаль финишёра."
+      },
+      "spectator": {
+        "name": "Билет зрителя",
+        "description": "Доступ к зонам просмотра вдоль трассы."
+      }
+    },
+    "wineTasting": {
+      "tastingPass": {
+        "name": "Дегустационный билет",
+        "description": "6 региональных вин с пояснениями дегустатора."
+      },
+      "sommelier": {
+        "name": "Опыт с сомелье",
+        "description": "Индивидуальная дегустация с сертифицированным сомелье."
+      }
+    },
+    "add": "Добавить",
+    "decreaseQuantity": "Уменьшить количество: {{ticket}}",
+    "increaseQuantity": "Увеличить количество: {{ticket}}"
+  },
+  "contact": {
+    "fields": {
+      "fullName": "Полное имя",
+      "email": "Электронная почта"
+    },
+    "validation": {
+      "fullNameRequired": "Введите полное имя",
+      "fullNameMin": "Имя должно содержать не менее 2 символов",
+      "emailRequired": "Введите электронную почту",
+      "emailInvalid": "Введите корректный адрес электронной почты"
+    }
+  },
+  "payment": {
+    "fields": {
+      "cardNumber": "Номер карты",
+      "expiryDate": "Срок действия",
+      "cvv": "CVV"
+    },
+    "placeholders": {
+      "cardNumber": "1234 5678 9012 3456",
+      "expiryDate": "ММ/ГГ",
+      "cvv": "***"
+    },
+    "validation": {
+      "cardNumberRequired": "Введите номер карты",
+      "cardNumberInvalid": "Введите корректный номер карты",
+      "expiryRequired": "Введите срок действия",
+      "expiryInvalid": "Используйте формат ММ/ГГ",
+      "cvvRequired": "Введите CVV",
+      "cvvInvalid": "Введите корректный CVV"
+    },
+    "secureNote": "Безопасная оплата с 256-битным SSL-шифрованием"
+  },
+  "summary": {
+    "aria": "Сводка заказа",
+    "serviceFee": "Сервисный сбор",
+    "processingFee": "Комиссия за обработку",
+    "total": "Итого",
+    "placeOrder": "Оформить заказ",
+    "lineItem": "{{name}} (x{{count}})"
+  },
+  "messages": {
+    "orderSuccess": "Ваш заказ успешно оформлен!",
+    "orderError": "Не удалось оформить заказ. Попробуйте снова.",
+    "eventNotFound": "Оформление для этого события недоступно."
+  },
+  "defaults": {
+    "contact": {
+      "fullName": "Алекс Риверс",
+      "email": "alex.rivers@example.com"
+    }
+  }
+}

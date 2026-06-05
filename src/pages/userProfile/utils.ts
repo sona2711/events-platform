@@ -29,13 +29,14 @@ const getUpcomingBookings = (bookings: UserBooking[], now = new Date()) =>
     )
     .sort((a, b) => getBookingTime(a) - getBookingTime(b))
 
-const getPastBookings = (bookings: UserBooking[], now = new Date()) =>
+export const getPastBookings = (bookings: UserBooking[], now = new Date()) =>
   bookings
     .filter(
       (booking) =>
         booking.status !== 'cancelled' &&
         (booking.status === 'past' || getBookingTime(booking) < now.getTime()),
     )
+    .map((booking) => ({ ...booking, status: 'past' as const }))
     .sort((a, b) => getBookingTime(b) - getBookingTime(a))
 
 const getCancelledBookings = (bookings: UserBooking[]) =>

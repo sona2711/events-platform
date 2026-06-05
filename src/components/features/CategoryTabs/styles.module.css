@@ -37,7 +37,12 @@
   font-size: 22px;
   height: 56px;
   justify-content: center;
+  transition: background-color 0.2s ease;
   width: 56px;
+}
+
+.tabButton:hover:not(.tabButtonActive) .iconCircle {
+  background: var(--color-surface-muted);
 }
 
 .label {

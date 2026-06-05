@@ -4,9 +4,12 @@ import userEvent from '@testing-library/user-event'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import '@/i18n'
 import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
+import checkoutEn from '@/locales/checkout/en.json'
+import { CheckoutPage } from '@/pages/CheckoutPage'
 import { profileReducer } from '@/store/profile'
 import type { UserProfile } from './types'
 import { UserProfilePage } from './index'
@@ -40,7 +43,12 @@ const renderPage = (profile: UserProfile = loggedInProfile) => {
       <Provider store={store}>
         <I18nextProvider i18n={i18n}>
           <ConfigProvider>
-            <UserProfilePage />
+            <MemoryRouter initialEntries={['/profile']}>
+              <Routes>
+                <Route path="/profile" element={<UserProfilePage />} />
+                <Route path="/checkout/:eventId" element={<CheckoutPage />} />
+              </Routes>
+            </MemoryRouter>
           </ConfigProvider>
         </I18nextProvider>
       </Provider>,
@@ -93,6 +101,17 @@ describe('UserProfilePage', () => {
       screen.getByRole('heading', { name: profileEn.sections.saved.title }),
     ).toBeInTheDocument()
     expect(screen.queryByLabelText(profileEn.bookings.aria)).not.toBeInTheDocument()
+  })
+
+  it('navigates to checkout with booking eventId when pay tickets is clicked', async () => {
+    const user = userEvent.setup()
+    renderPage()
+
+    await user.click(screen.getByRole('button', { name: profileEn.bookings.actions.payTickets }))
+
+    await waitFor(() => {
+      expect(screen.getByText(checkoutEn.event.jazzFest.title)).toBeInTheDocument()
+    })
   })
 
   it('updates avatar after selecting a new image', async () => {
