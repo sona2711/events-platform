@@ -1,0 +1,131 @@
+{
+  "steps": {
+    "tickets": {
+      "title": "Ticket Selection",
+      "aria": "Ticket selection"
+    },
+    "contact": {
+      "title": "Contact Information",
+      "aria": "Contact information"
+    },
+    "payment": {
+      "title": "Payment",
+      "aria": "Payment details"
+    }
+  },
+  "event": {
+    "jazzFest": {
+      "title": "Yerevan Jazz Fest 2026",
+      "location": "Cascade Complex"
+    },
+    "feast": {
+      "title": "Traditional Armenian Feast",
+      "location": "Republic Square"
+    },
+    "marathon": {
+      "title": "Yerevan Marathon 2026",
+      "location": "Northern Avenue"
+    },
+    "wineTasting": {
+      "title": "Armenian Wine Tasting",
+      "location": "Saryan Street"
+    }
+  },
+  "tickets": {
+    "jazzFest": {
+      "generalAdmission": {
+        "name": "General Admission",
+        "description": "Includes standard entry and floor access."
+      },
+      "vipBackstage": {
+        "name": "VIP Backstage Pass",
+        "description": "Meet the band + 2 complimentary drinks."
+      }
+    },
+    "feast": {
+      "standardSeat": {
+        "name": "Standard Seat",
+        "description": "Reserved seat with full dinner service."
+      },
+      "premiumTable": {
+        "name": "Premium Table",
+        "description": "Front-row table for up to 4 guests."
+      }
+    },
+    "marathon": {
+      "runner": {
+        "name": "Runner Entry",
+        "description": "Official race bib, timing chip, and finisher medal."
+      },
+      "spectator": {
+        "name": "Spectator Pass",
+        "description": "Access to viewing areas along the course."
+      }
+    },
+    "wineTasting": {
+      "tastingPass": {
+        "name": "Tasting Pass",
+        "description": "Sample 6 regional wines with guided notes."
+      },
+      "sommelier": {
+        "name": "Sommelier Experience",
+        "description": "Private tasting session with a certified sommelier."
+      }
+    },
+    "add": "Add",
+    "decreaseQuantity": "Decrease quantity for {{ticket}}",
+    "increaseQuantity": "Increase quantity for {{ticket}}"
+  },
+  "contact": {
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address"
+    },
+    "validation": {
+      "fullNameRequired": "Enter your full name",
+      "fullNameMin": "Name must be at least 2 characters",
+      "emailRequired": "Enter your email address",
+      "emailInvalid": "Enter a valid email address"
+    }
+  },
+  "payment": {
+    "fields": {
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV"
+    },
+    "placeholders": {
+      "cardNumber": "1234 5678 9012 3456",
+      "expiryDate": "MM/YY",
+      "cvv": "***"
+    },
+    "validation": {
+      "cardNumberRequired": "Enter your card number",
+      "cardNumberInvalid": "Enter a valid card number",
+      "expiryRequired": "Enter expiry date",
+      "expiryInvalid": "Use MM/YY format",
+      "cvvRequired": "Enter CVV",
+      "cvvInvalid": "Enter a valid CVV"
+    },
+    "secureNote": "Secure 256-bit SSL Encrypted Payment"
+  },
+  "summary": {
+    "aria": "Order summary",
+    "serviceFee": "Service Fee",
+    "processingFee": "Processing Fee",
+    "total": "Total",
+    "placeOrder": "Place Order",
+    "lineItem": "{{name}} (x{{count}})"
+  },
+  "messages": {
+    "orderSuccess": "Your order was placed successfully!",
+    "orderError": "Unable to place your order. Please try again.",
+    "eventNotFound": "This event checkout is not available."
+  },
+  "defaults": {
+    "contact": {
+      "fullName": "Alex Rivers",
+      "email": "alex.rivers@example.com"
+    }
+  }
+}

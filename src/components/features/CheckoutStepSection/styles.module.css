@@ -1,0 +1,58 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.header {
+  min-width: 0;
+}
+
+.stepBadge:global(.ant-avatar) {
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+}
+
+.title:global(.ant-typography) {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.content {
+  min-width: 0;
+  width: 100%;
+}
+
+.pending .stepBadge:global(.ant-avatar) {
+  background: rgb(var(--color-burgundy-700-rgb) / 8%);
+  color: var(--color-text-secondary);
+}
+
+.pending .title:global(.ant-typography) {
+  color: var(--color-text-secondary);
+}
+
+.active .stepBadge:global(.ant-avatar) {
+  background: var(--color-action-primary);
+  color: var(--color-text-on-brand);
+}
+
+.active .title:global(.ant-typography) {
+  color: var(--color-text-primary);
+}
+
+.completed .stepBadge:global(.ant-avatar) {
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+}
+
+.completed .title:global(.ant-typography) {
+  color: var(--color-text-primary);
+}

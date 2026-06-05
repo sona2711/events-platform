@@ -1,0 +1,8 @@
+.secureNote {
+  margin-top: 4px;
+}
+
+.secureNoteText:global(.ant-typography) {
+  font-size: 12px;
+  margin: 0;
+}

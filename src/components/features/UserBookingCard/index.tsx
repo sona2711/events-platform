@@ -35,7 +35,7 @@ export const UserBookingCard = ({
 
     return (
       <div className={styles.actions}>
-        <Button type="primary" onClick={() => onPayTickets?.(booking.id)}>
+        <Button type="primary" onClick={() => onPayTickets?.(booking.eventId)}>
           {t('bookings.actions.payTickets')}
         </Button>
         <Button onClick={() => onCancel?.(booking.id)}>{t('bookings.actions.cancel')}</Button>

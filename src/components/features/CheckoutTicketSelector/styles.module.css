@@ -1,0 +1,128 @@
+.list {
+  min-width: 0;
+  width: 100%;
+}
+
+.card:global(.ant-card) {
+  background: var(--color-surface-card);
+  border-color: rgb(var(--color-burgundy-700-rgb) / 8%);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgb(var(--color-burgundy-700-rgb) / 4%);
+}
+
+.card:global(.ant-card) :global(.ant-card-body) {
+  padding: 20px 24px;
+}
+
+.cardInner {
+  min-width: 0;
+  width: 100%;
+}
+
+.details {
+  flex: 1;
+  min-width: 0;
+}
+
+.name:global(.ant-typography) {
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.description:global(.ant-typography) {
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.price:global(.ant-typography) {
+  color: var(--color-text-primary);
+  font-size: 15px;
+  margin: 8px 0 0;
+}
+
+.actions {
+  flex-shrink: 0;
+}
+
+.actions :global(.ant-btn) {
+  border-radius: 999px;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 600;
+  height: 40px;
+  min-width: 88px;
+  padding: 0 24px;
+}
+
+.actions :global(.ant-btn-default) {
+  background: var(--color-surface-card);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.actions :global(.ant-btn-default:hover),
+.actions :global(.ant-btn-default:focus) {
+  background: rgb(38 101 214 / 8%);
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.quantityControl {
+  background: rgb(38 101 214 / 10%);
+  border-radius: 999px;
+  gap: 4px;
+  min-height: 40px;
+  padding: 4px 8px;
+}
+
+.quantityControl :global(.ant-btn) {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-action-primary);
+  display: inline-flex;
+  font-size: 18px;
+  font-weight: 600;
+  height: 32px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 32px;
+  padding: 0;
+  width: 32px;
+}
+
+.quantityControl :global(.ant-btn:hover:not(:disabled)) {
+  background: rgb(38 101 214 / 12%);
+  color: var(--color-action-primary);
+}
+
+.quantityControl :global(.ant-btn:disabled) {
+  opacity: 0.4;
+}
+
+.quantityValue:global(.ant-typography) {
+  color: var(--color-action-primary);
+  font-size: 16px;
+  min-width: 28px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .card:global(.ant-card) :global(.ant-card-body) {
+    padding: 16px 20px;
+  }
+
+  .cardInner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
