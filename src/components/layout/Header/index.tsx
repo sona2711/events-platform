@@ -81,7 +81,12 @@ export function Header() {
             <LanguageSwitcher />
             {user ? (
               <>
-                <div className={styles.userBlock}>
+                <Link
+                  className={styles.userBlock}
+                  to="/profile"
+                  onClick={closeMobile}
+                  aria-label={t('header.openProfile', { name: getUserDisplayName(user) })}
+                >
                   <img
                     className={styles.avatar}
                     src={getUserAvatarUrl(user)}
@@ -90,7 +95,7 @@ export function Header() {
                     height={40}
                   />
                   <span className={styles.userName}>{getUserDisplayName(user)}</span>
-                </div>
+                </Link>
                 <button
                   type="button"
                   className={styles.logoutButton}

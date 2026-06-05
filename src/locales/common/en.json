@@ -21,7 +21,8 @@
   },
   "header": {
     "toggleMenu": "Open navigation menu",
-    "closeMenu": "Close navigation menu"
+    "closeMenu": "Close navigation menu",
+    "openProfile": "Open profile for {{name}}"
   },
   "adminNav": {
     "dashboard": "Dashboard",

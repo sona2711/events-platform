@@ -21,7 +21,8 @@
   },
   "header": {
     "toggleMenu": "Открыть меню навигации",
-    "closeMenu": "Закрыть меню навигации"
+    "closeMenu": "Закрыть меню навигации",
+    "openProfile": "Открыть профиль {{name}}"
   },
   "adminNav": {
     "dashboard": "Дашборд",
