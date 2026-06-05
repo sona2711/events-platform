@@ -63,7 +63,7 @@ describe('profileReducer hydration', () => {
       ...getDefaultProfile(),
       id: authUser.uid,
       fullName: 'Sona Mkrtchyan',
-      email: authUser.email,
+      email: authUser.email ?? '',
       avatarUrl: authUser.photoURL ?? '',
       location: '',
       preferredLanguage: 'en' as const,
