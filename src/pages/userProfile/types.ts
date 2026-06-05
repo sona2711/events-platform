@@ -65,6 +65,7 @@ export type ProfileFormValues = {
   fullName: string
   email: string
   phone: string
+  location: string
   preferredLanguage: SupportedLanguage
 }
 

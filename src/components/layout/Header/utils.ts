@@ -1,5 +1,5 @@
 import type { AuthUser } from '@/types'
-import defaultAvatar from '@/assets/images/avatar.jpg'
+import defaultAvatar from '@/assets/images/avatar.svg'
 
 export const getUserDisplayName = (user: AuthUser): string => {
   const trimmedName = user.displayName?.trim()

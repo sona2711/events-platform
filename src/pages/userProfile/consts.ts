@@ -1,5 +1,5 @@
 import type { ProfileNavItem, UserBookingSeed } from './types'
-import avatar from '@/assets/images/avatar.jpg'
+import avatar from '@/assets/images/avatar.svg'
 import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
 import feastImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.jpg'
 import marathonImage from '@/assets/images/HikingToGarniTemple.jpg'
