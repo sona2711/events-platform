@@ -212,6 +212,7 @@
   .form {
     flex-direction: column;
     flex-basis: auto;
+    gap: 16px;
     height: auto;
     max-width: none;
     width: 100%;
@@ -219,8 +220,8 @@
 
   .input {
     flex-basis: auto;
-    height: 44px;
-    padding: 12px 24px;
+    height: 48px;
+    padding: 0 24px;
     text-align: center;
     width: 100%;
   }
@@ -232,7 +233,7 @@
 
   .button {
     flex-basis: auto;
-    height: 44px;
+    height: 48px;
     padding: 0 24px;
     width: 100%;
   }

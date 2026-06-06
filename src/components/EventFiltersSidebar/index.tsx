@@ -1,4 +1,5 @@
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { CATEGORIES, LOCATIONS, MAX_PRICE, MIN_PRICE, PRICE_STEP } from './consts'
 import type { EventFiltersSidebarProps } from './types'
@@ -303,12 +304,24 @@ export const EventFiltersSidebar = ({
       </section>
 
       <div className={styles.actions}>
-        <button type="button" className={styles.resetButton} onClick={handleReset}>
+        <Button
+          htmlType="button"
+          variant="outlined"
+          color="primary"
+          className={styles.resetButton}
+          onClick={handleReset}
+        >
           Reset
-        </button>
-        <button type="button" className={styles.applyButton} onClick={() => onApply()}>
+        </Button>
+        <Button
+          htmlType="button"
+          variant="solid"
+          color="primary"
+          className={styles.applyButton}
+          onClick={() => onApply()}
+        >
           Apply Filters
-        </button>
+        </Button>
       </div>
     </aside>
   )

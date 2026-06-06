@@ -158,3 +158,5 @@ export const MOCK_CATEGORY_EVENTS: CategoryEvent[] = [
     dateIso: '2026-10-21',
   },
 ]
+
+export const CATEGORY_EVENT_BY_ID = new Map(MOCK_CATEGORY_EVENTS.map((event) => [event.id, event]))

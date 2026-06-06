@@ -1,7 +1,13 @@
 import { MAX_PRICE } from '@/components/EventFiltersSidebar/consts'
 import type { FilterState } from '@/components/EventFiltersSidebar/types'
 import { CATEGORY_TAB_ITEMS } from '@/components/features/CategoryTabs/consts'
+import type { PaymentEvent } from '@/components/features/TicketPaymentModal/types'
 import type { CategoryEvent } from './types'
+
+export const toCategoryPaymentEvent = (event: CategoryEvent): PaymentEvent => ({
+  title: event.title,
+  price: event.priceLabel,
+})
 
 const labelToTabId = Object.fromEntries(
   CATEGORY_TAB_ITEMS.map((item) => [item.label, item.id]),
