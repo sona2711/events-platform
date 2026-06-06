@@ -6,7 +6,7 @@ import {
   PayCircleOutlined,
 } from '@ant-design/icons'
 import { Button, Form, Input, InputNumber, Modal, Radio, Steps } from 'antd'
-import { showNotification } from '@/components/_shared/NotificationBanner/utils'
+import { showNotification } from '@/providers/notifications/utils'
 import {
   CARD_NUMBER_PATTERN,
   CVC_PATTERN,

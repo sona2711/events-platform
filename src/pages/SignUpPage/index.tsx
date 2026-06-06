@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd'
-import { hideNotification, showNotification } from '@/components/_shared/NotificationBanner/utils'
+import { hideNotification, showNotification } from '@/providers/notifications/utils'
 import { AuthCard } from '@/components/shared/AuthCard'
 import { AuthDivider } from '@/components/shared/AuthDivider'
 import { FormItem } from '@/components/shared/FormItem'

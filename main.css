@@ -37,6 +37,7 @@
   --color-text-primary: var(--color-neutral-950);
   --color-text-secondary: #5b4a51;
   --color-text-on-brand: var(--color-white);
+  --color-error: #f5222d;
 
   background: var(--color-surface-page);
   color: var(--color-text-primary);
@@ -72,6 +73,13 @@ select {
 
 a {
   color: inherit;
+}
+
+.ant-form-item-explain-error {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 /* Tablet: 768px – 1199px */

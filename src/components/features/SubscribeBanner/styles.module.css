@@ -87,8 +87,8 @@
 }
 
 .inputError {
-  border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 4px rgb(var(--color-burgundy-700-rgb) / 16%);
+  border-color: var(--color-error);
+  box-shadow: none;
 }
 
 .input::placeholder {
@@ -100,7 +100,7 @@
   display: flex;
   flex: 0 0 350px;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   min-width: 0;
 }
 
@@ -110,12 +110,16 @@
 }
 
 .errorMessage {
-  color: var(--color-brand-primary);
-  font-size: 12px;
-  font-weight: 700;
+  color: var(--color-error);
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.3;
   margin: 0;
-  padding-left: 32px;
 }
 
 .button {

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { toast } from 'sonner'
 import dayjs from 'dayjs'
 import { RegistrationStatsCards } from '@/components/features/RegistrationStatsCards'
 import { RegistrationsFilterBar } from '@/components/features/RegistrationsFilterBar'
@@ -11,6 +10,7 @@ import type {
   RegistrationStatus,
 } from '@/components/features/RegistrationsTable/types'
 import { AdminLayout } from '@/components/layout/AdminLayout'
+import { showSystemMessage } from '@/providers/notifications/utils'
 import { applyFilters } from './utils'
 
 const DEFAULT_DATE_RANGE: [dayjs.Dayjs, dayjs.Dayjs] = [dayjs('2026-10-01'), dayjs('2026-10-31')]
@@ -67,7 +67,10 @@ export const AdminPage = () => {
       ),
     )
     setSelectedIds(new Set())
-    toast.success('Selected registrations cancelled')
+    showSystemMessage({
+      content: 'Selected registrations cancelled',
+      variant: 'success',
+    })
   }
 
   return (

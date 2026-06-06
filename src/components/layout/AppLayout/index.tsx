@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Loader } from '@/components/_shared/Loader'
-import { NotificationBanner } from '@/components/_shared/NotificationBanner'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import styles from './styles.module.css'
@@ -17,7 +16,6 @@ export function AppLayout() {
           <Outlet />
         </Suspense>
       </main>
-      <NotificationBanner />
       <Footer />
     </div>
   )

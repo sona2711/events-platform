@@ -1,6 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import { Loader } from '@/components/_shared/Loader'
-import { NotificationBanner } from '@/components/_shared/NotificationBanner'
 import { useAppSelector } from '@/store/hooks'
 import { POST_AUTH_REDIRECT_PATH } from './consts'
 import styles from './styles.module.css'
@@ -27,10 +26,5 @@ export function GuestRoute() {
     return <Navigate to={redirectTo} replace />
   }
 
-  return (
-    <>
-      <Outlet />
-      <NotificationBanner />
-    </>
-  )
+  return <Outlet />
 }

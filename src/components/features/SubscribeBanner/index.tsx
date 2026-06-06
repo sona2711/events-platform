@@ -1,6 +1,6 @@
 import type { ChangeEvent, FormEvent } from 'react'
 import { useRef, useState } from 'react'
-import { showNotification } from '@/components/_shared/NotificationBanner/utils'
+import { showNotification } from '@/providers/notifications/utils'
 import { EMAIL_PATTERN, SUBSCRIBE_COPY } from './consts'
 import styles from './styles.module.css'
 import { saveSubscriptionEmail } from './utils'

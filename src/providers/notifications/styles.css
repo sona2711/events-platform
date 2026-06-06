@@ -1,0 +1,72 @@
+:root {
+  --notification-success: #52c41a;
+  --notification-info: #2665d6;
+  --notification-warning: #faad14;
+  --notification-error: #ff4d4f;
+}
+
+.ant-notification-notice-success,
+.ant-notification-notice-info,
+.ant-notification-notice-warning,
+.ant-notification-notice-error {
+  background: var(--color-white);
+  border: none;
+  border-radius: 16px;
+}
+
+.ant-notification-notice-success .ant-notification-notice-message,
+.ant-notification-notice-info .ant-notification-notice-message,
+.ant-notification-notice-warning .ant-notification-notice-message,
+.ant-notification-notice-error .ant-notification-notice-message,
+.ant-notification-notice-success .ant-notification-notice-description,
+.ant-notification-notice-info .ant-notification-notice-description,
+.ant-notification-notice-warning .ant-notification-notice-description,
+.ant-notification-notice-error .ant-notification-notice-description {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.ant-notification-notice-success
+  .ant-notification-notice-icon.ant-notification-notice-icon-success.anticon {
+  color: var(--notification-success);
+}
+
+.ant-notification-notice-info
+  .ant-notification-notice-icon.ant-notification-notice-icon-info.anticon {
+  color: var(--notification-info);
+}
+
+.ant-notification-notice-warning
+  .ant-notification-notice-icon.ant-notification-notice-icon-warning.anticon {
+  color: var(--notification-warning);
+}
+
+.ant-notification-notice-error
+  .ant-notification-notice-icon.ant-notification-notice-icon-error.anticon {
+  color: var(--notification-error);
+}
+
+.ant-message-success .ant-message-notice-content,
+.ant-message-info .ant-message-notice-content,
+.ant-message-warning .ant-message-notice-content,
+.ant-message-error .ant-message-notice-content {
+  background: var(--color-white);
+  border: none;
+  border-radius: 16px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.ant-message-success .anticon {
+  color: var(--notification-success);
+}
+
+.ant-message-info .anticon {
+  color: var(--notification-info);
+}
+
+.ant-message-warning .anticon {
+  color: var(--notification-warning);
+}
+
+.ant-message-error .anticon {
+  color: var(--notification-error);
+}
