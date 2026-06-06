@@ -1,7 +1,7 @@
 .header {
-  --header-brand: var(--color-brand-primary);
-  --header-brand-hover: var(--color-brand-primary-hover);
-  --header-brand-rgb: var(--color-burgundy-700-rgb);
+  --header-brand: #770016;
+  --header-brand-hover: #770016;
+  --header-brand-rgb: 119 0 22;
 
   background: transparent;
   padding: 28px var(--layout-gutter) 24px;

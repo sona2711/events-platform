@@ -59,6 +59,12 @@ export const CategoriesPage = () => {
   }, [filteredEvents.length])
 
   const handleCategoryTabSelect = useCallback((tabId: string) => {
+    if (tabId === 'all') {
+      setActiveTabCategory(null)
+      setVisibleCount(INITIAL_VISIBLE_COUNT)
+      return
+    }
+
     const label = getCategoryLabelFromTabId(tabId)
     if (!label) {
       return

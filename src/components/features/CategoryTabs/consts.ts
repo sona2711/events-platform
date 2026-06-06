@@ -1,9 +1,20 @@
-import { BankOutlined, FormatPainterOutlined, MoonOutlined, SoundOutlined } from '@ant-design/icons'
+import {
+  AppstoreOutlined,
+  BankOutlined,
+  FormatPainterOutlined,
+  MoonOutlined,
+  SoundOutlined,
+} from '@ant-design/icons'
 import { createElement } from 'react'
 import { DumbbellIcon, FoodDrinkIcon } from './icons'
 import type { CategoryTabItem } from './types'
 
 export const CATEGORY_TAB_ITEMS: CategoryTabItem[] = [
+  {
+    id: 'all',
+    label: 'All',
+    icon: createElement(AppstoreOutlined),
+  },
   {
     id: 'music',
     label: 'Music',

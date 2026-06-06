@@ -15,7 +15,7 @@ const labelToTabId = Object.fromEntries(
 
 export const getActiveCategoryTabId = (tabCategory: string | null): string | null => {
   if (!tabCategory) {
-    return null
+    return 'all'
   }
 
   return labelToTabId[tabCategory] ?? null

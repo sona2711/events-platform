@@ -73,8 +73,8 @@
 
 .loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):hover,
 .loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):focus-visible {
-  border-color: var(--color-blue-700) !important;
-  color: var(--color-blue-700) !important;
+  border-color: var(--color-blue-800) !important;
+  color: var(--color-blue-800) !important;
 }
 
 .loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):active {

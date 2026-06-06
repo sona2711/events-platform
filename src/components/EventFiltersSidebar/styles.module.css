@@ -184,7 +184,7 @@
 
 .categoryPill {
   background-color: #eceef2;
-  border: 1.5px solid #d5dae3;
+  border: 1.5px solid transparent;
   border-radius: 999px;
   color: #4a4550;
   cursor: pointer;
@@ -198,35 +198,34 @@
 }
 
 .categoryPill:hover {
-  background-color: #f0f6fd;
-  border-color: rgb(var(--color-blue-600-rgb) / 0.45);
-  color: var(--color-blue-600);
+  background-color: #f4f5f7;
+  border-color: #d5dae3;
+  color: #4a4550;
 }
 
 .categoryPill:active {
-  background-color: #e3edfc;
-  border-color: var(--color-blue-600);
-  color: var(--color-blue-600);
+  background-color: #dcdfe5;
+  color: #4a4550;
 }
 
 .categoryPillActive {
-  background-color: #eef4fc;
-  border-color: var(--color-blue-600);
-  color: var(--color-blue-600);
+  background-color: #ffffff;
+  border-color: var(--color-burgundy-600);
+  color: var(--color-burgundy-600);
   font-weight: 600;
 }
 
 .categoryPillActive:hover {
-  background-color: #f2f7fd;
-  border-color: rgb(var(--color-blue-600-rgb) / 0.55);
-  color: var(--color-blue-600);
+  background-color: #ffffff;
+  border-color: var(--color-burgundy-700);
+  color: var(--color-burgundy-700);
 }
 
 .categoryPillActive:active {
-  background-color: #d9e8fc;
-  border-color: var(--color-blue-600);
-  box-shadow: 0 0 0 1px rgb(var(--color-blue-600-rgb) / 0.12);
-  color: var(--color-blue-600);
+  background-color: #fdf5f6;
+  border-color: var(--color-burgundy-700);
+  box-shadow: 0 0 0 1px rgb(var(--color-burgundy-600-rgb) / 0.12);
+  color: var(--color-burgundy-700);
 }
 
 /* ─────────────────────────────────────────
@@ -420,8 +419,8 @@
 
 .resetButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):hover,
 .resetButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):focus-visible {
-  border-color: var(--color-blue-700) !important;
-  color: var(--color-blue-700) !important;
+  border-color: var(--color-blue-800) !important;
+  color: var(--color-blue-800) !important;
 }
 
 .resetButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):active {
