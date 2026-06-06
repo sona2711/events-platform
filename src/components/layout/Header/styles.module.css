@@ -20,7 +20,7 @@
   justify-content: space-between;
   margin: 0 auto;
   max-width: 1248px;
-  min-height: 68px;
+  min-height: 72px;
   padding: 0 18px 0 32px;
   position: relative;
 }
@@ -77,6 +77,12 @@
   color: var(--color-text-primary);
   font-size: 16px;
   font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.authLink:not(.authLinkFilled):hover,
+.authLink:not(.authLinkFilled):focus-visible {
+  color: var(--color-brand-primary);
 }
 
 .navLink {
@@ -129,6 +135,7 @@
 .authLinkFilled:hover,
 .authLinkFilled:focus-visible {
   background: var(--color-brand-primary-hover);
+  color: var(--color-text-on-brand);
 }
 
 .menuToggle:global(.ant-btn) {
@@ -191,6 +198,7 @@
 .logoutButton:hover:not(:disabled),
 .logoutButton:focus-visible:not(:disabled) {
   background: var(--color-brand-primary-hover);
+  color: var(--color-text-on-brand);
 }
 
 @media (max-width: 820px) {
