@@ -114,10 +114,6 @@
   background-color: rgba(210, 232, 35, 1);
   color: rgba(119, 0, 22, 1);
   text-decoration: none;
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    color 0.25s ease;
 }
 
 .homeLinkLabel {
@@ -131,8 +127,8 @@
 
 .homeLink:hover,
 .homeLink:focus-visible {
-  transform: translateY(-2px);
   background-color: #e8f65c;
+  color: var(--color-burgundy-700);
   text-decoration: none;
 }
 

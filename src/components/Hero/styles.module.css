@@ -96,11 +96,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease;
 }
 
 .btnPrimary {
@@ -120,9 +115,10 @@
   display: block;
 }
 
-.btnPrimary:hover {
-  transform: translateY(-2px);
+.btnPrimary:hover,
+.btnPrimary:focus-visible {
   background-color: #e8f65c;
+  color: var(--color-burgundy-700);
 }
 
 .btnSecondary {
@@ -131,8 +127,8 @@
   border: 2px solid #d2e823;
 }
 
-.btnSecondary:hover {
-  transform: translateY(-2px);
+.btnSecondary:hover,
+.btnSecondary:focus-visible {
   color: #e8f65c;
   border-color: #e8f65c;
   background-color: rgba(210, 232, 35, 0.14);

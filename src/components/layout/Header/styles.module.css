@@ -73,8 +73,8 @@
   text-decoration: none;
 }
 
-.authLink {
-  color: var(--color-text-primary);
+.authLink:not(.authLinkFilled) {
+  color: var(--color-brand-primary);
   font-size: 16px;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -82,7 +82,7 @@
 
 .authLink:not(.authLinkFilled):hover,
 .authLink:not(.authLinkFilled):focus-visible {
-  color: var(--color-brand-primary);
+  color: var(--header-brand-hover);
 }
 
 .navLink {
@@ -128,6 +128,8 @@
   background: var(--color-brand-primary);
   border-radius: 9999px;
   color: var(--color-text-on-brand);
+  font-size: 16px;
+  font-weight: 600;
   padding: 12px 24px;
   transition: background-color 0.2s ease;
 }
