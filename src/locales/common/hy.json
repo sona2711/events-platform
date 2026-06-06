@@ -21,7 +21,8 @@
   },
   "header": {
     "toggleMenu": "Բացել նավիգացիոն մենյուն",
-    "closeMenu": "Փակել նավիգացիոն մենյուն"
+    "closeMenu": "Փակել նավիգացիոն մենյուն",
+    "openProfile": "Բացել {{name}}-ի պրոֆիլը"
   },
   "adminNav": {
     "dashboard": "Վահանակ",

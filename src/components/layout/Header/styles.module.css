@@ -116,8 +116,14 @@
 
 .userBlock {
   align-items: center;
+  cursor: pointer;
   display: flex;
   gap: 12px;
+  text-decoration: none;
+}
+
+.userBlock:hover .userName {
+  color: var(--color-burgundy-700);
 }
 
 .avatar {

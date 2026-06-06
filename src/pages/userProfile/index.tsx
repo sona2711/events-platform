@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
-import { message } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { showNotification } from '@/components/_shared/NotificationBanner/utils'
 import { saveReminder } from '@/components/features/UpcomingEventAlert/utils'
 import { ProfileDetailsForm } from '@/components/features/ProfileDetailsForm'
 import { UpcomingEventAlert } from '@/components/features/UpcomingEventAlert'
@@ -36,13 +36,17 @@ export const UserProfilePage = () => {
     dispatch(updateProfileDetails(values))
   }
 
-  const profileFormKey = `${profile.fullName}-${profile.email}-${profile.phone}-${profile.preferredLanguage}`
+  const profileFormKey = `${profile.fullName}-${profile.email}-${profile.phone}-${profile.location}-${profile.preferredLanguage}`
 
   const nextUpcomingBooking = upcomingBookings[0]
 
   const handleSetReminder = (bookingId: string) => {
     saveReminder(bookingId)
-    message.success(t('alert.reminderSet'))
+    showNotification({
+      title: t('alert.actionReminderSet'),
+      message: t('alert.reminderSet'),
+      variant: 'success',
+    })
   }
 
   const handlePayTickets = (eventId: string) => {

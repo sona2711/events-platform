@@ -1,16 +1,12 @@
-import {
-  MOCK_USER_AVATAR,
-  MOCK_USER_EMAIL,
-  MOCK_USER_FULL_NAME,
-  MOCK_USER_ID,
-  MOCK_USER_LOCATION,
-  MOCK_USER_PHONE,
-  MOCK_USER_PREFERRED_LANGUAGE,
-} from '@/pages/userProfile/consts'
+import defaultAvatar from '@/assets/images/avatar.svg'
 import type { SupportedLanguage } from '@/i18n'
+import { DEFAULT_LANGUAGE } from '@/i18n'
 import type { UserProfile } from '@/pages/userProfile/types'
 
 export const PROFILE_STORAGE_KEY = 'events-platform-profile'
+export const DEFAULT_PROFILE_LOCATION = 'Yerevan'
+
+const LEGACY_DEFAULT_LOCATION = 'Yerevan, Armenia'
 
 const SUPPORTED_LANGUAGES: SupportedLanguage[] = ['hy', 'en', 'ru']
 
@@ -36,14 +32,26 @@ const isUserProfile = (value: unknown): value is UserProfile => {
 }
 
 export const getDefaultProfile = (): UserProfile => ({
-  id: MOCK_USER_ID,
-  fullName: MOCK_USER_FULL_NAME,
-  location: MOCK_USER_LOCATION,
-  avatarUrl: MOCK_USER_AVATAR,
-  email: MOCK_USER_EMAIL,
-  phone: MOCK_USER_PHONE,
-  preferredLanguage: MOCK_USER_PREFERRED_LANGUAGE,
+  id: '',
+  fullName: '',
+  location: DEFAULT_PROFILE_LOCATION,
+  avatarUrl: defaultAvatar,
+  email: '',
+  phone: '',
+  preferredLanguage: DEFAULT_LANGUAGE,
 })
+
+export const normalizeProfile = (profile: UserProfile): UserProfile => {
+  const trimmedLocation = profile.location.trim()
+
+  return {
+    ...profile,
+    location:
+      trimmedLocation === LEGACY_DEFAULT_LOCATION || !trimmedLocation
+        ? DEFAULT_PROFILE_LOCATION
+        : trimmedLocation,
+  }
+}
 
 export const loadProfileFromStorage = (): UserProfile | null => {
   try {
@@ -53,7 +61,7 @@ export const loadProfileFromStorage = (): UserProfile | null => {
     }
 
     const parsed: unknown = JSON.parse(raw)
-    return isUserProfile(parsed) ? parsed : null
+    return isUserProfile(parsed) ? normalizeProfile(parsed) : null
   } catch {
     return null
   }

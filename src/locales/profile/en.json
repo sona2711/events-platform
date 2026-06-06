@@ -79,7 +79,13 @@
       "fullName": "Full Name",
       "email": "Email Address",
       "phone": "Phone Number",
+      "location": "Location",
       "preferredLanguage": "Preferred Language"
+    },
+    "validation": {
+      "required": "This field is required",
+      "email": "Enter a valid email address",
+      "phone": "Enter a valid phone number"
     }
   },
   "sidebar": {

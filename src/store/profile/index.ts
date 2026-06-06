@@ -1,4 +1,11 @@
-export { profileReducer, selectProfile, setAvatarUrl, updateProfileDetails } from './profileSlice'
+export {
+  hydrateFromAuthUser,
+  profileReducer,
+  selectProfile,
+  setAvatarUrl,
+  updateProfileDetails,
+} from './profileSlice'
+export { mapAuthUserToProfileIdentity, shouldHydrateProfileFromAuth } from './profileHydration'
 export type { ProfileState } from './profileTypes'
 export {
   getDefaultProfile,
