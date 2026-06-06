@@ -1,6 +1,6 @@
 .header {
-  --header-brand: #770016;
-  --header-brand-hover: #770016;
+  --header-brand: var(--color-brand-primary);
+  --header-brand-hover: var(--color-brand-primary-hover);
   --header-brand-rgb: 119 0 22;
 
   background: transparent;
@@ -119,15 +119,16 @@
 }
 
 .authLinkFilled {
-  background: var(--header-brand);
+  background: var(--color-brand-primary);
   border-radius: 9999px;
   color: var(--color-text-on-brand);
   padding: 12px 24px;
+  transition: background-color 0.2s ease;
 }
 
 .authLinkFilled:hover,
 .authLinkFilled:focus-visible {
-  background: var(--header-brand-hover);
+  background: var(--color-brand-primary-hover);
 }
 
 .menuToggle:global(.ant-btn) {
@@ -170,7 +171,7 @@
 }
 
 .logoutButton {
-  background: var(--header-brand);
+  background: var(--color-brand-primary);
   border: 0;
   border-radius: 999px;
   color: var(--color-text-on-brand);
@@ -178,6 +179,7 @@
   font-size: 16px;
   font-weight: 600;
   padding: 14px 24px;
+  transition: background-color 0.2s ease;
   white-space: nowrap;
 }
 
@@ -188,7 +190,7 @@
 
 .logoutButton:hover:not(:disabled),
 .logoutButton:focus-visible:not(:disabled) {
-  background: var(--header-brand-hover);
+  background: var(--color-brand-primary-hover);
 }
 
 @media (max-width: 820px) {

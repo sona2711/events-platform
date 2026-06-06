@@ -7,6 +7,8 @@
   /* primitive palette */
   --color-burgundy-700: #770016;
   --color-burgundy-700-rgb: 119 0 22;
+  --color-burgundy-750: #680013;
+  --color-burgundy-750-rgb: 104 0 19;
   --color-burgundy-600: #a80a22;
   --color-burgundy-600-rgb: 168 10 34;
   --color-burgundy-800: #5c0011;
@@ -24,7 +26,7 @@
 
   /* semantic aliases */
   --color-brand-primary: var(--color-burgundy-700);
-  --color-brand-primary-hover: var(--color-burgundy-800);
+  --color-brand-primary-hover: var(--color-burgundy-750);
   --color-action-primary: var(--color-blue-600);
   --color-accent-warm: var(--color-orange-500);
   --color-accent-bright: var(--color-lime-400);
