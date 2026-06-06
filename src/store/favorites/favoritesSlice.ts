@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createSelector, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { getDefaultFavorites, loadFavoritesFromStorage } from './favoritesStorage'
 import type { FavoritesState } from './favoritesTypes'
 
@@ -32,7 +32,19 @@ type FavoritesRootState = { favorites: FavoritesState }
 export const selectFavoriteEventIds = (state: FavoritesRootState): string[] =>
   state.favorites.eventIds
 
-export const selectIsEventFavorite =
-  (eventId: string) =>
-  (state: FavoritesRootState): boolean =>
-    state.favorites.eventIds.includes(eventId)
+const favoriteSelectorsByEventId = new Map<string, (state: FavoritesRootState) => boolean>()
+
+export const selectIsEventFavorite = (eventId: string) => {
+  const cachedSelector = favoriteSelectorsByEventId.get(eventId)
+
+  if (cachedSelector) {
+    return cachedSelector
+  }
+
+  const selector = createSelector([selectFavoriteEventIds], (eventIds) =>
+    eventIds.includes(eventId),
+  )
+
+  favoriteSelectorsByEventId.set(eventId, selector)
+  return selector
+}

@@ -20,9 +20,9 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  background-image: url('../../assets/svg/fireworks.webp');
-  background-size: cover;
-  background-position: center;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
   opacity: 0.2;
   z-index: 1;
   pointer-events: none;
@@ -58,7 +58,6 @@
 .pulseWord {
   font-family: Libre Caslon Text;
   color: #d2e823;
-  text-shadow: 0 0 18px rgba(255, 92, 122, 0.5);
   font-style: italic;
 }
 
@@ -109,6 +108,7 @@
   background-color: rgba(210, 232, 35, 1);
   color: rgba(119, 0, 22, 1);
   gap: 10px;
+  text-decoration: none;
 }
 
 .btnPrimaryLabel {
@@ -152,7 +152,19 @@
 .tickerTrack {
   display: flex;
   width: max-content;
-  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tickerTrack {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack {
+    transform: translateX(0);
+  }
 }
 
 .tickerText {
@@ -179,11 +191,11 @@
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 

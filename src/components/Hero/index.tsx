@@ -1,10 +1,20 @@
+import { Link } from 'react-router-dom'
+import fireworksBg from '@/assets/svg/fireworks.webp'
 import styles from './styles.module.css'
 import { TICKER_TEXT } from './consts'
 
 export function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.background} aria-hidden="true" />
+      <img
+        className={styles.background}
+        src={fireworksBg}
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        loading="eager"
+        decoding="async"
+      />
       <div className={styles.content}>
         <h1 className={styles.title}>
           <span className={styles.titleLine}>
@@ -21,7 +31,7 @@ export function Hero() {
         </p>
 
         <div className={styles.actions}>
-          <button className={styles.btnPrimary} type="button">
+          <Link className={styles.btnPrimary} to="/categories">
             <span className={styles.btnPrimaryLabel}>Start Exploring</span>
             <svg
               className={styles.btnPrimaryIcon}
@@ -39,7 +49,7 @@ export function Hero() {
                 strokeLinejoin="round"
               />
             </svg>
-          </button>
+          </Link>
 
           <button className={styles.btnSecondary} type="button">
             Watch Pulse Reel

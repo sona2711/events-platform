@@ -1,18 +1,11 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import {
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  signOut,
-  updateProfile,
-  GoogleAuthProvider,
-} from 'firebase/auth'
-import { auth } from '@/lib/firebase'
 import type { AuthState, AuthUser } from '@/types'
 import { AUTH_ERROR_MESSAGES, toAuthRejectValue } from './authErrors'
 
-const googleProvider = new GoogleAuthProvider()
+const loadFirebaseAuth = async () => {
+  const { getFirebaseAuth } = await import('@/lib/firebase')
+  return getFirebaseAuth()
+}
 
 export const loginWithEmail = createAsyncThunk<
   AuthUser,
@@ -20,6 +13,10 @@ export const loginWithEmail = createAsyncThunk<
   { rejectValue: string | null }
 >('auth/loginWithEmail', async ({ email, password }, { rejectWithValue }) => {
   try {
+    const [{ signInWithEmailAndPassword }, auth] = await Promise.all([
+      import('firebase/auth'),
+      loadFirebaseAuth(),
+    ])
     const { user } = await signInWithEmailAndPassword(auth, email, password)
     return {
       uid: user.uid,
@@ -36,7 +33,11 @@ export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: s
   'auth/loginWithGoogle',
   async (_, { rejectWithValue }) => {
     try {
-      const { user } = await signInWithPopup(auth, googleProvider)
+      const [{ signInWithPopup, GoogleAuthProvider }, auth] = await Promise.all([
+        import('firebase/auth'),
+        loadFirebaseAuth(),
+      ])
+      const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
       return {
         uid: user.uid,
         email: user.email,
@@ -55,6 +56,10 @@ export const registerWithEmail = createAsyncThunk<
   { rejectValue: string | null }
 >('auth/registerWithEmail', async ({ email, password, displayName }, { rejectWithValue }) => {
   try {
+    const [{ createUserWithEmailAndPassword, updateProfile }, auth] = await Promise.all([
+      import('firebase/auth'),
+      loadFirebaseAuth(),
+    ])
     const { user } = await createUserWithEmailAndPassword(auth, email, password)
     const trimmedDisplayName = displayName.trim()
 
@@ -76,6 +81,10 @@ export const sendPasswordReset = createAsyncThunk<void, string, { rejectValue: s
   'auth/sendPasswordReset',
   async (email, { rejectWithValue }) => {
     try {
+      const [{ sendPasswordResetEmail }, auth] = await Promise.all([
+        import('firebase/auth'),
+        loadFirebaseAuth(),
+      ])
       await sendPasswordResetEmail(auth, email)
     } catch (err) {
       return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.passwordResetFailed))
@@ -87,6 +96,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string | null 
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
+      const [{ signOut }, auth] = await Promise.all([import('firebase/auth'), loadFirebaseAuth()])
       await signOut(auth)
     } catch (err) {
       return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.logoutFailed))
@@ -164,4 +174,8 @@ const authSlice = createSlice({
 })
 
 export const { setUser, clearError } = authSlice.actions
+
+export const selectAuthUser = (state: { auth: AuthState }) => state.auth.user
+export const selectAuthLoading = (state: { auth: AuthState }) => state.auth.loading
+
 export default authSlice.reducer

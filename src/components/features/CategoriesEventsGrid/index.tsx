@@ -1,17 +1,11 @@
-import { lazy, Suspense, useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { Button } from 'antd'
 import { EventCard } from '@/components/features/EventCard'
-import type { PaymentEvent } from '@/components/features/TicketPaymentModal/types'
+import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import { CATEGORY_EVENT_BY_ID } from '@/pages/categoriesPage/mockEvents'
 import { toCategoryPaymentEvent } from '@/pages/categoriesPage/utils'
 import type { CategoriesEventsGridProps } from './types'
 import styles from './styles.module.css'
-
-const TicketPaymentModal = lazy(() =>
-  import('@/components/features/TicketPaymentModal').then((module) => ({
-    default: module.TicketPaymentModal,
-  })),
-)
 
 export const CategoriesEventsGrid = ({
   events,
@@ -20,21 +14,12 @@ export const CategoriesEventsGrid = ({
   emptyMessage,
   loadMoreLabel,
 }: CategoriesEventsGridProps) => {
-  const [selectedEvent, setSelectedEvent] = useState<PaymentEvent | null>(null)
   const hasEvents = events.length > 0
-
-  const handleBook = useCallback((eventId: string) => {
+  const resolveEvent = useCallback((eventId: string) => {
     const event = CATEGORY_EVENT_BY_ID.get(eventId)
-    if (!event) {
-      return
-    }
-
-    setSelectedEvent(toCategoryPaymentEvent(event))
+    return event ? toCategoryPaymentEvent(event) : null
   }, [])
-
-  const handleCloseModal = useCallback(() => {
-    setSelectedEvent(null)
-  }, [])
+  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
 
   return (
     <>
@@ -67,11 +52,7 @@ export const CategoriesEventsGrid = ({
         )}
       </section>
 
-      {selectedEvent !== null ? (
-        <Suspense fallback={null}>
-          <TicketPaymentModal event={selectedEvent} open onClose={handleCloseModal} />
-        </Suspense>
-      ) : null}
+      {bookingModal}
     </>
   )
 }

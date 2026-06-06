@@ -22,7 +22,7 @@
   width: 100%;
   background-image: url('../../../assets/svg/fireworks.webp');
   background-size: cover;
-  background-position: center;
+  background-position: center 62%;
   opacity: 0.12;
   z-index: 1;
   pointer-events: none;
@@ -150,7 +150,19 @@
 .tickerTrack {
   display: flex;
   width: max-content;
-  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tickerTrack {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tickerTrack {
+    transform: translateX(0);
+  }
 }
 
 .tickerText {
@@ -177,11 +189,11 @@
 
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 

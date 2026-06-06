@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { showNotification } from '@/components/_shared/NotificationBanner/utils'
@@ -49,9 +49,12 @@ export const UserProfilePage = () => {
     })
   }
 
-  const handlePayTickets = (eventId: string) => {
-    navigate(`/checkout/${eventId}`)
-  }
+  const handlePayTickets = useCallback(
+    (eventId: string) => {
+      navigate(`/checkout/${eventId}`)
+    },
+    [navigate],
+  )
 
   const navItems = useMemo(
     () =>
