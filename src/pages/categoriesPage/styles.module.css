@@ -58,7 +58,7 @@
 @media (max-width: 767px) {
   .page {
     gap: 24px;
-    padding-block: 24px 96px;
+    padding-block: 24px 48px;
   }
 }
 

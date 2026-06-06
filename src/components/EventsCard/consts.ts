@@ -76,11 +76,11 @@ export const SLIDER_BREAKPOINTS: SliderBreakpointConfig = {
     slidesPerView: 1,
     spaceBetween: 16,
   },
-  640: {
+  768: {
     slidesPerView: 2,
-    spaceBetween: 18,
+    spaceBetween: 20,
   },
-  1024: {
+  1200: {
     slidesPerView: 3,
     spaceBetween: EVENTS_LAYOUT.cardGap,
   },
