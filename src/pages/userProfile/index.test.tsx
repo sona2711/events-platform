@@ -104,14 +104,28 @@ describe('UserProfilePage', () => {
   })
 
   it('navigates to checkout with booking eventId when pay tickets is clicked', async () => {
-    const user = userEvent.setup()
-    renderPage()
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2026-05-01T12:00:00+04:00'))
 
-    await user.click(screen.getByRole('button', { name: profileEn.bookings.actions.payTickets }))
+    try {
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      renderPage()
 
-    await waitFor(() => {
-      expect(screen.getByText(checkoutEn.event.jazzFest.title)).toBeInTheDocument()
-    })
+      const jazzFestCard = screen.getByText(checkoutEn.event.jazzFest.title).closest('article')
+      expect(jazzFestCard).not.toBeNull()
+
+      await user.click(
+        within(jazzFestCard as HTMLElement).getByRole('button', {
+          name: profileEn.bookings.actions.payTickets,
+        }),
+      )
+
+      await waitFor(() => {
+        expect(screen.getByText(checkoutEn.event.jazzFest.title)).toBeInTheDocument()
+      })
+    } finally {
+      jest.useRealTimers()
+    }
   })
 
   it('updates avatar after selecting a new image', async () => {

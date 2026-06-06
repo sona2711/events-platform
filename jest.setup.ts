@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom'
 
+;(globalThis as { __IS_JEST__?: boolean }).__IS_JEST__ = true
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query: string) => ({
