@@ -1,0 +1,268 @@
+.hero {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: translateX(-50%);
+  margin-top: calc(-1 * var(--layout-header-height));
+  min-height: calc(100vh + var(--layout-header-height));
+  padding: 150px var(--layout-padding-inline) var(--layout-padding-inline);
+  overflow: hidden;
+  background-color: rgba(119, 0, 22, 1);
+  z-index: 1;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background-image: url('../../../assets/svg/fireworks.webp');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bgText {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: clamp(18rem, 55vw, 44rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  margin: -16px auto 0;
+  max-width: var(--layout-max-width);
+  width: min(100%, var(--layout-max-width));
+}
+
+.title {
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 80px;
+  letter-spacing: -3.2px;
+  color: #ffffff;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.description {
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 88px;
+}
+
+.homeLink {
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 18px 40px;
+  height: 60px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  background-color: rgba(210, 232, 35, 1);
+  color: rgba(119, 0, 22, 1);
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.homeLinkLabel {
+  line-height: 1;
+}
+
+.homeLinkIcon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.homeLink:hover,
+.homeLink:focus-visible {
+  transform: translateY(-2px);
+  background-color: #e8f65c;
+  text-decoration: none;
+}
+
+.ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: 16px 0;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.tickerTrack {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.tickerText {
+  display: inline-block;
+  padding-right: 40px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(119, 0, 22, 1) 0%,
+    rgba(242, 137, 6, 1) 33%,
+    rgba(38, 101, 214, 1) 66%,
+    rgba(210, 232, 35, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 102px;
+  font-weight: 800;
+  letter-spacing: -3.2px;
+  line-height: 1;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .hero {
+    min-height: calc(720px + var(--layout-header-height));
+    padding: 130px var(--layout-padding-inline) var(--layout-padding-inline);
+  }
+
+  .bgText {
+    font-size: clamp(14rem, 50vw, 28rem);
+    top: 50%;
+  }
+
+  .title {
+    font-size: clamp(3rem, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: -2.4px;
+  }
+
+  .description {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  .actions {
+    margin-bottom: 80px;
+  }
+
+  .tickerText {
+    font-size: 80px;
+    letter-spacing: -2.6px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    min-height: calc(520px + var(--layout-header-height));
+    padding: 96px var(--layout-padding-inline) 32px;
+  }
+
+  .bgText {
+    font-size: clamp(10rem, 68vw, 18rem);
+    top: 44%;
+  }
+
+  .title {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+    line-height: 0.98;
+    letter-spacing: -1.6px;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .homeLink {
+    width: 100%;
+    max-width: none;
+    height: 48px;
+    padding: 0 24px;
+    font-size: 16px;
+  }
+
+  .ticker {
+    padding: 8px 0;
+  }
+
+  .tickerText {
+    font-size: clamp(2.5rem, 14vw, 3.25rem);
+    letter-spacing: -1.6px;
+  }
+}

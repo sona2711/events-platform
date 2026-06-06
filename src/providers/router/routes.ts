@@ -70,6 +70,11 @@ export const appRoutes: RouteObject[] = [
           { path: 'checkout/:eventId', element: createElement(CheckoutPage) },
         ],
       },
+      {
+        path: '*',
+        element: createElement(NotFoundPage),
+        handle: { hideFooter: true },
+      },
     ],
   },
   {
@@ -89,5 +94,4 @@ export const appRoutes: RouteObject[] = [
   { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
   { path: 'admin/users', element: createElement(AdminComingSoonPage) },
   { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
-  { path: '*', element: createElement(NotFoundPage) },
 ]
