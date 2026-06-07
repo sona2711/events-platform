@@ -3,18 +3,21 @@ import { Col, Empty, Row, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { EventCard } from '@/components/features/EventCard'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
+import { MOCK_CATEGORY_EVENTS } from '@/pages/categoriesPage/mockEvents'
 import { selectFavoriteEventIds } from '@/store/favorites'
 import { useAppSelector } from '@/store/hooks'
 import styles from './styles.module.css'
 
 const { Title } = Typography
 
+const ALL_SAVED_EVENT_CARD_DATA = [...EVENTS_CARD_DATA, ...MOCK_CATEGORY_EVENTS]
+
 export const UserSavedEventsPanel = () => {
   const { t } = useTranslation('profile')
   const favoriteEventIds = useAppSelector(selectFavoriteEventIds)
 
   const favoriteEvents = useMemo(
-    () => EVENTS_CARD_DATA.filter((event) => favoriteEventIds.includes(event.id)),
+    () => ALL_SAVED_EVENT_CARD_DATA.filter((event) => favoriteEventIds.includes(event.id)),
     [favoriteEventIds],
   )
 
