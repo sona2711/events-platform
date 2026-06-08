@@ -27,6 +27,7 @@
     "@reduxjs/toolkit": "^2",
     "antd": "^5",
     "axios": "^1",
+    "circle-flags": "^2.8.3",
     "dayjs": "^1.11.21",
     "firebase": "^11",
     "i18next": "^25.10.10",
