@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import { EventCard } from '@/components/features/EventCard'
 import { useEventBookingModal } from '@/hooks/useEventBookingModal'
@@ -14,12 +15,20 @@ export const CategoriesEventsGrid = ({
   emptyMessage,
   loadMoreLabel,
 }: CategoriesEventsGridProps) => {
+  const navigate = useNavigate()
   const hasEvents = events.length > 0
   const resolveEvent = useCallback((eventId: string) => {
     const event = CATEGORY_EVENT_BY_ID.get(eventId)
     return event ? toCategoryPaymentEvent(event) : null
   }, [])
   const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
+
+  const handleNavigate = useCallback(
+    (eventId: string) => {
+      navigate(`/event/${eventId}`)
+    },
+    [navigate],
+  )
 
   return (
     <>
@@ -28,7 +37,7 @@ export const CategoriesEventsGrid = ({
           <ul className={styles.grid}>
             {events.map((event) => (
               <li key={event.id}>
-                <EventCard event={event} onBook={handleBook} />
+                <EventCard event={event} onBook={handleBook} onNavigate={handleNavigate} />
               </li>
             ))}
           </ul>

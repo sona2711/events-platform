@@ -9,6 +9,12 @@ import gastroFestImage from '@/assets/images/ArmenianGastroFest.webp'
 import dilijanImage from '@/assets/images/DilijanWeekendRetreat.webp'
 import startupImage from '@/assets/images/StratupPitchDeckReport.webp'
 import hikingToGarniImage from '@/assets/images/HikingToGarniTemple.webp'
+import wineImage from '@/assets/images/wine.webp'
+import headwayImage from '@/assets/images/headway-F2KRf_QfCqw-unsplash.webp'
+import ewanBuckImage from '@/assets/images/ewan-buck-xc9B3i-1QiI-unsplash.webp'
+import carolineImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.webp'
+import dennyImage from '@/assets/images/denny-muller-z_disLOcoKM-unsplash.webp'
+import wineStainImage from '@/assets/images/wine-stain-detail.webp'
 
 export type EventDetail = {
   id: string
@@ -145,4 +151,141 @@ export const MOCK_EVENTS: EventDetail[] = [
   },
 ]
 
-export const MOCK_EVENTS_BY_ID = new Map(MOCK_EVENTS.map((event) => [event.id, event]))
+const CATEGORY_EVENTS: EventDetail[] = [
+  {
+    id: 'event-modern-art',
+    title: 'Modern Art Exhibition',
+    category: 'Arts',
+    imageUrl: modernArtImage,
+    location: 'Cafesjian Center',
+    date: 'Oct 12, 2026',
+    price: '2,000 AMD',
+    description:
+      'Step inside the Cafesjian Center for the Arts and discover a world of modern creativity. This exhibition showcases bold new works from Armenian and international artists, spanning painting, sculpture, and multimedia installations.',
+  },
+  {
+    id: 'event-classical-night',
+    title: 'Classical Night at Opera House',
+    category: 'Music',
+    imageUrl: classicalNightImage,
+    location: 'Opera House',
+    date: 'Oct 12, 2026',
+    price: '10,000 AMD',
+    description:
+      'Experience the grandeur of classical music at the Yerevan Opera House. An evening of orchestral masterpieces performed by the Armenian Philharmonic Orchestra, featuring works by Komitas, Khachaturian, and Beethoven.',
+  },
+  {
+    id: 'event-gastro-fest',
+    title: 'Armenian Gastro Fest',
+    category: 'Food & Drink',
+    imageUrl: gastroFestImage,
+    location: 'Republic Square',
+    date: 'Oct 14, 2026',
+    price: '5,000 AMD',
+    description:
+      "A celebration of Armenian food culture right in the heart of Yerevan. Sample dishes from every corner of the country, meet the chefs behind the recipes, and discover why Armenian cuisine is one of the region's best-kept secrets.",
+  },
+  {
+    id: 'event-dilijan-retreat',
+    title: 'Dilijan Weekend Retreat',
+    category: 'Health',
+    imageUrl: dilijanImage,
+    location: 'Dilijan Forest',
+    date: 'Oct 18, 2026',
+    price: '15,000 AMD',
+    description:
+      "Escape the city for a restorative weekend in the forests of Dilijan. Guided meditation, forest walks, and wellness workshops set against the backdrop of Armenia's most serene national park. Accommodation and meals included.",
+  },
+  {
+    id: 'event-startup-pitch',
+    title: 'Startup Pitch Deck Workshop',
+    category: 'Business',
+    imageUrl: startupImage,
+    location: 'Yerevan Startup Hub',
+    date: 'Oct 20, 2026',
+    price: 'Free',
+    description:
+      "Learn how to craft a pitch deck that gets investors' attention. This hands-on workshop is led by experienced founders and VCs from Armenia's growing startup ecosystem. Open to entrepreneurs at any stage.",
+  },
+  {
+    id: 'event-hiking-garni',
+    title: 'Hiking to Garni Temple',
+    category: 'Health',
+    imageUrl: hikingToGarniImage,
+    location: 'Garni Village',
+    date: 'Oct 22, 2026',
+    price: '8,000 AMD',
+    description:
+      'Follow ancient paths through the Azat River gorge to the iconic Garni Temple. This guided hike combines stunning natural scenery with a deep dive into Armenian history, ending at the only surviving Hellenistic structure in the country.',
+  },
+  {
+    id: 'event-wine-tasting',
+    title: 'Armenian Wine Tasting',
+    category: 'Food & Drink',
+    imageUrl: wineImage,
+    location: 'Cascade Complex',
+    date: 'Oct 12, 2026',
+    price: '12,000 AMD',
+    description:
+      'Discover the depth of Armenian winemaking tradition at this curated tasting event. Sample indigenous grape varieties like Areni and Voskehat alongside expert commentary on the history and terroir of Armenian wine regions.',
+  },
+  {
+    id: 'event-jazz-night',
+    title: 'Jazz Night at Republic',
+    category: 'Music',
+    imageUrl: headwayImage,
+    location: 'Republic Square',
+    date: 'Oct 15, 2026',
+    price: '7,500 AMD',
+    description:
+      'An open-air jazz evening at the heart of Yerevan. Local ensembles and guest soloists perform under the stars, blending classic standards with original compositions inspired by Armenian musical traditions.',
+  },
+  {
+    id: 'event-night-market',
+    title: 'Vernissage Night Market',
+    category: 'Nightlife',
+    imageUrl: ewanBuckImage,
+    location: 'Vernissage Market',
+    date: 'Oct 16, 2026',
+    price: 'Free',
+    description:
+      "Yerevan's beloved Vernissage transforms into a vibrant night market. Browse handmade crafts, local food stalls, vintage finds, and live street performances in one of the city's most iconic open-air spaces.",
+  },
+  {
+    id: 'event-farm-to-table',
+    title: 'Farm to Table Dinner',
+    category: 'Food & Drink',
+    imageUrl: carolineImage,
+    location: 'Matenadaran',
+    date: 'Oct 17, 2026',
+    price: '18,000 AMD',
+    description:
+      'A unique dining experience hosted in the shadow of the Matenadaran manuscript museum. A curated five-course menu built entirely from local Armenian farms, paired with natural wines and accompanied by live acoustic music.',
+  },
+  {
+    id: 'event-rooftop-party',
+    title: 'Rooftop Sunset Party',
+    category: 'Nightlife',
+    imageUrl: dennyImage,
+    location: 'Cascade Complex',
+    date: 'Oct 19, 2026',
+    price: '6,000 AMD',
+    description:
+      'Watch the sun set over Mount Ararat from one of the best rooftop venues in Yerevan. DJ sets, craft cocktails, and an unbeatable view make this the go-to evening event of the autumn season.',
+  },
+  {
+    id: 'event-tech-meetup',
+    title: 'Yerevan Tech Meetup',
+    category: 'Business',
+    imageUrl: wineStainImage,
+    location: 'Yerevan Startup Hub',
+    date: 'Oct 21, 2026',
+    price: '3,000 AMD',
+    description:
+      "Monthly gathering of Yerevan's tech community. Featuring short talks on product, engineering, and design, followed by open networking. A great place to meet co-founders, collaborators, and future employers.",
+  },
+]
+
+export const MOCK_EVENTS_BY_ID = new Map(
+  [...MOCK_EVENTS, ...CATEGORY_EVENTS].map((event) => [event.id, event]),
+)
