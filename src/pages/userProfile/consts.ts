@@ -1,8 +1,10 @@
-import type { ProfileNavItem, UserBookingSeed } from './types'
+import type {
+  ProfileNavItem,
+  UserHistoricalBookingSnapshot,
+  UserUpcomingBookingSeed,
+} from './types'
 import avatar from '@/assets/images/avatar.svg'
-import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
 import feastImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.webp'
-import marathonImage from '@/assets/images/HikingToGarniTemple.webp'
 import wineTastingImage from '@/assets/images/wine-stain-detail.webp'
 
 export const MOCK_USER_AVATAR = avatar
@@ -21,39 +23,40 @@ export const PROFILE_NAV_ITEM_IDS: ProfileNavItem['id'][] = [
   'settings',
 ]
 
-export const MOCK_BOOKING_SEEDS: UserBookingSeed[] = [
+export const MOCK_UPCOMING_BOOKING_SEEDS: UserUpcomingBookingSeed[] = [
   {
     id: 'booking-1',
     eventId: 'event-jazz-fest',
-    itemKey: 'jazzFest',
-    categoryKey: 'music',
-    imageUrl: jazzFestImage,
     startsAt: '2026-06-02T19:30:00+04:00',
-  },
-  {
-    id: 'booking-2',
-    eventId: 'event-feast',
-    itemKey: 'feast',
-    categoryKey: 'culinary',
-    imageUrl: feastImage,
-    startsAt: '2026-07-14T18:00:00+04:00',
-    status: 'cancelled',
   },
   {
     id: 'booking-3',
     eventId: 'event-marathon',
-    itemKey: 'marathon',
-    categoryKey: 'sports',
-    imageUrl: marathonImage,
     startsAt: '2026-08-20T09:00:00+04:00',
+  },
+]
+
+export const MOCK_HISTORICAL_BOOKING_SNAPSHOTS: UserHistoricalBookingSnapshot[] = [
+  {
+    id: 'booking-2',
+    eventId: 'event-feast',
+    startsAt: '2026-07-14T18:00:00+04:00',
+    status: 'cancelled',
+    title: 'Traditional Armenian Feast',
+    category: 'CULINARY',
+    dateTime: 'Jul 14, 2026 · 18:00',
+    location: 'Republic Square',
+    imageUrl: feastImage,
   },
   {
     id: 'booking-4',
     eventId: 'event-wine-tasting',
-    itemKey: 'wineTasting',
-    categoryKey: 'culinary',
-    imageUrl: wineTastingImage,
     startsAt: '2026-03-10T17:00:00+04:00',
     status: 'past',
+    title: 'Armenian Wine Tasting',
+    category: 'CULINARY',
+    dateTime: 'Mar 10, 2026 · 17:00',
+    location: 'Saryan Street',
+    imageUrl: wineTastingImage,
   },
 ]

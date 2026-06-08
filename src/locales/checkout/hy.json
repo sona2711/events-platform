@@ -107,18 +107,22 @@
       "cvvRequired": "Մուտքագրեք CVV-ն",
       "cvvInvalid": "Մուտքագրեք վավեր CVV"
     },
-    "secureNote": "Անվտանգ 256-բիթ SSL գաղտնագրում"
+    "secureNote": "Անվտանգ 256-բիթ SSL գաղտնագրում",
+    "freeNotice": "Այս անվճար միջոցառման համար վճարում պետք չէ։"
   },
   "summary": {
     "aria": "Պատվերի ամփոփում",
     "serviceFee": "Սպասարկման վճար",
     "processingFee": "Մշակման վճար",
     "total": "Ընդամենը",
+    "free": "Անվճար",
     "placeOrder": "Հաստատել պատվերը",
+    "reserveTicket": "Ամրագրել տոմս",
     "lineItem": "{{name}} (x{{count}})"
   },
   "messages": {
     "orderSuccess": "Ձեր պատվերը հաջողությամբ է գրանցվել։",
+    "reservationSuccess": "Ձեր ամրագրումը հաստատված է։",
     "orderError": "Հնարավոր չէ հաստատել պատվերը։ Խնդրում ենք կրկին փորձել։",
     "eventNotFound": "Այս միջոցառման համար գնումը հասանելի չէ։"
   },

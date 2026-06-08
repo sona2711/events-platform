@@ -2,7 +2,7 @@ import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { MIN_TICKET_QUANTITY } from '@/pages/CheckoutPage/consts'
-import { formatCurrency } from '@/pages/CheckoutPage/utils'
+import { formatCheckoutAmount } from '@/pages/CheckoutPage/utils'
 import type { CheckoutTicketSelectorProps } from './types'
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ export const CheckoutTicketSelector = ({
     <Flex vertical gap={16} className={styles.list}>
       {tiers.map((tier) => {
         const quantity = selection[tier.id] ?? 0
-        const ticketName = t(tier.nameKey)
+        const ticketName = tier.name
         const isAtMin = quantity <= MIN_TICKET_QUANTITY
         const isAtMax = quantity >= tier.maxQuantity
 
@@ -29,10 +29,10 @@ export const CheckoutTicketSelector = ({
                   {ticketName}
                 </Typography.Title>
                 <Typography.Text type="secondary" className={styles.description}>
-                  {t(tier.descriptionKey)}
+                  {tier.description}
                 </Typography.Text>
                 <Typography.Text strong className={styles.price}>
-                  {formatCurrency(tier.priceAmd)}
+                  {formatCheckoutAmount(tier.priceAmd, t('summary.free'))}
                 </Typography.Text>
               </Flex>
 

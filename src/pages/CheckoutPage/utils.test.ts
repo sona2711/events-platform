@@ -5,14 +5,27 @@ import {
   calculateProcessingFee,
   calculateServiceFee,
   calculateTicketSubtotal,
+  formatCheckoutAmount,
   formatCurrency,
   getActiveCheckoutStep,
   getCheckoutReadiness,
   getCheckoutStepStatus,
   isCheckoutReady,
+  isFreeCheckout,
   isValidContactValues,
   isValidPaymentValues,
 } from './utils'
+
+const FREE_TICKET_TIERS = [
+  {
+    id: 'general-admission',
+    name: 'General Admission',
+    description: '',
+    priceAmd: 0,
+    maxQuantity: 10,
+  },
+]
+const FREE_SELECTION = { 'general-admission': 1 }
 
 describe('checkout utils', () => {
   it('calculates subtotal, fees, and total for default selection', () => {
@@ -37,6 +50,34 @@ describe('checkout utils', () => {
 
   it('formats currency in AMD', () => {
     expect(formatCurrency(33600)).toBe('33,600 AMD')
+    expect(formatCheckoutAmount(0, 'Free')).toBe('Free')
+  })
+
+  it('treats zero-total checkout as free', () => {
+    const totals = buildOrderTotals(FREE_SELECTION, FREE_TICKET_TIERS)
+
+    expect(isFreeCheckout(totals)).toBe(true)
+    expect(totals.totalAmd).toBe(0)
+  })
+
+  it('does not require payment for free checkout readiness', () => {
+    const contact = {
+      fullName: 'Alex Rivers',
+      email: 'alex.rivers@example.com',
+    }
+
+    expect(getCheckoutReadiness(FREE_SELECTION, contact, null, true).isReady).toBe(true)
+  })
+
+  it('marks payment step completed for free checkout when contact is valid', () => {
+    const contact = {
+      fullName: 'Alex Rivers',
+      email: 'alex.rivers@example.com',
+    }
+    const readiness = getCheckoutReadiness(FREE_SELECTION, contact, null, true)
+
+    expect(getActiveCheckoutStep(readiness, true)).toBe(2)
+    expect(getCheckoutStepStatus(3, readiness, true)).toBe('completed')
   })
 
   it('validates contact and payment values', () => {

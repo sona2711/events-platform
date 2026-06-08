@@ -73,6 +73,27 @@ export type BookingItemKey = 'jazzFest' | 'feast' | 'marathon' | 'wineTasting'
 
 export type BookingCategoryKey = 'music' | 'culinary' | 'sports'
 
+/** Current/upcoming bookings store only profile ownership data; event details come from MSW. */
+export type UserUpcomingBookingSeed = {
+  id: string
+  eventId: string
+  startsAt: string
+}
+
+/** Past/canceled bookings keep full display snapshots in profile mock data. */
+export type UserHistoricalBookingSnapshot = {
+  id: string
+  eventId: string
+  startsAt: string
+  status: Extract<UserBookingStatus, 'past' | 'cancelled'>
+  title: string
+  category: string
+  dateTime: string
+  location: string
+  imageUrl: string
+}
+
+/** @deprecated Use UserUpcomingBookingSeed or UserHistoricalBookingSnapshot. */
 export type UserBookingSeed = {
   id: string
   eventId: string
