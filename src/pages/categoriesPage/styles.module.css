@@ -6,7 +6,7 @@
   gap: 32px;
   margin: 0 calc(-1 * var(--layout-gutter));
   max-width: none;
-  padding: 32px var(--layout-gutter) 96px;
+  padding: 16px var(--layout-gutter) 64px;
   width: calc(100% + 2 * var(--layout-gutter));
 }
 
@@ -41,7 +41,7 @@
 @media (max-width: 1024px) {
   .page {
     gap: 28px;
-    padding-top: 28px;
+    padding-top: 22px;
   }
 }
 
@@ -58,13 +58,13 @@
 @media (max-width: 767px) {
   .page {
     gap: 24px;
-    padding-block: 24px 96px;
+    padding-block: 14px 48px;
   }
 }
 
 @media (max-width: 480px) {
   .page {
     gap: 20px;
-    padding-top: 20px;
+    padding-top: 12px;
   }
 }

@@ -20,12 +20,29 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 62%;
-  opacity: 0.2;
+  background-image: url('../../../assets/svg/fireworks.webp');
+  background-size: cover;
+  background-position: center 62%;
+  opacity: 0.12;
   z-index: 1;
   pointer-events: none;
+}
+
+.bgText {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: clamp(18rem, 55vw, 44rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
 }
 
 .content {
@@ -47,18 +64,15 @@
   text-align: center;
 }
 
-.titleLine {
-  display: block;
-}
-
-.descriptionLine {
-  display: block;
-}
-
-.pulseWord {
-  font-family: Libre Caslon Text;
-  color: #d2e823;
-  font-style: italic;
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .description {
@@ -81,8 +95,7 @@
   margin-bottom: 88px;
 }
 
-.btnPrimary,
-.btnSecondary {
+.homeLink {
   outline: none;
   cursor: pointer;
   margin: 0;
@@ -96,42 +109,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.btnPrimary {
+  gap: 10px;
   border: none;
   background-color: rgba(210, 232, 35, 1);
   color: rgba(119, 0, 22, 1);
-  gap: 10px;
   text-decoration: none;
 }
 
-.btnPrimaryLabel {
+.homeLinkLabel {
   line-height: 1;
 }
 
-.btnPrimaryIcon {
+.homeLinkIcon {
   flex-shrink: 0;
   display: block;
 }
 
-.btnPrimary:hover,
-.btnPrimary:focus-visible {
+.homeLink:hover,
+.homeLink:focus-visible {
   background-color: #e8f65c;
   color: var(--color-burgundy-700);
-}
-
-.btnSecondary {
-  background-color: transparent;
-  color: #d2e823;
-  border: 2px solid #d2e823;
-}
-
-.btnSecondary:hover,
-.btnSecondary:focus-visible {
-  color: #e8f65c;
-  border-color: #e8f65c;
-  background-color: rgba(210, 232, 35, 0.14);
+  text-decoration: none;
 }
 
 .ticker {
@@ -195,11 +193,15 @@
   }
 }
 
-/* Tablet: 768px – 1199px */
 @media (max-width: 1199px) and (min-width: 768px) {
   .hero {
     min-height: calc(720px + var(--layout-header-height));
     padding: 130px var(--layout-padding-inline) var(--layout-padding-inline);
+  }
+
+  .bgText {
+    font-size: clamp(14rem, 50vw, 28rem);
+    top: 50%;
   }
 
   .title {
@@ -224,11 +226,15 @@
   }
 }
 
-/* Mobile: < 768px */
 @media (max-width: 767px) {
   .hero {
     min-height: calc(520px + var(--layout-header-height));
     padding: 96px var(--layout-padding-inline) 32px;
+  }
+
+  .bgText {
+    font-size: clamp(10rem, 68vw, 18rem);
+    top: 44%;
   }
 
   .title {
@@ -251,8 +257,7 @@
     margin-bottom: 32px;
   }
 
-  .btnPrimary,
-  .btnSecondary {
+  .homeLink {
     width: 100%;
     max-width: none;
     height: 48px;

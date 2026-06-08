@@ -1,11 +1,10 @@
-import { lazy, Suspense, useCallback, useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { EventCard } from '@/components/features/EventCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
 import type { Swiper as SwiperInstance } from 'swiper'
-import type { ListingEventInput } from '@/components/features/EventCard/types'
+import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
@@ -14,20 +13,20 @@ import {
   EVENTS_NEXT_BUTTON_CLASS,
   EVENTS_PREV_BUTTON_CLASS,
   SLIDER_BREAKPOINTS,
+  SWIPER_MODULES,
   SWIPER_NO_SWIPING_CLASS,
 } from './consts'
 
-const TicketPaymentModal = lazy(() =>
-  import('@/components/features/TicketPaymentModal').then((module) => ({
-    default: module.TicketPaymentModal,
-  })),
-)
-
 export function EventsGrid() {
   const navigate = useNavigate()
-  const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
+  const resolveEvent = useCallback((eventId: string) => EVENT_BY_ID.get(eventId), [])
+  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
+  const navigationConfigRef = useRef({
+    prevEl: null as HTMLButtonElement | null,
+    nextEl: null as HTMLButtonElement | null,
+  })
 
   const handleNavigate = useCallback(
     (eventId: string) => {
@@ -36,15 +35,10 @@ export function EventsGrid() {
     [navigate],
   )
 
-  const handleBook = useCallback((eventId: string) => {
-    setSelectedEvent(EVENT_BY_ID.get(eventId) ?? null)
-  }, [])
+  const bindCarouselNavigation = useCallback((swiper: SwiperInstance) => {
+    navigationConfigRef.current.prevEl = navigationPrevRef.current
+    navigationConfigRef.current.nextEl = navigationNextRef.current
 
-  const handleCloseModal = useCallback(() => {
-    setSelectedEvent(null)
-  }, [])
-
-  const bindCarouselNavigation = (swiper: SwiperInstance) => {
     const navigation = swiper.params.navigation
 
     if (!navigation || typeof navigation === 'boolean') {
@@ -59,7 +53,7 @@ export function EventsGrid() {
       swiper.navigation.init()
       swiper.navigation.update()
     }
-  }
+  }, [])
 
   return (
     <>
@@ -92,17 +86,14 @@ export function EventsGrid() {
 
           <div className={styles.swiperViewport}>
             <Swiper
-              modules={[Navigation]}
+              modules={SWIPER_MODULES}
               autoHeight
               watchOverflow={false}
               allowTouchMove
               simulateTouch
               grabCursor
               breakpoints={SLIDER_BREAKPOINTS}
-              navigation={{
-                prevEl: navigationPrevRef.current,
-                nextEl: navigationNextRef.current,
-              }}
+              navigation={navigationConfigRef.current}
               onBeforeInit={bindCarouselNavigation}
               onInit={bindCarouselNavigation}
               className={styles.mySwiper}
@@ -123,11 +114,7 @@ export function EventsGrid() {
         </div>
       </section>
 
-      {selectedEvent !== null ? (
-        <Suspense fallback={null}>
-          <TicketPaymentModal event={selectedEvent} open onClose={handleCloseModal} />
-        </Suspense>
-      ) : null}
+      {bookingModal}
     </>
   )
 }

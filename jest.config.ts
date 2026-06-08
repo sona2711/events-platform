@@ -1,7 +1,7 @@
 import type { Config } from 'jest'
 
 const config: Config = {
-  testEnvironment: 'jsdom',
+  testEnvironment: '<rootDir>/jest.environment.ts',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': [
@@ -12,6 +12,9 @@ const config: Config = {
     ],
   },
   moduleNameMapper: {
+    '^swiper/modules$': '<rootDir>/src/__mocks__/swiperModules.ts',
+    '^swiper/react$': '<rootDir>/src/__mocks__/swiperReact.tsx',
+    '^swiper/css(?:/.*)?$': 'identity-obj-proxy',
     '^@/(.*)\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/src/__mocks__/fileMock.ts',
     '^@/(.*)$': '<rootDir>/src/$1',

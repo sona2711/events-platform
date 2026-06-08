@@ -16,6 +16,26 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          if (id.includes('node_modules/firebase')) {
+            return 'firebase'
+          }
+
+          if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) {
+            return 'i18n'
+          }
+
+          if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run/router')) {
+            return 'router'
+          }
+
+          if (
+            id.includes('node_modules/@reduxjs/toolkit') ||
+            id.includes('node_modules/react-redux') ||
+            id.includes('node_modules/redux')
+          ) {
+            return 'redux'
+          }
+
           if (id.includes('node_modules/swiper')) {
             return 'swiper'
           }

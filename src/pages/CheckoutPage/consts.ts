@@ -1,7 +1,7 @@
-import feastImage from '@/assets/images/ArmenianGastroFest.JPG'
-import marathonImage from '@/assets/images/HikingToGarniTemple.jpg'
-import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.jpg'
-import wineTastingImage from '@/assets/images/wine-stain-detail.jpg'
+import feastImage from '@/assets/images/ArmenianGastroFest.webp'
+import marathonImage from '@/assets/images/HikingToGarniTemple.webp'
+import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
+import wineTastingImage from '@/assets/images/wine-stain-detail.webp'
 import type { CheckoutEvent, TicketSelection, TicketTier } from './types'
 
 export const EMPTY_TICKET_TIERS: TicketTier[] = []

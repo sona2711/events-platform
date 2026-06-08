@@ -1,4 +1,8 @@
 .header {
+  --header-brand: var(--color-brand-primary);
+  --header-brand-hover: var(--color-brand-primary-hover);
+  --header-brand-rgb: 119 0 22;
+
   background: transparent;
   padding: 28px var(--layout-gutter) 24px;
   position: relative;
@@ -8,7 +12,7 @@
 .navBar {
   align-items: center;
   background: var(--color-surface-card);
-  border: 1px solid var(--color-brand-primary);
+  border: 2px solid var(--header-brand);
   border-radius: 9999px;
   box-shadow: none;
   display: flex;
@@ -16,7 +20,7 @@
   justify-content: space-between;
   margin: 0 auto;
   max-width: 1248px;
-  min-height: 68px;
+  min-height: 72px;
   padding: 0 18px 0 32px;
   position: relative;
 }
@@ -27,7 +31,7 @@
 }
 
 .brand {
-  color: var(--color-brand-primary);
+  color: var(--header-brand);
   font-family: 'Bricolage Grotesque Variable';
   font-size: 32px;
   font-weight: 800;
@@ -69,10 +73,16 @@
   text-decoration: none;
 }
 
-.authLink {
-  color: var(--color-text-primary);
+.authLink:not(.authLinkFilled) {
+  color: var(--color-brand-primary);
   font-size: 16px;
   font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.authLink:not(.authLinkFilled):hover,
+.authLink:not(.authLinkFilled):focus-visible {
+  color: var(--header-brand-hover);
 }
 
 .navLink {
@@ -81,14 +91,34 @@
   font-weight: 500;
   line-height: 26px;
   padding: 23px 0;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: var(--header-brand-hover);
+}
+
+.underlinedNavLink:hover,
+.underlinedNavLink:focus-visible {
+  color: var(--header-brand-hover);
+}
+
+.underlinedNavLink:hover::after,
+.underlinedNavLink:focus-visible::after {
+  background: var(--header-brand-hover);
+}
+
+.underlinedNavLink {
+  color: var(--header-brand);
 }
 
 .underlinedNavLink::after {
-  background: var(--color-brand-primary);
+  background: var(--header-brand);
   border-radius: 999px;
   bottom: 14px;
   content: '';
-  height: 1px;
+  height: 2px;
   left: 0;
   position: absolute;
   right: 0;
@@ -98,12 +128,16 @@
   background: var(--color-brand-primary);
   border-radius: 9999px;
   color: var(--color-text-on-brand);
+  font-size: 16px;
+  font-weight: 600;
   padding: 12px 24px;
+  transition: background-color 0.2s ease;
 }
 
 .authLinkFilled:hover,
 .authLinkFilled:focus-visible {
   background: var(--color-brand-primary-hover);
+  color: var(--color-text-on-brand);
 }
 
 .menuToggle:global(.ant-btn) {
@@ -123,11 +157,11 @@
 }
 
 .userBlock:hover .userName {
-  color: var(--color-burgundy-700);
+  color: var(--header-brand);
 }
 
 .avatar {
-  border: 2px solid rgb(var(--color-burgundy-700-rgb) / 12%);
+  border: 2px solid rgb(var(--header-brand-rgb) / 12%);
   border-radius: 50%;
   flex-shrink: 0;
   height: 40px;
@@ -154,6 +188,7 @@
   font-size: 16px;
   font-weight: 600;
   padding: 14px 24px;
+  transition: background-color 0.2s ease;
   white-space: nowrap;
 }
 
@@ -165,6 +200,7 @@
 .logoutButton:hover:not(:disabled),
 .logoutButton:focus-visible:not(:disabled) {
   background: var(--color-brand-primary-hover);
+  color: var(--color-text-on-brand);
 }
 
 @media (max-width: 820px) {
@@ -199,7 +235,7 @@
 
   .menuToggle:global(.ant-btn) {
     align-items: center;
-    color: var(--color-brand-primary);
+    color: var(--header-brand);
     display: inline-flex;
     flex-shrink: 0;
     font-size: 22px;
@@ -213,8 +249,8 @@
   .menuToggle:global(.ant-btn.ant-btn-variant-text:hover),
   .menuToggle:global(.ant-btn.ant-btn-variant-text:focus),
   .menuToggle:global(.ant-btn:active) {
-    background: rgb(var(--color-burgundy-700-rgb) / 8%);
-    color: var(--color-brand-primary);
+    background: rgb(var(--header-brand-rgb) / 8%);
+    color: var(--header-brand);
   }
 
   .navPanel {
@@ -227,7 +263,7 @@
   }
 
   .navPanelOpen {
-    border-top: 1px solid rgb(var(--color-burgundy-700-rgb) / 12%);
+    border-top: 1px solid rgb(var(--header-brand-rgb) / 12%);
     display: flex;
     margin-top: 16px;
     padding-top: 20px;

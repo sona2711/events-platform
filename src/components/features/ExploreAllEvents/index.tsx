@@ -1,19 +1,14 @@
-import { lazy, Suspense, useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { EventCard } from '@/components/features/EventCard'
-import type { ListingEventInput } from '@/components/features/EventCard/types'
+import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import { EXPLORE_EVENT_BY_ID, EXPLORE_EVENTS_CARD_DATA } from './consts'
 import styles from './styles.module.css'
 
-const TicketPaymentModal = lazy(() =>
-  import('@/components/features/TicketPaymentModal').then((module) => ({
-    default: module.TicketPaymentModal,
-  })),
-)
-
 export function ExploreAllEvents() {
   const navigate = useNavigate()
-  const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
+  const resolveEvent = useCallback((eventId: string) => EXPLORE_EVENT_BY_ID.get(eventId), [])
+  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
 
   const handleNavigate = useCallback(
     (eventId: string) => {
@@ -21,14 +16,6 @@ export function ExploreAllEvents() {
     },
     [navigate],
   )
-
-  const handleBook = useCallback((eventId: string) => {
-    setSelectedEvent(EXPLORE_EVENT_BY_ID.get(eventId) ?? null)
-  }, [])
-
-  const handleCloseModal = useCallback(() => {
-    setSelectedEvent(null)
-  }, [])
 
   return (
     <>
@@ -57,11 +44,7 @@ export function ExploreAllEvents() {
         </div>
       </section>
 
-      {selectedEvent !== null ? (
-        <Suspense fallback={null}>
-          <TicketPaymentModal event={selectedEvent} open onClose={handleCloseModal} />
-        </Suspense>
-      ) : null}
+      {bookingModal}
     </>
   )
 }

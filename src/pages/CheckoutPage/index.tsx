@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Empty, Flex, message } from 'antd'
+import { Empty, Flex } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { CheckoutContactForm } from '@/components/features/CheckoutContactForm'
@@ -7,6 +7,7 @@ import { CheckoutOrderSummary } from '@/components/features/CheckoutOrderSummary
 import { CheckoutPaymentForm } from '@/components/features/CheckoutPaymentForm'
 import { CheckoutStepSection } from '@/components/features/CheckoutStepSection'
 import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSelector'
+import { showSystemMessage } from '@/providers/notifications/utils'
 import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
 import { createDefaultTicketSelection, getCheckoutEventById, EMPTY_TICKET_TIERS } from './consts'
@@ -104,11 +105,11 @@ export const CheckoutPage = () => {
     try {
       await sendOrderToTelegram(order)
       setOrderStatus('success')
-      message.success(t('messages.orderSuccess'))
+      showSystemMessage({ content: t('messages.orderSuccess'), variant: 'success' })
     } catch (error) {
       console.error('Failed to send order to Telegram:', error)
       setOrderStatus('error')
-      message.error(t('messages.orderError'))
+      showSystemMessage({ content: t('messages.orderError'), variant: 'error' })
     }
   }
 

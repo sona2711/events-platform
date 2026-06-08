@@ -7,7 +7,7 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px 68px;
+  gap: 28px 52px;
   justify-content: center;
   list-style: none;
   margin: 0;
@@ -24,14 +24,14 @@
   flex-direction: column;
   flex-shrink: 0;
   gap: 10px;
-  min-width: 88px;
+  min-width: 80px;
   padding: 0;
 }
 
 .iconCircle {
   align-items: center;
   background: var(--color-surface-card);
-  border: 1px solid var(--color-brand-primary);
+  border: 2px solid var(--color-brand-primary);
   border-radius: 50%;
   display: inline-flex;
   font-size: 22px;
@@ -52,10 +52,6 @@
   white-space: nowrap;
 }
 
-.tabButtonActive .label {
-  font-weight: 700;
-}
-
 .iconCircleActive {
   background: var(--color-brand-primary);
   color: var(--color-surface-card);
@@ -68,11 +64,11 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .list {
-    gap: 24px 48px;
+    gap: 20px 40px;
   }
 
   .tabButton {
-    min-width: 80px;
+    min-width: 72px;
   }
 
   .iconCircle {
@@ -100,7 +96,7 @@
 
   .list {
     flex-wrap: nowrap;
-    gap: 24px;
+    gap: 20px;
     justify-content: flex-start;
     -webkit-overflow-scrolling: touch;
     overflow-x: auto;
@@ -129,29 +125,21 @@
     height: 52px;
     width: 52px;
   }
-
-  .label {
-    font-size: 13px;
-  }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   .list {
-    gap: 20px;
+    gap: 16px;
   }
 
   .tabButton {
-    min-width: 64px;
+    min-width: 60px;
   }
 
   .iconCircle {
     font-size: 18px;
     height: 48px;
     width: 48px;
-  }
-
-  .label {
-    font-size: 12px;
   }
 }

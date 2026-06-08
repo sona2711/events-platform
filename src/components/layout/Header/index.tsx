@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/_shared/LanguageSwitcher'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { logout } from '@/store/authSlice'
+import { logout, selectAuthLoading, selectAuthUser } from '@/store/authSlice'
 import { AUTH_LINKS, NAV_LINKS } from './consts'
 import styles from './styles.module.css'
 import { getUserAvatarUrl, getUserDisplayName } from './utils'
@@ -18,7 +18,8 @@ const getNavLinkClassName =
 export function Header() {
   const { t } = useTranslation('common')
   const dispatch = useAppDispatch()
-  const { user, loading } = useAppSelector((state) => state.auth)
+  const user = useAppSelector(selectAuthUser)
+  const loading = useAppSelector(selectAuthLoading)
 
   const handleLogout = () => {
     void dispatch(logout())

@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { SupportedLanguage } from '@/i18n'
 import { MOCK_BOOKING_SEEDS, PROFILE_NAV_ITEM_IDS } from './consts'
@@ -48,18 +49,26 @@ export const useProfilePageData = () => {
   const { t } = useTranslation('profile')
   const { t: tCommon } = useTranslation('common')
 
-  const languageOptions: LanguageOption[] = SUPPORTED_LANGUAGE_OPTIONS.map((value) => ({
-    value,
-    label: tCommon(`languages.${value}`),
-  }))
+  const languageOptions: LanguageOption[] = useMemo(
+    () =>
+      SUPPORTED_LANGUAGE_OPTIONS.map((value) => ({
+        value,
+        label: tCommon(`languages.${value}`),
+      })),
+    [tCommon],
+  )
 
-  const bookings = MOCK_BOOKING_SEEDS.map((seed) => mapBookingSeed(seed, t))
+  const bookings = useMemo(() => MOCK_BOOKING_SEEDS.map((seed) => mapBookingSeed(seed, t)), [t])
+
+  const upcomingBookings = useMemo(() => getUpcomingBookings(bookings), [bookings])
+  const pastBookings = useMemo(() => getPastBookings(bookings), [bookings])
+  const cancelledBookings = useMemo(() => getCancelledBookings(bookings), [bookings])
 
   return {
     profileNavItemIds: PROFILE_NAV_ITEM_IDS,
-    upcomingBookings: getUpcomingBookings(bookings),
-    pastBookings: getPastBookings(bookings),
-    cancelledBookings: getCancelledBookings(bookings),
+    upcomingBookings,
+    pastBookings,
+    cancelledBookings,
     languageOptions,
   }
 }

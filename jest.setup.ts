@@ -1,5 +1,11 @@
 import '@testing-library/jest-dom'
 
+jest.mock('@/__mocks__/telegramBot', () => ({
+  sendOrderToTelegram: jest.fn(async () => ({ ok: true })),
+}))
+
+;(globalThis as { __IS_JEST__?: boolean }).__IS_JEST__ = true
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query: string) => ({

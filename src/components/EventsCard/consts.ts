@@ -5,7 +5,10 @@ import TechImage from '@/assets/svg/TechSummit.webp'
 import WineImage from '@/assets/svg/WineTasting.webp'
 import { mapEventsToCardData } from '@/components/features/EventCard/utils'
 import type { ListingEventInput } from '@/components/features/EventCard/types'
+import { Navigation } from 'swiper/modules'
 import type { SliderBreakpointConfig } from './types'
+
+export const SWIPER_MODULES = [Navigation]
 
 export const EVENTS_PREV_BUTTON_CLASS = 'events-prev-button'
 export const EVENTS_NEXT_BUTTON_CLASS = 'events-next-button'
@@ -76,11 +79,11 @@ export const SLIDER_BREAKPOINTS: SliderBreakpointConfig = {
     slidesPerView: 1,
     spaceBetween: 16,
   },
-  640: {
+  768: {
     slidesPerView: 2,
-    spaceBetween: 18,
+    spaceBetween: 20,
   },
-  1024: {
+  1200: {
     slidesPerView: 3,
     spaceBetween: EVENTS_LAYOUT.cardGap,
   },
