@@ -22,9 +22,13 @@ const EventCardFavoriteButton = memo(
     const dispatch = useAppDispatch()
     const isFavorite = useAppSelector(selectIsEventFavorite(eventId))
 
-    const handleToggleFavorite = useCallback(() => {
-      dispatch(toggleFavorite(eventId))
-    }, [dispatch, eventId])
+    const handleToggleFavorite = useCallback(
+      (e: React.MouseEvent) => {
+        e.stopPropagation()
+        dispatch(toggleFavorite(eventId))
+      },
+      [dispatch, eventId],
+    )
 
     const favoriteButtonClassName = isFavorite
       ? joinClassNames(className, styles.favoriteButtonActive)
@@ -51,7 +55,7 @@ const EventCardFavoriteButton = memo(
 EventCardFavoriteButton.displayName = 'EventCardFavoriteButton'
 
 export const EventCard = memo(
-  ({ event, variant = 'default', onBook, noSwipeClassName }: EventCardProps) => {
+  ({ event, variant = 'default', onBook, onNavigate, noSwipeClassName }: EventCardProps) => {
     const isFreePrice = event.priceLabel === 'Free'
     const priceClassName = isFreePrice ? styles.priceFree : styles.price
     const favoriteButtonClassName = joinClassNames(styles.favoriteButton, noSwipeClassName)
@@ -59,12 +63,20 @@ export const EventCard = memo(
     const cardClassName =
       variant === 'default' ? joinClassNames(styles.card, styles.cardDefault) : styles.card
 
-    const handleBookClick = useCallback(() => {
-      onBook?.(event.id)
-    }, [onBook, event.id])
+    const handleCardClick = useCallback(() => {
+      onNavigate?.(event.id)
+    }, [onNavigate, event.id])
+
+    const handleBookClick = useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        onBook?.(event.id)
+      },
+      [onBook, event.id],
+    )
 
     const card = (
-      <article className={cardClassName}>
+      <article className={cardClassName} onClick={handleCardClick}>
         <div className={styles.imageWrapper}>
           <img
             src={event.imageUrl}

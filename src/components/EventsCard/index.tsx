@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { EventCard } from '@/components/features/EventCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -17,6 +18,7 @@ import {
 } from './consts'
 
 export function EventsGrid() {
+  const navigate = useNavigate()
   const resolveEvent = useCallback((eventId: string) => EVENT_BY_ID.get(eventId), [])
   const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
@@ -25,6 +27,13 @@ export function EventsGrid() {
     prevEl: null as HTMLButtonElement | null,
     nextEl: null as HTMLButtonElement | null,
   })
+
+  const handleNavigate = useCallback(
+    (eventId: string) => {
+      navigate(`/event/${eventId}`)
+    },
+    [navigate],
+  )
 
   const bindCarouselNavigation = useCallback((swiper: SwiperInstance) => {
     navigationConfigRef.current.prevEl = navigationPrevRef.current
@@ -96,6 +105,7 @@ export function EventsGrid() {
                     variant="carousel"
                     noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
                     onBook={handleBook}
+                    onNavigate={handleNavigate}
                   />
                 </SwiperSlide>
               ))}

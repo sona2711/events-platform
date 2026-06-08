@@ -9,7 +9,7 @@ import type { ListingEventInput } from '@/components/features/EventCard/types'
 
 export const EXPLORE_EVENTS: ListingEventInput[] = [
   {
-    id: 1,
+    id: 6,
     title: 'Modern Art Exhibition',
     category: 'Art',
     location: 'Cafesjian Center',
@@ -18,7 +18,7 @@ export const EXPLORE_EVENTS: ListingEventInput[] = [
     image: modernArtImage,
   },
   {
-    id: 2,
+    id: 7,
     title: 'Classical Night at Opera House',
     category: 'Classical',
     location: 'Opera House',
@@ -27,7 +27,7 @@ export const EXPLORE_EVENTS: ListingEventInput[] = [
     image: classicalNightImage,
   },
   {
-    id: 3,
+    id: 8,
     title: 'Armenian Gastro Fest',
     category: 'Festival',
     location: 'Republic Square',
@@ -36,7 +36,7 @@ export const EXPLORE_EVENTS: ListingEventInput[] = [
     image: gastroFestImage,
   },
   {
-    id: 4,
+    id: 9,
     title: 'Dilijan Weekend Retreat',
     category: 'Retreat',
     location: 'Dilijan Forest',
@@ -45,7 +45,7 @@ export const EXPLORE_EVENTS: ListingEventInput[] = [
     image: dilijanImage,
   },
   {
-    id: 5,
+    id: 10,
     title: 'Startup Pitch Deck Workshop',
     category: 'Education',
     location: 'Yerevan Startup Hub',
@@ -54,7 +54,7 @@ export const EXPLORE_EVENTS: ListingEventInput[] = [
     image: startupImage,
   },
   {
-    id: 6,
+    id: 11,
     title: 'Hiking to Garni Temple',
     category: 'Tech',
     location: 'Garni Village',

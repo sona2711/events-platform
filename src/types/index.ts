@@ -30,3 +30,24 @@ export interface SignUpFormValues {
 export interface PasswordRecoveryFormValues {
   email: string
 }
+
+export type OrderLineItem = {
+  name: string
+  quantity: number
+  amountAmd: number
+}
+
+export type Order = {
+  id: string
+  total: number
+  status: string
+  createdAt: string
+  userId: string
+  userEmail: string
+  userName: string
+  userPhone?: string
+  paymentMethod: string
+  eventId: string
+  eventTitle: string
+  lineItems: OrderLineItem[]
+}

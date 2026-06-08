@@ -4,6 +4,8 @@ import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
 import wineTastingImage from '@/assets/images/wine-stain-detail.webp'
 import type { CheckoutEvent, TicketSelection, TicketTier } from './types'
 
+export const EMPTY_TICKET_TIERS: TicketTier[] = []
+
 export const CHECKOUT_EVENTS: CheckoutEvent[] = [
   {
     id: 'event-jazz-fest',

@@ -7,6 +7,7 @@ import { ProfileDetailsForm } from '@/components/features/ProfileDetailsForm'
 import { UpcomingEventAlert } from '@/components/features/UpcomingEventAlert'
 import { UserBookingsPanel } from '@/components/features/UserBookingsPanel'
 import { UserProfileSidebar } from '@/components/features/UserProfileSidebar'
+import { UserSavedEventsPanel } from '@/components/features/UserSavedEventsPanel'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { selectProfile, setAvatarUrl, updateProfileDetails } from '@/store/profile'
 import { isValidAvatarFile, readFileAsDataUrl } from './avatarUtils'
@@ -86,14 +87,7 @@ export const UserProfilePage = () => {
           />
         )
       case 'saved':
-        return (
-          <section className={styles.placeholderPanel} aria-labelledby="profile-saved-title">
-            <h2 className={styles.placeholderTitle} id="profile-saved-title">
-              {t('sections.saved.title')}
-            </h2>
-            <p className={styles.placeholderText}>{t('sections.saved.description')}</p>
-          </section>
-        )
+        return <UserSavedEventsPanel />
       case 'feedback':
         return (
           <section className={styles.placeholderPanel} aria-labelledby="profile-feedback-title">

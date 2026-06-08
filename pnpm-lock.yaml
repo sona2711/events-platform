@@ -26,6 +26,9 @@ importers:
       axios:
         specifier: ^1
         version: 1.16.1
+      circle-flags:
+        specifier: ^2.8.3
+        version: 2.8.3
       dayjs:
         specifier: ^1.11.21
         version: 1.11.21
@@ -1581,6 +1584,9 @@ packages:
   ci-info@3.9.0:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
     engines: {node: '>=8'}
+
+  circle-flags@2.8.3:
+    resolution: {integrity: sha512-62gm4tY7evXzNdLP+nFOzxEtCagbY4nSnrPNn/yOWFAvApvOWCAvyqL+NeLN+nfhGOGc4L+oSgEheqM3XE5w7g==}
 
   cjs-module-lexer@1.4.3:
     resolution: {integrity: sha512-9z8TZaGM1pfswYeXrUpzPrkx8UnWYdhJclsiYMm6x/w5+nN+8Tf/LnAgfLGQCm59qAOxU8WwHEq2vNwF6i4j+Q==}
@@ -5241,6 +5247,8 @@ snapshots:
   char-regex@1.0.2: {}
 
   ci-info@3.9.0: {}
+
+  circle-flags@2.8.3: {}
 
   cjs-module-lexer@1.4.3: {}
 

@@ -10,6 +10,7 @@ import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
 import checkoutEn from '@/locales/checkout/en.json'
 import { CheckoutPage } from '@/pages/CheckoutPage'
+import { favoritesReducer } from '@/store/favorites'
 import { profileReducer } from '@/store/profile'
 import type { UserProfile } from './types'
 import { UserProfilePage } from './index'
@@ -24,18 +25,22 @@ const loggedInProfile: UserProfile = {
   preferredLanguage: 'en',
 }
 
-const createTestStore = (profile: UserProfile = loggedInProfile) =>
+const createTestStore = (profile: UserProfile = loggedInProfile, favoriteEventIds: string[] = []) =>
   configureStore({
     reducer: {
+      favorites: favoritesReducer,
       profile: profileReducer,
     },
     preloadedState: {
+      favorites: {
+        eventIds: favoriteEventIds,
+      },
       profile,
     },
   })
 
-const renderPage = (profile: UserProfile = loggedInProfile) => {
-  const store = createTestStore(profile)
+const renderPage = (profile: UserProfile = loggedInProfile, favoriteEventIds: string[] = []) => {
+  const store = createTestStore(profile, favoriteEventIds)
 
   return {
     store,
@@ -101,6 +106,16 @@ describe('UserProfilePage', () => {
       screen.getByRole('heading', { name: profileEn.sections.saved.title }),
     ).toBeInTheDocument()
     expect(screen.queryByLabelText(profileEn.bookings.aria)).not.toBeInTheDocument()
+  })
+
+  it('shows favorite event cards when saved events exist', async () => {
+    const user = userEvent.setup()
+    renderPage(loggedInProfile, ['1', '2'])
+
+    await user.click(screen.getByRole('button', { name: profileEn.nav.saved }))
+
+    expect(screen.getByRole('heading', { name: 'Jazz Night at Cascade' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Tech Meetup Yerevan' })).toBeInTheDocument()
   })
 
   it('navigates to checkout with booking eventId when pay tickets is clicked', async () => {

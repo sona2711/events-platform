@@ -10,18 +10,21 @@ import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSele
 import { showSystemMessage } from '@/providers/notifications/utils'
 import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
-import {
-  CHECKOUT_SUBMIT_DELAY_MS,
-  createDefaultTicketSelection,
-  getCheckoutEventById,
-} from './consts'
+import { createDefaultTicketSelection, getCheckoutEventById, EMPTY_TICKET_TIERS } from './consts'
 import type {
   CheckoutContactValues,
   CheckoutPaymentValues,
   OrderStatus,
   TicketSelection,
 } from './types'
-import { buildOrderTotals, getCheckoutReadiness, getCheckoutStepStatus } from './utils'
+import {
+  buildOrderTotals,
+  getCheckoutReadiness,
+  getCheckoutStepStatus,
+  normalizeCardNumber,
+} from './utils'
+import { sendOrderToTelegram } from '@/__mocks__/telegramBot'
+import type { Order } from '@/types'
 import styles from './styles.module.css'
 
 export const CheckoutPage = () => {
@@ -29,7 +32,7 @@ export const CheckoutPage = () => {
   const { eventId = '' } = useParams<{ eventId: string }>()
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
-  const ticketTiers = event?.ticketTiers ?? []
+  const ticketTiers = event?.ticketTiers ?? EMPTY_TICKET_TIERS
 
   const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
     event ? createDefaultTicketSelection(event.ticketTiers) : {},
@@ -79,14 +82,32 @@ export const CheckoutPage = () => {
     }
 
     setOrderStatus('submitting')
+    const now = new Date().toISOString()
 
+    const order: Order = {
+      id: crypto.randomUUID(),
+      total: totals.totalAmd,
+      status: 'pending',
+      createdAt: now,
+      userId: profile.id,
+      userEmail: contactValues!.email,
+      userName: contactValues!.fullName,
+      userPhone: profile.phone || undefined,
+      paymentMethod: `****${normalizeCardNumber(paymentValues!.cardNumber).slice(-4)}`,
+      eventId: event.id,
+      eventTitle: t(event.titleKey),
+      lineItems: totals.lineItems.map((item) => ({
+        name: t(item.nameKey),
+        quantity: item.quantity,
+        amountAmd: item.amountAmd,
+      })),
+    }
     try {
-      await new Promise((resolve) => {
-        window.setTimeout(resolve, CHECKOUT_SUBMIT_DELAY_MS)
-      })
+      await sendOrderToTelegram(order)
       setOrderStatus('success')
       showSystemMessage({ content: t('messages.orderSuccess'), variant: 'success' })
-    } catch {
+    } catch (error) {
+      console.error('Failed to send order to Telegram:', error)
       setOrderStatus('error')
       showSystemMessage({ content: t('messages.orderError'), variant: 'error' })
     }
@@ -146,7 +167,7 @@ export const CheckoutPage = () => {
         <CheckoutOrderSummary
           event={event}
           totals={totals}
-          isReady={readiness.isReady}
+          isReady={readiness.isReady && orderStatus !== 'success'}
           isSubmitting={isSubmitting}
           onPlaceOrder={() => {
             void handlePlaceOrder()

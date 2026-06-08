@@ -14,6 +14,7 @@ export type EventCardProps = {
   event: EventCardData
   variant?: EventCardVariant
   onBook?: (eventId: string) => void
+  onNavigate?: (eventId: string) => void
   noSwipeClassName?: string
 }
 
