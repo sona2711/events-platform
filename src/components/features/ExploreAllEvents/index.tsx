@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { EventCard } from '@/components/features/EventCard'
 import type { ListingEventInput } from '@/components/features/EventCard/types'
 import { EXPLORE_EVENT_BY_ID, EXPLORE_EVENTS_CARD_DATA } from './consts'
@@ -12,7 +12,15 @@ const TicketPaymentModal = lazy(() =>
 )
 
 export function ExploreAllEvents() {
+  const navigate = useNavigate()
   const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
+
+  const handleNavigate = useCallback(
+    (eventId: string) => {
+      navigate(`/event/${eventId}`)
+    },
+    [navigate],
+  )
 
   const handleBook = useCallback((eventId: string) => {
     setSelectedEvent(EXPLORE_EVENT_BY_ID.get(eventId) ?? null)
@@ -32,7 +40,12 @@ export function ExploreAllEvents() {
 
           <div className={styles.grid}>
             {EXPLORE_EVENTS_CARD_DATA.map((event) => (
-              <EventCard key={event.id} event={event} onBook={handleBook} />
+              <EventCard
+                key={event.id}
+                event={event}
+                onBook={handleBook}
+                onNavigate={handleNavigate}
+              />
             ))}
           </div>
 

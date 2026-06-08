@@ -49,6 +49,12 @@ const CheckoutPage = lazy(() =>
   })),
 )
 
+const EventDetailPage = lazy(() =>
+  import('@/pages/EventDetailPage').then((module) => ({
+    default: module.EventDetailPage,
+  })),
+)
+
 const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
@@ -63,6 +69,7 @@ export const appRoutes: RouteObject[] = [
         element: createElement(Navigate, { to: '/categories', replace: true }),
       },
       { path: 'categories', element: createElement(CategoriesPage) },
+      { path: 'event/:eventId', element: createElement(EventDetailPage) },
       {
         element: createElement(ProtectedRoute),
         children: [

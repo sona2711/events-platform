@@ -20,6 +20,7 @@ export const areEventCardPropsEqual = (prev: EventCardProps, next: EventCardProp
   prev.variant === next.variant &&
   prev.noSwipeClassName === next.noSwipeClassName &&
   prev.onBook === next.onBook &&
+  prev.onNavigate === next.onNavigate &&
   prev.event.id === next.event.id &&
   prev.event.imageUrl === next.event.imageUrl &&
   prev.event.categoryLabel === next.event.categoryLabel &&

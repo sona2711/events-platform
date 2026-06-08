@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+import { MOCK_EVENTS, MOCK_EVENTS_BY_ID } from './eventsData'
 import { addSubscriptionEmail, subscriptionEmailTable } from './subscriptionEmailTable'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -15,10 +16,16 @@ const isSubscriptionRequestBody = (value: unknown): value is SubscriptionRequest
 
 export const handlers = [
   http.get('/api/events', () => {
-    return HttpResponse.json([
-      { id: '1', title: 'Event One', date: '2026-06-01' },
-      { id: '2', title: 'Event Two', date: '2026-06-15' },
-    ])
+    return HttpResponse.json(MOCK_EVENTS)
+  }),
+  http.get('/api/events/:id', ({ params }) => {
+    const event = MOCK_EVENTS_BY_ID.get(params.id as string)
+
+    if (!event) {
+      return HttpResponse.json({ message: 'Event not found' }, { status: 404 })
+    }
+
+    return HttpResponse.json(event)
   }),
   http.get('/api/subscriptions', () => {
     return HttpResponse.json(subscriptionEmailTable)

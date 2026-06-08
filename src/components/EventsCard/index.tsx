@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './styles.module.css'
 import { EventCard } from '@/components/features/EventCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -23,9 +24,17 @@ const TicketPaymentModal = lazy(() =>
 )
 
 export function EventsGrid() {
+  const navigate = useNavigate()
   const [selectedEvent, setSelectedEvent] = useState<ListingEventInput | null>(null)
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
+
+  const handleNavigate = useCallback(
+    (eventId: string) => {
+      navigate(`/event/${eventId}`)
+    },
+    [navigate],
+  )
 
   const handleBook = useCallback((eventId: string) => {
     setSelectedEvent(EVENT_BY_ID.get(eventId) ?? null)
@@ -105,6 +114,7 @@ export function EventsGrid() {
                     variant="carousel"
                     noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
                     onBook={handleBook}
+                    onNavigate={handleNavigate}
                   />
                 </SwiperSlide>
               ))}
