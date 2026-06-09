@@ -70,12 +70,10 @@ export const appRoutes: RouteObject[] = [
       },
       { path: 'categories', element: createElement(CategoriesPage) },
       { path: 'event/:eventId', element: createElement(EventDetailPage) },
+      { path: 'checkout/:eventId', element: createElement(CheckoutPage) },
       {
         element: createElement(ProtectedRoute),
-        children: [
-          { path: 'profile', element: createElement(UserProfilePage) },
-          { path: 'checkout/:eventId', element: createElement(CheckoutPage) },
-        ],
+        children: [{ path: 'profile', element: createElement(UserProfilePage) }],
       },
       {
         path: '*',

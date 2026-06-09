@@ -1,7 +1,12 @@
 import { EnvironmentOutlined } from '@ant-design/icons'
 import { Button, Card, Divider, Flex, Image, List, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { formatCheckoutAmount } from '@/pages/CheckoutPage/utils'
+import {
+  formatCheckoutAmount,
+  getCheckoutEventLocation,
+  getCheckoutEventTitle,
+  getOrderLineItemName,
+} from '@/pages/CheckoutPage/utils'
 import type { CheckoutOrderSummaryProps } from './types'
 import styles from './styles.module.css'
 
@@ -16,6 +21,8 @@ export const CheckoutOrderSummary = ({
   const { t } = useTranslation('checkout')
   const freeLabel = t('summary.free')
   const formatAmount = (amountAmd: number) => formatCheckoutAmount(amountAmd, freeLabel)
+  const eventTitle = getCheckoutEventTitle(event)
+  const eventLocation = getCheckoutEventLocation(event)
 
   return (
     <Card
@@ -27,17 +34,17 @@ export const CheckoutOrderSummary = ({
           <Image
             className={styles.heroImage}
             src={event.imageUrl}
-            alt={event.title}
+            alt={eventTitle}
             preview={false}
           />
           <div className={styles.heroOverlay} aria-hidden />
           <Flex vertical gap={6} className={styles.heroContent}>
             <Typography.Title level={4} className={styles.eventTitle}>
-              {event.title}
+              {eventTitle}
             </Typography.Title>
             <Typography.Text className={styles.location}>
               <EnvironmentOutlined aria-hidden />
-              {event.location}
+              {eventLocation}
             </Typography.Text>
           </Flex>
         </div>
@@ -51,7 +58,7 @@ export const CheckoutOrderSummary = ({
           <List.Item className={styles.lineItem}>
             <Typography.Text type="secondary">
               {t('summary.lineItem', {
-                name: item.name,
+                name: getOrderLineItemName(item),
                 count: item.quantity,
               })}
             </Typography.Text>
