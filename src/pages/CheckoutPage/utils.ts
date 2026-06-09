@@ -37,7 +37,7 @@ export const buildOrderTotals = (selection: TicketSelection, tiers: TicketTier[]
       const quantity = selection[tier.id] ?? 0
       return {
         tierId: tier.id,
-        nameKey: tier.nameKey,
+        name: tier.name,
         quantity,
         amountAmd: quantity * tier.priceAmd,
       }
@@ -59,6 +59,11 @@ export const buildOrderTotals = (selection: TicketSelection, tiers: TicketTier[]
 
 export const formatCurrency = (amountAmd: number): string =>
   `${amountAmd.toLocaleString('en-US')} AMD`
+
+export const formatCheckoutAmount = (amountAmd: number, freeLabel: string): string =>
+  amountAmd === 0 ? freeLabel : formatCurrency(amountAmd)
+
+export const isFreeCheckout = (totals: OrderTotals): boolean => totals.totalAmd === 0
 
 export const normalizeCardNumber = (value = ''): string => value.replace(/\D/g, '')
 
@@ -92,10 +97,11 @@ export const getCheckoutReadiness = (
   selection: TicketSelection,
   contactValues: CheckoutContactValues | null,
   paymentValues: CheckoutPaymentValues | null,
+  isFree = false,
 ): CheckoutReadiness => {
   const hasTickets = getTotalTicketCount(selection) > 0
   const hasContact = isValidContactValues(contactValues)
-  const hasPayment = isValidPaymentValues(paymentValues)
+  const hasPayment = isFree || isValidPaymentValues(paymentValues)
 
   return {
     hasTickets,
@@ -109,9 +115,13 @@ export const isCheckoutReady = (
   selection: TicketSelection,
   contactValues: CheckoutContactValues | null,
   paymentValues: CheckoutPaymentValues | null,
-): boolean => getCheckoutReadiness(selection, contactValues, paymentValues).isReady
+  isFree = false,
+): boolean => getCheckoutReadiness(selection, contactValues, paymentValues, isFree).isReady
 
-export const getActiveCheckoutStep = (readiness: CheckoutReadiness): CheckoutStepNumber => {
+export const getActiveCheckoutStep = (
+  readiness: CheckoutReadiness,
+  isFree = false,
+): CheckoutStepNumber => {
   if (!readiness.hasTickets) {
     return 1
   }
@@ -120,12 +130,13 @@ export const getActiveCheckoutStep = (readiness: CheckoutReadiness): CheckoutSte
     return 2
   }
 
-  return 3
+  return isFree ? 2 : 3
 }
 
 export const getCheckoutStepStatus = (
   stepNumber: CheckoutStepNumber,
   readiness: CheckoutReadiness,
+  isFree = false,
 ): CheckoutStepStatus => {
   if (stepNumber === 1) {
     return readiness.hasTickets ? 'completed' : 'active'
@@ -137,6 +148,14 @@ export const getCheckoutStepStatus = (
     }
 
     return readiness.hasContact ? 'completed' : 'active'
+  }
+
+  if (isFree) {
+    if (!readiness.hasTickets || !readiness.hasContact) {
+      return 'pending'
+    }
+
+    return 'completed'
   }
 
   if (!readiness.hasTickets || !readiness.hasContact) {

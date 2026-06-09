@@ -6,14 +6,11 @@ import { CheckoutOrderSummary } from '@/components/features/CheckoutOrderSummary
 import '@/i18n'
 import i18n from '@/i18n'
 import checkoutEn from '@/locales/checkout/en.json'
-import {
-  CHECKOUT_EVENTS,
-  CHECKOUT_TICKET_TIERS,
-  DEFAULT_TICKET_SELECTION,
-} from '@/pages/CheckoutPage/consts'
+import { CHECKOUT_TICKET_TIERS, DEFAULT_TICKET_SELECTION } from '@/pages/CheckoutPage/consts'
+import { CHECKOUT_EVENT_OVERRIDES } from '@/pages/CheckoutPage/checkoutOverrides'
 import { buildOrderTotals } from '@/pages/CheckoutPage/utils'
 
-const event = CHECKOUT_EVENTS[0]
+const event = CHECKOUT_EVENT_OVERRIDES[0]
 const totals = buildOrderTotals(DEFAULT_TICKET_SELECTION, CHECKOUT_TICKET_TIERS)
 
 const renderSummary = (props: {

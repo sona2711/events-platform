@@ -2,16 +2,16 @@ export type OrderStatus = 'idle' | 'submitting' | 'success' | 'error'
 
 export type CheckoutEvent = {
   id: string
-  titleKey: string
-  locationKey: string
+  title: string
+  location: string
   imageUrl: string
   ticketTiers: TicketTier[]
 }
 
 export type TicketTier = {
   id: string
-  nameKey: string
-  descriptionKey: string
+  name: string
+  description: string
   priceAmd: number
   maxQuantity: number
 }
@@ -31,7 +31,7 @@ export type CheckoutPaymentValues = {
 
 export type OrderLineItem = {
   tierId: string
-  nameKey: string
+  name: string
   quantity: number
   amountAmd: number
 }

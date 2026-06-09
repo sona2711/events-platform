@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Empty, Flex } from 'antd'
+import { Empty, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { CheckoutContactForm } from '@/components/features/CheckoutContactForm'
@@ -10,7 +10,8 @@ import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSele
 import { showSystemMessage } from '@/providers/notifications/utils'
 import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
-import { createDefaultTicketSelection, getCheckoutEventById, EMPTY_TICKET_TIERS } from './consts'
+import { createDefaultTicketSelection, EMPTY_TICKET_TIERS } from './consts'
+import { getCheckoutEventById } from './eventResolver'
 import type {
   CheckoutContactValues,
   CheckoutPaymentValues,
@@ -21,6 +22,7 @@ import {
   buildOrderTotals,
   getCheckoutReadiness,
   getCheckoutStepStatus,
+  isFreeCheckout,
   normalizeCardNumber,
 } from './utils'
 import { sendOrderToTelegram } from '@/__mocks__/telegramBot'
@@ -64,9 +66,11 @@ export const CheckoutPage = () => {
     [ticketSelection, ticketTiers],
   )
 
+  const isFree = isFreeCheckout(totals)
+
   const readiness = useMemo(
-    () => getCheckoutReadiness(ticketSelection, contactValues, paymentValues),
-    [contactValues, paymentValues, ticketSelection],
+    () => getCheckoutReadiness(ticketSelection, contactValues, paymentValues, isFree),
+    [contactValues, isFree, paymentValues, ticketSelection],
   )
 
   const handleQuantityChange = (tierId: string, quantity: number) => {
@@ -93,11 +97,13 @@ export const CheckoutPage = () => {
       userEmail: contactValues!.email,
       userName: contactValues!.fullName,
       userPhone: profile.phone || undefined,
-      paymentMethod: `****${normalizeCardNumber(paymentValues!.cardNumber).slice(-4)}`,
+      paymentMethod: isFree
+        ? 'Free'
+        : `****${normalizeCardNumber(paymentValues!.cardNumber).slice(-4)}`,
       eventId: event.id,
-      eventTitle: t(event.titleKey),
+      eventTitle: event.title,
       lineItems: totals.lineItems.map((item) => ({
-        name: t(item.nameKey),
+        name: item.name,
         quantity: item.quantity,
         amountAmd: item.amountAmd,
       })),
@@ -105,7 +111,10 @@ export const CheckoutPage = () => {
     try {
       await sendOrderToTelegram(order)
       setOrderStatus('success')
-      showSystemMessage({ content: t('messages.orderSuccess'), variant: 'success' })
+      showSystemMessage({
+        content: isFree ? t('messages.reservationSuccess') : t('messages.orderSuccess'),
+        variant: 'success',
+      })
     } catch (error) {
       console.error('Failed to send order to Telegram:', error)
       setOrderStatus('error')
@@ -132,7 +141,7 @@ export const CheckoutPage = () => {
           stepNumber={1}
           title={t('steps.tickets.title')}
           ariaLabel={t('steps.tickets.aria')}
-          status={getCheckoutStepStatus(1, readiness)}
+          status={getCheckoutStepStatus(1, readiness, isFree)}
         >
           <CheckoutTicketSelector
             tiers={ticketTiers}
@@ -145,7 +154,7 @@ export const CheckoutPage = () => {
           stepNumber={2}
           title={t('steps.contact.title')}
           ariaLabel={t('steps.contact.aria')}
-          status={getCheckoutStepStatus(2, readiness)}
+          status={getCheckoutStepStatus(2, readiness, isFree)}
         >
           <CheckoutContactForm
             initialValues={contactInitialValues}
@@ -157,9 +166,13 @@ export const CheckoutPage = () => {
           stepNumber={3}
           title={t('steps.payment.title')}
           ariaLabel={t('steps.payment.aria')}
-          status={getCheckoutStepStatus(3, readiness)}
+          status={getCheckoutStepStatus(3, readiness, isFree)}
         >
-          <CheckoutPaymentForm onValidChange={setPaymentValues} />
+          {isFree ? (
+            <Typography.Text type="secondary">{t('payment.freeNotice')}</Typography.Text>
+          ) : (
+            <CheckoutPaymentForm onValidChange={setPaymentValues} />
+          )}
         </CheckoutStepSection>
       </Flex>
 
@@ -167,6 +180,7 @@ export const CheckoutPage = () => {
         <CheckoutOrderSummary
           event={event}
           totals={totals}
+          isFreeCheckout={isFree}
           isReady={readiness.isReady && orderStatus !== 'success'}
           isSubmitting={isSubmitting}
           onPlaceOrder={() => {

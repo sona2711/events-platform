@@ -8,7 +8,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import '@/i18n'
 import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
-import checkoutEn from '@/locales/checkout/en.json'
 import { CheckoutPage } from '@/pages/CheckoutPage'
 import { favoritesReducer } from '@/store/favorites'
 import { profileReducer } from '@/store/profile'
@@ -126,18 +125,53 @@ describe('UserProfilePage', () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
       renderPage()
 
-      const jazzFestCard = screen.getByText(checkoutEn.event.jazzFest.title).closest('article')
-      expect(jazzFestCard).not.toBeNull()
+      const jazzFestCard = await screen.findByText('Yerevan Jazz Fest 2026')
+      expect(jazzFestCard.closest('article')).not.toBeNull()
 
       await user.click(
-        within(jazzFestCard as HTMLElement).getByRole('button', {
+        within(jazzFestCard.closest('article') as HTMLElement).getByRole('button', {
           name: profileEn.bookings.actions.payTickets,
         }),
       )
 
       await waitFor(() => {
-        expect(screen.getByText(checkoutEn.event.jazzFest.title)).toBeInTheDocument()
+        expect(screen.getByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+        expect(screen.getByText('General Admission')).toBeInTheDocument()
       })
+    } finally {
+      jest.useRealTimers()
+    }
+  })
+
+  it('renders upcoming bookings from resolved event details', async () => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2026-05-01T12:00:00+04:00'))
+
+    try {
+      renderPage()
+
+      expect(await screen.findByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+      expect(screen.getByText('Yerevan Marathon 2026')).toBeInTheDocument()
+    } finally {
+      jest.useRealTimers()
+    }
+  })
+
+  it('renders past and canceled bookings from profile snapshots', async () => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date('2026-05-01T12:00:00+04:00'))
+
+    try {
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+      renderPage()
+
+      await screen.findByText('Yerevan Jazz Fest 2026')
+
+      await user.click(screen.getByRole('tab', { name: profileEn.bookings.tabs.past }))
+      expect(screen.getByText('Armenian Wine Tasting')).toBeInTheDocument()
+
+      await user.click(screen.getByRole('tab', { name: profileEn.bookings.tabs.cancelled }))
+      expect(screen.getByText('Traditional Armenian Feast')).toBeInTheDocument()
     } finally {
       jest.useRealTimers()
     }

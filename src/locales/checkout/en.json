@@ -107,18 +107,22 @@
       "cvvRequired": "Enter CVV",
       "cvvInvalid": "Enter a valid CVV"
     },
-    "secureNote": "Secure 256-bit SSL Encrypted Payment"
+    "secureNote": "Secure 256-bit SSL Encrypted Payment",
+    "freeNotice": "No payment is required for this free event."
   },
   "summary": {
     "aria": "Order summary",
     "serviceFee": "Service Fee",
     "processingFee": "Processing Fee",
     "total": "Total",
+    "free": "Free",
     "placeOrder": "Place Order",
+    "reserveTicket": "Reserve Ticket",
     "lineItem": "{{name}} (x{{count}})"
   },
   "messages": {
     "orderSuccess": "Your order was placed successfully!",
+    "reservationSuccess": "Your reservation was confirmed!",
     "orderError": "Unable to place your order. Please try again.",
     "eventNotFound": "This event checkout is not available."
   },
