@@ -166,6 +166,7 @@
   flex-shrink: 0;
   height: 40px;
   object-fit: cover;
+  object-position: center top;
   width: 40px;
 }
 
