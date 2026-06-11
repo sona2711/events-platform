@@ -6,6 +6,14 @@ jest.mock('@/__mocks__/telegramBot', () => ({
 
 ;(globalThis as { __IS_JEST__?: boolean }).__IS_JEST__ = true
 
+if (typeof URL.createObjectURL !== 'function') {
+  URL.createObjectURL = jest.fn(() => 'blob:mock-url')
+}
+
+if (typeof URL.revokeObjectURL !== 'function') {
+  URL.revokeObjectURL = jest.fn()
+}
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query: string) => ({

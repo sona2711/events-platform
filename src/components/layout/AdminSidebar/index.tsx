@@ -35,13 +35,15 @@ export const AdminSidebar = () => {
             <p className={styles.brand}>{t('brand')}</p>
             <p className={styles.subtitle}>{t('adminSidebar.subtitle')}</p>
           </div>
-          <Button
-            className={styles.mobileClose}
-            icon={<CloseOutlined />}
-            onClick={closeMobile}
-            aria-label={t('adminSidebar.closeMenu')}
-            type="text"
-          />
+          {mobileOpen && (
+            <Button
+              className={styles.mobileClose}
+              icon={<CloseOutlined />}
+              onClick={closeMobile}
+              aria-label={t('adminSidebar.closeMenu')}
+              type="text"
+            />
+          )}
         </div>
 
         <nav className={styles.nav} aria-label={t('aria.adminNav')}>
