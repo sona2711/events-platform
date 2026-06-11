@@ -1,0 +1,64 @@
+.section {
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+}
+
+.label:global(.ant-typography) {
+  display: block;
+  margin: 0 0 8px;
+  color: var(--color-text-secondary);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.name:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.followButton:global(.ant-btn) {
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.followButton:global(.ant-btn:hover),
+.followButton:global(.ant-btn:focus) {
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+  background: rgb(var(--color-blue-600-rgb) / 8%);
+}
+
+.unfollowButton:global(.ant-btn) {
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border-color: rgb(0 0 0 / 18%);
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.unfollowButton:global(.ant-btn:hover),
+.unfollowButton:global(.ant-btn:focus) {
+  border-color: rgb(0 0 0 / 28%);
+  color: var(--color-text-primary);
+  background: rgb(0 0 0 / 4%);
+}
+
+@media (max-width: 640px) {
+  .name:global(.ant-typography) {
+    font-size: 24px;
+  }
+}

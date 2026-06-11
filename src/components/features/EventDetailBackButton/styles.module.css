@@ -1,0 +1,16 @@
+.backButton:global(.ant-btn) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 0;
+  margin-bottom: 32px;
+  color: var(--color-action-primary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.backButton:global(.ant-btn:hover),
+.backButton:global(.ant-btn:focus) {
+  color: var(--color-blue-700);
+}
