@@ -1,13 +1,14 @@
 import { useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { EventCard } from '@/components/features/EventCard'
-import { useBookEvent } from '@/hooks/useBookEvent'
-import { EXPLORE_EVENTS_CARD_DATA } from './consts'
+import { useEventBookingModal } from '@/hooks/useEventBookingModal'
+import { EXPLORE_EVENT_BY_ID, EXPLORE_EVENTS_CARD_DATA } from './consts'
 import styles from './styles.module.css'
 
 export function ExploreAllEvents() {
   const navigate = useNavigate()
-  const handleBook = useBookEvent()
+  const resolveEvent = useCallback((eventId: string) => EXPLORE_EVENT_BY_ID.get(eventId), [])
+  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
 
   const handleNavigate = useCallback(
     (eventId: string) => {
@@ -42,6 +43,8 @@ export function ExploreAllEvents() {
           </div>
         </div>
       </section>
+
+      {bookingModal}
     </>
   )
 }

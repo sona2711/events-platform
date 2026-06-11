@@ -4,10 +4,11 @@ import styles from './styles.module.css'
 import { EventCard } from '@/components/features/EventCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperInstance } from 'swiper'
-import { useBookEvent } from '@/hooks/useBookEvent'
+import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
+  EVENT_BY_ID,
   EVENTS_CARD_DATA,
   EVENTS_NEXT_BUTTON_CLASS,
   EVENTS_PREV_BUTTON_CLASS,
@@ -18,7 +19,8 @@ import {
 
 export function EventsGrid() {
   const navigate = useNavigate()
-  const handleBook = useBookEvent()
+  const resolveEvent = useCallback((eventId: string) => EVENT_BY_ID.get(eventId), [])
+  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
   const navigationConfigRef = useRef({
@@ -111,6 +113,8 @@ export function EventsGrid() {
           </div>
         </div>
       </section>
+
+      {bookingModal}
     </>
   )
 }
