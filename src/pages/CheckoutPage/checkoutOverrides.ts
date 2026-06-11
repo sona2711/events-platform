@@ -1,33 +1,45 @@
 import feastImage from '@/assets/images/ArmenianGastroFest.webp'
 import marathonImage from '@/assets/images/HikingToGarniTemple.webp'
-import jazzFestImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
-import wineTastingImage from '@/assets/images/wine-stain-detail.webp'
-import type { CheckoutEvent } from './types'
+import type { CheckoutEvent, TicketTier } from './types'
 
-/** Profile booking events with custom ticket tiers. All other IDs resolve from mock event data. */
-export const CHECKOUT_EVENT_OVERRIDES: CheckoutEvent[] = [
-  {
-    id: 'event-jazz-fest',
-    title: 'Yerevan Jazz Fest 2026',
-    location: 'Cascade Complex',
-    imageUrl: jazzFestImage,
-    ticketTiers: [
-      {
-        id: 'general-admission',
-        name: 'General Admission',
-        description: 'Includes standard entry and floor access.',
-        priceAmd: 15_000,
-        maxQuantity: 10,
-      },
-      {
-        id: 'vip-backstage',
-        name: 'VIP Backstage Pass',
-        description: 'Meet the band + 2 complimentary drinks.',
-        priceAmd: 40_000,
-        maxQuantity: 4,
-      },
-    ],
-  },
+/** Custom ticket tiers for mock events that exist on detail pages. Display fields come from mock data. */
+export const CHECKOUT_TICKET_TIER_OVERRIDES: Record<string, TicketTier[]> = {
+  'event-jazz-fest': [
+    {
+      id: 'general-admission',
+      name: 'General Admission',
+      description: 'Includes standard entry and floor access.',
+      priceAmd: 15_000,
+      maxQuantity: 10,
+    },
+    {
+      id: 'vip-backstage',
+      name: 'VIP Backstage Pass',
+      description: 'Meet the band + 2 complimentary drinks.',
+      priceAmd: 40_000,
+      maxQuantity: 4,
+    },
+  ],
+  'event-wine-tasting': [
+    {
+      id: 'tasting-pass',
+      name: 'Tasting Pass',
+      description: 'Sample 6 regional wines with guided notes.',
+      priceAmd: 10_000,
+      maxQuantity: 6,
+    },
+    {
+      id: 'sommelier',
+      name: 'Sommelier Experience',
+      description: 'Private tasting session with a certified sommelier.',
+      priceAmd: 18_000,
+      maxQuantity: 2,
+    },
+  ],
+}
+
+/** Profile-only booking events with no detail page in mock data. */
+export const CHECKOUT_STANDALONE_EVENTS: CheckoutEvent[] = [
   {
     id: 'event-feast',
     title: 'Traditional Armenian Feast',
@@ -72,30 +84,11 @@ export const CHECKOUT_EVENT_OVERRIDES: CheckoutEvent[] = [
       },
     ],
   },
-  {
-    id: 'event-wine-tasting',
-    title: 'Armenian Wine Tasting',
-    location: 'Saryan Street',
-    imageUrl: wineTastingImage,
-    ticketTiers: [
-      {
-        id: 'tasting-pass',
-        name: 'Tasting Pass',
-        description: 'Sample 6 regional wines with guided notes.',
-        priceAmd: 10_000,
-        maxQuantity: 6,
-      },
-      {
-        id: 'sommelier',
-        name: 'Sommelier Experience',
-        description: 'Private tasting session with a certified sommelier.',
-        priceAmd: 18_000,
-        maxQuantity: 2,
-      },
-    ],
-  },
 ]
 
-export const CHECKOUT_EVENT_OVERRIDES_BY_ID = new Map(
-  CHECKOUT_EVENT_OVERRIDES.map((event) => [event.id, event]),
+export const CHECKOUT_STANDALONE_EVENTS_BY_ID = new Map(
+  CHECKOUT_STANDALONE_EVENTS.map((event) => [event.id, event]),
 )
+
+/** @deprecated Use CHECKOUT_STANDALONE_EVENTS_BY_ID — kept for profile event resolution fallback. */
+export const CHECKOUT_EVENT_OVERRIDES_BY_ID = CHECKOUT_STANDALONE_EVENTS_BY_ID

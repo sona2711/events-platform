@@ -1,162 +1,67 @@
-import modernArtImage from '@/assets/images/modernArtsExhibition.webp'
-import classicalNightImage from '@/assets/images/ClassicalNightAtOperaHouse.webp'
-import gastroFestImage from '@/assets/images/ArmenianGastroFest.webp'
-import dilijanImage from '@/assets/images/DilijanWeekendRetreat.webp'
-import startupImage from '@/assets/images/StratupPitchDeckReport.webp'
-import hikingImage from '@/assets/images/HikingToGarniTemple.webp'
-import wineImage from '@/assets/images/wine.webp'
-import headwayImage from '@/assets/images/headway-F2KRf_QfCqw-unsplash.webp'
-import ewanBuckImage from '@/assets/images/ewan-buck-xc9B3i-1QiI-unsplash.webp'
-import carolineImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash.webp'
-import dennyImage from '@/assets/images/denny-muller-z_disLOcoKM-unsplash.webp'
-import wineStainImage from '@/assets/images/wine-stain-detail.webp'
-import type { CategoryEvent } from './types'
+import { parsePriceAmd } from '@/mock-api/eventDetailUtils'
+import type { EventRecord } from '@/mock-api/eventDetailTypes'
+import { CATEGORY_EVENTS } from '@/mock-api/eventsData'
+import type { CategoryEvent, EventCategory } from './types'
 
-export const MOCK_CATEGORY_EVENTS: CategoryEvent[] = [
-  {
-    id: 'event-modern-art',
-    imageUrl: modernArtImage,
-    categoryLabel: 'ART',
-    title: 'Modern Art Exhibiti...',
-    location: 'Cafesjian Center',
-    date: 'Oct 12, 2026',
-    priceLabel: '2,000 AMD',
-    category: 'Arts',
-    priceAmd: 2_000,
-    dateIso: '2026-10-12',
-  },
-  {
-    id: 'event-classical-night',
-    imageUrl: classicalNightImage,
-    categoryLabel: 'CLASSICAL',
-    title: 'Classical Night at O...',
-    location: 'Opera House',
-    date: 'Oct 12, 2026',
-    priceLabel: '10,000 AMD',
-    category: 'Music',
-    priceAmd: 10_000,
-    dateIso: '2026-10-12',
-  },
-  {
-    id: 'event-gastro-fest',
-    imageUrl: gastroFestImage,
-    categoryLabel: 'FESTIVAL',
-    title: 'Armenian Gastro F...',
-    location: 'Republic Square',
-    date: 'Oct 14, 2026',
-    priceLabel: '5,000 AMD',
-    category: 'Food & Drink',
-    priceAmd: 5_000,
-    dateIso: '2026-10-14',
-  },
-  {
-    id: 'event-dilijan-retreat',
-    imageUrl: dilijanImage,
-    categoryLabel: 'RETREAT',
-    title: 'Dilijan Weekend Re...',
-    location: 'Dilijan Forest',
-    date: 'Oct 18, 2026',
-    priceLabel: '15,000 AMD',
-    category: 'Health',
-    priceAmd: 15_000,
-    dateIso: '2026-10-18',
-  },
-  {
-    id: 'event-startup-pitch',
-    imageUrl: startupImage,
-    categoryLabel: 'EDUCATION',
-    title: 'Startup Pitch Deck...',
-    location: 'Yerevan Startup Hub',
-    date: 'Oct 20, 2026',
-    priceLabel: 'Free',
-    category: 'Business',
-    priceAmd: 0,
-    dateIso: '2026-10-20',
-  },
-  {
-    id: 'event-hiking-garni',
-    imageUrl: hikingImage,
-    categoryLabel: 'OUTDOORS',
-    title: 'Hiking to Garni Tem...',
-    location: 'Garni Village',
-    date: 'Oct 22, 2026',
-    priceLabel: '8,000 AMD',
-    category: 'Health',
-    priceAmd: 8_000,
-    dateIso: '2026-10-22',
-  },
-  {
-    id: 'event-wine-tasting',
-    imageUrl: wineImage,
-    categoryLabel: 'TASTING',
-    title: 'Armenian Wine Tasting',
-    location: 'Cascade Complex',
-    date: 'Oct 12, 2026',
-    priceLabel: '12,000 AMD',
-    category: 'Food & Drink',
-    priceAmd: 12_000,
-    dateIso: '2026-10-12',
-  },
-  {
-    id: 'event-jazz-night',
-    imageUrl: headwayImage,
-    categoryLabel: 'JAZZ',
-    title: 'Jazz Night at Republic',
-    location: 'Republic Square',
-    date: 'Oct 15, 2026',
-    priceLabel: '7,500 AMD',
-    category: 'Music',
-    priceAmd: 7_500,
-    dateIso: '2026-10-15',
-  },
-  {
-    id: 'event-night-market',
-    imageUrl: ewanBuckImage,
-    categoryLabel: 'MARKET',
-    title: 'Vernissage Night Market',
-    location: 'Vernissage Market',
-    date: 'Oct 16, 2026',
-    priceLabel: 'Free',
-    category: 'Nightlife',
-    priceAmd: 0,
-    dateIso: '2026-10-16',
-  },
-  {
-    id: 'event-farm-to-table',
-    imageUrl: carolineImage,
-    categoryLabel: 'DINING',
-    title: 'Farm to Table Dinner',
-    location: 'Matenadaran',
-    date: 'Oct 17, 2026',
-    priceLabel: '18,000 AMD',
-    category: 'Food & Drink',
-    priceAmd: 18_000,
-    dateIso: '2026-10-17',
-  },
-  {
-    id: 'event-rooftop-party',
-    imageUrl: dennyImage,
-    categoryLabel: 'PARTY',
-    title: 'Rooftop Sunset Party',
-    location: 'Cascade Complex',
-    date: 'Oct 19, 2026',
-    priceLabel: '6,000 AMD',
-    category: 'Nightlife',
-    priceAmd: 6_000,
-    dateIso: '2026-10-19',
-  },
-  {
-    id: 'event-tech-meetup',
-    imageUrl: wineStainImage,
-    categoryLabel: 'TECH',
-    title: 'Yerevan Tech Meetup',
-    location: 'Yerevan Startup Hub',
-    date: 'Oct 21, 2026',
-    priceLabel: '3,000 AMD',
-    category: 'Business',
-    priceAmd: 3_000,
-    dateIso: '2026-10-21',
-  },
-]
+const toCategoryLabel = (category: string, title: string): string => {
+  if (title.includes('Classical')) return 'CLASSICAL'
+  if (title.includes('Jazz')) return 'JAZZ'
+  if (title.includes('Wine')) return 'TASTING'
+  if (title.includes('Gastro')) return 'FESTIVAL'
+  if (title.includes('Market')) return 'MARKET'
+  if (title.includes('Rooftop')) return 'PARTY'
+  if (title.includes('Hiking')) return 'OUTDOORS'
+  if (title.includes('Retreat')) return 'RETREAT'
+  if (title.includes('Pitch')) return 'EDUCATION'
+  if (title.includes('Tech Meetup')) return 'TECH'
+  if (category === 'Arts') return 'ART'
+
+  return category.toUpperCase()
+}
+
+const MONTH_TO_NUMBER: Record<string, string> = {
+  Jan: '01',
+  Feb: '02',
+  Mar: '03',
+  Apr: '04',
+  May: '05',
+  Jun: '06',
+  Jul: '07',
+  Aug: '08',
+  Sep: '09',
+  Oct: '10',
+  Nov: '11',
+  Dec: '12',
+}
+
+const parseDisplayDateToIso = (displayDate: string): string => {
+  const match = /^(\w{3})\s+(\d{1,2}),\s+(\d{4})$/.exec(displayDate.trim())
+  if (!match) {
+    return ''
+  }
+
+  const [, month, day, year] = match
+  const monthNumber = MONTH_TO_NUMBER[month]
+  if (!monthNumber) {
+    return ''
+  }
+
+  return `${year}-${monthNumber}-${day.padStart(2, '0')}`
+}
+
+const toCategoryEvent = (event: EventRecord): CategoryEvent => ({
+  id: event.id,
+  imageUrl: event.imageUrl,
+  categoryLabel: toCategoryLabel(event.category, event.title),
+  title: event.title,
+  location: event.location,
+  date: event.date,
+  priceLabel: event.price,
+  category: event.category as EventCategory,
+  priceAmd: parsePriceAmd(event.price),
+  dateIso: parseDisplayDateToIso(event.date),
+})
+
+export const MOCK_CATEGORY_EVENTS: CategoryEvent[] = CATEGORY_EVENTS.map(toCategoryEvent)
 
 export const CATEGORY_EVENT_BY_ID = new Map(MOCK_CATEGORY_EVENTS.map((event) => [event.id, event]))

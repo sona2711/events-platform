@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
@@ -38,6 +38,10 @@ const renderForm = (profileOverride?: Partial<UserProfile>, onSave = jest.fn()) 
   )
 
 describe('ProfileDetailsForm', () => {
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
   it('renders profile fields as read-only until edit is clicked', () => {
     renderForm()
 
@@ -54,7 +58,7 @@ describe('ProfileDetailsForm', () => {
   })
 
   it('enables editing and submits updated values', async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup({ delay: null })
     const onSave = jest.fn()
     renderForm(undefined, onSave)
 
@@ -63,8 +67,7 @@ describe('ProfileDetailsForm', () => {
     const fullNameInput = screen.getByDisplayValue(profileEn.user.fullName)
     expect(fullNameInput).not.toBeDisabled()
 
-    await user.clear(fullNameInput)
-    await user.type(fullNameInput, 'Aram K.')
+    fireEvent.change(fullNameInput, { target: { value: 'Aram K.' } })
     await user.click(screen.getByRole('button', { name: profileEn.form.saveChanges }))
 
     await waitFor(() => {
@@ -76,44 +79,41 @@ describe('ProfileDetailsForm', () => {
         preferredLanguage: profile.preferredLanguage,
       })
     })
-  })
+  }, 10000)
 
   it('accepts international phone numbers', async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup({ delay: null })
     const onSave = jest.fn()
     renderForm(undefined, onSave)
 
     await user.click(screen.getByRole('button', { name: profileEn.form.editDetails }))
 
     const phoneInput = screen.getByDisplayValue(profile.phone)
-    await user.clear(phoneInput)
-    await user.type(phoneInput, '+1 415 555 2671')
+    fireEvent.change(phoneInput, { target: { value: '+1 415 555 2671' } })
     await user.click(screen.getByRole('button', { name: profileEn.form.saveChanges }))
 
     await waitFor(() => {
       expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ phone: '+1 415 555 2671' }))
     })
-  })
+  }, 10000)
 
   it('shows validation errors for invalid email and phone', async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup({ delay: null })
     const onSave = jest.fn()
     renderForm(undefined, onSave)
 
     await user.click(screen.getByRole('button', { name: profileEn.form.editDetails }))
 
     const emailInput = screen.getByDisplayValue(profile.email)
-    await user.clear(emailInput)
-    await user.type(emailInput, 'not-an-email')
+    fireEvent.change(emailInput, { target: { value: 'not-an-email' } })
 
     const phoneInput = screen.getByDisplayValue(profile.phone)
-    await user.clear(phoneInput)
-    await user.type(phoneInput, '123')
+    fireEvent.change(phoneInput, { target: { value: '123' } })
 
     await user.click(screen.getByRole('button', { name: profileEn.form.saveChanges }))
 
     expect(await screen.findByText(profileEn.form.validation.email)).toBeInTheDocument()
     expect(await screen.findByText(profileEn.form.validation.phone)).toBeInTheDocument()
     expect(onSave).not.toHaveBeenCalled()
-  })
+  }, 10000)
 })

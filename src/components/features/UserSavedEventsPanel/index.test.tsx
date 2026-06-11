@@ -43,9 +43,11 @@ describe('UserSavedEventsPanel', () => {
   })
 
   it('shows favorite event cards when saved home events exist', () => {
-    renderPanel(['1', '2'])
+    renderPanel(['event-jazz-fest', 'event-tech-meetup-tumo'])
 
-    expect(screen.getByRole('heading', { name: 'Jazz Night at Cascade' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Yerevan Jazz Night at Cascade' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Tech Meetup Yerevan' })).toBeInTheDocument()
     expect(screen.queryByText(profileEn.sections.saved.description)).not.toBeInTheDocument()
   })
@@ -53,8 +55,8 @@ describe('UserSavedEventsPanel', () => {
   it('shows favorite event cards when saved category events exist', () => {
     renderPanel(['event-modern-art', 'event-gastro-fest'])
 
-    expect(screen.getByRole('heading', { name: 'Modern Art Exhibiti...' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Armenian Gastro F...' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Modern Art Exhibition' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Armenian Gastro Fest' })).toBeInTheDocument()
     expect(screen.queryByText(profileEn.sections.saved.description)).not.toBeInTheDocument()
   })
 })

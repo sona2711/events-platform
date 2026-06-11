@@ -1,0 +1,94 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 35%, rgb(0 0 0 / 72%) 100%);
+  pointer-events: none;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+  color: var(--color-text-on-brand);
+}
+
+.badge:global(.ant-tag) {
+  width: fit-content;
+  margin: 0;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 999px;
+  background: #e0e7ff;
+  color: var(--color-blue-800);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.title:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-on-brand);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.meta {
+  flex-wrap: wrap;
+}
+
+.metaItem:global(.ant-typography) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--color-text-on-brand);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.metaIcon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    height: 280px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .title:global(.ant-typography) {
+    font-size: 28px;
+  }
+
+  .metaItem:global(.ant-typography) {
+    font-size: 14px;
+  }
+}

@@ -6,24 +6,24 @@ describe('getCheckoutEventById', () => {
 
     expect(event).toMatchObject({
       id: 'event-jazz-fest',
-      title: 'Yerevan Jazz Fest 2026',
-      location: 'Cascade Complex',
+      title: 'Yerevan Jazz Night at Cascade',
+      location: 'Cascade Complex, Yerevan',
     })
     expect(event?.ticketTiers).toHaveLength(2)
   })
 
   it('builds checkout data from shared mock events for detail page ids', () => {
-    const event = getCheckoutEventById('1')
+    const event = getCheckoutEventById('event-wine-food-festival')
 
     expect(event).toMatchObject({
-      id: '1',
-      title: 'Jazz Night at Cascade',
-      location: 'Cascade Complex',
+      id: 'event-wine-food-festival',
+      title: 'Wine & Food Festival',
+      location: 'Republic Square',
     })
     expect(event?.ticketTiers).toHaveLength(1)
     expect(event?.ticketTiers[0]).toMatchObject({
       name: 'General Admission',
-      priceAmd: 8_000,
+      priceAmd: 12_000,
     })
   })
 

@@ -42,7 +42,7 @@ describe('CheckoutPage', () => {
   it('shows event-specific summary and ticket tiers for a profile booking event id', () => {
     renderCheckoutPage('event-jazz-fest')
 
-    expect(screen.getByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+    expect(screen.getByText('Yerevan Jazz Night at Cascade')).toBeInTheDocument()
     expect(screen.getByText('General Admission')).toBeInTheDocument()
     expect(screen.getByText('VIP Backstage Pass')).toBeInTheDocument()
   })
@@ -56,9 +56,9 @@ describe('CheckoutPage', () => {
   })
 
   it('shows checkout for a home event detail id from mock data', () => {
-    renderCheckoutPage('1')
+    renderCheckoutPage('event-jazz-fest')
 
-    expect(screen.getByText('Jazz Night at Cascade')).toBeInTheDocument()
+    expect(screen.getByText('Yerevan Jazz Night at Cascade')).toBeInTheDocument()
     expect(screen.getByText('General Admission')).toBeInTheDocument()
   })
 
@@ -76,7 +76,7 @@ describe('CheckoutPage', () => {
   })
 
   it('shows free checkout flow without payment form for a free event', async () => {
-    renderCheckoutPage('2')
+    renderCheckoutPage('event-tech-meetup-tumo')
 
     expect(screen.getByText('Tech Meetup Yerevan')).toBeInTheDocument()
     expect(screen.getAllByText(checkoutEn.summary.free).length).toBeGreaterThan(0)

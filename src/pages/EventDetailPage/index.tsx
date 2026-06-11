@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeftOutlined, CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
+import { EventDetailAbout } from '@/components/features/EventDetailAbout'
+import { EventDetailBackButton } from '@/components/features/EventDetailBackButton'
+import { EventDetailHero } from '@/components/features/EventDetailHero'
+import { EventDetailInfoCard } from '@/components/features/EventDetailInfoCard'
+import { EventDetailLayout } from '@/components/features/EventDetailLayout'
+import { EventDetailLocation } from '@/components/features/EventDetailLocation'
+import { EventDetailOrganizer } from '@/components/features/EventDetailOrganizer'
+import { EventDetailTags } from '@/components/features/EventDetailTags'
+import { EventDetailTicketCard } from '@/components/features/EventDetailTicketCard'
 import type { EventDetail } from './types'
 import styles from './styles.module.css'
 
@@ -65,44 +73,31 @@ export function EventDetailPage() {
     )
   }
 
-  const isFree = event.price === 'Free'
-
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <button type="button" className={styles.backButton} onClick={() => navigate(-1)}>
-          <ArrowLeftOutlined aria-hidden />
-          Back
-        </button>
-
-        <div className={styles.imageWrapper}>
-          <img src={event.imageUrl} alt={event.title} className={styles.image} />
-          <span className={styles.category}>{event.category}</span>
-        </div>
-
-        <div className={styles.content}>
-          <h1 className={styles.title}>{event.title}</h1>
-
-          <div className={styles.meta}>
-            <p className={styles.metaItem}>
-              <EnvironmentOutlined className={styles.metaIcon} aria-hidden />
-              {event.location}
-            </p>
-            <p className={styles.metaItem}>
-              <CalendarOutlined className={styles.metaIcon} aria-hidden />
-              {event.date}
-            </p>
-          </div>
-
-          <p className={styles.description}>{event.description}</p>
-
-          <div className={styles.footer}>
-            <span className={isFree ? styles.priceFree : styles.price}>{event.price}</span>
-            <Link to={`/checkout/${event.id}`} className={styles.bookButton}>
-              Book Now
-            </Link>
-          </div>
-        </div>
+        <EventDetailBackButton onBack={() => navigate(-1)} />
+        <EventDetailHero event={event} />
+        <EventDetailLayout
+          main={
+            <>
+              <EventDetailOrganizer organizer={event.organizer} eventTitle={event.title} />
+              <EventDetailAbout description={event.description} highlights={event.highlights} />
+              <EventDetailLocation location={event.locationDetails} />
+              <EventDetailTags tags={event.tags} />
+            </>
+          }
+          sidebar={
+            <>
+              <EventDetailTicketCard
+                eventId={event.id}
+                ticket={event.ticket}
+                contactPhone={event.contactPhone}
+              />
+              <EventDetailInfoCard items={event.eventInfo} />
+            </>
+          }
+        />
       </div>
     </main>
   )

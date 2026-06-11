@@ -1,0 +1,36 @@
+.section {
+  padding-top: 40px;
+}
+
+.heading:global(.ant-typography) {
+  margin: 0 0 16px;
+  color: var(--color-text-primary);
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.tag:global(.ant-tag) {
+  margin: 0;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #e9ecef;
+  color: var(--color-text-primary);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .heading:global(.ant-typography) {
+    font-size: 24px;
+  }
+
+  .tag:global(.ant-tag) {
+    font-size: 14px;
+    padding: 7px 14px;
+  }
+}

@@ -19,7 +19,7 @@ export type EventCardProps = {
 }
 
 export type ListingEventInput = {
-  id: number
+  id: string
   image: string
   category: string
   title: string

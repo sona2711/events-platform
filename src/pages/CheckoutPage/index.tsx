@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Empty, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { CheckoutContactForm } from '@/components/features/CheckoutContactForm'
 import { CheckoutOrderSummary } from '@/components/features/CheckoutOrderSummary'
 import { CheckoutPaymentForm } from '@/components/features/CheckoutPaymentForm'
@@ -10,19 +10,21 @@ import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSele
 import { showSystemMessage } from '@/providers/notifications/utils'
 import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
-import { createDefaultTicketSelection, EMPTY_TICKET_TIERS } from './consts'
-import { getCheckoutEventById } from './eventResolver'
+import { createInitialTicketSelection, getCheckoutEventById, EMPTY_TICKET_TIERS } from './consts'
 import type {
   CheckoutContactValues,
+  CheckoutLocationState,
   CheckoutPaymentValues,
   OrderStatus,
   TicketSelection,
 } from './types'
 import {
   buildOrderTotals,
+  getCheckoutEventTitle,
   getCheckoutReadiness,
   getCheckoutStepStatus,
   isFreeCheckout,
+  getOrderLineItemName,
   normalizeCardNumber,
 } from './utils'
 import { sendOrderToTelegram } from '@/__mocks__/telegramBot'
@@ -32,12 +34,16 @@ import styles from './styles.module.css'
 export const CheckoutPage = () => {
   const { t } = useTranslation('checkout')
   const { eventId = '' } = useParams<{ eventId: string }>()
+  const location = useLocation()
+  const checkoutNavigationState = location.state as CheckoutLocationState | null
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
   const ticketTiers = event?.ticketTiers ?? EMPTY_TICKET_TIERS
 
   const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
-    event ? createDefaultTicketSelection(event.ticketTiers) : {},
+    event
+      ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationState?.ticketQuantity)
+      : {},
   )
   const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(null)
   const [paymentValues, setPaymentValues] = useState<CheckoutPaymentValues | null>(null)
@@ -46,12 +52,15 @@ export const CheckoutPage = () => {
   useEffect(() => {
     const checkoutEvent = getCheckoutEventById(eventId)
     if (checkoutEvent) {
-      setTicketSelection(createDefaultTicketSelection(checkoutEvent.ticketTiers))
+      const navigationState = location.state as CheckoutLocationState | null
+      setTicketSelection(
+        createInitialTicketSelection(checkoutEvent.ticketTiers, navigationState?.ticketQuantity),
+      )
       setContactValues(null)
       setPaymentValues(null)
       setOrderStatus('idle')
     }
-  }, [eventId])
+  }, [eventId, location.state])
 
   const contactInitialValues = useMemo<CheckoutContactValues>(
     () => ({
@@ -101,9 +110,9 @@ export const CheckoutPage = () => {
         ? 'Free'
         : `****${normalizeCardNumber(paymentValues!.cardNumber).slice(-4)}`,
       eventId: event.id,
-      eventTitle: event.title,
+      eventTitle: getCheckoutEventTitle(event),
       lineItems: totals.lineItems.map((item) => ({
-        name: item.name,
+        name: getOrderLineItemName(item),
         quantity: item.quantity,
         amountAmd: item.amountAmd,
       })),

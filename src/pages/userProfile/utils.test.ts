@@ -4,15 +4,15 @@ import { getPastBookings } from './utils'
 
 describe('resolveEventByIdSync', () => {
   it('resolves shared mock events by id', () => {
-    expect(resolveEventByIdSync('1')).toMatchObject({
-      title: 'Jazz Night at Cascade',
+    expect(resolveEventByIdSync('event-jazz-fest')).toMatchObject({
+      title: 'Yerevan Jazz Night at Cascade',
     })
   })
 
   it('falls back to checkout overrides for profile booking ids', () => {
-    expect(resolveEventByIdSync('event-jazz-fest')).toMatchObject({
-      title: 'Yerevan Jazz Fest 2026',
-      location: 'Cascade Complex',
+    expect(resolveEventByIdSync('event-marathon')).toMatchObject({
+      title: 'Yerevan Marathon 2026',
+      location: 'Northern Avenue',
     })
   })
 })

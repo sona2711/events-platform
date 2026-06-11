@@ -16,31 +16,32 @@ import carolineImage from '@/assets/images/caroline-attwood-z38uTGNpNnA-unsplash
 import dennyImage from '@/assets/images/denny-muller-z_disLOcoKM-unsplash.webp'
 import wineStainImage from '@/assets/images/wine-stain-detail.webp'
 
-export type EventDetail = {
-  id: string
-  title: string
-  category: string
-  imageUrl: string
-  location: string
-  date: string
-  price: string
-  description: string
-}
+import type { EventRecord } from './eventDetailTypes'
 
-export const MOCK_EVENTS: EventDetail[] = [
+export type {
+  EventDetail,
+  EventInfoItem,
+  EventLocationDetails,
+  EventRecord,
+  EventTicketDetails,
+} from './eventDetailTypes'
+
+export const MOCK_EVENTS: EventRecord[] = [
   {
-    id: '1',
-    title: 'Jazz Night at Cascade',
+    id: 'event-jazz-fest',
+    title: 'Yerevan Jazz Night at Cascade',
     category: 'Music',
+    badgeLabel: 'LIVE SESSION',
     imageUrl: JazzImage,
-    location: 'Cascade Complex',
+    location: 'Cascade Complex, Yerevan',
     date: 'Oct 18, 2026',
-    price: '8,000 AMD',
+    time: '7:00 PM',
+    price: '15,000 AMD',
     description:
       'An unforgettable evening of live jazz music set against the stunning backdrop of the Cascade Complex. Featuring local and international artists, this intimate concert brings together jazz lovers for a night of soulful melodies and improvisational brilliance.',
   },
   {
-    id: '2',
+    id: 'event-tech-meetup-tumo',
     title: 'Tech Meetup Yerevan',
     category: 'Technology',
     imageUrl: TechImage,
@@ -51,7 +52,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       "Connect with the brightest minds in Armenia's tech scene at TUMO Center. This monthly meetup features lightning talks, panel discussions, and networking opportunities for developers, designers, and entrepreneurs.",
   },
   {
-    id: '3',
+    id: 'event-wine-food-festival',
     title: 'Wine & Food Festival',
     category: 'Festival',
     imageUrl: WineImage,
@@ -62,7 +63,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       'Celebrate the richness of Armenian cuisine and wine culture at Republic Square. Sample over 50 local wines, traditional dishes, and artisan products from producers across all regions of Armenia.',
   },
   {
-    id: '4',
+    id: 'event-hike-hatis',
     title: 'Morning Hike to Hatis',
     category: 'Adventure',
     imageUrl: HikingImage,
@@ -73,7 +74,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       'Rise early and tackle the breathtaking trails of Hatis Mountain with an experienced guide. The hike offers panoramic views of Yerevan and Mount Ararat — a rewarding adventure for nature lovers of all fitness levels.',
   },
   {
-    id: '5',
+    id: 'event-art-exhibition',
     title: 'Art Exhibition',
     category: 'Art',
     imageUrl: ArtImage,
@@ -84,7 +85,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       'Explore a curated selection of contemporary Armenian art at the National Gallery of Armenia. Featuring works by emerging and established artists, this exhibition explores themes of identity, memory, and transformation.',
   },
   {
-    id: '6',
+    id: 'event-modern-art',
     title: 'Modern Art Exhibition',
     category: 'Art',
     imageUrl: modernArtImage,
@@ -95,7 +96,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       'Step inside the Cafesjian Center for the Arts and discover a world of modern creativity. This exhibition showcases bold new works from Armenian and international artists, spanning painting, sculpture, and multimedia installations.',
   },
   {
-    id: '7',
+    id: 'event-classical-night',
     title: 'Classical Night at Opera House',
     category: 'Classical',
     imageUrl: classicalNightImage,
@@ -106,7 +107,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       'Experience the grandeur of classical music at the Yerevan Opera House. An evening of orchestral masterpieces performed by the Armenian Philharmonic Orchestra, featuring works by Komitas, Khachaturian, and Beethoven.',
   },
   {
-    id: '8',
+    id: 'event-gastro-fest',
     title: 'Armenian Gastro Fest',
     category: 'Festival',
     imageUrl: gastroFestImage,
@@ -117,7 +118,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       "A celebration of Armenian food culture right in the heart of Yerevan. Sample dishes from every corner of the country, meet the chefs behind the recipes, and discover why Armenian cuisine is one of the region's best-kept secrets.",
   },
   {
-    id: '9',
+    id: 'event-dilijan-retreat',
     title: 'Dilijan Weekend Retreat',
     category: 'Retreat',
     imageUrl: dilijanImage,
@@ -128,7 +129,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       "Escape the city for a restorative weekend in the forests of Dilijan. Guided meditation, forest walks, and wellness workshops set against the backdrop of Armenia's most serene national park. Accommodation and meals included.",
   },
   {
-    id: '10',
+    id: 'event-startup-pitch',
     title: 'Startup Pitch Deck Workshop',
     category: 'Education',
     imageUrl: startupImage,
@@ -139,7 +140,7 @@ export const MOCK_EVENTS: EventDetail[] = [
       "Learn how to craft a pitch deck that gets investors' attention. This hands-on workshop is led by experienced founders and VCs from Armenia's growing startup ecosystem. Open to entrepreneurs at any stage.",
   },
   {
-    id: '11',
+    id: 'event-hiking-garni',
     title: 'Hiking to Garni Temple',
     category: 'Tech',
     imageUrl: hikingToGarniImage,
@@ -151,7 +152,7 @@ export const MOCK_EVENTS: EventDetail[] = [
   },
 ]
 
-const CATEGORY_EVENTS: EventDetail[] = [
+export const CATEGORY_EVENTS: EventRecord[] = [
   {
     id: 'event-modern-art',
     title: 'Modern Art Exhibition',
