@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/_shared/LanguageSwitcher'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { logout, selectAuthLoading, selectAuthUser } from '@/store/authSlice'
+import { selectProfile } from '@/store/profile'
 import { AUTH_LINKS, NAV_LINKS } from './consts'
 import styles from './styles.module.css'
 import { getUserAvatarUrl, getUserDisplayName } from './utils'
@@ -19,7 +20,11 @@ export function Header() {
   const { t } = useTranslation('common')
   const dispatch = useAppDispatch()
   const user = useAppSelector(selectAuthUser)
+  const profile = useAppSelector(selectProfile)
   const loading = useAppSelector(selectAuthLoading)
+
+  const displayName = profile.fullName.trim() || (user ? getUserDisplayName(user) : '')
+  const avatarUrl = profile.avatarUrl || (user ? getUserAvatarUrl(user) : '')
 
   const handleLogout = () => {
     void dispatch(logout())
@@ -86,16 +91,10 @@ export function Header() {
                   className={styles.userBlock}
                   to="/profile"
                   onClick={closeMobile}
-                  aria-label={t('header.openProfile', { name: getUserDisplayName(user) })}
+                  aria-label={t('header.openProfile', { name: displayName })}
                 >
-                  <img
-                    className={styles.avatar}
-                    src={getUserAvatarUrl(user)}
-                    alt=""
-                    width={40}
-                    height={40}
-                  />
-                  <span className={styles.userName}>{getUserDisplayName(user)}</span>
+                  <img className={styles.avatar} src={avatarUrl} alt="" width={40} height={40} />
+                  <span className={styles.userName}>{displayName}</span>
                 </Link>
                 <button
                   type="button"
