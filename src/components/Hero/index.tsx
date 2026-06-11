@@ -11,7 +11,7 @@ export function Hero() {
         src={fireworksBg}
         alt=""
         aria-hidden="true"
-        fetchPriority="high"
+        fetchpriority="high"
         loading="eager"
         decoding="async"
       />

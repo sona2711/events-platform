@@ -1,5 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import '@/i18n'
@@ -41,8 +40,10 @@ describe('AdminPage', () => {
     expect(screen.getByRole('region', { name: 'Registrations filters' })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: 'Registrations table' })).toBeInTheDocument()
 
+    const statsList = screen.getByRole('list', { name: 'Registration statistics' })
+
     STAT_CARD_META.forEach((card) => {
-      expect(screen.getByText(card.label)).toBeInTheDocument()
+      expect(within(statsList).getByText(card.label)).toBeInTheDocument()
     })
   })
 
@@ -60,39 +61,38 @@ describe('AdminPage', () => {
     expect(screen.getByText(pending.toLocaleString())).toBeInTheDocument()
   })
 
-  it('filters table rows when searching by name', async () => {
-    const user = userEvent.setup()
+  it('filters table rows when searching by name', () => {
     renderAdminPage()
 
     expect(screen.getByText(`(${REGISTRATIONS_DATA.length})`)).toBeInTheDocument()
 
-    await user.type(screen.getByLabelText('Search registrations by name or email'), 'Anahit')
+    fireEvent.change(screen.getByLabelText('Search registrations by name or email'), {
+      target: { value: 'Anahit' },
+    })
 
     expect(screen.getByText('Anahit Sargsyan')).toBeInTheDocument()
     expect(screen.queryByText('Gevorg Abrahamyan')).not.toBeInTheDocument()
     expect(screen.getByText('(1)')).toBeInTheDocument()
   })
 
-  it('resets filters when reset is clicked', async () => {
-    const user = userEvent.setup()
+  it('resets filters when reset is clicked', () => {
     renderAdminPage()
 
     const searchInput = screen.getByLabelText('Search registrations by name or email')
-    await user.type(searchInput, 'Anahit')
+    fireEvent.change(searchInput, { target: { value: 'Anahit' } })
     expect(screen.getByText('(1)')).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Reset all filters' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Reset all filters' }))
 
     expect(searchInput).toHaveValue('')
     expect(screen.getByText(`(${REGISTRATIONS_DATA.length})`)).toBeInTheDocument()
   })
 
-  it('cancels selected registrations and shows a success message', async () => {
-    const user = userEvent.setup()
+  it('cancels selected registrations and shows a success message', () => {
     renderAdminPage()
 
-    await user.click(screen.getByLabelText('Select Anahit Sargsyan'))
-    await user.click(screen.getByRole('button', { name: 'Cancel Selected' }))
+    fireEvent.click(screen.getByLabelText('Select Anahit Sargsyan'))
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel Selected' }))
 
     const tableRegion = screen.getByRole('region', { name: 'Registrations table' })
     const anahitRow = within(tableRegion).getByText('Anahit Sargsyan').closest('tr')

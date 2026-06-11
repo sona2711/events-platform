@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ConfigProvider, Modal } from 'antd'
 import { RegistrationsTable } from './index'
@@ -121,11 +121,10 @@ describe('RegistrationsTable', () => {
     expect(onCancelSelected).toHaveBeenCalledTimes(1)
   })
 
-  it('opens the edit modal with the selected registration details', async () => {
-    const user = userEvent.setup()
+  it('opens the edit modal with the selected registration details', () => {
     renderTable()
 
-    await user.click(screen.getByRole('button', { name: 'Edit registration for Anahit Sargsyan' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Edit registration for Anahit Sargsyan' }))
 
     const dialog = screen.getByRole('dialog', { name: 'Edit Registration' })
     expect(dialog).toBeInTheDocument()
@@ -133,17 +132,14 @@ describe('RegistrationsTable', () => {
     expect(within(dialog).getByLabelText('Email')).toHaveValue('anahit@email.am')
   })
 
-  it('calls onCancelItem after confirming cancellation in the modal', async () => {
-    const user = userEvent.setup()
+  it('calls onCancelItem after confirming cancellation in the modal', () => {
     const confirmSpy = jest.spyOn(Modal, 'confirm').mockImplementation((config) => {
       config.onOk?.()
       return { destroy: jest.fn(), update: jest.fn() }
     })
     const { onCancelItem } = renderTable()
 
-    await user.click(
-      screen.getByRole('button', { name: 'Cancel registration for Anahit Sargsyan' }),
-    )
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel registration for Anahit Sargsyan' }))
 
     expect(confirmSpy).toHaveBeenCalled()
     expect(onCancelItem).toHaveBeenCalledWith('reg-1')
@@ -159,15 +155,14 @@ describe('RegistrationsTable', () => {
     ).toBeDisabled()
   })
 
-  it('exports data to csv when export button is clicked', async () => {
-    const user = userEvent.setup()
+  it('exports data to csv when export button is clicked', () => {
     const clickSpy = jest.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {})
     const createObjectURLSpy = jest.spyOn(URL, 'createObjectURL').mockReturnValue('blob:mock-url')
     const revokeObjectURLSpy = jest.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
 
     renderTable()
 
-    await user.click(screen.getByRole('button', { name: 'Export to CSV' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Export to CSV' }))
 
     expect(createObjectURLSpy).toHaveBeenCalled()
     expect(clickSpy).toHaveBeenCalled()

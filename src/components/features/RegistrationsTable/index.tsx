@@ -288,7 +288,7 @@ export const RegistrationsTable = ({
         onCancel={handleEditModalClose}
         okText="Save Changes"
         cancelText="Cancel"
-        destroyOnClose
+        destroyOnHidden
       >
         <Form form={form} layout="vertical" name="edit-registration">
           <Form.Item
