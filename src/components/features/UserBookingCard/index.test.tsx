@@ -11,7 +11,7 @@ import { UserBookingCard } from './index'
 const upcomingBooking: UserBooking = {
   id: 'booking-1',
   eventId: 'event-jazz-fest',
-  title: 'Yerevan Jazz Fest 2026',
+  title: 'Yerevan Jazz Night at Cascade',
   category: 'MUSIC',
   dateTime: 'Jun 02, 2026 · 19:30',
   startsAt: '2026-06-02T19:30:00+04:00',

@@ -1,5 +1,8 @@
+import { CHECKOUT_TICKET_TIER_OVERRIDES } from './checkoutOverrides'
+import { getCheckoutEventById } from './eventResolver'
 import type { TicketSelection, TicketTier } from './types'
-import { CHECKOUT_EVENT_OVERRIDES } from './checkoutOverrides'
+
+export { getCheckoutEventById }
 
 export const EMPTY_TICKET_TIERS: TicketTier[] = []
 
@@ -19,8 +22,28 @@ export const createDefaultTicketSelection = (
     return selection
   }, {})
 
+export const createInitialTicketSelection = (
+  tiers: TicketTier[],
+  ticketQuantity?: number,
+): TicketSelection => {
+  if (tiers.length === 0) {
+    return {}
+  }
+
+  if (typeof ticketQuantity === 'number' && ticketQuantity > 0) {
+    const quantity = Math.min(Math.max(1, ticketQuantity), tiers[0].maxQuantity)
+
+    return tiers.reduce<TicketSelection>((selection, tier, index) => {
+      selection[tier.id] = index === 0 ? quantity : 0
+      return selection
+    }, {})
+  }
+
+  return createDefaultTicketSelection(tiers)
+}
+
 /** @deprecated Use event-specific tiers from `getCheckoutEventById`. Kept for unit tests. */
-export const CHECKOUT_TICKET_TIERS: TicketTier[] = CHECKOUT_EVENT_OVERRIDES[0].ticketTiers
+export const CHECKOUT_TICKET_TIERS: TicketTier[] = CHECKOUT_TICKET_TIER_OVERRIDES['event-jazz-fest']
 
 /** @deprecated Use `createDefaultTicketSelection` with event tiers. Kept for unit tests. */
 export const DEFAULT_TICKET_SELECTION: TicketSelection = createDefaultTicketSelection(

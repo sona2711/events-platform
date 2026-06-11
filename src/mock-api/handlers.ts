@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw'
+import { enrichEventRecord } from './eventDetailUtils'
 import { MOCK_EVENTS, MOCK_EVENTS_BY_ID } from './eventsData'
 import { addSubscriptionEmail, subscriptionEmailTable } from './subscriptionEmailTable'
 
@@ -25,7 +26,7 @@ export const handlers = [
       return HttpResponse.json({ message: 'Event not found' }, { status: 404 })
     }
 
-    return HttpResponse.json(event)
+    return HttpResponse.json(enrichEventRecord(event))
   }),
   http.get('/api/subscriptions', () => {
     return HttpResponse.json(subscriptionEmailTable)

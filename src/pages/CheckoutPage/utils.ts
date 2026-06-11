@@ -1,14 +1,26 @@
 import { PROCESSING_FEE_AMD, SERVICE_FEE_RATE } from './consts'
 import type {
   CheckoutContactValues,
+  CheckoutEvent,
   CheckoutPaymentValues,
   CheckoutReadiness,
   CheckoutStepNumber,
   CheckoutStepStatus,
+  OrderLineItem,
   OrderTotals,
   TicketSelection,
   TicketTier,
 } from './types'
+
+export const getCheckoutEventTitle = (event: CheckoutEvent): string => event.title ?? ''
+
+export const getCheckoutEventLocation = (event: CheckoutEvent): string => event.location ?? ''
+
+export const getTicketTierName = (tier: TicketTier): string => tier.name ?? ''
+
+export const getTicketTierDescription = (tier: TicketTier): string => tier.description ?? ''
+
+export const getOrderLineItemName = (item: OrderLineItem): string => item.name ?? ''
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const EXPIRY_PATTERN = /^(0[1-9]|1[0-2])\/\d{2}$/

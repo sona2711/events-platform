@@ -1,18 +1,16 @@
-import { CHECKOUT_EVENT_OVERRIDES_BY_ID } from '@/pages/CheckoutPage/checkoutOverrides'
+import { CHECKOUT_STANDALONE_EVENTS_BY_ID } from '@/pages/CheckoutPage/checkoutOverrides'
+import type { CheckoutEvent } from '@/pages/CheckoutPage/types'
+import type { EventRecord } from './eventDetailTypes'
+import { enrichEventRecord } from './eventDetailUtils'
 import type { EventDetail } from './eventsData'
 import { MOCK_EVENTS_BY_ID } from './eventsData'
 
-const checkoutOverrideToEventDetail = (override: {
-  id: string
-  title: string
-  location: string
-  imageUrl: string
-}): EventDetail => ({
+const checkoutOverrideToEventRecord = (override: CheckoutEvent): EventRecord => ({
   id: override.id,
-  title: override.title,
+  title: override.title ?? '',
   category: '',
   imageUrl: override.imageUrl,
-  location: override.location,
+  location: override.location ?? '',
   date: '',
   price: '',
   description: '',
@@ -21,12 +19,12 @@ const checkoutOverrideToEventDetail = (override: {
 export const resolveEventByIdSync = (eventId: string): EventDetail | null => {
   const mockEvent = MOCK_EVENTS_BY_ID.get(eventId)
   if (mockEvent) {
-    return mockEvent
+    return enrichEventRecord(mockEvent)
   }
 
-  const override = CHECKOUT_EVENT_OVERRIDES_BY_ID.get(eventId)
+  const override = CHECKOUT_STANDALONE_EVENTS_BY_ID.get(eventId)
   if (override) {
-    return checkoutOverrideToEventDetail(override)
+    return enrichEventRecord(checkoutOverrideToEventRecord(override))
   }
 
   return null

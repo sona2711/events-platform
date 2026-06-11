@@ -12,7 +12,7 @@ const upcomingBookings: UserBooking[] = [
   {
     id: 'upcoming-1',
     eventId: 'event-jazz-fest',
-    title: 'Yerevan Jazz Fest 2026',
+    title: 'Yerevan Jazz Night at Cascade',
     category: 'MUSIC',
     dateTime: 'Jun 02, 2026 · 19:30',
     startsAt: '2026-06-02T19:30:00+04:00',
@@ -66,7 +66,7 @@ describe('UserBookingsPanel', () => {
   it('shows upcoming bookings by default with pay and cancel actions', () => {
     renderPanel()
 
-    expect(screen.getByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+    expect(screen.getByText('Yerevan Jazz Night at Cascade')).toBeInTheDocument()
     expect(
       screen.getByRole('button', { name: profileEn.bookings.actions.payTickets }),
     ).toBeInTheDocument()

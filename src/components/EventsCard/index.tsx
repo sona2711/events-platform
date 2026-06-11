@@ -8,8 +8,8 @@ import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
-  EVENTS_CARD_DATA,
   EVENT_BY_ID,
+  EVENTS_CARD_DATA,
   EVENTS_NEXT_BUTTON_CLASS,
   EVENTS_PREV_BUTTON_CLASS,
   SLIDER_BREAKPOINTS,
