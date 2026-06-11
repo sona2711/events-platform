@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import { EventCard } from '@/components/features/EventCard'
+import { useBookEvent } from '@/hooks/useBookEvent'
 import type { CategoriesEventsGridProps } from './types'
 import styles from './styles.module.css'
 
@@ -13,13 +14,8 @@ export const CategoriesEventsGrid = ({
   loadMoreLabel,
 }: CategoriesEventsGridProps) => {
   const navigate = useNavigate()
+  const handleBook = useBookEvent()
   const hasEvents = events.length > 0
-  const handleBook = useCallback(
-    (eventId: string) => {
-      navigate(`/checkout/${eventId}`)
-    },
-    [navigate],
-  )
 
   const handleNavigate = useCallback(
     (eventId: string) => {

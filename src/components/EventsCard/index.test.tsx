@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ReactNode } from 'react'
 import { EventsGrid } from './index'
@@ -59,28 +59,6 @@ jest.mock('@/components/features/EventCard', () => ({
   ),
 }))
 
-jest.mock('@/components/features/TicketPaymentModal', () => ({
-  TicketPaymentModal: ({
-    event,
-    open,
-    onClose,
-  }: {
-    event: {
-      title: string
-    }
-    open: boolean
-    onClose: () => void
-  }) =>
-    open ? (
-      <div role="dialog" aria-label="ticket payment">
-        <p>{event.title}</p>
-        <button type="button" onClick={onClose}>
-          Close
-        </button>
-      </div>
-    ) : null,
-}))
-
 describe('EventsGrid', () => {
   beforeEach(() => {
     mockNavigate.mockClear()
@@ -118,7 +96,7 @@ describe('EventsGrid', () => {
     expect(mockNavigate).toHaveBeenCalledWith(`/event/${firstEvent.id}`)
   })
 
-  it('opens and closes the payment modal for the booked event', async () => {
+  it('navigates to checkout when book is clicked', async () => {
     const user = userEvent.setup()
     const firstEvent = EVENTS_CARD_DATA[0]
 
@@ -126,13 +104,8 @@ describe('EventsGrid', () => {
 
     await user.click(screen.getByRole('button', { name: `Book ${firstEvent.title}` }))
 
-    const dialog = await screen.findByRole('dialog', { name: /ticket payment/i })
-
-    expect(dialog).toBeTruthy()
-    expect(within(dialog).getByText(firstEvent.title)).toBeTruthy()
-
-    await user.click(screen.getByRole('button', { name: /close/i }))
-
-    expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
+    expect(mockNavigate).toHaveBeenCalledWith(`/checkout/${firstEvent.id}`, {
+      state: undefined,
+    })
   })
 })
