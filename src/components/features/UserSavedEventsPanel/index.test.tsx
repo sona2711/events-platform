@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 import '@/i18n'
 import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
@@ -26,7 +27,9 @@ const renderPanel = (favoriteEventIds: string[] = []) =>
     <Provider store={createTestStore(favoriteEventIds)}>
       <I18nextProvider i18n={i18n}>
         <ConfigProvider>
-          <UserSavedEventsPanel />
+          <MemoryRouter>
+            <UserSavedEventsPanel />
+          </MemoryRouter>
         </ConfigProvider>
       </I18nextProvider>
     </Provider>,

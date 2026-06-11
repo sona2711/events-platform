@@ -1,4 +1,64 @@
 {
   "title": "All Events",
-  "description": "Discover upcoming gatherings, talks, and community events across Yerevan."
+  "description": "Discover upcoming gatherings, talks, and community events across Yerevan.",
+  "hero": {
+    "eyebrow": "Yerevan Events",
+    "titleLine1": "Experience the",
+    "titleAccent": "Pulse",
+    "titleLine2": "of Yerevan",
+    "description": "Discover curated cultural experiences, underground techno nights, and tech summits in the heart of Armenia.",
+    "primaryCta": "Start Exploring",
+    "secondaryCta": "View This Week",
+    "categoryChipsAria": "Browse by category",
+    "featuredEventAria": "Featured event: {{title}}"
+  },
+  "eventsGrid": {
+    "eyebrow": "This Month",
+    "title": "Latest in Yerevan",
+    "description": "The most anticipated gatherings happening this month.",
+    "viewAll": "View all events",
+    "book": "Book",
+    "viewEventAria": "View event: {{title}}",
+    "carouselNavAria": "Events carousel navigation",
+    "previous": "Previous events",
+    "next": "Next events"
+  },
+  "wineFest": {
+    "badge": "Sponsored Spotlight",
+    "title": "Armenia Wine Fest 2026",
+    "description": "Taste regional vintages, live folk sets, and sunset pairings in Republic Square.",
+    "countdownAria": "Countdown to event",
+    "days": "Days",
+    "hours": "Hours",
+    "mins": "Mins",
+    "cta": "Get Tickets",
+    "imageAlt": "Armenia Wine Fest 2026"
+  },
+  "explore": {
+    "eyebrow": "Editor's Picks",
+    "title": "Explore All Events",
+    "subtitle": "Browse curated stories, weekend plans, and trending gatherings across the city.",
+    "seeMore": "See more events",
+    "sidebarAria": "Event highlights",
+    "trending": "Trending",
+    "weekend": "This Weekend",
+    "categories": "Categories"
+  },
+  "subscribe": {
+    "eyebrow": "Weekly city guide",
+    "titleStart": "Stay Ahead",
+    "titleMiddle": "of the",
+    "titleAccent": "Pulse",
+    "description": "Get the latest event updates, exclusive ticket presales, and city guides delivered to your inbox every week.",
+    "benefits": ["Presales", "Weekend picks", "No spam"],
+    "emailPlaceholder": "your@email.com",
+    "emailAria": "Email address",
+    "buttonLabel": "Subscribe",
+    "invalidEmailTitle": "Check your email",
+    "invalidEmailMessage": "Please enter a valid email address, for example name@example.com.",
+    "successTitle": "Subscription successful",
+    "successMessage": "You will be notified about upcoming events.",
+    "saveErrorTitle": "Subscription failed",
+    "saveErrorMessage": "Please try subscribing again in a moment."
+  }
 }

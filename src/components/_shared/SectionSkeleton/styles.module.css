@@ -28,7 +28,7 @@
 
 .skeletonWineFest {
   composes: skeleton;
-  min-height: 480px;
+  min-height: 360px;
 }
 
 .skeletonExplore {
@@ -48,7 +48,7 @@
   }
 
   .skeletonWineFest {
-    min-height: 560px;
+    min-height: 420px;
   }
 
   .skeletonExplore {
@@ -63,7 +63,7 @@
   }
 
   .skeletonWineFest {
-    min-height: 520px;
+    min-height: 480px;
   }
 
   .skeletonExplore {

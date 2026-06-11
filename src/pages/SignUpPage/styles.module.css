@@ -1,4 +1,14 @@
 .page {
+  --color-brand-primary: var(--color-light-brand-primary);
+  --color-brand-primary-hover: var(--color-light-brand-primary-hover);
+  --color-action-primary: var(--color-light-action-primary);
+  --color-surface-page: var(--color-light-surface-page);
+  --color-surface-card: var(--color-light-surface-card);
+  --color-surface-muted: var(--color-light-surface-muted);
+  --color-text-primary: var(--color-light-text-primary);
+  --color-text-secondary: var(--color-light-text-secondary);
+  --color-text-on-brand: var(--color-white);
+
   position: relative;
   min-height: 100vh;
   display: flex;

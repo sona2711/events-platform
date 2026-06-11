@@ -60,8 +60,11 @@ export const EventCard = memo(
     const priceClassName = isFreePrice ? styles.priceFree : styles.price
     const favoriteButtonClassName = joinClassNames(styles.favoriteButton, noSwipeClassName)
     const bookButtonClassName = joinClassNames(styles.bookButton, noSwipeClassName)
-    const cardClassName =
-      variant === 'default' ? joinClassNames(styles.card, styles.cardDefault) : styles.card
+    const cardClassName = joinClassNames(
+      styles.card,
+      variant === 'default' ? styles.cardDefault : undefined,
+      variant === 'editorial' ? styles.cardEditorial : undefined,
+    )
 
     const handleCardClick = useCallback(() => {
       onNavigate?.(event.id)
@@ -113,7 +116,7 @@ export const EventCard = memo(
       </article>
     )
 
-    if (variant === 'carousel') {
+    if (variant === 'carousel' || (variant === 'editorial' && noSwipeClassName)) {
       return <div className={styles.hoverShell}>{card}</div>
     }
 

@@ -2,5 +2,8 @@
   "title": "Explore Events in Yerevan",
   "description": "Curated experiences from jazz nights to tech meetups in the heart of Armenia.",
   "emptyState": "No events found for these criteria.",
-  "loadMore": "Load More"
+  "loadMore": "Load More",
+  "filters": "Filters",
+  "filtersAriaLabel": "Open event filters",
+  "activeFilters": "{{count}} active filters"
 }

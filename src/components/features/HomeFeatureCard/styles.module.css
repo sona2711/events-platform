@@ -1,0 +1,149 @@
+.featuredCard,
+.secondaryCard {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  border-radius: 20px;
+  border: 1px solid var(--color-home-border);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.featuredCard {
+  min-height: 380px;
+}
+
+.secondaryCard {
+  flex: 1;
+  min-height: 0;
+  border-radius: 16px;
+}
+
+.featuredCard:hover,
+.featuredCard:focus-visible,
+.secondaryCard:hover,
+.secondaryCard:focus-visible {
+  transform: translateY(-4px);
+  text-decoration: none;
+  border-color: rgb(255 255 255 / 22%);
+}
+
+.accentPink {
+  --card-accent: var(--color-home-card-pink);
+  --card-glow: rgb(236 72 153 / 30%);
+}
+
+.accentBlue {
+  --card-accent: var(--color-home-card-blue);
+  --card-glow: rgb(38 101 214 / 30%);
+}
+
+.accentOrange {
+  --card-accent: var(--color-home-card-orange);
+  --card-glow: rgb(242 137 6 / 30%);
+}
+
+.accentLime {
+  --card-accent: var(--color-home-card-lime);
+  --card-glow: rgb(180 210 30 / 30%);
+}
+
+.accentPurple {
+  --card-accent: var(--color-home-card-purple);
+  --card-glow: rgb(168 85 247 / 30%);
+}
+
+.featuredCard:hover,
+.featuredCard:focus-visible {
+  box-shadow: 0 20px 40px -16px var(--card-glow);
+}
+
+.secondaryCard:hover,
+.secondaryCard:focus-visible {
+  box-shadow: 0 14px 28px -12px var(--card-glow);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 24px;
+  background: linear-gradient(180deg, transparent 25%, rgb(8 12 28 / 90%) 100%);
+}
+
+.secondaryCard .overlay {
+  gap: 6px;
+  padding: 18px;
+}
+
+.category {
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--card-accent);
+  color: #fff;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.secondaryCard .category {
+  font-size: 10px;
+  padding: 3px 10px;
+}
+
+.title:global(.ant-typography) {
+  margin: 0;
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.featuredCard .title:global(.ant-typography) {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.secondaryCard .title:global(.ant-typography) {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.meta:global(.ant-typography) {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  color: rgb(255 255 255 / 72%);
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .featuredCard {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 767px) {
+  .featuredCard {
+    min-height: 260px;
+  }
+
+  .secondaryCard {
+    min-height: 160px;
+  }
+}

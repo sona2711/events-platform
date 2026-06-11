@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Typography } from 'antd'
+import { useTranslation } from 'react-i18next'
 import wineImg from '@/assets/images/wine.webp'
-import rectangleStain from '@/assets/images/Rectangle 1.webp'
+import {
+  COUNTDOWN_INTERVAL_MS,
+  COUNTDOWN_UNITS,
+  WINE_FEST_CTA_PATH,
+  WINE_FEST_TARGET,
+} from './consts'
 import styles from './styles.module.css'
 
-const TARGET = new Date('2026-06-10T16:00:00')
-const COUNTDOWN_INTERVAL_MS = 60_000
+const { Title, Text, Paragraph } = Typography
 
-function getTimeLeft() {
-  const diff = TARGET.getTime() - Date.now()
+const getTimeLeft = () => {
+  const diff = WINE_FEST_TARGET.getTime() - Date.now()
   if (diff <= 0) return { days: 0, hours: 0, mins: 0 }
   return {
     days: Math.floor(diff / 864e5),
@@ -17,9 +23,8 @@ function getTimeLeft() {
   }
 }
 
-const UNITS = ['DAYS', 'HOURS', 'MINS'] as const
-
-export function WineFestHero() {
+export const WineFestHero = () => {
+  const { t } = useTranslation('home')
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)
 
   useEffect(() => {
@@ -31,47 +36,39 @@ export function WineFestHero() {
   const values = [timeLeft.days, timeLeft.hours, timeLeft.mins]
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} aria-labelledby="wine-fest-title">
       <div className={styles.layout}>
-        <div className={styles.left}>
-          <h2 className={styles.title}>
-            <span className={styles.titleLine}>Armenia</span>
-            <span className={styles.titleLine}>Wine Fest</span>
-            <span className={styles.titleLine}>2026</span>
-          </h2>
+        <div className={styles.content}>
+          <Text className={styles.badge}>{t('wineFest.badge')}</Text>
 
-          <div className={styles.countdown}>
-            {UNITS.map((label, i) => (
-              <div key={label} className={styles.unit}>
-                <span className={styles.number}>{pad(values[i])}</span>
-                <span className={styles.unitLabel}>{label}</span>
+          <Title className={styles.title} id="wine-fest-title" level={2}>
+            {t('wineFest.title')}
+          </Title>
+
+          <Paragraph className={styles.description}>{t('wineFest.description')}</Paragraph>
+
+          <div className={styles.countdown} aria-label={t('wineFest.countdownAria')}>
+            {COUNTDOWN_UNITS.map((unit, index) => (
+              <div key={unit} className={styles.unit}>
+                <span className={styles.number}>{pad(values[index])}</span>
+                <span className={styles.unitLabel}>{t(`wineFest.${unit}`)}</span>
               </div>
             ))}
           </div>
 
-          <Link to="/login" className={styles.btn}>
-            Get Tickets
+          <Link to={WINE_FEST_CTA_PATH} className={styles.btn}>
+            {t('wineFest.cta')}
           </Link>
         </div>
 
-        <div className={styles.right}>
-          <div className={styles.imageFrame}>
-            <img
-              src={wineImg}
-              alt="Armenia Wine Fest 2026"
-              className={styles.wineImg}
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src={rectangleStain}
-              alt=""
-              aria-hidden="true"
-              className={styles.stain}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+        <div className={styles.imageFrame}>
+          <img
+            src={wineImg}
+            alt={t('wineFest.imageAlt')}
+            className={styles.wineImg}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </section>

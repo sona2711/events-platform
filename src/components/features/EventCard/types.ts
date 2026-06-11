@@ -8,7 +8,7 @@ export type EventCardData = {
   priceLabel: string
 }
 
-export type EventCardVariant = 'default' | 'carousel'
+export type EventCardVariant = 'default' | 'carousel' | 'editorial'
 
 export type EventCardProps = {
   event: EventCardData

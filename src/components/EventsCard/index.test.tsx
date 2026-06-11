@@ -1,15 +1,16 @@
 import React from 'react'
+import { configureStore } from '@reduxjs/toolkit'
+import { I18nextProvider } from 'react-i18next'
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ReactNode } from 'react'
+import '@/i18n'
+import i18n from '@/i18n'
+import { favoritesReducer } from '@/store/favorites'
 import { EventsGrid } from './index'
 import { EVENTS_CARD_DATA } from './consts'
-
-const mockNavigate = jest.fn()
-
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => mockNavigate,
-}))
 
 jest.mock('swiper/modules', () => ({
   Navigation: {},
@@ -24,38 +25,6 @@ jest.mock('swiper/react', () => ({
   ),
   SwiperSlide: ({ children }: { children: ReactNode }) => (
     <div data-testid="events-swiper-slide">{children}</div>
-  ),
-}))
-
-jest.mock('@/components/features/EventCard', () => ({
-  EventCard: ({
-    event,
-    noSwipeClassName,
-    onBook,
-    onNavigate,
-    variant,
-  }: {
-    event: {
-      id: string
-      title: string
-      priceLabel: string
-    }
-    noSwipeClassName?: string
-    onBook?: (eventId: string) => void
-    onNavigate?: (eventId: string) => void
-    variant?: string
-  }) => (
-    <article data-testid="event-card" data-variant={variant}>
-      <h3>{event.title}</h3>
-      <span>{event.priceLabel}</span>
-      <span data-testid={`no-swipe-${event.id}`}>{noSwipeClassName}</span>
-      <button type="button" onClick={() => onNavigate?.(event.id)}>
-        View {event.title}
-      </button>
-      <button type="button" onClick={() => onBook?.(event.id)}>
-        Book {event.title}
-      </button>
-    </article>
   ),
 }))
 
@@ -81,50 +50,54 @@ jest.mock('@/components/features/TicketPaymentModal', () => ({
     ) : null,
 }))
 
-describe('EventsGrid', () => {
-  beforeEach(() => {
-    mockNavigate.mockClear()
+function renderEventsGrid() {
+  const store = configureStore({
+    reducer: {
+      favorites: favoritesReducer,
+    },
   })
 
-  it('renders the section heading, external navigation buttons, and all event cards', () => {
-    render(<EventsGrid />)
+  return render(
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <MemoryRouter>
+          <EventsGrid />
+        </MemoryRouter>
+      </I18nextProvider>
+    </Provider>,
+  )
+}
 
-    expect(screen.getByRole('heading', { name: /upcoming events in yerevan/i })).toBeTruthy()
+describe('EventsGrid', () => {
+  it('renders the section heading, external navigation buttons, and all event cards', () => {
+    renderEventsGrid()
+
+    expect(screen.getByRole('heading', { name: /latest in yerevan/i })).toBeTruthy()
     expect(screen.getByRole('button', { name: /previous events/i }).className).toContain(
       'events-prev-button',
     )
     expect(screen.getByRole('button', { name: /next events/i }).className).toContain(
       'events-next-button',
     )
-    expect(screen.getAllByTestId('event-card')).toHaveLength(EVENTS_CARD_DATA.length)
+    expect(screen.getAllByRole('article')).toHaveLength(EVENTS_CARD_DATA.length)
 
     for (const event of EVENTS_CARD_DATA) {
       expect(screen.getByRole('heading', { name: event.title })).toBeTruthy()
       expect(screen.getByText(event.priceLabel)).toBeTruthy()
-      expect(screen.getByTestId(`no-swipe-${event.id}`).textContent).toBe('swiper-no-swiping')
+      expect(screen.getByRole('link', { name: `View event: ${event.title}` })).toHaveAttribute(
+        'href',
+        `/event/${event.id}`,
+      )
     }
-  })
-
-  it('passes carousel props to event cards and navigates with the selected event id', async () => {
-    const user = userEvent.setup()
-    const firstEvent = EVENTS_CARD_DATA[0]
-
-    render(<EventsGrid />)
-
-    expect(screen.getAllByTestId('event-card')[0].getAttribute('data-variant')).toBe('carousel')
-
-    await user.click(screen.getByRole('button', { name: `View ${firstEvent.title}` }))
-
-    expect(mockNavigate).toHaveBeenCalledWith(`/event/${firstEvent.id}`)
   })
 
   it('opens and closes the payment modal for the booked event', async () => {
     const user = userEvent.setup()
     const firstEvent = EVENTS_CARD_DATA[0]
 
-    render(<EventsGrid />)
+    renderEventsGrid()
 
-    await user.click(screen.getByRole('button', { name: `Book ${firstEvent.title}` }))
+    await user.click(screen.getAllByRole('button', { name: 'Book' })[0])
 
     const dialog = await screen.findByRole('dialog', { name: /ticket payment/i })
 

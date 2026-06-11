@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { Col, Empty, Row, Typography } from 'antd'
+import { Empty, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { EventCard } from '@/components/features/EventCard'
+import { HomeEventCard } from '@/components/features/HomeEventCard'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { MOCK_CATEGORY_EVENTS } from '@/pages/categoriesPage/mockEvents'
 import { selectFavoriteEventIds } from '@/store/favorites'
@@ -28,13 +28,13 @@ export const UserSavedEventsPanel = () => {
       </Title>
 
       {favoriteEvents.length > 0 ? (
-        <Row gutter={[{ xs: 8, sm: 12, md: 12, lg: 16, xl: 20 }, 20]}>
+        <ul className={styles.grid}>
           {favoriteEvents.map((event) => (
-            <Col key={event.id} xs={12} md={12} xl={8}>
-              <EventCard event={event} />
-            </Col>
+            <li key={event.id}>
+              <HomeEventCard event={event} size="compact" />
+            </li>
           ))}
-        </Row>
+        </ul>
       ) : (
         <Empty className={styles.emptyState} description={t('sections.saved.description')} />
       )}

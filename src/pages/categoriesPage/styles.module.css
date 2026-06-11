@@ -1,19 +1,37 @@
 .page {
-  background: var(--color-surface-muted);
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  gap: 32px;
-  margin: 0 calc(-1 * var(--layout-gutter));
+  gap: 20px;
+  margin: 0;
   max-width: none;
-  padding: 16px var(--layout-gutter) 64px;
-  width: calc(100% + 2 * var(--layout-gutter));
+  padding: 40px var(--layout-padding-inline) 56px;
+  background: var(--color-home-explore-bg);
+  overflow: hidden;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: -120px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(168 85 247 / 16%) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .page > * {
+  position: relative;
+  z-index: 1;
   margin-inline: auto;
-  max-width: 1248px;
-  width: 100%;
+  max-width: var(--layout-max-width);
+  width: min(100%, var(--layout-max-width));
 }
 
 .tabsSection {
@@ -25,23 +43,120 @@
 .mainContent {
   align-items: start;
   display: grid;
-  gap: 28px;
-  grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+  gap: 24px;
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
 }
 
 .sidebarColumn {
   position: sticky;
-  top: 120px;
+  top: calc(var(--layout-header-height) + 16px);
 }
 
 .resultsColumn {
+  container-type: inline-size;
+  container-name: results;
   min-width: 0;
+}
+
+.mobileFilterBar {
+  display: none;
+  margin-bottom: 16px;
+}
+
+.mobileFilterButton:global(.ant-btn) {
+  align-items: center;
+  background: rgb(18 26 48 / 72%);
+  border: 1px solid var(--color-home-border);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%);
+  color: var(--color-home-text);
+  display: inline-flex;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 18px;
+}
+
+.mobileFilterButton:global(.ant-btn):hover,
+.mobileFilterButton:global(.ant-btn):focus-visible {
+  background: rgb(255 255 255 / 6%) !important;
+  border-color: var(--color-home-accent-cyan) !important;
+  color: var(--color-home-text) !important;
+}
+
+.activeFilterCount {
+  align-items: center;
+  background: var(--color-home-accent-cyan);
+  border-radius: 999px;
+  color: var(--color-home-surface);
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  height: 22px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 22px;
+  padding: 0 6px;
+}
+
+.filtersDrawerRoot :global(.ant-drawer-content-wrapper) {
+  max-height: min(88vh, 760px);
+}
+
+.filtersDrawer {
+  background: rgb(18 26 48 / 98%) !important;
+  border-top: 1px solid var(--color-home-border);
+  border-radius: 20px 20px 0 0;
+}
+
+.filtersDrawer :global(.ant-drawer-header) {
+  background: transparent;
+  border-bottom: 1px solid var(--color-home-border);
+  padding: 16px 20px;
+}
+
+.filtersDrawer :global(.ant-drawer-title) {
+  color: var(--color-home-text);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filtersDrawer :global(.ant-drawer-close) {
+  color: var(--color-home-text-muted);
+}
+
+.filtersDrawer :global(.ant-drawer-close:hover) {
+  color: var(--color-home-text);
+}
+
+.filtersDrawer :global(.ant-drawer-body) {
+  max-height: min(78vh, 720px);
+  overflow-y: auto;
+  padding: 0 20px 24px;
+}
+
+.drawerSidebar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 20px 0 0 !important;
+}
+
+@media (max-width: 1199px) and (min-width: 768px) {
+  .page {
+    padding: 36px var(--layout-padding-inline) 48px;
+  }
 }
 
 @media (max-width: 1024px) {
   .page {
-    gap: 28px;
-    padding-top: 22px;
+    gap: 18px;
+    padding-top: 32px;
   }
 }
 
@@ -51,20 +166,24 @@
   }
 
   .sidebarColumn {
-    position: static;
+    display: none;
+  }
+
+  .mobileFilterBar {
+    display: block;
   }
 }
 
 @media (max-width: 767px) {
   .page {
-    gap: 24px;
-    padding-block: 14px 48px;
+    gap: 16px;
+    padding: 32px var(--layout-padding-inline) 44px;
   }
 }
 
 @media (max-width: 480px) {
   .page {
-    gap: 20px;
-    padding-top: 12px;
+    gap: 14px;
+    padding-top: 28px;
   }
 }

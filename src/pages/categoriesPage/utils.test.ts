@@ -1,4 +1,9 @@
-import { filterCategoryEvents, withTabCategoryFilter } from './utils'
+import {
+  filterCategoryEvents,
+  getCategoryEventCounts,
+  getCategoryLabelFromSearchParam,
+  withTabCategoryFilter,
+} from './utils'
 import { DEFAULT_FILTERS } from './consts'
 import type { CategoryEvent } from './types'
 
@@ -49,5 +54,26 @@ describe('filterCategoryEvents', () => {
 
     expect(filtered).toHaveLength(1)
     expect(filtered[0]?.location).toBe('Opera House')
+  })
+})
+
+describe('getCategoryEventCounts', () => {
+  it('returns counts grouped by category label', () => {
+    expect(getCategoryEventCounts(events)).toEqual({
+      Music: 1,
+      Arts: 1,
+    })
+  })
+})
+
+describe('getCategoryLabelFromSearchParam', () => {
+  it('maps valid tab ids to category labels', () => {
+    expect(getCategoryLabelFromSearchParam('music')).toBe('Music')
+    expect(getCategoryLabelFromSearchParam('food-drink')).toBe('Food & Drink')
+  })
+
+  it('returns null for missing or invalid params', () => {
+    expect(getCategoryLabelFromSearchParam(null)).toBeNull()
+    expect(getCategoryLabelFromSearchParam('invalid')).toBeNull()
   })
 })

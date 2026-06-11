@@ -1,4 +1,5 @@
 export type PaymentEvent = {
+  id?: string | number
   title: string
   price: string
 }
@@ -18,7 +19,7 @@ export type ContactFormValues = {
 export type PaymentMethod = 'card' | 'paypal'
 
 export type PaymentFormValues = {
-  paymentMethod: PaymentMethod
+  paymentMethod?: PaymentMethod
   ticketQuantity: number
   cardNumber?: string
   expiration?: string
