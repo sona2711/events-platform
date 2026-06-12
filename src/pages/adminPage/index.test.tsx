@@ -1,11 +1,13 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
+import { Provider } from 'react-redux'
 import '@/i18n'
 import i18n from '@/i18n'
 import { REGISTRATIONS_DATA } from '@/components/features/RegistrationsTable/consts'
 import { STAT_CARD_META } from '@/components/features/RegistrationStatsCards/consts'
 import { MemoryRouter } from 'react-router-dom'
+import { store } from '@/store'
 import { AdminPage } from './index'
 
 jest.mock('@/providers/notifications/utils', () => ({
@@ -18,13 +20,15 @@ const { showSystemMessage } = jest.requireMock<{
 
 const renderAdminPage = () =>
   render(
-    <I18nextProvider i18n={i18n}>
-      <ConfigProvider>
-        <MemoryRouter initialEntries={['/admin']}>
-          <AdminPage />
-        </MemoryRouter>
-      </ConfigProvider>
-    </I18nextProvider>,
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <ConfigProvider>
+          <MemoryRouter initialEntries={['/admin']}>
+            <AdminPage />
+          </MemoryRouter>
+        </ConfigProvider>
+      </I18nextProvider>
+    </Provider>,
   )
 
 describe('AdminPage', () => {

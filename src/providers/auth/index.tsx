@@ -22,17 +22,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const auth = await getFirebaseAuth()
 
       unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-        if (firebaseUser) {
-          const user: AuthUser = {
-            uid: firebaseUser.uid,
-            email: firebaseUser.email,
-            displayName: firebaseUser.displayName,
-            photoURL: firebaseUser.photoURL,
+        void (async () => {
+          if (firebaseUser) {
+            const { createAuthUser } = await import('@/lib/authUser')
+            const user: AuthUser = await createAuthUser(firebaseUser)
+            dispatch(setUser(user))
+            return
           }
-          dispatch(setUser(user))
-        } else {
+
           dispatch(setUser(null))
-        }
+        })()
       })
     })()
 

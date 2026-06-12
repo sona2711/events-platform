@@ -2,22 +2,26 @@ import type { ReactNode } from 'react'
 import { render, screen } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
+import { Provider } from 'react-redux'
 import '@/i18n'
 import i18n from '@/i18n'
 import { MemoryRouter } from 'react-router-dom'
+import { store } from '@/store'
 import { AdminLayout } from './index'
 
 const renderLayout = (children: ReactNode = <p>Dashboard content</p>) =>
   render(
-    <I18nextProvider i18n={i18n}>
-      <ConfigProvider>
-        <MemoryRouter initialEntries={['/admin']}>
-          <AdminLayout title="Registrations" notificationCount={3}>
-            {children}
-          </AdminLayout>
-        </MemoryRouter>
-      </ConfigProvider>
-    </I18nextProvider>,
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <ConfigProvider>
+          <MemoryRouter initialEntries={['/admin']}>
+            <AdminLayout title="Registrations" notificationCount={3}>
+              {children}
+            </AdminLayout>
+          </MemoryRouter>
+        </ConfigProvider>
+      </I18nextProvider>
+    </Provider>,
   )
 
 describe('AdminLayout', () => {

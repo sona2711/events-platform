@@ -16,6 +16,7 @@ const authUser: AuthUser = {
   email: 'mkrtchyansona77@gmail.com',
   displayName: 'Sona Mkrtchyan',
   photoURL: 'https://lh3.googleusercontent.com/a/example-photo',
+  isAdmin: false,
 }
 
 describe('profileHydration', () => {
