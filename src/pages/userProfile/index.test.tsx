@@ -12,6 +12,7 @@ import { CheckoutPage } from '@/pages/CheckoutPage'
 import { ThemeScope } from '@/components/_shared/ThemeScope'
 import { ThemeProvider } from '@/providers/theme'
 import { favoritesReducer } from '@/store/favorites'
+import { paidBookingsReducer } from '@/store/paidBookings'
 import { profileReducer } from '@/store/profile'
 import type { UserProfile } from './types'
 import { UserProfilePage } from './index'
@@ -31,12 +32,16 @@ const createTestStore = (profile: UserProfile = loggedInProfile, favoriteEventId
     reducer: {
       favorites: favoritesReducer,
       profile: profileReducer,
+      paidBookings: paidBookingsReducer,
     },
     preloadedState: {
       favorites: {
         eventIds: favoriteEventIds,
       },
       profile,
+      paidBookings: {
+        eventIds: [],
+      },
     },
   })
 

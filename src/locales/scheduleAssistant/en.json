@@ -1,0 +1,15 @@
+{
+  "welcomeMessage": "Welcome to Yerevan Pulsar. I'm here to help you find out about all the exciting events happening around Yerevan. You can ask me questions about events by day, location, time, category, or price.",
+  "pageTitle": "Events Assistant",
+  "pageDescription": "Ask questions about events — filter by day, location, time, category, or price.",
+  "chatTitle": "Events chat",
+  "inputPlaceholder": "e.g. What events are at Republic Square on Oct 12?",
+  "inputLabel": "Your message",
+  "send": "Send message",
+  "loading": "Loading assistant",
+  "thinking": "Assistant is thinking",
+  "errors": {
+    "welcomeFailed": "Could not start the events assistant.",
+    "sendFailed": "Could not send your message. Please try again."
+  }
+}

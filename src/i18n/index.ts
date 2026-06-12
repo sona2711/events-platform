@@ -13,6 +13,9 @@ import categoriesRu from '@/locales/categories/ru.json'
 import checkoutEn from '@/locales/checkout/en.json'
 import checkoutHy from '@/locales/checkout/hy.json'
 import checkoutRu from '@/locales/checkout/ru.json'
+import scheduleAssistantEn from '@/locales/scheduleAssistant/en.json'
+import scheduleAssistantHy from '@/locales/scheduleAssistant/hy.json'
+import scheduleAssistantRu from '@/locales/scheduleAssistant/ru.json'
 import commonEn from '@/locales/common/en.json'
 import commonHy from '@/locales/common/hy.json'
 import commonRu from '@/locales/common/ru.json'
@@ -42,6 +45,7 @@ export const I18N_NAMESPACES = [
   'notFound',
   'profile',
   'checkout',
+  'scheduleAssistant',
 ] as const
 
 export type I18nNamespace = (typeof I18N_NAMESPACES)[number]
@@ -64,6 +68,7 @@ export const resources = {
     notFound: notFoundEn,
     profile: profileEn,
     checkout: checkoutEn,
+    scheduleAssistant: scheduleAssistantEn,
   },
   hy: {
     common: commonHy,
@@ -74,6 +79,7 @@ export const resources = {
     notFound: notFoundHy,
     profile: profileHy,
     checkout: checkoutHy,
+    scheduleAssistant: scheduleAssistantHy,
   },
   ru: {
     common: commonRu,
@@ -84,6 +90,7 @@ export const resources = {
     notFound: notFoundRu,
     profile: profileRu,
     checkout: checkoutRu,
+    scheduleAssistant: scheduleAssistantRu,
   },
 } as const
 
@@ -130,6 +137,11 @@ const localeLoaders: Record<
     en: () => import('@/locales/checkout/en.json'),
     hy: () => import('@/locales/checkout/hy.json'),
     ru: () => import('@/locales/checkout/ru.json'),
+  },
+  scheduleAssistant: {
+    en: () => import('@/locales/scheduleAssistant/en.json'),
+    hy: () => import('@/locales/scheduleAssistant/hy.json'),
+    ru: () => import('@/locales/scheduleAssistant/ru.json'),
   },
 }
 

@@ -10,8 +10,8 @@ import '../main.css'
 
 async function enableMocking() {
   if (!import.meta.env.DEV) return
-  const { worker } = await import('./mock-api/browser')
-  return worker.start()
+  const { startMockWorker } = await import('./mock-api/browser')
+  return startMockWorker()
 }
 
 enableMocking().then(() => {

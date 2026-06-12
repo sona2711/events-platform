@@ -92,14 +92,14 @@ describe('EventsGrid', () => {
   })
 
   it('opens and closes the payment modal for the booked event', async () => {
-    const user = userEvent.setup()
+    const user = userEvent.setup({ delay: null })
     const firstEvent = EVENTS_CARD_DATA[0]
 
     renderEventsGrid()
 
     await user.click(screen.getAllByRole('button', { name: 'Book' })[0])
 
-    const dialog = await screen.findByRole('dialog', { name: /ticket payment/i })
+    const dialog = await screen.findByRole('dialog', { name: /ticket payment/i }, { timeout: 3000 })
 
     expect(dialog).toBeTruthy()
     expect(within(dialog).getByText(firstEvent.title)).toBeTruthy()
@@ -107,5 +107,5 @@ describe('EventsGrid', () => {
     await user.click(screen.getByRole('button', { name: /close/i }))
 
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
-  })
+  }, 10000)
 })

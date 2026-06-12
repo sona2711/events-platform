@@ -1,6 +1,6 @@
 import { Divider, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { FOOTER_LINK_GROUPS, SOCIAL_LINKS } from './consts'
+import { FOOTER_LINK_GROUPS, FOOTER_LINK_HREFS, SOCIAL_LINKS } from './consts'
 import styles from './styles.module.css'
 
 const { Title, Text, Paragraph } = Typography
@@ -29,7 +29,7 @@ export const Footer = () => {
               <ul className={styles.linkList}>
                 {group.linkKeys.map((linkKey) => (
                   <li key={linkKey}>
-                    <a className={styles.footerLink} href="/">
+                    <a className={styles.footerLink} href={FOOTER_LINK_HREFS[linkKey] ?? '/'}>
                       {t(linkKey)}
                     </a>
                   </li>

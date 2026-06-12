@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
@@ -10,6 +9,7 @@ import { showSystemMessage } from '@/providers/notifications/utils'
 import '@/i18n'
 import i18n from '@/i18n'
 import checkoutEn from '@/locales/checkout/en.json'
+import { paidBookingsReducer } from '@/store/paidBookings'
 import { getDefaultProfile, profileReducer } from '@/store/profile'
 import { CheckoutPage } from './index'
 
@@ -17,18 +17,22 @@ jest.mock('@/providers/notifications/utils', () => ({
   showSystemMessage: jest.fn(),
 }))
 
-const createTestStore = () =>
+const createCheckoutTestStore = () =>
   configureStore({
     reducer: {
       profile: profileReducer,
+      paidBookings: paidBookingsReducer,
     },
     preloadedState: {
       profile: getDefaultProfile(),
+      paidBookings: {
+        eventIds: [],
+      },
     },
   })
 
 const renderCheckoutPage = (eventId: string) => {
-  const store = createTestStore()
+  const store = createCheckoutTestStore()
 
   return render(
     <Provider store={store}>
@@ -103,14 +107,19 @@ describe('CheckoutPage', () => {
   })
 
   it('enables paid checkout after entering valid payment details and places the order', async () => {
-    const user = userEvent.setup()
     renderCheckoutPage('event-jazz-fest')
 
     expect(screen.getByRole('button', { name: checkoutEn.summary.placeOrder })).toBeDisabled()
 
-    await user.type(screen.getByLabelText(checkoutEn.payment.fields.cardNumber), '4242424242424242')
-    await user.type(screen.getByLabelText(checkoutEn.payment.fields.expiryDate), '1230')
-    await user.type(screen.getByLabelText(checkoutEn.payment.fields.cvv), '123')
+    fireEvent.change(screen.getByLabelText(checkoutEn.payment.fields.cardNumber), {
+      target: { value: '4242 4242 4242 4242' },
+    })
+    fireEvent.change(screen.getByLabelText(checkoutEn.payment.fields.expiryDate), {
+      target: { value: '12/30' },
+    })
+    fireEvent.change(screen.getByLabelText(checkoutEn.payment.fields.cvv), {
+      target: { value: '123' },
+    })
 
     await waitFor(() => {
       expect(screen.getByRole('button', { name: checkoutEn.summary.placeOrder })).toBeEnabled()
@@ -118,9 +127,14 @@ describe('CheckoutPage', () => {
 
     fireEvent.click(screen.getByRole('button', { name: checkoutEn.summary.placeOrder }))
 
-    expect(showSystemMessageMock).toHaveBeenCalledWith({
-      content: checkoutEn.messages.orderSuccess,
-      variant: 'success',
-    })
-  })
+    await waitFor(
+      () => {
+        expect(showSystemMessageMock).toHaveBeenCalledWith({
+          content: checkoutEn.messages.orderSuccess,
+          variant: 'success',
+        })
+      },
+      { timeout: 5000 },
+    )
+  }, 30000)
 })

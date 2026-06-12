@@ -112,6 +112,14 @@
   color: var(--color-home-text) !important;
 }
 
+.errorMsg {
+  align-self: stretch !important;
+  background: rgba(245, 34, 45, 0.12) !important;
+  border-color: rgba(245, 34, 45, 0.3) !important;
+  color: #ff8a8a !important;
+  font-size: 0.8rem !important;
+}
+
 .inputWrapper {
   flex-shrink: 0;
   display: flex;

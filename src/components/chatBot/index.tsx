@@ -1,43 +1,53 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { MarkdownText } from '@/components/_shared/MarkdownText'
+import {
+  createAssistantMessage,
+  createUserMessage,
+} from '@/components/features/ScheduleAssistantChat/utils'
+import { fetchScheduleChatReply } from '@/services/scheduleAssistantApi'
+import type { ScheduleChatMessage } from '@/types/scheduleAssistant'
 import elipse from '../../assets/images/Ellipse 23.png'
 import logo from '../../assets/images/Logo.png'
-import styles from './style.module.css'
-import { useState } from 'react'
 import send from '../../assets/images/send.png'
-// import { sendMessage } from './api/gegitminiCall'
+import styles from './style.module.css'
+
+const WELCOME_MESSAGE = createAssistantMessage("Hi! I am Gemini's helper.\nHow can I help you?")
 
 export const Chat = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [message, setMessage] = useState<{ role: 'user' | 'model'; text: string }[]>([])
+  const [messages, setMessages] = useState<ScheduleChatMessage[]>([WELCOME_MESSAGE])
   const [inputValue, setInputValue] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
-  const handleChatOpen = () => {
-    setIsOpen((prev) => !prev)
-  }
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, isSending])
 
-  const handleMessageSend = async () => {
-    if (!inputValue.trim()) return
-    setLoading(true)
+  const handleMessageSend = useCallback(async () => {
+    const trimmed = inputValue.trim()
+    if (!trimmed || isSending) return
 
-    const userMessage: { role: 'user' | 'model'; text: string } = {
-      role: 'user',
-      text: inputValue,
-    }
+    const userMessage = createUserMessage(trimmed)
+    const nextMessages = [...messages, userMessage]
 
-    const newMessage = [...message, userMessage]
-
-    setMessage(newMessage)
+    setMessages(nextMessages)
     setInputValue('')
+    setIsSending(true)
+    setError(null)
+
     try {
-      // const geminiAnswer = await sendMessage(newMessage);
-      setMessage((prev) => [
-        ...prev,
-        // { role: 'model', text: geminiAnswer }
-      ])
+      const { reply } = await fetchScheduleChatReply(nextMessages)
+      setMessages((current) => [...current, createAssistantMessage(reply)])
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to get a response.')
+      setMessages(messages)
+      setInputValue(trimmed)
     } finally {
-      setLoading(false)
+      setIsSending(false)
     }
-  }
+  }, [inputValue, isSending, messages])
 
   return (
     <>
@@ -50,30 +60,35 @@ export const Chat = () => {
               <p>Ask anything!</p>
             </div>
             <div className={styles.messagesArea}>
-              <p>
-                Hi! I am Gemini's helper.
-                <br /> How can I help you?
-              </p>
-              {message.map((msg, i) => (
-                <p key={i} className={msg.role === 'user' ? styles.userMsg : styles.modelMsg}>
-                  {msg.text}
-                </p>
-              ))}
+              {messages.map((msg) =>
+                msg.role === 'user' ? (
+                  <p key={msg.id} className={styles.userMsg}>
+                    {msg.content}
+                  </p>
+                ) : (
+                  <div key={msg.id} className={styles.modelMsg}>
+                    <MarkdownText content={msg.content} />
+                  </div>
+                ),
+              )}
+              {isSending && <p className={styles.modelMsg}>...</p>}
+              {error && <p className={styles.errorMsg}>{error}</p>}
+              <div ref={messagesEndRef} />
             </div>
             <div className={styles.inputWrapper}>
               <input
                 placeholder="Type your message here..."
                 value={inputValue}
-                disabled={loading}
+                disabled={isSending}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleMessageSend()}
+                onKeyDown={(e) => e.key === 'Enter' && void handleMessageSend()}
               />
-              <img src={send} onClick={handleMessageSend} />
+              <img src={send} onClick={() => void handleMessageSend()} />
             </div>
           </div>
         </div>
       ) : (
-        <div className={styles.wrap} onClick={handleChatOpen}>
+        <div className={styles.wrap} onClick={() => setIsOpen((prev) => !prev)}>
           <div className={styles.robotLogo}>
             <img src={elipse} />
             <img src={logo} />
