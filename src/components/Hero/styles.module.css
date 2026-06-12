@@ -146,6 +146,16 @@
   background: rgb(210 232 35 / 12%);
 }
 
+.chipPurple {
+  border-color: rgb(var(--color-home-accent-purple-rgb) / 40%);
+  background: rgb(var(--color-home-accent-purple-rgb) / 12%);
+}
+
+.chipCyan {
+  border-color: rgb(var(--color-home-accent-cyan-rgb) / 40%);
+  background: rgb(var(--color-home-accent-cyan-rgb) / 12%);
+}
+
 .actions {
   display: flex;
   align-items: center;

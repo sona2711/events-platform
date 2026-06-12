@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Hero } from '@/components/Hero'
 import { LazySection } from '@/components/_shared/LazySection'
 import { SectionSkeleton } from '@/components/_shared/SectionSkeleton'
+import { EXPLORE_ALL_EVENTS_SECTION_ID } from '@/components/features/homepage/consts'
 
 const EventsGrid = lazy(() =>
   import('@/components/EventsCard').then((module) => ({ default: module.EventsGrid })),
@@ -37,7 +38,7 @@ export const MainPage = () => {
           <WineFestHero />
         </Suspense>
       </LazySection>
-      <LazySection placeholderSize="explore">
+      <LazySection id={EXPLORE_ALL_EVENTS_SECTION_ID} placeholderSize="explore">
         <Suspense fallback={<SectionSkeleton size="explore" />}>
           <ExploreAllEvents />
         </Suspense>

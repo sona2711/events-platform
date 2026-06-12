@@ -6,4 +6,5 @@ export type LazySectionProps = {
   children: ReactNode
   placeholderSize: LazySectionPlaceholderSize
   rootMargin?: string
+  id?: string
 }
