@@ -14,6 +14,7 @@ const config: Config = {
   moduleNameMapper: {
     '^swiper/modules$': '<rootDir>/src/__mocks__/swiperModules.ts',
     '^swiper/react$': '<rootDir>/src/__mocks__/swiperReact.tsx',
+    '^react-markdown$': '<rootDir>/src/__mocks__/reactMarkdown.tsx',
     '^swiper/css(?:/.*)?$': 'identity-obj-proxy',
     '^@/(.*)\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)\\.(jpg|jpeg|png|gif|svg|webp)$': '<rootDir>/src/__mocks__/fileMock.ts',
@@ -24,7 +25,11 @@ const config: Config = {
   transformIgnorePatterns: [
     '/node_modules/(?!(antd|@ant-design|rc-|@rc-component|msw|@mswjs)/)',
   ],
-  testMatch: ['**/__tests__/**/*.{ts,tsx}', '**/*.{spec,test}.{ts,tsx}'],
+  testMatch: [
+    '**/__tests__/**/*.{ts,tsx}',
+    '**/*.{spec,test}.{ts,tsx}',
+    'api/**/*.{spec,test}.{ts,tsx}',
+  ],
   testPathIgnorePatterns: ['/node_modules/', '/tests/'],
   coverageDirectory: 'coverage',
   collectCoverageFrom: [

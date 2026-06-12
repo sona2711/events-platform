@@ -1,3 +1,7 @@
+export const FOOTER_LINK_HREFS: Partial<Record<string, string>> = {
+  'footer.groups.product.links.chat': '/schedule-assistant',
+}
+
 export const FOOTER_LINK_GROUPS = [
   {
     id: 'features',
