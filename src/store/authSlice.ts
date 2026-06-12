@@ -18,12 +18,8 @@ export const loginWithEmail = createAsyncThunk<
       loadFirebaseAuth(),
     ])
     const { user } = await signInWithEmailAndPassword(auth, email, password)
-    return {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-    }
+    const { createAuthUser } = await import('@/lib/authUser')
+    return createAuthUser(user)
   } catch (err) {
     return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.loginFailed))
   }
@@ -38,12 +34,8 @@ export const loginWithGoogle = createAsyncThunk<AuthUser, void, { rejectValue: s
         loadFirebaseAuth(),
       ])
       const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
-      return {
-        uid: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-      }
+      const { createAuthUser } = await import('@/lib/authUser')
+      return createAuthUser(user)
     } catch (err) {
       return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.googleSignInFailed))
     }
@@ -66,12 +58,8 @@ export const registerWithEmail = createAsyncThunk<
     await updateProfile(user, { displayName: trimmedDisplayName })
     await user.reload()
 
-    return {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName ?? trimmedDisplayName,
-      photoURL: user.photoURL,
-    }
+    const { createAuthUser } = await import('@/lib/authUser')
+    return createAuthUser(user)
   } catch (err) {
     return rejectWithValue(toAuthRejectValue(err, AUTH_ERROR_MESSAGES.registrationFailed))
   }
@@ -177,5 +165,6 @@ export const { setUser, clearError } = authSlice.actions
 
 export const selectAuthUser = (state: { auth: AuthState }) => state.auth.user
 export const selectAuthLoading = (state: { auth: AuthState }) => state.auth.loading
+export const selectIsAdmin = (state: { auth: AuthState }) => state.auth.user?.isAdmin ?? false
 
 export default authSlice.reducer

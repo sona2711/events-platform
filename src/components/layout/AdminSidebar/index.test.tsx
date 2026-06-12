@@ -1,22 +1,26 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
+import { Provider } from 'react-redux'
 import '@/i18n'
 import i18n from '@/i18n'
 import commonEn from '@/locales/common/en.json'
 import { MemoryRouter } from 'react-router-dom'
+import { store } from '@/store'
 import { ADMIN_NAV_LINKS } from './consts'
 import { AdminSidebar } from './index'
 
 const renderSidebar = (initialRoute = '/admin') =>
   render(
-    <I18nextProvider i18n={i18n}>
-      <ConfigProvider>
-        <MemoryRouter initialEntries={[initialRoute]}>
-          <AdminSidebar />
-        </MemoryRouter>
-      </ConfigProvider>
-    </I18nextProvider>,
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <ConfigProvider>
+          <MemoryRouter initialEntries={[initialRoute]}>
+            <AdminSidebar />
+          </MemoryRouter>
+        </ConfigProvider>
+      </I18nextProvider>
+    </Provider>,
   )
 
 describe('AdminSidebar', () => {

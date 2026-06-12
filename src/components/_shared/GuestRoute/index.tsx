@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation, type Location } from 'react-router-dom'
 import { Loader } from '@/components/_shared/Loader'
 import { useAppSelector } from '@/store/hooks'
-import { POST_AUTH_REDIRECT_PATH } from './consts'
+import { ADMIN_POST_AUTH_REDIRECT_PATH, POST_AUTH_REDIRECT_PATH } from './consts'
 import styles from './styles.module.css'
 
 interface GuestRouteLocationState {
@@ -21,6 +21,10 @@ export function GuestRoute() {
   }
 
   if (user) {
+    if (user.isAdmin) {
+      return <Navigate to={ADMIN_POST_AUTH_REDIRECT_PATH} replace />
+    }
+
     const state = location.state as GuestRouteLocationState | null
 
     if (state?.from) {
