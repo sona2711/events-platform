@@ -5,6 +5,7 @@ import { isValidContactValues } from '@/pages/CheckoutPage/utils'
 import type { CheckoutContactValues } from '@/pages/CheckoutPage/types'
 import { CONTACT_FORM_FIELDS } from './consts'
 import type { CheckoutContactFormProps } from './types'
+import styles from './styles.module.css'
 
 export const CheckoutContactForm = ({ initialValues, onValidChange }: CheckoutContactFormProps) => {
   const { t } = useTranslation('checkout')
@@ -21,6 +22,7 @@ export const CheckoutContactForm = ({ initialValues, onValidChange }: CheckoutCo
 
   return (
     <Form
+      className={styles.form}
       form={form}
       layout="vertical"
       initialValues={initialValues}

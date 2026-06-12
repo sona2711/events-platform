@@ -1,21 +1,54 @@
 .page {
+  --color-brand-primary: var(--color-light-brand-primary);
+  --color-brand-primary-hover: var(--color-light-brand-primary-hover);
+  --color-action-primary: var(--color-light-action-primary);
+  --color-surface-page: var(--color-light-surface-page);
+  --color-surface-card: var(--color-light-surface-card);
+  --color-surface-muted: var(--color-light-surface-muted);
+  --color-text-primary: var(--color-light-text-primary);
+  --color-text-secondary: var(--color-light-text-secondary);
+  --color-text-on-brand: var(--color-white);
+  --button-primary-bg: var(--color-action-primary);
+  --button-primary-border: var(--color-action-primary);
+  --button-primary-disabled-bg: rgb(var(--color-blue-600-rgb) / 35%);
+  --button-secondary-border: rgb(var(--color-burgundy-700-rgb) / 12%);
+  --button-secondary-hover-bg: rgb(var(--color-blue-600-rgb) / 8%);
+  --button-secondary-hover-border: var(--color-action-primary);
+  --button-secondary-hover-text: var(--color-action-primary);
+
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background-color: #eee6e7;
-  background-image: url('../../assets/images/background.png');
+  overflow: hidden;
+  background-color: var(--color-home-surface);
+  background-image: var(--color-home-hero-bg);
   background-size: cover;
   background-position: center;
+}
+
+.page :global(.ant-form-item) {
+  margin-bottom: 14px;
+}
+
+.page :global(.ant-divider) {
+  margin: 14px 0;
 }
 
 .page::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgb(var(--color-home-accent-pink-rgb) / 12%) 0%,
+    transparent 60%
+  );
   z-index: 0;
 }
 
@@ -44,10 +77,9 @@
   margin-top: 4px;
 }
 
-.submitButton {
-  border-radius: 24px !important;
-  background-color: #3b5bdb !important;
-  border-color: #3b5bdb !important;
+.passwordStrength {
+  margin-top: 6px;
+  margin-bottom: 4px;
 }
 
 .footer {
@@ -61,4 +93,149 @@
   margin-top: 16px;
   text-align: center;
   vertical-align: middle;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 16px;
+  }
+}
+
+@media (max-height: 740px) {
+  .page {
+    padding: 12px 16px;
+  }
+
+  .title {
+    margin-bottom: 14px !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .footer {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .submitItem {
+    margin-top: 0;
+  }
+
+  .page :global(.ant-form-item) {
+    margin-bottom: 10px;
+  }
+
+  .page :global(.ant-divider) {
+    margin: 10px 0;
+  }
+
+  .passwordStrength {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  .page :global(.ant-btn-lg.ant-btn-block) {
+    height: 44px !important;
+    min-height: 44px;
+    padding-block: 4px;
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 680px) {
+  .page {
+    padding: 10px 14px;
+  }
+
+  .title {
+    margin-bottom: 10px !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+  }
+
+  .footer {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .page :global(.ant-form-item) {
+    margin-bottom: 8px;
+  }
+
+  .page :global(.ant-form-item-label > label) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+
+  .page :global(.ant-divider) {
+    margin: 8px 0;
+    font-size: 11px !important;
+  }
+
+  .page :global(.ant-checkbox-wrapper) {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .passwordStrength {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .passwordStrength :global(.ant-typography) {
+    font-size: 11px;
+  }
+}
+
+@media (max-height: 620px) {
+  .page {
+    padding: 6px 10px;
+  }
+
+  .title {
+    margin-bottom: 8px !important;
+    font-size: 16px !important;
+    line-height: 22px !important;
+  }
+
+  .footer {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .submitItem {
+    margin-bottom: 4px !important;
+  }
+
+  .page :global(.ant-form-item) {
+    margin-bottom: 6px;
+  }
+
+  .page :global(.ant-row) {
+    row-gap: 0 !important;
+  }
+
+  .page :global(.ant-input-lg),
+  .page :global(.ant-input-affix-wrapper-lg) {
+    padding-block: 5px;
+    font-size: 13px;
+  }
+
+  .page :global(.ant-btn-lg) {
+    height: 38px;
+    padding-block: 4px;
+    font-size: 13px;
+  }
+
+  .page :global(.ant-divider) {
+    margin: 6px 0;
+  }
+
+  .passwordStrength :global(.ant-typography) {
+    font-size: 10px;
+    line-height: 1.2;
+  }
 }

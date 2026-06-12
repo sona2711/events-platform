@@ -3,6 +3,7 @@ import { Button, Flex, Typography } from 'antd'
 import { showSystemMessage } from '@/providers/notifications/utils'
 import { getFollowSuccessMessage, getUnfollowSuccessMessage } from './consts'
 import type { EventDetailOrganizerProps } from './types'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 export const EventDetailOrganizer = ({ organizer, eventTitle }: EventDetailOrganizerProps) => {
@@ -33,8 +34,9 @@ export const EventDetailOrganizer = ({ organizer, eventTitle }: EventDetailOrgan
           {organizer}
         </Typography.Title>
         <Button
-          type="default"
-          className={isFollowing ? styles.unfollowButton : styles.followButton}
+          variant="outlined"
+          color="primary"
+          className={`${buttonStyles.secondaryButton} ${buttonStyles.compactButton}`}
           onClick={handleFollowToggle}
           aria-pressed={isFollowing}
         >

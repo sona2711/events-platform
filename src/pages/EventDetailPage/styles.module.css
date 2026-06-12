@@ -1,8 +1,11 @@
 .page {
-  padding: 40px 24px 80px;
+  min-height: 100%;
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 32px) clamp(64px, 8vw, 96px);
+  background: var(--color-surface-page);
 }
 
 .container {
+  width: min(100%, var(--layout-max-width));
   max-width: var(--layout-max-width);
   margin: 0 auto;
 }
@@ -14,12 +17,15 @@
   justify-content: center;
   min-height: 50vh;
   gap: 16px;
+  padding: clamp(24px, 4vw, 48px);
+  background: var(--color-surface-page);
 }
 
 .stateMessage {
   margin: 0;
   font-size: 18px;
   color: var(--color-text-primary);
+  font-family: var(--font-family-body);
 }
 
 .backLink {
@@ -29,14 +35,19 @@
   color: var(--color-action-primary);
   font-size: 16px;
   font-weight: 500;
+  font-family: var(--font-family-body);
   text-decoration: underline;
   padding: 0;
+}
+
+.backLink:hover {
+  color: var(--color-action-primary);
 }
 
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgb(0 0 0 / 10%);
+  border: 3px solid rgb(var(--color-white-rgb) / 12%);
   border-top-color: var(--color-action-primary);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;

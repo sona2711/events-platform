@@ -1,24 +1,94 @@
+.modal {
+  --modal-text: var(--color-home-text);
+  --modal-muted: var(--color-home-text-muted);
+  --modal-surface: rgb(var(--color-home-surface-elevated-rgb) / 96%);
+  --modal-surface-muted: rgb(var(--color-white-rgb) / 6%);
+  --modal-border: var(--color-home-border);
+  --modal-border-strong: var(--color-home-border-hover);
+
+  max-width: min(560px, calc(100vw - 32px));
+  padding-bottom: 0;
+}
+
 .modal :global(.ant-modal-content) {
-  border-radius: 28px;
-  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 24px);
+  border: 1px solid var(--modal-border);
+  border-radius: 26px;
+  background:
+    radial-gradient(
+      circle at 12% 0%,
+      rgb(var(--color-home-accent-cyan-rgb) / 18%) 0%,
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 100% 14%,
+      rgb(var(--color-home-accent-purple-rgb) / 22%) 0%,
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      rgb(18 26 48 / 98%) 0%,
+      rgb(10 16 32 / 98%) 58%,
+      rgb(16 12 38 / 98%) 100%
+    );
+  padding: 22px 24px 18px;
+  box-shadow:
+    0 28px 80px -32px rgb(0 0 0 / 78%),
+    inset 0 1px 0 rgb(var(--color-white-rgb) / 8%);
+  overflow: hidden;
+}
+
+.modal :global(.ant-modal-body) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
   overflow: hidden;
 }
 
 .modal :global(.ant-modal-close) {
-  color: var(--color-text-secondary);
+  top: 16px;
+  inset-inline-end: 16px;
+  color: var(--modal-text);
+}
+
+.modal :global(.ant-modal-close:hover) {
+  color: var(--color-action-primary);
+  background: rgb(var(--color-white-rgb) / 8%);
+}
+
+.modalShell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.modalTop {
+  flex-shrink: 0;
+}
+
+.modalContent {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .backButton {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--color-text-primary);
+  color: var(--modal-muted);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  transition: color 160ms ease;
 }
 
 .backButton:hover {
@@ -26,14 +96,14 @@
 }
 
 .header {
-  margin-top: 22px;
-  margin-bottom: 22px;
+  margin-top: 14px;
+  margin-bottom: 16px;
 }
 
 .eyebrow {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: var(--color-action-primary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -41,22 +111,70 @@
 
 .title {
   margin: 0;
-  color: var(--color-burgundy-700);
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--modal-text);
+  font-family: var(--font-family-display);
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.08;
 }
 
 .subtitle {
-  margin: 8px 0 0;
-  color: var(--color-text-secondary);
-  font-size: 15px;
+  margin: 6px 0 0;
+  color: var(--modal-muted);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .steps {
-  margin-bottom: 26px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.steps :global(.ant-steps-item) {
+  padding-inline-start: 0 !important;
+}
+
+.steps :global(.ant-steps-item-container) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--modal-border);
+  border-radius: 999px;
+  background: var(--modal-surface-muted);
+}
+
+.steps :global(.ant-steps-item-tail) {
+  display: none;
+}
+
+.steps :global(.ant-steps-item-content) {
+  min-height: 0;
+}
+
+.steps :global(.ant-steps-item-title) {
+  color: var(--modal-muted) !important;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding-inline-end: 0;
+}
+
+.steps :global(.ant-steps-item-title::after) {
+  display: none;
+}
+
+.steps :global(.ant-steps-item-icon) {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-inline-end: 0;
+  font-size: 13px;
+  line-height: 24px;
 }
 
 .steps :global(.ant-steps-item-process .ant-steps-item-icon),
@@ -65,8 +183,17 @@
   background: var(--color-action-primary);
 }
 
+.steps :global(.ant-steps-item-process .ant-steps-item-container) {
+  border-color: rgb(var(--color-home-accent-cyan-rgb) / 44%);
+  background: rgb(var(--color-home-accent-cyan-rgb) / 12%);
+}
+
+.steps :global(.ant-steps-item-process .ant-steps-item-title) {
+  color: var(--modal-text) !important;
+}
+
 .steps :global(.ant-steps-item-finish .ant-steps-icon) {
-  color: var(--color-white);
+  color: var(--color-home-surface);
 }
 
 .steps :global(.ant-steps-item-finish .ant-steps-item-tail::after) {
@@ -78,9 +205,19 @@
   flex-direction: column;
 }
 
+.form :global(.ant-form-item) {
+  margin-bottom: 14px;
+}
+
+.form :global(.ant-form-item-label) {
+  padding-bottom: 4px;
+}
+
 .form :global(.ant-form-item-label > label) {
-  color: var(--color-text-primary);
-  font-weight: 700;
+  color: var(--modal-text);
+  font-size: 13px;
+  font-weight: 800;
+  height: auto;
 }
 
 .form :global(.ant-input),
@@ -91,7 +228,38 @@
 
 .form :global(.ant-input),
 .form :global(.ant-input-number) {
-  border-color: rgb(var(--color-blue-600-rgb) / 18%);
+  border-color: var(--modal-border);
+  background: rgb(var(--color-white-rgb) / 8%);
+  color: var(--modal-text);
+}
+
+.form :global(.ant-input-status-error),
+.form :global(.ant-input-status-error:not(.ant-input-disabled)),
+.form :global(.ant-input-number-status-error),
+.form :global(.ant-input-number-status-error:not(.ant-input-number-disabled)) {
+  background: rgb(var(--color-white-rgb) / 8%) !important;
+  color: var(--modal-text);
+}
+
+.form :global(.ant-input::placeholder) {
+  color: rgb(var(--color-home-text-rgb) / 42%);
+}
+
+.form :global(.ant-input-status-error::placeholder) {
+  color: rgb(var(--color-home-text-rgb) / 42%);
+}
+
+.form :global(.ant-input-disabled),
+.form :global(.ant-input-number-disabled) {
+  border-color: var(--modal-border);
+  background: rgb(var(--color-white-rgb) / 5%);
+  color: var(--modal-muted);
+}
+
+.form :global(.ant-input),
+.form :global(.ant-input-number-input) {
+  height: 40px;
+  font-size: 14px;
 }
 
 .form :global(.ant-input:focus),
@@ -99,6 +267,7 @@
 .form :global(.ant-input-number-focused),
 .form :global(.ant-input-number:hover) {
   border-color: var(--color-action-primary);
+  box-shadow: 0 0 0 2px rgb(var(--color-home-accent-cyan-rgb) / 14%);
 }
 
 .formGrid {
@@ -113,7 +282,7 @@
 
 .paymentMethods {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: 100%;
 }
@@ -121,13 +290,20 @@
 .paymentMethod {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: flex-start;
   width: 100%;
-  height: 72px;
-  border: 1px solid rgb(var(--color-blue-600-rgb) / 18%);
-  border-radius: 14px;
-  color: var(--color-text-primary);
+  height: 56px;
+  padding-inline: 16px;
+  border: 1px solid var(--modal-border);
+  border-radius: 12px;
+  color: var(--modal-text);
+  background: rgb(var(--color-white-rgb) / 7%);
+  font-size: 13px;
   font-weight: 700;
+}
+
+.paymentLabel {
+  margin-left: 8px;
 }
 
 .paymentMethods :global(.ant-radio-button-wrapper)::before {
@@ -137,31 +313,125 @@
 .paymentMethods :global(.ant-radio-button-wrapper-checked) {
   border-color: var(--color-action-primary);
   color: var(--color-action-primary);
-  box-shadow: 0 0 0 1px var(--color-action-primary);
+  background: rgb(var(--color-home-accent-cyan-rgb) / 12%);
+  box-shadow: 0 0 0 1px rgb(var(--color-home-accent-cyan-rgb) / 62%);
 }
 
 .paymentIcon {
   color: var(--color-action-primary);
-  font-size: 22px;
+  font-size: 18px;
+}
+
+.freeNotice {
+  margin: 0 0 10px;
+  padding: 12px 14px;
+  border: 1px solid rgb(var(--color-home-accent-cyan-rgb) / 28%);
+  border-radius: 14px;
+  background: rgb(var(--color-home-accent-cyan-rgb) / 10%);
+  color: var(--modal-text);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.paymentStep .header {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.paymentStep .title {
+  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
+}
+
+.paymentStep .subtitle {
+  display: none;
+}
+
+.paymentStep .steps {
+  margin-bottom: 10px;
+}
+
+.paymentStep .steps :global(.ant-steps-item-container) {
+  min-height: 32px;
+  padding: 4px 8px;
+}
+
+.paymentStep .form :global(.ant-form-item) {
+  margin-bottom: 8px;
+}
+
+.paymentStep .form :global(.ant-form-item-label) {
+  padding-bottom: 2px;
+}
+
+.paymentStep .form :global(.ant-form-item-label > label) {
+  font-size: 12px;
+}
+
+.paymentStep .form :global(.ant-input),
+.paymentStep .form :global(.ant-input-number-input) {
+  height: 36px;
+}
+
+.paymentStep .paymentMethod {
+  height: 44px;
+}
+
+.paymentStep .terms {
+  margin-bottom: 8px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.modalPrimaryButton:global(.ant-btn) {
+  height: 44px;
+  min-height: 44px;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.paymentStep .modalPrimaryButton:global(.ant-btn) {
+  height: 40px;
+  min-height: 40px;
 }
 
 .terms {
-  margin: 0 0 22px;
-  color: var(--color-text-secondary);
-  font-size: 12px;
-  line-height: 1.5;
+  margin: 0 0 14px;
+  color: var(--modal-muted);
+  font-size: 11px;
+  line-height: 1.45;
 }
 
-.primaryButton {
-  width: 100%;
-  height: 46px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--color-blue-600), var(--color-blue-700));
-  font-weight: 800;
+.receiptStep .header {
+  margin-top: 8px;
+  margin-bottom: 10px;
 }
 
-.primaryButton:hover {
-  background: linear-gradient(135deg, var(--color-blue-700), var(--color-blue-800)) !important;
+.receiptStep .title {
+  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
+}
+
+.receiptStep .subtitle {
+  display: none;
+}
+
+.receiptStep .steps {
+  margin-bottom: 10px;
+}
+
+.receiptStep .steps :global(.ant-steps-item-container) {
+  min-height: 32px;
+  padding: 4px 8px;
+}
+
+.receiptStep .modalContent {
+  flex: 0 1 auto;
+}
+
+.receiptStep .modalPrimaryButton:global(.ant-btn) {
+  flex-shrink: 0;
+  height: 40px;
+  min-height: 40px;
+  margin-top: 0;
 }
 
 .receipt {
@@ -173,37 +443,42 @@
 
 .successIcon {
   display: inline-flex;
-  margin-bottom: 14px;
-  color: #16a34a;
-  font-size: 56px;
+  margin-bottom: 6px;
+  color: var(--color-action-primary);
+  font-size: 34px;
+  filter: drop-shadow(0 0 18px rgb(var(--color-home-accent-cyan-rgb) / 34%));
 }
 
 .receiptKicker {
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: var(--color-action-primary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .receiptTitle {
-  margin: 0 0 22px;
-  color: var(--color-burgundy-700);
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 1.8rem;
+  margin: 0 0 10px;
+  color: var(--modal-text);
+  font-family: var(--font-family-display);
+  font-size: 1.3rem;
   font-weight: 800;
 }
 
 .receiptPaper {
   width: 100%;
-  margin-bottom: 24px;
-  padding: 22px;
-  border: 1px dashed rgb(var(--color-blue-600-rgb) / 34%);
+  margin-bottom: 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--modal-border-strong);
   border-radius: 18px;
   background:
-    linear-gradient(180deg, rgb(var(--color-blue-600-rgb) / 7%), transparent 42%),
-    var(--color-surface-card);
+    radial-gradient(
+      circle at 100% 0%,
+      rgb(var(--color-home-accent-cyan-rgb) / 10%),
+      transparent 46%
+    ),
+    rgb(var(--color-white-rgb) / 7%);
   text-align: left;
 }
 
@@ -211,22 +486,23 @@
 .receiptTotal {
   display: flex;
   justify-content: space-between;
-  gap: 18px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgb(var(--color-blue-600-rgb) / 10%);
-  color: var(--color-text-secondary);
+  gap: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--modal-border);
+  color: var(--modal-muted);
+  font-size: 13px;
 }
 
 .receiptRow strong,
 .receiptTotal strong {
-  color: var(--color-text-primary);
+  color: var(--modal-text);
   text-align: right;
 }
 
 .receiptTotal {
   border-bottom: 0;
-  color: var(--color-burgundy-700);
-  font-size: 18px;
+  color: var(--modal-text);
+  font-size: 15px;
   font-weight: 800;
 }
 
@@ -236,7 +512,22 @@
 
 @media (max-width: 620px) {
   .modal :global(.ant-modal-content) {
-    padding: 22px 18px;
+    max-height: calc(100dvh - 24px);
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .header {
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+
+  .steps {
+    margin-bottom: 12px;
+  }
+
+  .steps :global(.ant-steps-item-title) {
+    font-size: 12px;
   }
 
   .paymentMethods,
@@ -247,7 +538,7 @@
   .receiptRow,
   .receiptTotal {
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .receiptRow strong,

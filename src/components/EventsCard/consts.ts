@@ -1,4 +1,4 @@
-import { mapEventsToCardData } from '@/components/features/EventCard/utils'
+import { mapEventsToCardData } from '@/components/_shared/EventsCard/utils'
 import { getHomepageListingEvents } from '@/mock-api/listingEventUtils'
 import { Navigation } from 'swiper/modules'
 import type { SliderBreakpointConfig } from './types'

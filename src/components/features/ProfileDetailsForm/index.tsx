@@ -5,6 +5,7 @@ import { Button, Form, Input, Select } from 'antd'
 import type { ProfileFormValues } from '@/pages/userProfile/types'
 import { ARMENIA_REGION_OPTIONS, getProfileFormRules, PROFILE_FORM_FIELDS } from './consts'
 import type { ProfileDetailsFormProps } from './types'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 export const ProfileDetailsForm = ({
@@ -91,7 +92,7 @@ export const ProfileDetailsForm = ({
 
         {isEditing ? (
           <div className={styles.footer}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" className={buttonStyles.primaryButton}>
               {t('form.saveChanges')}
             </Button>
           </div>

@@ -8,6 +8,7 @@ import {
   getOrderLineItemName,
 } from '@/pages/CheckoutPage/utils'
 import type { CheckoutOrderSummaryProps } from './types'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 export const CheckoutOrderSummary = ({
@@ -56,7 +57,7 @@ export const CheckoutOrderSummary = ({
         dataSource={totals.lineItems}
         renderItem={(item) => (
           <List.Item className={styles.lineItem}>
-            <Typography.Text type="secondary">
+            <Typography.Text className={styles.lineItemLabel}>
               {t('summary.lineItem', {
                 name: getOrderLineItemName(item),
                 count: item.quantity,
@@ -72,14 +73,16 @@ export const CheckoutOrderSummary = ({
       {!isFreeCheckout && (
         <>
           <Flex justify="space-between" className={styles.feeRow}>
-            <Typography.Text type="secondary">{t('summary.serviceFee')}</Typography.Text>
+            <Typography.Text className={styles.feeLabel}>{t('summary.serviceFee')}</Typography.Text>
             <Typography.Text strong className={styles.feeAmount}>
               {formatAmount(totals.serviceFeeAmd)}
             </Typography.Text>
           </Flex>
 
           <Flex justify="space-between" className={styles.feeRow}>
-            <Typography.Text type="secondary">{t('summary.processingFee')}</Typography.Text>
+            <Typography.Text className={styles.feeLabel}>
+              {t('summary.processingFee')}
+            </Typography.Text>
             <Typography.Text strong className={styles.feeAmount}>
               {formatAmount(totals.processingFeeAmd)}
             </Typography.Text>
@@ -90,7 +93,9 @@ export const CheckoutOrderSummary = ({
       <Divider className={styles.divider} />
 
       <Flex justify="space-between" align="center" className={styles.totalRow}>
-        <Typography.Text strong>{t('summary.total')}</Typography.Text>
+        <Typography.Text strong className={styles.totalLabel}>
+          {t('summary.total')}
+        </Typography.Text>
         <Typography.Text strong className={styles.totalAmount}>
           {formatAmount(totals.totalAmd)}
         </Typography.Text>
@@ -101,7 +106,7 @@ export const CheckoutOrderSummary = ({
         block
         disabled={!isReady || isSubmitting}
         loading={isSubmitting}
-        className={styles.placeOrderButton}
+        className={`${buttonStyles.primaryButton} ${buttonStyles.largeButton} ${buttonStyles.fullWidthButton} ${styles.placeOrderButton}`}
         onClick={onPlaceOrder}
       >
         {isFreeCheckout ? t('summary.reserveTicket') : t('summary.placeOrder')}

@@ -9,6 +9,7 @@ import { EventDetailLocation } from '@/components/features/EventDetailLocation'
 import { EventDetailOrganizer } from '@/components/features/EventDetailOrganizer'
 import { EventDetailTags } from '@/components/features/EventDetailTags'
 import { EventDetailTicketCard } from '@/components/features/EventDetailTicketCard'
+import { fetchEventById } from '@/mock-api/resolveEventById'
 import type { EventDetail } from './types'
 import styles from './styles.module.css'
 
@@ -23,24 +24,26 @@ export function EventDetailPage() {
   useEffect(() => {
     if (!eventId) return
 
+    let cancelled = false
+
+    setEvent(null)
     setStatus('loading')
 
-    fetch(`/api/events/${eventId}`)
-      .then((res) => {
-        if (res.status === 404) {
-          setStatus('not-found')
-          return null
-        }
-        if (!res.ok) throw new Error('Failed to fetch')
-        return res.json() as Promise<EventDetail>
-      })
-      .then((data) => {
-        if (data) {
-          setEvent(data)
-          setStatus('ready')
-        }
-      })
-      .catch(() => setStatus('error'))
+    fetchEventById(eventId).then((data) => {
+      if (cancelled) return
+
+      if (!data) {
+        setStatus('not-found')
+        return
+      }
+
+      setEvent(data)
+      setStatus('ready')
+    })
+
+    return () => {
+      cancelled = true
+    }
   }, [eventId])
 
   if (status === 'loading') {

@@ -9,6 +9,8 @@ import '@/i18n'
 import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
 import { CheckoutPage } from '@/pages/CheckoutPage'
+import { ThemeScope } from '@/components/_shared/ThemeScope'
+import { ThemeProvider } from '@/providers/theme'
 import { favoritesReducer } from '@/store/favorites'
 import { profileReducer } from '@/store/profile'
 import type { UserProfile } from './types'
@@ -45,16 +47,20 @@ const renderPage = (profile: UserProfile = loggedInProfile, favoriteEventIds: st
     store,
     ...render(
       <Provider store={store}>
-        <I18nextProvider i18n={i18n}>
-          <ConfigProvider>
-            <MemoryRouter initialEntries={['/profile']}>
-              <Routes>
-                <Route path="/profile" element={<UserProfilePage />} />
-                <Route path="/checkout/:eventId" element={<CheckoutPage />} />
-              </Routes>
-            </MemoryRouter>
-          </ConfigProvider>
-        </I18nextProvider>
+        <ThemeProvider>
+          <I18nextProvider i18n={i18n}>
+            <ConfigProvider>
+              <MemoryRouter initialEntries={['/profile']}>
+                <ThemeScope>
+                  <Routes>
+                    <Route path="/profile" element={<UserProfilePage />} />
+                    <Route path="/checkout/:eventId" element={<CheckoutPage />} />
+                  </Routes>
+                </ThemeScope>
+              </MemoryRouter>
+            </ConfigProvider>
+          </I18nextProvider>
+        </ThemeProvider>
       </Provider>,
     ),
   }

@@ -23,7 +23,7 @@ const SubscribeBanner = lazy(() =>
   })),
 )
 
-export function MainPage() {
+export const MainPage = () => {
   return (
     <>
       <Hero />

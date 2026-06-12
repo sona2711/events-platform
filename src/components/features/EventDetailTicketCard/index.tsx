@@ -15,6 +15,7 @@ import {
 } from './consts'
 import { formatTicketFeeLabel, isValidRefundPhone, toTelHref } from './utils'
 import { MAX_TICKET_QUANTITY, MIN_TICKET_QUANTITY, type EventDetailTicketCardProps } from './types'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 type RefundRequestValues = {
@@ -88,7 +89,7 @@ export const EventDetailTicketCard = ({
 
         <Button
           type="primary"
-          className={styles.bookButton}
+          className={`${buttonStyles.primaryButton} ${buttonStyles.largeButton} ${buttonStyles.fullWidthButton} ${styles.bookButton}`}
           onClick={() =>
             navigate(`/checkout/${eventId}`, {
               state: { ticketQuantity: quantity } satisfies CheckoutLocationState,
@@ -148,7 +149,12 @@ export const EventDetailTicketCard = ({
             >
               <Input placeholder="+374 00 000 000" inputMode="tel" autoComplete="tel" />
             </Form.Item>
-            <Button type="primary" htmlType="submit" block className={styles.infoSubmitButton}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              className={`${buttonStyles.primaryButton} ${buttonStyles.fullWidthButton}`}
+            >
               {REFUND_POLICY_SUBMIT_LABEL}
             </Button>
           </Form>

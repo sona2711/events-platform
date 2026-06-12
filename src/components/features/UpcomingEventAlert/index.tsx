@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { getDaysUntilEvent, hasReminder } from './utils'
 import type { UpcomingEventAlertProps } from './types'
 import styles from './styles.module.css'
@@ -52,6 +53,11 @@ export const UpcomingEventAlert = ({ booking, onSetReminder }: UpcomingEventAler
       <p className={styles.description}>{getDescription()}</p>
       <Button
         type={reminderSet ? 'default' : 'primary'}
+        className={
+          reminderSet
+            ? `${buttonStyles.secondaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`
+            : `${buttonStyles.primaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`
+        }
         block
         disabled={!booking || reminderSet}
         onClick={handleSetReminder}

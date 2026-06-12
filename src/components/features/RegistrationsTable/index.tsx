@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button, Form, Input, Modal, Pagination, Select } from 'antd'
 import { DownloadOutlined, EditOutlined, StopOutlined } from '@ant-design/icons'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { PAGE_SIZE, STATUS_CLASS_BY_VALUE } from './consts'
 import { buildInitials, exportToCsv } from './utils'
 import styles from './styles.module.css'
@@ -124,10 +125,14 @@ export const RegistrationsTable = ({
           <h2 className={styles.tableTitle}>
             Total Registrations <span className={styles.tableTitleCount}>({totalCount})</span>
           </h2>
-          <button className={styles.exportButton} type="button" onClick={handleExportCsv}>
-            <DownloadOutlined className={styles.exportIcon} aria-hidden="true" />
+          <Button
+            className={`${buttonStyles.secondaryButton} ${buttonStyles.compactButton} ${styles.exportButton}`}
+            type="default"
+            onClick={handleExportCsv}
+            icon={<DownloadOutlined className={styles.exportIcon} aria-hidden="true" />}
+          >
             Export to CSV
-          </button>
+          </Button>
         </div>
 
         <div className={styles.tableScroll}>

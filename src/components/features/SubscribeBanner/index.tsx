@@ -1,16 +1,27 @@
 import type { ChangeEvent, FormEvent } from 'react'
 import { useRef, useState } from 'react'
+import { Button, Flex, Input, Tag, Typography } from 'antd'
+import type { InputRef } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { showNotification } from '@/providers/notifications/utils'
-import { EMAIL_PATTERN, SUBSCRIBE_COPY } from './consts'
+import { EMAIL_PATTERN } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 import { saveSubscriptionEmail } from './utils'
 
-export function SubscribeBanner() {
-  const emailInputRef = useRef<HTMLInputElement>(null)
+const { Title, Text, Paragraph } = Typography
+
+export const SubscribeBanner = () => {
+  const { t } = useTranslation('home')
+  const emailInputRef = useRef<InputRef>(null)
+  const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (emailError && EMAIL_PATTERN.test(event.target.value.trim())) {
+    const nextEmail = event.target.value
+    setEmail(nextEmail)
+
+    if (emailError && EMAIL_PATTERN.test(nextEmail.trim())) {
       setEmailError('')
     }
   }
@@ -18,13 +29,13 @@ export function SubscribeBanner() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const normalizedEmail = emailInputRef.current?.value.trim().toLowerCase() ?? ''
+    const normalizedEmail = email.trim().toLowerCase()
 
     if (!EMAIL_PATTERN.test(normalizedEmail)) {
-      setEmailError(SUBSCRIBE_COPY.invalidEmailMessage)
+      setEmailError(t('subscribe.invalidEmailMessage'))
       showNotification({
-        title: SUBSCRIBE_COPY.invalidEmailTitle,
-        message: SUBSCRIBE_COPY.invalidEmailMessage,
+        title: t('subscribe.invalidEmailTitle'),
+        message: t('subscribe.invalidEmailMessage'),
         variant: 'error',
       })
       return
@@ -33,61 +44,80 @@ export function SubscribeBanner() {
     try {
       await saveSubscriptionEmail(normalizedEmail)
 
-      if (emailInputRef.current) {
-        emailInputRef.current.value = ''
-      }
-
+      setEmail('')
       setEmailError('')
       showNotification({
-        title: SUBSCRIBE_COPY.successTitle,
-        message: SUBSCRIBE_COPY.successMessage,
+        title: t('subscribe.successTitle'),
+        message: t('subscribe.successMessage'),
         variant: 'success',
       })
     } catch {
       showNotification({
-        title: SUBSCRIBE_COPY.saveErrorTitle,
-        message: SUBSCRIBE_COPY.saveErrorMessage,
+        title: t('subscribe.saveErrorTitle'),
+        message: t('subscribe.saveErrorMessage'),
         variant: 'error',
       })
     }
   }
 
+  const benefits = t('subscribe.benefits', { returnObjects: true }) as string[]
+
   return (
     <section className={styles.section} aria-labelledby="subscribe-banner-title">
       <div className={styles.banner}>
         <div className={styles.content}>
-          <h2 className={styles.title} id="subscribe-banner-title">
-            {SUBSCRIBE_COPY.titleStart}
+          <Text className={styles.eyebrow}>{t('subscribe.eyebrow')}</Text>
+
+          <Title className={styles.title} id="subscribe-banner-title" level={2}>
+            {t('subscribe.titleStart')}
             <br />
-            {SUBSCRIBE_COPY.titleMiddle}{' '}
-            <span className={styles.accent}>{SUBSCRIBE_COPY.titleAccent}</span>
-          </h2>
-          <p className={styles.description}>{SUBSCRIBE_COPY.description}</p>
+            {t('subscribe.titleMiddle')}{' '}
+            <span className={styles.accent}>{t('subscribe.titleAccent')}</span>
+          </Title>
+
+          <Paragraph className={styles.description}>{t('subscribe.description')}</Paragraph>
+
+          <Flex className={styles.benefits} gap={8} wrap="wrap">
+            {benefits.map((benefit) => (
+              <Tag key={benefit} className={styles.benefitTag}>
+                {benefit}
+              </Tag>
+            ))}
+          </Flex>
         </div>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <div className={styles.field}>
-            <input
-              ref={emailInputRef}
-              className={emailError ? `${styles.input} ${styles.inputError}` : styles.input}
-              type="email"
-              name="email"
-              placeholder={SUBSCRIBE_COPY.emailPlaceholder}
-              aria-label="Email address"
-              aria-invalid={Boolean(emailError)}
-              aria-describedby={emailError ? 'subscribe-email-error' : undefined}
-              onChange={handleEmailChange}
-            />
-            {emailError ? (
-              <p className={styles.errorMessage} id="subscribe-email-error">
-                {emailError}
-              </p>
-            ) : null}
-          </div>
-          <button className={styles.button} type="submit">
-            {SUBSCRIBE_COPY.buttonLabel}
-          </button>
-        </form>
+        <div className={styles.formPanel}>
+          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+            <div className={styles.field}>
+              <Input
+                ref={emailInputRef}
+                value={email}
+                className={emailError ? `${styles.input} ${styles.inputError}` : styles.input}
+                type="email"
+                name="email"
+                placeholder={t('subscribe.emailPlaceholder')}
+                aria-label={t('subscribe.emailAria')}
+                aria-invalid={Boolean(emailError)}
+                aria-describedby={emailError ? 'subscribe-email-error' : undefined}
+                onChange={handleEmailChange}
+                size="large"
+              />
+              {emailError ? (
+                <Text className={styles.errorMessage} id="subscribe-email-error" type="danger">
+                  {emailError}
+                </Text>
+              ) : null}
+            </div>
+            <Button
+              className={`${buttonStyles.primaryButton} ${buttonStyles.largeButton} ${buttonStyles.fullWidthButton}`}
+              htmlType="submit"
+              size="large"
+              type="primary"
+            >
+              {t('subscribe.buttonLabel')}
+            </Button>
+          </form>
+        </div>
       </div>
     </section>
   )

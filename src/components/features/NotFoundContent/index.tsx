@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { NOT_FOUND_TICKER_TEXT } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 export const NotFoundContent = () => {
@@ -21,10 +22,10 @@ export const NotFoundContent = () => {
         <p className={styles.description}>{t('description')}</p>
 
         <div className={styles.actions}>
-          <Link className={styles.homeLink} to="/" replace>
-            <span className={styles.homeLinkLabel}>{t('homeLink')}</span>
+          <Link className={buttonStyles.largeLink} to="/" replace>
+            <span>{t('homeLink')}</span>
             <svg
-              className={styles.homeLinkIcon}
+              className={styles.ctaIcon}
               width="20"
               height="20"
               viewBox="0 0 20 20"

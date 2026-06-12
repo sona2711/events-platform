@@ -2,6 +2,7 @@ import { memo, useCallback } from 'react'
 import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import { Button, Image, Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { areUserBookingCardPropsEqual } from './utils'
 import type { UserBookingCardProps } from './types'
 import styles from './styles.module.css'
@@ -40,20 +41,38 @@ export const UserBookingCard = memo(
       if (isPastBooking) {
         return (
           <div className={styles.actions}>
-            <Button type="primary" onClick={handleViewTicket}>
+            <Button
+              type="primary"
+              className={`${buttonStyles.primaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`}
+              onClick={handleViewTicket}
+            >
               {t('bookings.actions.viewTicket')}
             </Button>
-            <Button onClick={handleLeaveFeedback}>{t('bookings.actions.leaveFeedback')}</Button>
+            <Button
+              className={`${buttonStyles.secondaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`}
+              onClick={handleLeaveFeedback}
+            >
+              {t('bookings.actions.leaveFeedback')}
+            </Button>
           </div>
         )
       }
 
       return (
         <div className={styles.actions}>
-          <Button type="primary" onClick={handlePayTickets}>
+          <Button
+            type="primary"
+            className={`${buttonStyles.primaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`}
+            onClick={handlePayTickets}
+          >
             {t('bookings.actions.payTickets')}
           </Button>
-          <Button onClick={handleCancel}>{t('bookings.actions.cancel')}</Button>
+          <Button
+            className={`${buttonStyles.secondaryButton} ${buttonStyles.cardPrimaryButton} ${buttonStyles.fullWidthButton}`}
+            onClick={handleCancel}
+          >
+            {t('bookings.actions.cancel')}
+          </Button>
         </div>
       )
     }

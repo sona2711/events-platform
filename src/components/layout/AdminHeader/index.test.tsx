@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { ConfigProvider } from 'antd'
+import { renderWithTheme } from '@/test/renderWithTheme'
 import { AdminHeader } from './index'
 
 const renderHeader = (props?: Partial<Parameters<typeof AdminHeader>[0]>) =>
-  render(
+  renderWithTheme(
     <ConfigProvider>
       <AdminHeader title="Registrations" notificationCount={3} {...props} />
     </ConfigProvider>,

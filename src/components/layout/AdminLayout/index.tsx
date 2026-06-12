@@ -1,3 +1,4 @@
+import { ThemeScope } from '@/components/_shared/ThemeScope'
 import { AdminHeader } from '@/components/layout/AdminHeader'
 import { AdminSidebar } from '@/components/layout/AdminSidebar'
 import type { AdminLayoutProps } from './types'
@@ -8,10 +9,10 @@ export const AdminLayout = ({ title, notificationCount, children }: AdminLayoutP
     <div className={styles.layout}>
       <AdminSidebar />
 
-      <div className={styles.content}>
+      <ThemeScope className={styles.content}>
         <AdminHeader title={title} notificationCount={notificationCount} />
         <main className={styles.main}>{children}</main>
-      </div>
+      </ThemeScope>
     </div>
   )
 }

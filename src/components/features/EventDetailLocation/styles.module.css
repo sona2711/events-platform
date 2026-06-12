@@ -1,21 +1,23 @@
 .section {
-  padding-top: 32px;
+  padding: clamp(28px, 3.5vw, 36px) 0;
+  border-bottom: 1px solid var(--color-home-border);
 }
 
 .heading:global(.ant-typography) {
   margin: 0 0 20px;
   color: var(--color-text-primary);
-  font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-size: 28px;
+  font-family: var(--font-family-display);
+  font-size: clamp(22px, 3vw, 28px);
   font-weight: 700;
   line-height: 1.2;
 }
 
 .mapCard {
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 16px;
   background: var(--color-surface-card);
-  box-shadow: 0 4px 16px rgb(0 0 0 / 6%);
+  border: 1px solid var(--color-home-border);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 20%);
 }
 
 .details {
@@ -25,7 +27,7 @@
 .placeName:global(.ant-typography) {
   margin: 0 0 6px;
   color: var(--color-text-primary);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-family-body);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
@@ -34,7 +36,7 @@
 .address:global(.ant-typography) {
   margin: 0 0 12px;
   color: var(--color-text-secondary);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-family-body);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -44,21 +46,17 @@
   align-items: center;
   gap: 6px;
   color: var(--color-action-primary);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-family-body);
   font-size: 15px;
   font-weight: 600;
 }
 
 .directionsLink:global(.ant-typography:hover) {
-  color: var(--color-blue-700);
+  color: var(--color-home-accent-cyan);
 }
 
 @media (max-width: 640px) {
-  .heading:global(.ant-typography) {
-    font-size: 24px;
-  }
-
   .details {
-    padding: 16px 20px 20px;
+    padding: 16px 18px 20px;
   }
 }

@@ -12,6 +12,7 @@ import { isEmailExistsAuthError } from '@/store/authErrors'
 import { clearError, loginWithGoogle, registerWithEmail } from '@/store/authSlice'
 import type { SignUpFormValues } from '@/types'
 import { SIGN_UP_NOTIFICATION_COPY } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -115,7 +116,7 @@ export default function SignUpPage() {
             />
           </FormItem>
 
-          <PasswordStrengthBar password={password} />
+          <PasswordStrengthBar password={password} className={styles.passwordStrength} />
 
           <FormItem
             label="Confirm password"
@@ -167,7 +168,7 @@ export default function SignUpPage() {
               size="large"
               block={true}
               loading={auth.loading}
-              className={styles.submitButton}
+              className={`${buttonStyles.primaryButton} ${buttonStyles.fullWidthButton}`}
             >
               Create account
             </Button>

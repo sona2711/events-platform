@@ -5,15 +5,16 @@ import styles from './styles.module.css'
 
 interface PasswordStrengthBarProps {
   password: string
+  className?: string
 }
 
-export function PasswordStrengthBar({ password }: PasswordStrengthBarProps) {
+export function PasswordStrengthBar({ password, className }: PasswordStrengthBarProps) {
   const strength = useMemo(() => getStrength(password), [password])
 
   if (!password) return null
 
   return (
-    <div className={styles.wrapper}>
+    <div className={[styles.wrapper, className].filter(Boolean).join(' ')}>
       <div className={styles.bars}>
         {[1, 2, 3, 4].map((segment) => (
           <div

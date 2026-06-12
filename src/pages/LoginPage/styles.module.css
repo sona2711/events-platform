@@ -1,21 +1,54 @@
 .page {
+  --color-brand-primary: var(--color-light-brand-primary);
+  --color-brand-primary-hover: var(--color-light-brand-primary-hover);
+  --color-action-primary: var(--color-light-action-primary);
+  --color-surface-page: var(--color-light-surface-page);
+  --color-surface-card: var(--color-light-surface-card);
+  --color-surface-muted: var(--color-light-surface-muted);
+  --color-text-primary: var(--color-light-text-primary);
+  --color-text-secondary: var(--color-light-text-secondary);
+  --color-text-on-brand: var(--color-white);
+  --button-primary-bg: var(--color-action-primary);
+  --button-primary-border: var(--color-action-primary);
+  --button-primary-disabled-bg: rgb(var(--color-blue-600-rgb) / 35%);
+  --button-secondary-border: rgb(var(--color-burgundy-700-rgb) / 12%);
+  --button-secondary-hover-bg: rgb(var(--color-blue-600-rgb) / 8%);
+  --button-secondary-hover-border: var(--color-action-primary);
+  --button-secondary-hover-text: var(--color-action-primary);
+
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background-color: #eee6e7;
-  background-image: url('../../assets/images/background.png');
+  overflow: hidden;
+  background-color: var(--color-home-surface);
+  background-image: var(--color-home-hero-bg);
   background-size: cover;
   background-position: center;
+}
+
+.page :global(.ant-form-item) {
+  margin-bottom: 16px;
+}
+
+.page :global(.ant-divider) {
+  margin: 16px 0;
 }
 
 .page::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 0%,
+    rgb(var(--color-home-accent-pink-rgb) / 12%) 0%,
+    transparent 60%
+  );
   z-index: 0;
 }
 
@@ -54,7 +87,7 @@
   line-height: 21px;
   margin-bottom: 24px;
   text-align: center;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 .row {
@@ -73,12 +106,6 @@
   margin-bottom: 8px !important;
 }
 
-.submitButton {
-  border-radius: 24px !important;
-  background-color: #3b5bdb !important;
-  border-color: #3b5bdb !important;
-}
-
 .footer {
   color: #565e74;
   display: block;
@@ -89,10 +116,124 @@
   line-height: 21px;
   margin-top: 16px;
   text-align: center;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 .link {
   color: #3b5bdb;
   font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 16px;
+  }
+}
+
+@media (max-height: 740px) {
+  .page {
+    padding: 12px 16px;
+  }
+
+  .brand {
+    font-size: 26px !important;
+    line-height: 32px !important;
+  }
+
+  .title {
+    font-size: 20px !important;
+    line-height: 28px !important;
+    margin: 0.25rem 0 !important;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    line-height: 18px;
+    margin-bottom: 16px;
+  }
+
+  .row {
+    margin-bottom: 16px;
+  }
+
+  .footer {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .page :global(.ant-form-item) {
+    margin-bottom: 12px;
+  }
+
+  .page :global(.ant-divider) {
+    margin: 12px 0;
+  }
+
+  .page :global(.ant-btn-lg.ant-btn-block) {
+    height: 44px !important;
+    min-height: 44px;
+    padding-block: 4px;
+    font-size: 14px;
+  }
+}
+
+@media (max-height: 640px) {
+  .page {
+    padding: 8px 12px;
+  }
+
+  .brand {
+    font-size: 22px !important;
+    line-height: 28px !important;
+  }
+
+  .title {
+    font-size: 18px !important;
+    line-height: 24px !important;
+    margin: 0.125rem 0 !important;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 10px;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+
+  .footer {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .page :global(.ant-form-item) {
+    margin-bottom: 8px;
+  }
+
+  .page :global(.ant-form-item-label > label) {
+    font-size: 13px;
+    line-height: 13px;
+  }
+
+  .page :global(.ant-divider) {
+    margin: 8px 0;
+    font-size: 11px !important;
+  }
+
+  .page :global(.ant-input-lg),
+  .page :global(.ant-input-affix-wrapper-lg) {
+    padding-block: 6px;
+    font-size: 14px;
+  }
+
+  .page :global(.ant-btn-lg.ant-btn-block) {
+    height: 40px !important;
+    min-height: 40px;
+    padding-block: 4px;
+    font-size: 14px;
+  }
 }

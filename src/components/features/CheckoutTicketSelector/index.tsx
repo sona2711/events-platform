@@ -1,6 +1,7 @@
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { MIN_TICKET_QUANTITY } from '@/pages/CheckoutPage/consts'
 import {
   formatCheckoutAmount,
@@ -49,7 +50,6 @@ export const CheckoutTicketSelector = ({
                       icon={<MinusOutlined aria-hidden />}
                       aria-label={t('tickets.decreaseQuantity', { ticket: ticketName })}
                       disabled={isAtMin}
-                      className={styles.quantityButton}
                       onClick={() => onQuantityChange(tier.id, quantity - 1)}
                     />
                     <Typography.Text strong className={styles.quantityValue} aria-live="polite">
@@ -60,12 +60,15 @@ export const CheckoutTicketSelector = ({
                       icon={<PlusOutlined aria-hidden />}
                       aria-label={t('tickets.increaseQuantity', { ticket: ticketName })}
                       disabled={isAtMax}
-                      className={styles.quantityButton}
                       onClick={() => onQuantityChange(tier.id, quantity + 1)}
                     />
                   </Flex>
                 ) : (
-                  <Button type="default" onClick={() => onQuantityChange(tier.id, 1)}>
+                  <Button
+                    type="default"
+                    className={`${buttonStyles.secondaryButton} ${buttonStyles.cardPrimaryButton}`}
+                    onClick={() => onQuantityChange(tier.id, 1)}
+                  >
                     {t('tickets.add')}
                   </Button>
                 )}

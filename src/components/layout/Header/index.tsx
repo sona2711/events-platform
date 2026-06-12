@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/_shared/LanguageSwitcher'
+import { ThemeToggle } from '@/components/_shared/ThemeToggle'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { logout, selectAuthLoading, selectAuthUser } from '@/store/authSlice'
 import { selectProfile } from '@/store/profile'
@@ -18,6 +19,8 @@ const getNavLinkClassName =
 
 export function Header() {
   const { t } = useTranslation('common')
+  const { pathname } = useLocation()
+  const showThemeToggle = pathname !== '/'
   const dispatch = useAppDispatch()
   const user = useAppSelector(selectAuthUser)
   const profile = useAppSelector(selectProfile)
@@ -84,6 +87,7 @@ export function Header() {
           </div>
 
           <div className={styles.authLinks}>
+            {showThemeToggle ? <ThemeToggle /> : null}
             <LanguageSwitcher />
             {user ? (
               <>

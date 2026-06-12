@@ -1,9 +1,13 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: clamp(280px, 42vw, 440px);
   border-radius: 20px;
   overflow: hidden;
+  border: 1px solid var(--color-home-border);
+  box-shadow:
+    0 4px 24px rgb(0 0 0 / 24%),
+    0 0 0 1px rgb(var(--color-white-rgb) / 4%) inset;
 }
 
 .image {
@@ -16,7 +20,12 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(0 0 0 / 0%) 35%, rgb(0 0 0 / 72%) 100%);
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 8%) 0%,
+    rgb(0 0 0 / 20%) 45%,
+    rgb(0 0 0 / 78%) 100%
+  );
   pointer-events: none;
 }
 
@@ -25,37 +34,39 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 32px;
-  color: var(--color-text-on-brand);
+  padding: clamp(20px, 4vw, 36px);
+  color: var(--color-white);
 }
 
 .badge:global(.ant-tag) {
   width: fit-content;
   margin: 0;
-  padding: 4px 12px;
-  border: none;
+  padding: 5px 14px;
+  border: 1px solid rgb(var(--color-home-accent-cyan-rgb) / 35%);
   border-radius: 999px;
-  background: #e0e7ff;
-  color: var(--color-blue-800);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 12px;
+  background: rgb(var(--color-home-accent-cyan-rgb) / 18%);
+  color: var(--color-home-accent-cyan);
+  font-family: var(--font-family-body);
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   line-height: 1.4;
   text-transform: uppercase;
 }
 
 .title:global(.ant-typography) {
   margin: 0;
-  color: var(--color-text-on-brand);
-  font-family: 'Bricolage Grotesque Variable', sans-serif;
-  font-size: 36px;
+  color: var(--color-white);
+  font-family: var(--font-family-display);
+  font-size: clamp(26px, 4vw, 40px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 45%);
 }
 
 .meta {
   flex-wrap: wrap;
+  gap: 16px 24px !important;
 }
 
 .metaItem:global(.ant-typography) {
@@ -63,32 +74,25 @@
   align-items: center;
   gap: 8px;
   margin: 0;
-  color: var(--color-text-on-brand);
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 16px;
+  color: rgb(var(--color-white-rgb) / 92%);
+  font-family: var(--font-family-body);
+  font-size: clamp(14px, 1.6vw, 16px);
   font-weight: 400;
   line-height: 1.4;
 }
 
 .metaIcon {
   flex-shrink: 0;
-  font-size: 16px;
+  font-size: 1em;
+  color: var(--color-home-accent-cyan);
 }
 
 @media (max-width: 640px) {
   .hero {
-    height: 280px;
+    border-radius: 16px;
   }
 
   .content {
-    padding: 24px;
-  }
-
-  .title:global(.ant-typography) {
-    font-size: 28px;
-  }
-
-  .metaItem:global(.ant-typography) {
-    font-size: 14px;
+    padding: 20px;
   }
 }

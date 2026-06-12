@@ -20,6 +20,7 @@
 }
 
 .title:global(.ant-typography) {
+  font-family: var(--font-family-display);
   font-size: 18px;
   font-weight: 700;
   margin: 0;
@@ -31,12 +32,13 @@
 }
 
 .pending .stepBadge:global(.ant-avatar) {
-  background: rgb(var(--color-burgundy-700-rgb) / 8%);
+  background: var(--color-badge-muted-bg);
   color: var(--color-text-secondary);
 }
 
 .pending .title:global(.ant-typography) {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
+  opacity: 0.72;
 }
 
 .active .stepBadge:global(.ant-avatar) {

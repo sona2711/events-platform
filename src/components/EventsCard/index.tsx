@@ -1,7 +1,8 @@
 import { useCallback, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './styles.module.css'
-import { EventCard } from '@/components/features/EventCard'
+import { Link } from 'react-router-dom'
+import { Button, Flex, Typography } from 'antd'
+import { useTranslation } from 'react-i18next'
+import { EventsCard } from '@/components/_shared/EventsCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperInstance } from 'swiper'
 import { useEventBookingModal } from '@/hooks/useEventBookingModal'
@@ -16,9 +17,12 @@ import {
   SWIPER_MODULES,
   SWIPER_NO_SWIPING_CLASS,
 } from './consts'
+import styles from './styles.module.css'
 
-export function EventsGrid() {
-  const navigate = useNavigate()
+const { Title, Text, Paragraph } = Typography
+
+export const EventsGrid = () => {
+  const { t } = useTranslation('home')
   const resolveEvent = useCallback((eventId: string) => EVENT_BY_ID.get(eventId), [])
   const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
@@ -27,13 +31,6 @@ export function EventsGrid() {
     prevEl: null as HTMLButtonElement | null,
     nextEl: null as HTMLButtonElement | null,
   })
-
-  const handleNavigate = useCallback(
-    (eventId: string) => {
-      navigate(`/event/${eventId}`)
-    },
-    [navigate],
-  )
 
   const bindCarouselNavigation = useCallback((swiper: SwiperInstance) => {
     navigationConfigRef.current.prevEl = navigationPrevRef.current
@@ -59,29 +56,39 @@ export function EventsGrid() {
     <>
       <section className={styles.container} aria-labelledby="events-grid-title">
         <div className={styles.layout}>
-          <h2 className={styles.title} id="events-grid-title">
-            Upcoming Events in Yerevan
-          </h2>
-
-          <div className={styles.subtitleRow}>
-            <p className={styles.description}>
-              The most anticipated gatherings happening this month.
-            </p>
-
-            <div className={styles.navigationButtons} aria-label="Events carousel navigation">
-              <button
-                ref={navigationPrevRef}
-                className={EVENTS_PREV_BUTTON_CLASS}
-                type="button"
-                aria-label="Previous events"
-              />
-              <button
-                ref={navigationNextRef}
-                className={EVENTS_NEXT_BUTTON_CLASS}
-                type="button"
-                aria-label="Next events"
-              />
+          <div className={styles.header}>
+            <div className={styles.headerCopy}>
+              <Text className={styles.eyebrow}>{t('eventsGrid.eyebrow')}</Text>
+              <Title className={styles.title} id="events-grid-title" level={2}>
+                {t('eventsGrid.title')}
+              </Title>
+              <Paragraph className={styles.description}>{t('eventsGrid.description')}</Paragraph>
             </div>
+
+            <Flex className={styles.headerActions} align="center" gap={16} wrap="wrap">
+              <Link className={styles.viewAllLink} to="/categories">
+                {t('eventsGrid.viewAll')}
+              </Link>
+
+              <Flex
+                className={styles.navigationButtons}
+                aria-label={t('eventsGrid.carouselNavAria')}
+                gap={8}
+              >
+                <Button
+                  ref={navigationPrevRef}
+                  className={EVENTS_PREV_BUTTON_CLASS}
+                  type="default"
+                  aria-label={t('eventsGrid.previous')}
+                />
+                <Button
+                  ref={navigationNextRef}
+                  className={EVENTS_NEXT_BUTTON_CLASS}
+                  type="default"
+                  aria-label={t('eventsGrid.next')}
+                />
+              </Flex>
+            </Flex>
           </div>
 
           <div className={styles.swiperViewport}>
@@ -100,12 +107,10 @@ export function EventsGrid() {
             >
               {EVENTS_CARD_DATA.map((event) => (
                 <SwiperSlide key={event.id} className={styles.slide}>
-                  <EventCard
+                  <EventsCard
                     event={event}
-                    variant="carousel"
                     noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
                     onBook={handleBook}
-                    onNavigate={handleNavigate}
                   />
                 </SwiperSlide>
               ))}

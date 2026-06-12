@@ -1,0 +1,16 @@
+.toggle:global(.ant-btn) {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  font-size: 18px;
+  height: 40px;
+  justify-content: center;
+  min-width: 40px;
+  padding: 0;
+  width: 40px;
+}
+
+.toggle:global(.ant-btn:hover),
+.toggle:global(.ant-btn:focus-visible) {
+  color: inherit;
+}

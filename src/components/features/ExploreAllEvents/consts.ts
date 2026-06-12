@@ -1,4 +1,4 @@
-import { mapEventsToCardData } from '@/components/features/EventCard/utils'
+import { mapEventsToCardData } from '@/components/_shared/EventsCard/utils'
 import { getExploreListingEvents } from '@/mock-api/listingEventUtils'
 
 export const EXPLORE_EVENTS = getExploreListingEvents()

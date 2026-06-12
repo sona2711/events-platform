@@ -1,9 +1,9 @@
 .card {
   align-items: center;
   background: var(--color-surface-card);
-  border: 1px solid rgb(var(--color-burgundy-700-rgb) / 8%);
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgb(var(--color-burgundy-700-rgb) / 6%);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
   display: grid;
   gap: 20px;
   grid-template-columns: 120px minmax(0, 1fr) auto;
@@ -40,10 +40,10 @@
 }
 
 .category {
-  background: rgb(var(--color-burgundy-700-rgb) / 6%);
+  background: var(--color-badge-muted-bg);
   border: 0;
   border-radius: 999px;
-  color: var(--color-text-secondary);
+  color: var(--color-badge-muted-text);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -54,10 +54,10 @@
 
 .title {
   margin: 0;
-  font-family: 'Bricolage Grotesque Variable', sans-serif;
+  font-family: var(--font-family-display);
   font-size: 24px;
   font-weight: 600;
-  color: var(--color-burgundy-700);
+  color: var(--color-brand-primary);
   line-height: 1.25;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -67,13 +67,17 @@
 
 .meta {
   align-items: center;
-  color: #1a1a1a;
+  color: var(--color-text-secondary);
   display: flex;
   flex-wrap: wrap;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-family-body);
+  font-size: 15px;
   font-weight: 400;
   gap: 16px;
+}
+
+.metaItem :global(.anticon) {
+  color: var(--color-action-primary);
 }
 
 .metaItem {
@@ -89,26 +93,6 @@
   flex-shrink: 0;
   gap: 10px;
   width: 132px;
-}
-
-.actions :global(.ant-btn) {
-  border-radius: 999px;
-  box-shadow: none;
-  font-size: 12px;
-  font-weight: 600;
-  height: 40px;
-  padding: 0 18px;
-  width: 100%;
-}
-
-.actions :global(.ant-btn-primary) {
-  background: var(--color-action-primary);
-  border-color: var(--color-action-primary);
-}
-
-.actions :global(.ant-btn-default) {
-  border-color: var(--color-action-primary);
-  color: var(--color-action-primary);
 }
 
 @media (max-width: 720px) {

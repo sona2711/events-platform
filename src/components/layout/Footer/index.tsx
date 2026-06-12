@@ -1,22 +1,31 @@
+import { Divider, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { FOOTER_LINK_GROUPS, SOCIAL_LINKS } from './consts'
 import styles from './styles.module.css'
 
-export function Footer() {
+const { Title, Text, Paragraph } = Typography
+
+export const Footer = () => {
   const { t } = useTranslation('common')
 
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
         <div className={styles.top}>
-          <p className={styles.brand}>{t('brand')}</p>
+          <div className={styles.brandBlock}>
+            <Title className={styles.brand} level={3}>
+              {t('brand')}
+            </Title>
+            <Paragraph className={styles.tagline}>{t('footer.tagline')}</Paragraph>
+          </div>
+
           <div className={styles.navSpacer} aria-hidden="true" />
 
           {FOOTER_LINK_GROUPS.map((group) => (
             <section key={group.id} aria-labelledby={`footer-${group.id}`}>
-              <h2 className={styles.groupTitle} id={`footer-${group.id}`}>
+              <Title className={styles.groupTitle} id={`footer-${group.id}`} level={5}>
                 {t(group.titleKey)}
-              </h2>
+              </Title>
               <ul className={styles.linkList}>
                 {group.linkKeys.map((linkKey) => (
                   <li key={linkKey}>
@@ -31,11 +40,17 @@ export function Footer() {
         </div>
 
         <div className={styles.bottomSection}>
-          <div className={styles.divider} />
+          <Divider className={styles.divider} />
 
-          <div className={styles.bottom}>
-            <p className={styles.copyright}>{t('footer.copyright')}</p>
-            <div className={styles.socialLinks}>
+          <Flex
+            className={styles.bottom}
+            align="center"
+            justify="space-between"
+            wrap="wrap"
+            gap={16}
+          >
+            <Text className={styles.copyright}>{t('footer.copyright')}</Text>
+            <Flex className={styles.socialLinks} gap={12}>
               {SOCIAL_LINKS.map((link) => (
                 <a
                   key={link.label}
@@ -48,8 +63,8 @@ export function Footer() {
                   <img className={styles.socialIcon} src={link.iconSrc} alt="" />
                 </a>
               ))}
-            </div>
-          </div>
+            </Flex>
+          </Flex>
         </div>
       </div>
     </footer>

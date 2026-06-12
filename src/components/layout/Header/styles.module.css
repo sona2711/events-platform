@@ -1,7 +1,19 @@
 .header {
-  --header-brand: var(--color-brand-primary);
-  --header-brand-hover: var(--color-brand-primary-hover);
-  --header-brand-rgb: 119 0 22;
+  --color-text-primary: var(--color-home-text);
+  --color-text-secondary: var(--color-home-text-muted);
+  --color-text-on-brand: var(--color-home-surface);
+  --header-brand: var(--color-home-accent-cyan);
+  --header-brand-hover: var(--color-accent-bright);
+  --header-brand-rgb: var(--color-home-accent-cyan-rgb);
+  --header-surface: rgb(255 255 255 / 14%);
+  --header-surface-mobile: rgb(255 255 255 / 18%);
+  --header-border: rgb(255 255 255 / 22%);
+  --header-shadow: 0 16px 36px -28px rgb(0 0 0 / 66%);
+  --header-filled-bg: var(--button-primary-bg);
+  --header-filled-bg-hover: var(--button-primary-bg);
+  --header-filled-text: var(--button-primary-text);
+  --header-toggle-hover-bg: rgb(var(--color-home-accent-cyan-rgb) / 14%);
+  --header-divider: rgb(255 255 255 / 14%);
 
   background: transparent;
   padding: 28px var(--layout-gutter) 24px;
@@ -11,10 +23,11 @@
 
 .navBar {
   align-items: center;
-  background: var(--color-surface-card);
-  border: 2px solid var(--header-brand);
+  background: var(--header-surface);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--header-border);
   border-radius: 9999px;
-  box-shadow: none;
+  box-shadow: var(--header-shadow);
   display: flex;
   gap: 32px;
   justify-content: space-between;
@@ -32,7 +45,7 @@
 
 .brand {
   color: var(--header-brand);
-  font-family: 'Bricolage Grotesque Variable';
+  font-family: 'Bricolage Grotesque Variable', sans-serif;
   font-size: 32px;
   font-weight: 800;
   letter-spacing: 0;
@@ -74,7 +87,7 @@
 }
 
 .authLink:not(.authLinkFilled) {
-  color: var(--color-brand-primary);
+  color: var(--header-brand);
   font-size: 16px;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -86,7 +99,7 @@
 }
 
 .navLink {
-  color: #151515;
+  color: var(--color-text-primary);
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
@@ -125,9 +138,9 @@
 }
 
 .authLinkFilled {
-  background: var(--color-brand-primary);
+  background: var(--header-filled-bg);
   border-radius: 9999px;
-  color: var(--color-text-on-brand);
+  color: var(--header-filled-text);
   font-size: 16px;
   font-weight: 600;
   padding: 12px 24px;
@@ -136,8 +149,9 @@
 
 .authLinkFilled:hover,
 .authLinkFilled:focus-visible {
-  background: var(--color-brand-primary-hover);
-  color: var(--color-text-on-brand);
+  background: var(--header-filled-bg-hover);
+  color: var(--header-filled-text);
+  filter: brightness(1.08);
 }
 
 .menuToggle:global(.ant-btn) {
@@ -181,10 +195,10 @@
 }
 
 .logoutButton {
-  background: var(--color-brand-primary);
+  background: var(--header-filled-bg);
   border: 0;
   border-radius: 999px;
-  color: var(--color-text-on-brand);
+  color: var(--header-filled-text);
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
@@ -200,8 +214,9 @@
 
 .logoutButton:hover:not(:disabled),
 .logoutButton:focus-visible:not(:disabled) {
-  background: var(--color-brand-primary-hover);
-  color: var(--color-text-on-brand);
+  background: var(--header-filled-bg-hover);
+  color: var(--header-filled-text);
+  filter: brightness(1.08);
 }
 
 @media (max-width: 820px) {
@@ -211,6 +226,7 @@
 
   .navBar {
     align-items: stretch;
+    background: var(--header-surface-mobile);
     border-radius: 9999px;
     flex-direction: column;
     gap: 0;
@@ -250,7 +266,7 @@
   .menuToggle:global(.ant-btn.ant-btn-variant-text:hover),
   .menuToggle:global(.ant-btn.ant-btn-variant-text:focus),
   .menuToggle:global(.ant-btn:active) {
-    background: rgb(var(--header-brand-rgb) / 8%);
+    background: var(--header-toggle-hover-bg);
     color: var(--header-brand);
   }
 
@@ -264,7 +280,7 @@
   }
 
   .navPanelOpen {
-    border-top: 1px solid rgb(var(--header-brand-rgb) / 12%);
+    border-top: 1px solid var(--header-divider);
     display: flex;
     margin-top: 16px;
     padding-top: 20px;

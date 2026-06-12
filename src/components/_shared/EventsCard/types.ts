@@ -8,16 +8,6 @@ export type EventCardData = {
   priceLabel: string
 }
 
-export type EventCardVariant = 'default' | 'carousel'
-
-export type EventCardProps = {
-  event: EventCardData
-  variant?: EventCardVariant
-  onBook?: (eventId: string) => void
-  onNavigate?: (eventId: string) => void
-  noSwipeClassName?: string
-}
-
 export type ListingEventInput = {
   id: string
   image: string
@@ -26,4 +16,16 @@ export type ListingEventInput = {
   location: string
   date: string
   price: string
+}
+
+export type EventCardSize = 'default' | 'compact'
+
+export type EventCardSurface = 'dark' | 'light'
+
+export type EventCardProps = {
+  event: EventCardData
+  onBook?: (eventId: string) => void
+  noSwipeClassName?: string
+  size?: EventCardSize
+  surface?: EventCardSurface
 }

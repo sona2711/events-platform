@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearError, sendPasswordReset } from '@/store/authSlice'
 import type { PasswordRecoveryFormValues } from '@/types'
 import { PASSWORD_RECOVERY_NOTIFICATION_COPY } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -86,7 +87,7 @@ export function PasswordRecoveryPage() {
               block
               loading={loading}
               disabled={emailSent}
-              className={styles.submitButton}
+              className={`${buttonStyles.primaryButton} ${buttonStyles.fullWidthButton}`}
             >
               Send reset link
             </Button>

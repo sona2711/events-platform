@@ -3,7 +3,7 @@
 }
 
 .content {
-  background: #f7f7f8;
+  background: var(--color-surface-muted);
   display: flex;
   flex-direction: column;
   margin-left: 280px;
@@ -14,9 +14,9 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 16px;
+  gap: 20px;
   padding: 0 32px 32px;
-  background-color: rgb(240, 238, 238);
+  background-color: var(--color-surface-muted);
 }
 
 @media (max-width: 1280px) {

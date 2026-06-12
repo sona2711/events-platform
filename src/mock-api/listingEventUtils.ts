@@ -1,4 +1,4 @@
-import type { ListingEventInput } from '@/components/features/EventCard/types'
+import type { ListingEventInput } from '@/components/_shared/EventsCard/types'
 import type { EventRecord } from './eventDetailTypes'
 import { MOCK_EVENTS_BY_ID } from './eventsData'
 

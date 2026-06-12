@@ -1,5 +1,6 @@
 import { BellOutlined, QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons'
 import { Badge, Input } from 'antd'
+import { ThemeToggle } from '@/components/_shared/ThemeToggle'
 import type { AdminHeaderProps } from './types'
 import styles from './styles.module.css'
 
@@ -9,6 +10,7 @@ export const AdminHeader = ({ title, notificationCount = 0 }: AdminHeaderProps) 
       <h1 className={styles.title}>{title}</h1>
 
       <div className={styles.actions}>
+        <ThemeToggle />
         <Input
           className={styles.searchInput}
           placeholder="Global search..."
