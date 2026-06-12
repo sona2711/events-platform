@@ -32,6 +32,7 @@
   --color-white: #ffffff;
   --color-white-rgb: 255 255 255;
   --color-neutral-950: #1a1a1a;
+  --color-neutral-950-rgb: 26 26 26;
 
   /* light theme tokens for pages that stay bright */
   --color-light-surface-page: #e8e7e7;
@@ -121,41 +122,44 @@
 
 /* Scoped app theme: light mode (categories, profile, checkout, admin, etc.) */
 [data-theme-scope='app'][data-theme='light'] {
-  --color-brand-primary: var(--color-light-brand-primary);
-  --color-brand-primary-hover: var(--color-light-brand-primary-hover);
-  --color-action-primary: var(--color-light-action-primary);
+  --color-brand-primary: var(--color-home-accent-pink);
+  --color-brand-primary-hover: var(--color-home-accent-purple);
+  --color-action-primary: var(--color-home-accent-cyan);
   --color-accent-warm: var(--color-orange-500);
-  --color-accent-bright: var(--color-burgundy-700);
+  --color-accent-bright: var(--color-lime-400);
   --color-surface-page: var(--color-light-surface-page);
   --color-surface-card: var(--color-light-surface-card);
   --color-surface-muted: var(--color-light-surface-muted);
   --color-surface-brand: var(--color-light-surface-card);
   --color-text-primary: var(--color-light-text-primary);
   --color-text-secondary: var(--color-light-text-secondary);
-  --color-text-on-brand: var(--color-white);
-  --color-border-subtle: rgb(var(--color-burgundy-700-rgb) / 8%);
+  --color-text-on-brand: var(--color-home-surface);
+  --color-border-subtle: rgb(var(--color-neutral-950-rgb) / 12%);
   --color-app-page-bg: var(--color-light-surface-muted);
-  --shadow-card: 0 8px 24px rgb(var(--color-burgundy-700-rgb) / 6%);
+  --shadow-card: 0 8px 24px rgb(var(--color-home-surface-rgb) / 8%);
   --button-primary-bg: var(--color-action-primary);
   --button-primary-border: var(--color-action-primary);
   --button-primary-text: var(--color-text-on-brand);
-  --button-primary-disabled-bg: rgb(var(--color-blue-600-rgb) / 35%);
+  --button-primary-disabled-bg: rgb(var(--color-home-accent-cyan-rgb) / 35%);
   --button-primary-disabled-text: rgb(var(--color-white-rgb) / 72%);
   --button-secondary-bg: transparent;
-  --button-secondary-border: rgb(var(--color-burgundy-700-rgb) / 12%);
+  --button-secondary-border: rgb(var(--color-neutral-950-rgb) / 20%);
   --button-secondary-text: var(--color-text-primary);
-  --button-secondary-hover-bg: rgb(var(--color-blue-600-rgb) / 8%);
+  --button-secondary-hover-bg: rgb(var(--color-home-accent-cyan-rgb) / 10%);
   --button-secondary-hover-border: var(--color-action-primary);
-  --button-secondary-hover-text: var(--color-action-primary);
+  --button-secondary-hover-text: var(--color-text-primary);
+  --button-secondary-active-bg: rgb(var(--color-home-accent-cyan-rgb) / 18%);
+  --button-secondary-active-border: var(--color-action-primary);
+  --button-secondary-active-text: var(--color-text-primary);
   --button-focus-ring: var(--color-action-primary);
-  --color-action-primary-muted: rgb(var(--color-blue-600-rgb) / 14%);
+  --color-action-primary-muted: rgb(var(--color-home-accent-cyan-rgb) / 14%);
   --color-input-bg: var(--color-white);
-  --color-input-border: rgb(var(--color-burgundy-700-rgb) / 16%);
+  --color-input-border: rgb(var(--color-neutral-950-rgb) / 22%);
   --color-input-text: var(--color-text-primary);
   --color-input-placeholder: var(--color-text-secondary);
   --color-surface-elevated: var(--color-white);
-  --color-divider: rgb(var(--color-burgundy-700-rgb) / 10%);
-  --color-badge-muted-bg: rgb(var(--color-burgundy-700-rgb) / 8%);
+  --color-divider: rgb(var(--color-neutral-950-rgb) / 14%);
+  --color-badge-muted-bg: rgb(var(--color-home-accent-cyan-rgb) / 8%);
   --color-badge-muted-text: var(--color-text-secondary);
   --color-status-active-bg: #dcfce7;
   --color-status-active-text: #166534;
@@ -163,6 +167,7 @@
   --color-status-pending-bg: #fef3c7;
   --color-status-pending-text: #92400e;
   --color-status-pending-dot: #d97706;
+  --color-table-row-alt: rgb(var(--color-neutral-950-rgb) / 3%);
 }
 
 /* Scoped app theme: dark mode */
@@ -173,7 +178,7 @@
   --color-accent-warm: var(--color-orange-500);
   --color-accent-bright: var(--color-lime-400);
   --color-surface-page: var(--color-home-surface);
-  --color-surface-card: var(--color-home-surface-card);
+  --color-surface-card: #1a243d;
   --color-surface-muted: var(--color-home-surface-elevated);
   --color-surface-brand: var(--color-home-surface-card);
   --color-text-primary: var(--color-home-text);
@@ -193,6 +198,9 @@
   --button-secondary-hover-bg: rgb(var(--color-white-rgb) / 6%);
   --button-secondary-hover-border: var(--color-accent-bright);
   --button-secondary-hover-text: var(--color-accent-bright);
+  --button-secondary-active-bg: rgb(var(--color-home-accent-cyan-rgb) / 16%);
+  --button-secondary-active-border: var(--color-action-primary);
+  --button-secondary-active-text: var(--color-text-primary);
   --button-focus-ring: var(--color-action-primary);
   --color-action-primary-muted: rgb(var(--color-home-accent-cyan-rgb) / 14%);
   --color-input-bg: rgb(var(--color-home-surface-elevated-rgb) / 92%);
@@ -209,6 +217,7 @@
   --color-status-pending-bg: rgb(217 119 6 / 18%);
   --color-status-pending-text: #fbbf24;
   --color-status-pending-dot: #fbbf24;
+  --color-table-row-alt: rgb(var(--color-white-rgb) / 4%);
 }
 
 /* Ant Design secondary text + form controls inside scoped app pages */
@@ -233,6 +242,32 @@
 
 [data-theme-scope='app'] .ant-tabs-tab-active .ant-tabs-tab-btn {
   color: var(--color-action-primary);
+}
+
+[data-theme-scope='app'] .ant-select-selector {
+  background: var(--color-input-bg) !important;
+  border-color: var(--color-input-border) !important;
+  color: var(--color-input-text) !important;
+}
+
+[data-theme-scope='app'] .ant-select-selection-item,
+[data-theme-scope='app'] .ant-select-selection-placeholder {
+  color: var(--color-input-text) !important;
+}
+
+[data-theme-scope='app'] .ant-input-affix-wrapper .ant-input {
+  background: transparent !important;
+  color: var(--color-input-text) !important;
+}
+
+[data-theme-scope='app'] .ant-card {
+  background: var(--color-surface-card);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+
+[data-theme-scope='app'] .ant-form-item-label > label {
+  color: var(--color-text-primary) !important;
 }
 
 html {

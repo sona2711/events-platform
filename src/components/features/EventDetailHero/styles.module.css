@@ -4,7 +4,7 @@
   height: clamp(280px, 42vw, 440px);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--color-home-border);
+  border: 1px solid var(--color-border-subtle);
   box-shadow:
     0 4px 24px rgb(0 0 0 / 24%),
     0 0 0 1px rgb(var(--color-white-rgb) / 4%) inset;
@@ -42,10 +42,10 @@
   width: fit-content;
   margin: 0;
   padding: 5px 14px;
-  border: 1px solid rgb(var(--color-home-accent-cyan-rgb) / 35%);
+  border: 1px solid rgb(var(--color-white-rgb) / 36%);
   border-radius: 999px;
-  background: rgb(var(--color-home-accent-cyan-rgb) / 18%);
-  color: var(--color-home-accent-cyan);
+  background: rgb(0 0 0 / 36%);
+  color: var(--color-white);
   font-family: var(--font-family-body);
   font-size: 11px;
   font-weight: 600;
@@ -84,7 +84,7 @@
 .metaIcon {
   flex-shrink: 0;
   font-size: 1em;
-  color: var(--color-home-accent-cyan);
+  color: var(--color-action-primary);
 }
 
 @media (max-width: 640px) {

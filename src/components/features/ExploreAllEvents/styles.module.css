@@ -182,7 +182,7 @@
 
 .accentBlue {
   --category-accent: var(--color-home-card-blue);
-  --category-glow: rgb(var(--color-blue-600-rgb) / 16%);
+  --category-glow: rgb(var(--color-home-accent-cyan-rgb) / 16%);
 }
 
 .accentOrange {

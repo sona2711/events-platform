@@ -37,6 +37,14 @@
   padding: 48px 0;
 }
 
+.freeNotice:global(.ant-typography) {
+  color: var(--color-text-secondary);
+  display: block;
+  font-family: var(--font-family-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 @media (max-width: 960px) {
   .page {
     flex-direction: column;

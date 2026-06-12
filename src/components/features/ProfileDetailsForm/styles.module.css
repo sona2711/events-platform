@@ -30,7 +30,7 @@
 
 .card :global(.ant-input),
 .card :global(.ant-select-selector) {
-  border-color: rgb(var(--color-burgundy-700-rgb) / 12%) !important;
+  border-color: var(--color-input-border) !important;
   border-radius: 10px !important;
   font-family: var(--font-family-body);
   font-size: 14px;
@@ -41,12 +41,12 @@
 .card :global(.ant-select:hover .ant-select-selector),
 .card :global(.ant-select-focused .ant-select-selector) {
   border-color: var(--color-action-primary) !important;
-  box-shadow: 0 0 0 2px rgb(var(--color-blue-600-rgb) / 12%);
+  box-shadow: 0 0 0 2px var(--color-action-primary-muted);
 }
 
 .card :global(.ant-input-disabled),
 .card :global(.ant-select-disabled .ant-select-selector) {
-  background: rgb(var(--color-burgundy-700-rgb) / 4%);
+  background: var(--color-surface-muted);
   color: var(--color-text-secondary);
 }
 

@@ -67,9 +67,12 @@
 }
 
 .secondaryButton:global(.ant-btn):not(.ant-btn-variant-solid):active {
-  background: var(--button-secondary-hover-bg) !important;
-  border-color: var(--button-secondary-hover-border) !important;
-  color: var(--button-secondary-hover-text) !important;
+  background: var(--button-secondary-active-bg, var(--button-secondary-hover-bg)) !important;
+  border-color: var(
+    --button-secondary-active-border,
+    var(--button-secondary-hover-border)
+  ) !important;
+  color: var(--button-secondary-active-text, var(--button-secondary-hover-text)) !important;
 }
 
 .primaryLink,
@@ -141,6 +144,12 @@
   border-color: var(--button-secondary-hover-border);
   color: var(--button-secondary-hover-text);
   text-decoration: none;
+}
+
+.secondaryLink:active {
+  background-color: var(--button-secondary-active-bg, var(--button-secondary-hover-bg));
+  border-color: var(--button-secondary-active-border, var(--button-secondary-hover-border));
+  color: var(--button-secondary-active-text, var(--button-secondary-hover-text));
 }
 
 .compactButton:global(.ant-btn) {

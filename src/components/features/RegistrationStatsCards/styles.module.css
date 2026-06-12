@@ -56,8 +56,8 @@
 }
 
 .iconTotal {
-  background: rgb(var(--color-blue-600-rgb) / 12%);
-  color: var(--color-blue-600);
+  background: var(--color-action-primary-muted);
+  color: var(--color-action-primary);
 }
 
 .iconActive {

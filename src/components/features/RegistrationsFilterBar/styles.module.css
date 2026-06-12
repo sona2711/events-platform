@@ -57,7 +57,7 @@
 }
 
 .filterSelect :global(.ant-select-selection-placeholder) {
-  color: var(--color-text-secondary);
+  color: var(--color-input-placeholder);
 }
 
 .dateRangePicker {
@@ -121,7 +121,7 @@
 }
 
 .searchInput :global(.ant-input::placeholder) {
-  color: var(--color-text-secondary);
+  color: var(--color-input-placeholder);
 }
 
 .searchInput :global(.ant-input-prefix) {

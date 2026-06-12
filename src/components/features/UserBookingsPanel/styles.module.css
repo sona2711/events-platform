@@ -17,10 +17,14 @@
 
 .panel :global(.ant-tabs-tab) {
   color: var(--color-text-secondary);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 8px 0;
+  padding: 10px 4px;
   white-space: nowrap;
+}
+
+.panel :global(.ant-tabs-tab + .ant-tabs-tab) {
+  margin-left: 20px;
 }
 
 .panel :global(.ant-tabs-tab:hover .ant-tabs-tab-btn) {

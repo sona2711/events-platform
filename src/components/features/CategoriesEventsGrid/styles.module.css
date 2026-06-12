@@ -27,8 +27,8 @@
 }
 
 .emptyState {
-  background: rgb(18 26 48 / 72%);
-  border: 1px dashed rgb(255 255 255 / 14%);
+  background: var(--color-surface-card);
+  border: 1px dashed var(--color-border-subtle);
   border-radius: 16px;
   color: var(--color-text-secondary);
   font-size: 15px;

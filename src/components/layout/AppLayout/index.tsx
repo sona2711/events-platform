@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { Loader } from '@/components/_shared/Loader'
 import { ThemeScope } from '@/components/_shared/ThemeScope'
+import { Chat } from '@/components/chatBot'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import styles from './styles.module.css'
@@ -27,6 +28,7 @@ export function AppLayout() {
         </Suspense>
       </main>
       <Footer />
+      <Chat />
     </div>
   )
 }

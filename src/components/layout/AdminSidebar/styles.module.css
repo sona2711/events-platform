@@ -1,6 +1,6 @@
 /* ─── Sidebar shell ─────────────────────────────────────────── */
 .sidebar {
-  background: var(--color-burgundy-700);
+  background: var(--color-home-surface);
   color: var(--color-white);
   display: flex;
   flex-direction: column;
@@ -71,11 +71,11 @@
 }
 
 .activeNavLink {
-  background: var(--color-burgundy-600);
+  background: var(--color-home-surface-elevated);
 }
 
 .activeNavLink:hover {
-  background: var(--color-burgundy-600);
+  background: var(--color-home-surface-elevated);
 }
 
 .navIcon {
@@ -102,7 +102,7 @@
   background: var(--color-white);
   border-color: var(--color-white);
   border-radius: var(--button-radius);
-  color: var(--color-burgundy-700);
+  color: var(--color-home-surface);
   font-family: var(--font-family-body);
   font-weight: 600;
   height: 40px;
@@ -133,7 +133,7 @@
 .createEventBtn:global(.ant-btn:focus) {
   background: rgb(var(--color-white-rgb) / 92%);
   border-color: rgb(var(--color-white-rgb) / 92%);
-  color: var(--color-burgundy-700);
+  color: var(--color-home-surface);
 }
 
 .avatarRow {
@@ -222,7 +222,7 @@
     border: none;
     border-radius: 8px;
     box-shadow: none;
-    color: var(--color-burgundy-700);
+    color: var(--color-action-primary);
     display: inline-flex;
     font-size: 22px;
     height: 40px;
@@ -242,9 +242,9 @@
   .mobileToggle:global(.ant-btn.ant-btn-variant-text:hover),
   .mobileToggle:global(.ant-btn.ant-btn-variant-text:focus),
   .mobileToggle:global(.ant-btn:active) {
-    background: rgb(var(--color-burgundy-700-rgb) / 8%);
+    background: var(--color-action-primary-muted);
     box-shadow: none;
-    color: var(--color-burgundy-700);
+    color: var(--color-action-primary);
   }
 
   .mobileClose:global(.ant-btn) {

@@ -1,6 +1,6 @@
 .toggle:global(.ant-btn) {
   align-items: center;
-  color: inherit;
+  color: var(--color-home-text);
   display: inline-flex;
   font-size: 18px;
   height: 40px;
@@ -11,6 +11,11 @@
 }
 
 .toggle:global(.ant-btn:hover),
-.toggle:global(.ant-btn:focus-visible) {
-  color: inherit;
+.toggle:global(.ant-btn:focus-visible),
+.toggle:global(.ant-btn.ant-btn-text:hover),
+.toggle:global(.ant-btn.ant-btn-text:focus),
+.toggle:global(.ant-btn.ant-btn-variant-text:hover),
+.toggle:global(.ant-btn.ant-btn-variant-text:focus) {
+  background: rgb(var(--color-home-accent-cyan-rgb) / 14%);
+  color: var(--color-home-accent-cyan);
 }
