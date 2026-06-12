@@ -3,17 +3,26 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, Button } from 'antd'
 import { CloseOutlined, LogoutOutlined, MenuOutlined, PlusOutlined } from '@ant-design/icons'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { logout, selectAuthLoading } from '@/store/authSlice'
 import { ADMIN_NAV_LINKS, ADMIN_PROFILE_AVATAR_SRC } from './consts'
 import styles from './styles.module.css'
 
 export const AdminSidebar = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const dispatch = useAppDispatch()
+  const loading = useAppSelector(selectAuthLoading)
   const { t } = useTranslation('common')
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive ? `${styles.navLink} ${styles.activeNavLink}` : styles.navLink
 
   const closeMobile = () => setMobileOpen(false)
+
+  const handleLogout = () => {
+    closeMobile()
+    void dispatch(logout())
+  }
 
   return (
     <>
@@ -72,7 +81,14 @@ export const AdminSidebar = () => {
             <span className={styles.adminName}>{t('adminSidebar.adminName')}</span>
           </div>
 
-          <Button className={styles.logoutBtn} icon={<LogoutOutlined />} type="text" block>
+          <Button
+            className={styles.logoutBtn}
+            icon={<LogoutOutlined />}
+            type="text"
+            block
+            onClick={handleLogout}
+            disabled={loading}
+          >
             {t('adminNav.logout')}
           </Button>
         </div>

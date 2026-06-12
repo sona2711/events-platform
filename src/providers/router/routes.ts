@@ -1,6 +1,7 @@
 import { createElement, lazy, type ComponentType } from 'react'
 import { Navigate } from 'react-router-dom'
 import type { RouteObject } from 'react-router-dom'
+import { AdminRoute } from '@/components/_shared/AdminRoute'
 import { GuestRoute } from '@/components/_shared/GuestRoute'
 import { ProtectedRoute } from '@/components/_shared/ProtectedRoute'
 import { AppLayout } from '@/components/layout/AppLayout'
@@ -100,12 +101,17 @@ export const appRoutes: RouteObject[] = [
     ],
   },
   {
-    path: 'admin',
-    element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
+    element: createElement(AdminRoute),
+    children: [
+      {
+        path: 'admin',
+        element: createElement(Navigate, { to: '/admin/registrations', replace: true }),
+      },
+      { path: 'admin/registrations', element: createElement(AdminPage) },
+      { path: 'admin/events', element: createElement(AdminComingSoonPage) },
+      { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
+      { path: 'admin/users', element: createElement(AdminComingSoonPage) },
+      { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
+    ],
   },
-  { path: 'admin/registrations', element: createElement(AdminPage) },
-  { path: 'admin/events', element: createElement(AdminComingSoonPage) },
-  { path: 'admin/finances', element: createElement(AdminComingSoonPage) },
-  { path: 'admin/users', element: createElement(AdminComingSoonPage) },
-  { path: 'admin/settings', element: createElement(AdminComingSoonPage) },
 ]
