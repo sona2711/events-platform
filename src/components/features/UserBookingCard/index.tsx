@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react'
-import { CalendarOutlined, EnvironmentOutlined } from '@ant-design/icons'
+import { CalendarOutlined, CheckCircleOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import { Button, Image, Tag } from 'antd'
 import { useTranslation } from 'react-i18next'
 import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
@@ -12,6 +12,7 @@ export const UserBookingCard = memo(
     const { t } = useTranslation('profile')
     const isPastBooking = booking.status === 'past'
     const isCancelledBooking = booking.status === 'cancelled'
+    const isPaidBooking = booking.status === 'paid'
 
     const handlePayTickets = useCallback(() => {
       onPayTickets?.(booking.eventId)
@@ -36,6 +37,17 @@ export const UserBookingCard = memo(
     const renderActions = () => {
       if (isCancelledBooking) {
         return null
+      }
+
+      if (isPaidBooking) {
+        return (
+          <div className={styles.actions}>
+            <div className={styles.paidBadge}>
+              <CheckCircleOutlined aria-hidden />
+              {t('bookings.status.paid')}
+            </div>
+          </div>
+        )
       }
 
       if (isPastBooking) {

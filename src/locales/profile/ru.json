@@ -33,6 +33,9 @@
       "viewTicket": "Посмотреть билет",
       "leaveFeedback": "Оставить отзыв"
     },
+    "status": {
+      "paid": "Оплачено"
+    },
     "categories": {
       "music": "МУЗЫКА",
       "culinary": "КУЛИНАРИЯ",

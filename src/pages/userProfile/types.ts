@@ -10,7 +10,7 @@ export type UserProfile = {
   preferredLanguage: SupportedLanguage
 }
 
-export type UserBookingStatus = 'upcoming' | 'past' | 'cancelled'
+export type UserBookingStatus = 'upcoming' | 'past' | 'cancelled' | 'paid'
 
 export type UserTicket = {
   id: string

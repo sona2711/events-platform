@@ -1,4 +1,5 @@
 import type { Order } from '@/types'
+import { createOrderId } from '@/lib/orderId'
 import type { ProfileState } from '@/store/profile/profileTypes'
 import type { ContactFormValues, PaymentEvent, PaymentFormValues } from './types'
 
@@ -49,7 +50,7 @@ export const buildModalOrder = ({
   amount,
   profile,
 }: BuildModalOrderInput): Order => ({
-  id: crypto.randomUUID(),
+  id: createOrderId(),
   total: amount,
   status: 'pending',
   createdAt: new Date().toISOString(),

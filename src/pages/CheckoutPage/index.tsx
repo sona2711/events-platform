@@ -1,16 +1,23 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Empty, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { CheckoutContactForm } from '@/components/features/CheckoutContactForm'
 import { CheckoutOrderSummary } from '@/components/features/CheckoutOrderSummary'
 import { CheckoutPaymentForm } from '@/components/features/CheckoutPaymentForm'
 import { CheckoutStepSection } from '@/components/features/CheckoutStepSection'
 import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSelector'
+import { createOrderId } from '@/lib/orderId'
 import { showSystemMessage } from '@/providers/notifications/utils'
-import { useAppSelector } from '@/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { markAsPaid } from '@/store/paidBookings'
 import { selectProfile } from '@/store/profile'
-import { createInitialTicketSelection, getCheckoutEventById, EMPTY_TICKET_TIERS } from './consts'
+import {
+  createInitialTicketSelection,
+  getCheckoutEventById,
+  EMPTY_TICKET_TIERS,
+  CHECKOUT_SUBMIT_DELAY_MS,
+} from './consts'
 import type {
   CheckoutContactValues,
   CheckoutLocationState,
@@ -35,40 +42,51 @@ export const CheckoutPage = () => {
   const { t } = useTranslation('checkout')
   const { eventId = '' } = useParams<{ eventId: string }>()
   const location = useLocation()
+  const navigate = useNavigate()
   const checkoutNavigationState = location.state as CheckoutLocationState | null
+  const checkoutNavigationTicketQuantity = checkoutNavigationState?.ticketQuantity
+  const dispatch = useAppDispatch()
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
   const ticketTiers = event?.ticketTiers ?? EMPTY_TICKET_TIERS
+  const defaultContactFullName = t('defaults.contact.fullName')
+  const defaultContactEmail = t('defaults.contact.email')
+  const checkoutResetKey = `${eventId}:${checkoutNavigationTicketQuantity ?? ''}`
+  const previousCheckoutResetKeyRef = useRef(checkoutResetKey)
+  const contactInitialValues = useMemo<CheckoutContactValues>(
+    () => ({
+      fullName: profile.fullName || defaultContactFullName,
+      email: profile.email || defaultContactEmail,
+    }),
+    [defaultContactEmail, defaultContactFullName, profile.email, profile.fullName],
+  )
 
   const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
-    event
-      ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationState?.ticketQuantity)
-      : {},
+    event ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationTicketQuantity) : {},
   )
-  const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(null)
+  const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(
+    contactInitialValues,
+  )
   const [paymentValues, setPaymentValues] = useState<CheckoutPaymentValues | null>(null)
   const [orderStatus, setOrderStatus] = useState<OrderStatus>('idle')
 
   useEffect(() => {
+    if (previousCheckoutResetKeyRef.current === checkoutResetKey) {
+      return
+    }
+
+    previousCheckoutResetKeyRef.current = checkoutResetKey
+
     const checkoutEvent = getCheckoutEventById(eventId)
     if (checkoutEvent) {
-      const navigationState = location.state as CheckoutLocationState | null
       setTicketSelection(
-        createInitialTicketSelection(checkoutEvent.ticketTiers, navigationState?.ticketQuantity),
+        createInitialTicketSelection(checkoutEvent.ticketTiers, checkoutNavigationTicketQuantity),
       )
-      setContactValues(null)
+      setContactValues(contactInitialValues)
       setPaymentValues(null)
       setOrderStatus('idle')
     }
-  }, [eventId, location.state])
-
-  const contactInitialValues = useMemo<CheckoutContactValues>(
-    () => ({
-      fullName: profile.fullName || t('defaults.contact.fullName'),
-      email: profile.email || t('defaults.contact.email'),
-    }),
-    [profile.email, profile.fullName, t],
-  )
+  }, [checkoutNavigationTicketQuantity, checkoutResetKey, contactInitialValues, eventId])
 
   const totals = useMemo(
     () => buildOrderTotals(ticketSelection, ticketTiers),
@@ -81,6 +99,7 @@ export const CheckoutPage = () => {
     () => getCheckoutReadiness(ticketSelection, contactValues, paymentValues, isFree),
     [contactValues, isFree, paymentValues, ticketSelection],
   )
+  console.log('readiness', readiness, { contactValues, paymentValues, ticketSelection, isFree })
 
   const handleQuantityChange = (tierId: string, quantity: number) => {
     setTicketSelection((current) => ({
@@ -95,10 +114,11 @@ export const CheckoutPage = () => {
     }
 
     setOrderStatus('submitting')
+    await new Promise((resolve) => setTimeout(resolve, CHECKOUT_SUBMIT_DELAY_MS))
     const now = new Date().toISOString()
 
     const order: Order = {
-      id: crypto.randomUUID(),
+      id: createOrderId(),
       total: totals.totalAmd,
       status: 'pending',
       createdAt: now,
@@ -117,18 +137,18 @@ export const CheckoutPage = () => {
         amountAmd: item.amountAmd,
       })),
     }
-    try {
-      try {
-        await sendOrderToTelegram(order)
-      } catch (notificationError) {
-        console.warn('Failed to send order to Telegram:', notificationError)
-      }
+    void sendOrderToTelegram(order).catch((notificationError: unknown) => {
+      console.warn('Failed to send order to Telegram:', notificationError)
+    })
 
+    try {
+      dispatch(markAsPaid(eventId))
       setOrderStatus('success')
       showSystemMessage({
         content: isFree ? t('messages.reservationSuccess') : t('messages.orderSuccess'),
         variant: 'success',
       })
+      navigate('/categories')
     } catch (error) {
       console.error('Failed to send order to Telegram:', error)
       setOrderStatus('error')
