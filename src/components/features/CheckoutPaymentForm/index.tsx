@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { CreditCardOutlined, LockOutlined } from '@ant-design/icons'
 import { Col, Form, Input, Row, Space, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -12,14 +13,21 @@ export const CheckoutPaymentForm = ({ onValidChange }: CheckoutPaymentFormProps)
   const { t } = useTranslation('checkout')
   const [form] = Form.useForm<CheckoutPaymentValues>()
 
-  const emitValidValues = () => {
-    const values = form.getFieldsValue()
-    onValidChange(isValidPaymentValues(values) ? values : null)
-  }
+  const emitValidValues = useCallback(
+    (values = form.getFieldsValue()) => {
+      onValidChange(isValidPaymentValues(values) ? values : null)
+    },
+    [form, onValidChange],
+  )
 
   return (
     <>
-      <Form className={styles.form} form={form} layout="vertical" onValuesChange={emitValidValues}>
+      <Form
+        className={styles.form}
+        form={form}
+        layout="vertical"
+        onValuesChange={(_, values) => emitValidValues(values)}
+      >
         <Row gutter={[24, 20]}>
           <Col span={24}>
             <Form.Item

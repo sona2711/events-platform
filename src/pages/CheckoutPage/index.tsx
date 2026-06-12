@@ -39,13 +39,24 @@ export const CheckoutPage = () => {
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
   const ticketTiers = event?.ticketTiers ?? EMPTY_TICKET_TIERS
+  const defaultContactFullName = t('defaults.contact.fullName')
+  const defaultContactEmail = t('defaults.contact.email')
+  const contactInitialValues = useMemo<CheckoutContactValues>(
+    () => ({
+      fullName: profile.fullName || defaultContactFullName,
+      email: profile.email || defaultContactEmail,
+    }),
+    [defaultContactEmail, defaultContactFullName, profile.email, profile.fullName],
+  )
 
   const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
     event
       ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationState?.ticketQuantity)
       : {},
   )
-  const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(null)
+  const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(
+    contactInitialValues,
+  )
   const [paymentValues, setPaymentValues] = useState<CheckoutPaymentValues | null>(null)
   const [orderStatus, setOrderStatus] = useState<OrderStatus>('idle')
 
@@ -56,19 +67,11 @@ export const CheckoutPage = () => {
       setTicketSelection(
         createInitialTicketSelection(checkoutEvent.ticketTiers, navigationState?.ticketQuantity),
       )
-      setContactValues(null)
+      setContactValues(contactInitialValues)
       setPaymentValues(null)
       setOrderStatus('idle')
     }
-  }, [eventId, location.state])
-
-  const contactInitialValues = useMemo<CheckoutContactValues>(
-    () => ({
-      fullName: profile.fullName || t('defaults.contact.fullName'),
-      email: profile.email || t('defaults.contact.email'),
-    }),
-    [profile.email, profile.fullName, t],
-  )
+  }, [contactInitialValues, eventId, location.state])
 
   const totals = useMemo(
     () => buildOrderTotals(ticketSelection, ticketTiers),
@@ -117,13 +120,11 @@ export const CheckoutPage = () => {
         amountAmd: item.amountAmd,
       })),
     }
-    try {
-      try {
-        await sendOrderToTelegram(order)
-      } catch (notificationError) {
-        console.warn('Failed to send order to Telegram:', notificationError)
-      }
+    void sendOrderToTelegram(order).catch((notificationError: unknown) => {
+      console.warn('Failed to send order to Telegram:', notificationError)
+    })
 
+    try {
       setOrderStatus('success')
       showSystemMessage({
         content: isFree ? t('messages.reservationSuccess') : t('messages.orderSuccess'),

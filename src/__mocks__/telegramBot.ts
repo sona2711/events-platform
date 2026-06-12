@@ -13,6 +13,8 @@ type SendOrderToTelegramResult = {
   description?: string
 }
 
+const TELEGRAM_REQUEST_TIMEOUT_MS = 5_000
+
 const getTelegramConfig = (): TelegramConfig | null => {
   const botToken = import.meta.env.VITE_TELEGRAM_BOT?.trim()
   const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID?.trim()
@@ -57,6 +59,9 @@ export const sendOrderToTelegram = async (order: Order): Promise<SendOrderToTele
         `Created: ${order.createdAt}`,
         `Order ID: ${order.id}`,
       ].join('\n'),
+    },
+    {
+      timeout: TELEGRAM_REQUEST_TIMEOUT_MS,
     },
   )
   return response.data

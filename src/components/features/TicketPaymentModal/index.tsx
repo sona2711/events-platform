@@ -104,11 +104,9 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
         profile,
       })
 
-      try {
-        await sendOrderToTelegram(order)
-      } catch (notificationError) {
+      void sendOrderToTelegram(order).catch((notificationError: unknown) => {
         console.warn('Failed to send order to Telegram:', notificationError)
-      }
+      })
 
       setReceiptDetails({
         ...contactValues,

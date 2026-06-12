@@ -11,14 +11,17 @@ export const CheckoutContactForm = ({ initialValues, onValidChange }: CheckoutCo
   const { t } = useTranslation('checkout')
   const [form] = Form.useForm<CheckoutContactValues>()
 
-  const emitValidValues = useCallback(() => {
-    const values = form.getFieldsValue()
-    onValidChange(isValidContactValues(values) ? values : null)
-  }, [form, onValidChange])
+  const emitValidValues = useCallback(
+    (values = form.getFieldsValue()) => {
+      onValidChange(isValidContactValues(values) ? values : null)
+    },
+    [form, onValidChange],
+  )
 
   useEffect(() => {
-    emitValidValues()
-  }, [emitValidValues])
+    form.setFieldsValue(initialValues)
+    emitValidValues(initialValues)
+  }, [emitValidValues, form, initialValues])
 
   return (
     <Form
@@ -26,7 +29,7 @@ export const CheckoutContactForm = ({ initialValues, onValidChange }: CheckoutCo
       form={form}
       layout="vertical"
       initialValues={initialValues}
-      onValuesChange={emitValidValues}
+      onValuesChange={(_, values) => emitValidValues(values)}
       onFinish={emitValidValues}
     >
       <Row gutter={[24, 20]}>
