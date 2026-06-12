@@ -11,7 +11,9 @@ import logo from '../../assets/images/Logo.png'
 import send from '../../assets/images/send.png'
 import styles from './style.module.css'
 
-const WELCOME_MESSAGE = createAssistantMessage("Hi! I am Gemini's helper.\nHow can I help you?")
+const WELCOME_MESSAGE = createAssistantMessage(
+  "Welcome to Pulsar, I'm here to help you find exciting events. What can I help you find today?",
+)
 
 export const Chat = () => {
   const [isOpen, setIsOpen] = useState(false)
