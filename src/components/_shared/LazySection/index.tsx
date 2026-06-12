@@ -7,6 +7,7 @@ export const LazySection = ({
   children,
   placeholderSize,
   rootMargin = DEFAULT_LAZY_SECTION_ROOT_MARGIN,
+  id,
 }: LazySectionProps) => {
   const containerRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -36,7 +37,7 @@ export const LazySection = ({
   const placeholderClassName = LAZY_SECTION_PLACEHOLDER_CLASS[placeholderSize]
 
   return (
-    <section ref={containerRef} className={styles.root}>
+    <section ref={containerRef} id={id} className={styles.root}>
       {isVisible ? children : <div className={placeholderClassName} aria-hidden="true" />}
     </section>
   )

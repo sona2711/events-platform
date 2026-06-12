@@ -1,12 +1,15 @@
+import type { MouseEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { HomeFeatureCard } from '@/components/features/HomeFeatureCard'
+import { EXPLORE_ALL_EVENTS_SECTION_ID } from '@/components/features/homepage/consts'
 import {
   CATEGORY_CHIPS,
   HERO_FEATURED_EVENT,
   HERO_SECONDARY_EVENTS,
 } from '@/components/features/homepage/homeContent'
+import { scrollToSection } from '@/components/features/homepage/utils'
 import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
@@ -14,6 +17,11 @@ const { Title, Text, Paragraph } = Typography
 
 export const Hero = () => {
   const { t } = useTranslation('home')
+
+  const handleViewThisWeekClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    scrollToSection(EXPLORE_ALL_EVENTS_SECTION_ID)
+  }
 
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
@@ -41,9 +49,9 @@ export const Hero = () => {
           >
             {CATEGORY_CHIPS.map((chip) => (
               <Link
-                key={chip.slug}
+                key={chip.id}
                 className={`${styles.chip} ${styles[`chip${chip.accent.charAt(0).toUpperCase() + chip.accent.slice(1)}`]}`}
-                to="/categories"
+                to={`/categories?category=${chip.id}`}
               >
                 {chip.label}
               </Link>
@@ -71,9 +79,13 @@ export const Hero = () => {
               </svg>
             </Link>
 
-            <Link className={buttonStyles.secondaryLink} to="/categories">
+            <a
+              className={buttonStyles.secondaryLink}
+              href={`#${EXPLORE_ALL_EVENTS_SECTION_ID}`}
+              onClick={handleViewThisWeekClick}
+            >
               {t('hero.secondaryCta')}
-            </Link>
+            </a>
           </Flex>
         </div>
 
