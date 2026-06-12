@@ -60,12 +60,6 @@ const NotFoundPage = lazy(() =>
   import('@/pages/404page').then((module) => ({ default: module.NotFoundPage })),
 )
 
-const ScheduleAssistantPage = lazy(() =>
-  import('@/pages/ScheduleAssistantPage').then((module) => ({
-    default: module.ScheduleAssistantPage,
-  })),
-)
-
 export const appRoutes: RouteObject[] = [
   {
     element: createElement(AppLayout),
@@ -76,7 +70,6 @@ export const appRoutes: RouteObject[] = [
         element: createElement(Navigate, { to: '/categories', replace: true }),
       },
       { path: 'categories', element: createElement(CategoriesPage) },
-      { path: 'schedule-assistant', element: createElement(ScheduleAssistantPage) },
       { path: 'event/:eventId', element: createElement(EventDetailPage) },
       {
         element: createElement(ProtectedRoute),

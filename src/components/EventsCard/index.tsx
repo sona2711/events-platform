@@ -94,7 +94,6 @@ export const EventsGrid = () => {
           <div className={styles.swiperViewport}>
             <Swiper
               modules={SWIPER_MODULES}
-              autoHeight
               watchOverflow={false}
               allowTouchMove
               simulateTouch

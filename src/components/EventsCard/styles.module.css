@@ -161,7 +161,6 @@
 .mySwiper :global(.swiper-slide),
 .slide {
   display: flex;
-  height: auto;
   width: auto;
   overflow: visible;
 }
