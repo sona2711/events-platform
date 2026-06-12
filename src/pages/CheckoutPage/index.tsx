@@ -99,7 +99,6 @@ export const CheckoutPage = () => {
     () => getCheckoutReadiness(ticketSelection, contactValues, paymentValues, isFree),
     [contactValues, isFree, paymentValues, ticketSelection],
   )
-  console.log('readiness', readiness, { contactValues, paymentValues, ticketSelection, isFree })
 
   const handleQuantityChange = (tierId: string, quantity: number) => {
     setTicketSelection((current) => ({

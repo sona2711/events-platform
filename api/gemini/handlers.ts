@@ -1,6 +1,4 @@
 import type { ChatMessage, ChatRequestBody } from './types'
-import { buildEventSchedule } from './events/scheduleBuilder'
-import { SCHEDULE_EVENTS } from './events/data'
 import { generateEventsChatReply } from './eventsChat'
 
 const isChatMessage = (value: unknown): value is ChatMessage => {
@@ -37,13 +35,6 @@ export const handleGeminiRoute = async (
   pathname: string,
   requestBody: unknown,
 ): Promise<GeminiHandlerResult | null> => {
-  if (pathname === '/api/gemini/schedule' && method === 'GET') {
-    return {
-      status: 200,
-      body: { schedule: buildEventSchedule(SCHEDULE_EVENTS) },
-    }
-  }
-
   if (pathname === '/api/gemini/chat' && method === 'POST') {
     if (!isChatRequestBody(requestBody)) {
       return { status: 400, body: { message: 'Invalid request body.' } }

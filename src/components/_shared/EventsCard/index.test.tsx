@@ -8,7 +8,7 @@ import '@/i18n'
 import i18n from '@/i18n'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { favoritesReducer } from '@/store/favorites'
-import { EventCard } from './index'
+import { EventsCard } from './index'
 
 const event = EVENTS_CARD_DATA[0]
 
@@ -35,7 +35,7 @@ const renderCard = ({ onBook, initialPath = '/' }: RenderCardOptions = {}) => {
         <MemoryRouter initialEntries={[initialPath]}>
           <LocationProbe />
           <Routes>
-            <Route path="/" element={<EventCard event={event} onBook={onBook} />} />
+            <Route path="/" element={<EventsCard event={event} onBook={onBook} />} />
             <Route path="/event/:eventId" element={<div>Event details</div>} />
             <Route path="/checkout/:eventId" element={<div>Checkout</div>} />
           </Routes>

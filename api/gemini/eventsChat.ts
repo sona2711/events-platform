@@ -1,13 +1,15 @@
 import type { ChatMessage } from './types'
 import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder'
-import { SCHEDULE_EVENTS } from './events/data'
-import { linkifyScheduleEventLinks } from '../../src/data/scheduleAssistantEvents'
+import {
+  linkifyScheduleEventLinks,
+  SCHEDULE_ASSISTANT_EVENTS,
+} from '../../src/data/scheduleAssistantEvents'
 import { buildGeminiHistory } from './chatHistory'
 import { getGeminiModelName, getGoogleGenAI } from './client'
 
-const schedule = buildEventSchedule(SCHEDULE_EVENTS)
+const schedule = buildEventSchedule(SCHEDULE_ASSISTANT_EVENTS)
 const scheduleContext = formatScheduleForPrompt(schedule)
-const eventsListContext = SCHEDULE_EVENTS.map(
+const eventsListContext = SCHEDULE_ASSISTANT_EVENTS.map(
   (event) =>
     `- ${event.title} | ${event.date} | ${event.time} | ${event.location} | ${event.category} | ${event.price} [id: ${event.id}]`,
 ).join('\n')

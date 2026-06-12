@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 're
 import { useTranslation } from 'react-i18next'
 import { fetchScheduleChatReply } from '@/services/scheduleAssistantApi'
 import type { ScheduleChatMessage } from '@/types/scheduleAssistant'
-import { linkifyScheduleEventLinks } from '@/data/scheduleAssistantEvents'
 import { createAssistantMessage, createUserMessage } from './utils'
 import type { ScheduleAssistantChatProps } from './types'
 import styles from './styles.module.css'
@@ -50,10 +49,7 @@ export const ScheduleAssistantChat = ({ className }: ScheduleAssistantChatProps)
 
     try {
       const { reply } = await fetchScheduleChatReply(nextMessages)
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        createAssistantMessage(linkifyScheduleEventLinks(reply)),
-      ])
+      setMessages((currentMessages) => [...currentMessages, createAssistantMessage(reply)])
     } catch (sendError) {
       setError(sendError instanceof Error ? sendError.message : t('errors.sendFailed'))
       setMessages(messages)
