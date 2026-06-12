@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Empty, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import { CheckoutOrderSummary } from '@/components/features/CheckoutOrderSummary
 import { CheckoutPaymentForm } from '@/components/features/CheckoutPaymentForm'
 import { CheckoutStepSection } from '@/components/features/CheckoutStepSection'
 import { CheckoutTicketSelector } from '@/components/features/CheckoutTicketSelector'
+import { createOrderId } from '@/lib/orderId'
 import { showSystemMessage } from '@/providers/notifications/utils'
 import { useAppSelector } from '@/store/hooks'
 import { selectProfile } from '@/store/profile'
@@ -36,11 +37,14 @@ export const CheckoutPage = () => {
   const { eventId = '' } = useParams<{ eventId: string }>()
   const location = useLocation()
   const checkoutNavigationState = location.state as CheckoutLocationState | null
+  const checkoutNavigationTicketQuantity = checkoutNavigationState?.ticketQuantity
   const profile = useAppSelector(selectProfile)
   const event = getCheckoutEventById(eventId)
   const ticketTiers = event?.ticketTiers ?? EMPTY_TICKET_TIERS
   const defaultContactFullName = t('defaults.contact.fullName')
   const defaultContactEmail = t('defaults.contact.email')
+  const checkoutResetKey = `${eventId}:${checkoutNavigationTicketQuantity ?? ''}`
+  const previousCheckoutResetKeyRef = useRef(checkoutResetKey)
   const contactInitialValues = useMemo<CheckoutContactValues>(
     () => ({
       fullName: profile.fullName || defaultContactFullName,
@@ -50,9 +54,7 @@ export const CheckoutPage = () => {
   )
 
   const [ticketSelection, setTicketSelection] = useState<TicketSelection>(() =>
-    event
-      ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationState?.ticketQuantity)
-      : {},
+    event ? createInitialTicketSelection(event.ticketTiers, checkoutNavigationTicketQuantity) : {},
   )
   const [contactValues, setContactValues] = useState<CheckoutContactValues | null>(
     contactInitialValues,
@@ -61,17 +63,22 @@ export const CheckoutPage = () => {
   const [orderStatus, setOrderStatus] = useState<OrderStatus>('idle')
 
   useEffect(() => {
+    if (previousCheckoutResetKeyRef.current === checkoutResetKey) {
+      return
+    }
+
+    previousCheckoutResetKeyRef.current = checkoutResetKey
+
     const checkoutEvent = getCheckoutEventById(eventId)
     if (checkoutEvent) {
-      const navigationState = location.state as CheckoutLocationState | null
       setTicketSelection(
-        createInitialTicketSelection(checkoutEvent.ticketTiers, navigationState?.ticketQuantity),
+        createInitialTicketSelection(checkoutEvent.ticketTiers, checkoutNavigationTicketQuantity),
       )
       setContactValues(contactInitialValues)
       setPaymentValues(null)
       setOrderStatus('idle')
     }
-  }, [contactInitialValues, eventId, location.state])
+  }, [checkoutNavigationTicketQuantity, checkoutResetKey, contactInitialValues, eventId])
 
   const totals = useMemo(
     () => buildOrderTotals(ticketSelection, ticketTiers),
@@ -101,7 +108,7 @@ export const CheckoutPage = () => {
     const now = new Date().toISOString()
 
     const order: Order = {
-      id: crypto.randomUUID(),
+      id: createOrderId(),
       total: totals.totalAmd,
       status: 'pending',
       createdAt: now,

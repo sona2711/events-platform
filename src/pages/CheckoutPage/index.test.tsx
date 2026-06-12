@@ -1,16 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ConfigProvider } from 'antd'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { sendOrderToTelegram } from '@/__mocks__/telegramBot'
+import { showSystemMessage } from '@/providers/notifications/utils'
 import '@/i18n'
 import i18n from '@/i18n'
 import checkoutEn from '@/locales/checkout/en.json'
 import { getDefaultProfile, profileReducer } from '@/store/profile'
 import { CheckoutPage } from './index'
+
+jest.mock('@/providers/notifications/utils', () => ({
+  showSystemMessage: jest.fn(),
+}))
 
 const createTestStore = () =>
   configureStore({
@@ -41,10 +46,12 @@ const renderCheckoutPage = (eventId: string) => {
 }
 
 const sendOrderToTelegramMock = jest.mocked(sendOrderToTelegram)
+const showSystemMessageMock = jest.mocked(showSystemMessage)
 
 describe('CheckoutPage', () => {
   beforeEach(() => {
     sendOrderToTelegramMock.mockClear()
+    showSystemMessageMock.mockClear()
   })
 
   it('shows event-specific summary and ticket tiers for a profile booking event id', () => {
@@ -109,10 +116,11 @@ describe('CheckoutPage', () => {
       expect(screen.getByRole('button', { name: checkoutEn.summary.placeOrder })).toBeEnabled()
     })
 
-    await user.click(screen.getByRole('button', { name: checkoutEn.summary.placeOrder }))
+    fireEvent.click(screen.getByRole('button', { name: checkoutEn.summary.placeOrder }))
 
-    await waitFor(() => {
-      expect(sendOrderToTelegramMock).toHaveBeenCalledTimes(1)
+    expect(showSystemMessageMock).toHaveBeenCalledWith({
+      content: checkoutEn.messages.orderSuccess,
+      variant: 'success',
     })
   })
 })
