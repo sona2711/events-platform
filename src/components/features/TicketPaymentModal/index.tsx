@@ -104,7 +104,11 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
         profile,
       })
 
-      await sendOrderToTelegram(order)
+      try {
+        await sendOrderToTelegram(order)
+      } catch (notificationError) {
+        console.warn('Failed to send order to Telegram:', notificationError)
+      }
 
       setReceiptDetails({
         ...contactValues,
@@ -149,7 +153,7 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
       onCancel={onClose}
       width={560}
       centered
-      destroyOnClose
+      destroyOnHidden
       title={null}
       styles={{ body: { padding: 0 } }}
     >

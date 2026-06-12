@@ -118,7 +118,12 @@ export const CheckoutPage = () => {
       })),
     }
     try {
-      await sendOrderToTelegram(order)
+      try {
+        await sendOrderToTelegram(order)
+      } catch (notificationError) {
+        console.warn('Failed to send order to Telegram:', notificationError)
+      }
+
       setOrderStatus('success')
       showSystemMessage({
         content: isFree ? t('messages.reservationSuccess') : t('messages.orderSuccess'),
