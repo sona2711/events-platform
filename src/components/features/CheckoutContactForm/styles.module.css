@@ -1,0 +1,35 @@
+.form :global(.ant-form-item) {
+  margin-bottom: 0;
+}
+
+.form :global(.ant-form-item-label) {
+  padding-bottom: 6px;
+}
+
+.form :global(.ant-form-item-label > label) {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: 14px;
+  font-weight: 600;
+  height: auto;
+}
+
+.form :global(.ant-input) {
+  background: var(--color-input-bg);
+  border-radius: 10px;
+  border-color: var(--color-input-border);
+  color: var(--color-input-text);
+  font-family: var(--font-family-body);
+  font-size: 14px;
+  height: 44px;
+}
+
+.form :global(.ant-input:hover),
+.form :global(.ant-input:focus) {
+  border-color: var(--color-action-primary);
+  box-shadow: 0 0 0 2px var(--color-action-primary-muted);
+}
+
+.form :global(.ant-input::placeholder) {
+  color: var(--color-input-placeholder);
+}

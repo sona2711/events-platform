@@ -1,0 +1,163 @@
+.card {
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: 20px;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.ticketName:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.price:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-action-primary);
+  font-family: var(--font-family-display);
+  font-size: clamp(22px, 3vw, 26px);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fee:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.quantityLabel:global(.ant-typography) {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.quantityControl {
+  width: 100%;
+  min-height: 52px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+}
+
+.quantityControl :global(.ant-btn) {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--color-action-primary);
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 600;
+  height: 36px;
+  justify-content: center;
+  line-height: 1;
+  min-width: 36px;
+  padding: 0;
+  width: 36px;
+}
+
+.quantityControl :global(.ant-btn:hover:not(:disabled)) {
+  background: var(--color-action-primary-muted);
+  color: var(--color-action-primary);
+}
+
+.quantityControl :global(.ant-btn:disabled) {
+  opacity: 0.35;
+}
+
+.quantityValue:global(.ant-typography) {
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 32px;
+  text-align: center;
+}
+
+.bookButton:global(.ant-btn) {
+  font-size: 16px;
+}
+
+.content {
+  margin-top: 24px;
+}
+
+.secureNote:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.secureIcon {
+  color: var(--color-action-primary);
+  font-size: 14px;
+}
+
+.divider {
+  margin: 0;
+  border-color: var(--color-border-subtle);
+}
+
+.footerLink:global(.ant-typography) {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footerLink:global(.ant-typography:hover) {
+  color: var(--color-action-primary);
+}
+
+.infoModal :global(.ant-modal-content) {
+  border-radius: 20px;
+}
+
+.infoModalContent {
+  padding: 4px 0 8px;
+}
+
+.infoDescription:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.contactLabel:global(.ant-typography) {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contactPhone:global(.ant-typography) {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .card {
+    position: static;
+  }
+}

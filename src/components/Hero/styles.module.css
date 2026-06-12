@@ -154,59 +154,9 @@
   margin-top: 8px;
 }
 
-.btnPrimary,
-.btnSecondary {
-  outline: none;
-  cursor: pointer;
-  margin: 0;
-  padding: 16px 32px;
-  min-height: 52px;
-  border-radius: 999px;
-  font-size: 16px;
-  font-weight: 600;
-  box-shadow: none;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.btnPrimary {
-  border: none;
-  background-color: var(--color-accent-bright);
-  color: var(--color-burgundy-700);
-  gap: 10px;
-}
-
-.btnPrimary:hover,
-.btnPrimary:focus-visible {
-  background-color: #e8f65c;
-  color: var(--color-burgundy-700);
-  text-decoration: none;
-}
-
-.btnPrimaryLabel {
-  line-height: 1;
-}
-
-.btnPrimaryIcon {
+.ctaIcon {
   flex-shrink: 0;
   display: block;
-}
-
-.btnSecondary {
-  background-color: transparent;
-  color: var(--color-home-text);
-  border: 2px solid rgb(255 255 255 / 24%);
-}
-
-.btnSecondary:hover,
-.btnSecondary:focus-visible {
-  color: var(--color-accent-bright);
-  border-color: var(--color-accent-bright);
-  background-color: rgb(210 232 35 / 8%);
-  text-decoration: none;
 }
 
 .featuredGrid {
@@ -263,10 +213,9 @@
     margin-top: 4px;
   }
 
-  .btnPrimary,
-  .btnSecondary {
+  .actions :global(a) {
     width: 100%;
-    min-height: 48px;
+    min-height: var(--button-height-default);
     padding: 0 24px;
     font-size: 15px;
   }

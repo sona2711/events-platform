@@ -1,0 +1,209 @@
+/* Shared button system – semantic tokens from main.css */
+
+.primaryButton:global(.ant-btn),
+.secondaryButton:global(.ant-btn),
+.primaryLink,
+.secondaryLink,
+.primaryNative {
+  border-radius: var(--button-radius);
+  box-shadow: none;
+  font-family: var(--font-family-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.primaryButton:global(.ant-btn),
+.secondaryButton:global(.ant-btn) {
+  height: var(--button-height-default);
+  min-height: var(--button-height-default);
+  padding: 0 24px;
+}
+
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary) {
+  background: var(--button-primary-bg);
+  border-color: var(--button-primary-border);
+  color: var(--button-primary-text);
+  transition: filter 0.2s ease;
+}
+
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary:hover),
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary):focus-visible {
+  background: var(--button-primary-bg) !important;
+  border-color: var(--button-primary-border) !important;
+  color: var(--button-primary-text) !important;
+  filter: brightness(1.08);
+}
+
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary):active {
+  filter: brightness(0.95);
+}
+
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary:disabled),
+.primaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary.ant-btn-disabled) {
+  background: var(--button-primary-disabled-bg) !important;
+  border-color: transparent !important;
+  color: var(--button-primary-disabled-text) !important;
+  filter: none;
+}
+
+.secondaryButton:global(.ant-btn):not(.ant-btn-variant-solid) {
+  background: var(--button-secondary-bg) !important;
+  border-color: var(--button-secondary-border) !important;
+  box-shadow: none;
+  color: var(--button-secondary-text) !important;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondaryButton:global(.ant-btn):not(.ant-btn-variant-solid):hover,
+.secondaryButton:global(.ant-btn):not(.ant-btn-variant-solid):focus-visible {
+  background: var(--button-secondary-hover-bg) !important;
+  border-color: var(--button-secondary-hover-border) !important;
+  color: var(--button-secondary-hover-text) !important;
+}
+
+.secondaryButton:global(.ant-btn):not(.ant-btn-variant-solid):active {
+  background: var(--button-secondary-hover-bg) !important;
+  border-color: var(--button-secondary-hover-border) !important;
+  color: var(--button-secondary-hover-text) !important;
+}
+
+.primaryLink,
+.primaryNative {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: var(--button-height-default);
+  padding: 0 32px;
+  border: none;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  text-decoration: none;
+  transition: filter 0.2s ease;
+}
+
+.primaryNative {
+  font-size: 16px;
+  padding: 0 24px;
+}
+
+.primaryLink:hover,
+.primaryLink:focus-visible,
+.primaryNative:hover:not(:disabled),
+.primaryNative:focus-visible:not(:disabled) {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  filter: brightness(1.08);
+  text-decoration: none;
+}
+
+.primaryLink:active,
+.primaryNative:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.primaryNative:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  filter: none;
+}
+
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--button-height-default);
+  padding: 0 32px;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: var(--button-radius);
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  font-family: var(--font-family-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondaryLink:hover,
+.secondaryLink:focus-visible {
+  background-color: var(--button-secondary-hover-bg);
+  border-color: var(--button-secondary-hover-border);
+  color: var(--button-secondary-hover-text);
+  text-decoration: none;
+}
+
+.compactButton:global(.ant-btn) {
+  font-size: 14px;
+  height: var(--button-height-compact);
+  min-height: var(--button-height-compact);
+  padding: 0 18px;
+}
+
+.largeButton:global(.ant-btn),
+.largeLink {
+  height: var(--button-height-large);
+  min-height: var(--button-height-large);
+}
+
+.largeLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 40px;
+  border: none;
+  border-radius: var(--button-radius);
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  font-family: var(--font-family-body);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.largeLink:hover,
+.largeLink:focus-visible {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  filter: brightness(1.08);
+  text-decoration: none;
+}
+
+.fullWidthButton:global(.ant-btn) {
+  width: 100%;
+}
+
+.cardPrimaryButton:global(.ant-btn) {
+  height: var(--button-height-card);
+  min-height: var(--button-height-card);
+  padding: 0 22px;
+  font-size: 14px;
+}
+
+.cardPrimaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary) {
+  background: var(--button-primary-bg);
+  border-color: var(--button-primary-border);
+  color: var(--button-primary-text);
+}
+
+.cardPrimaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary:hover),
+.cardPrimaryButton:global(.ant-btn-variant-solid.ant-btn-color-primary):focus-visible {
+  background: var(--button-primary-bg) !important;
+  border-color: var(--button-primary-border) !important;
+  color: var(--button-primary-text) !important;
+  filter: brightness(1.08);
+}

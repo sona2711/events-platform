@@ -54,6 +54,7 @@ const renderGrid = () => {
               }
             />
             <Route path="/event/:eventId" element={<div>Event details</div>} />
+            <Route path="/checkout/:eventId" element={<div>Checkout</div>} />
           </Routes>
         </MemoryRouter>
       </I18nextProvider>
@@ -68,18 +69,16 @@ describe('CategoriesEventsGrid', () => {
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
   })
 
-  it('navigates to event details when a catalog card book button is clicked', async () => {
+  it('navigates to checkout when a catalog card book button is clicked', async () => {
     const user = userEvent.setup()
 
     renderGrid()
 
-    const bookLinks = screen.getAllByRole('link', { name: 'Book' })
-    expect(bookLinks[0]).toHaveAttribute('href', `/event/${firstEvent.id}`)
+    const bookButtons = screen.getAllByRole('button', { name: 'Book' })
+    await user.click(bookButtons[0])
 
-    await user.click(bookLinks[0])
-
-    expect(screen.getByTestId('current-path')).toHaveTextContent(`/event/${firstEvent.id}`)
-    expect(screen.getByText('Event details')).toBeTruthy()
+    expect(screen.getByTestId('current-path')).toHaveTextContent(`/checkout/${firstEvent.id}`)
+    expect(screen.getByText('Checkout')).toBeTruthy()
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
   })
 })

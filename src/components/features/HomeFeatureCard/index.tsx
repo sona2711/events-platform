@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import type { EventCardData } from '@/components/features/EventCard/types'
+import type { EventCardData } from '@/components/_shared/EventsCard/types'
 import { getCategoryAccent } from '@/components/features/homepage/categoryAccents'
 import styles from './styles.module.css'
 
@@ -28,7 +28,7 @@ export const HomeFeatureCard = ({ event, size }: HomeFeatureCardProps) => {
           className={styles.image}
           src={event.imageUrl}
           alt=""
-          fetchPriority="high"
+          // fetchpriority="high"
           loading="eager"
           decoding="async"
         />

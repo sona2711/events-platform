@@ -1,11 +1,14 @@
 import { AppLocaleProvider } from '@/providers/app-locale-provider'
 import { AppRouter } from '@/providers/router'
+import { ThemeProvider } from '@/providers/theme'
 
 function App() {
   return (
-    <AppLocaleProvider>
-      <AppRouter />
-    </AppLocaleProvider>
+    <ThemeProvider>
+      <AppLocaleProvider>
+        <AppRouter />
+      </AppLocaleProvider>
+    </ThemeProvider>
   )
 }
 

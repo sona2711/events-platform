@@ -1,6 +1,9 @@
-import type { EventDetail } from '@/mock-api/eventsData'
+import type { EventRecord } from '@/mock-api/eventDetailTypes'
 import { MOCK_EVENTS_BY_ID } from '@/mock-api/eventsData'
-import { CHECKOUT_EVENT_OVERRIDES_BY_ID } from './checkoutOverrides'
+import {
+  CHECKOUT_STANDALONE_EVENTS_BY_ID,
+  CHECKOUT_TICKET_TIER_OVERRIDES,
+} from './checkoutOverrides'
 import type { CheckoutEvent, TicketTier } from './types'
 
 const DEFAULT_TICKET_TIER_ID = 'general-admission'
@@ -24,7 +27,7 @@ const buildDefaultTicketTier = (priceAmd: number): TicketTier => ({
   maxQuantity: 10,
 })
 
-export const buildCheckoutEventFromMock = (event: EventDetail): CheckoutEvent => ({
+export const buildCheckoutEventFromMock = (event: EventRecord): CheckoutEvent => ({
   id: event.id,
   title: event.title,
   location: event.location,
@@ -33,15 +36,13 @@ export const buildCheckoutEventFromMock = (event: EventDetail): CheckoutEvent =>
 })
 
 export const getCheckoutEventById = (eventId: string): CheckoutEvent | undefined => {
-  const override = CHECKOUT_EVENT_OVERRIDES_BY_ID.get(eventId)
-  if (override) {
-    return override
-  }
-
   const mockEvent = MOCK_EVENTS_BY_ID.get(eventId)
   if (mockEvent) {
-    return buildCheckoutEventFromMock(mockEvent)
+    const checkoutEvent = buildCheckoutEventFromMock(mockEvent)
+    const ticketTiers = CHECKOUT_TICKET_TIER_OVERRIDES[eventId]
+
+    return ticketTiers ? { ...checkoutEvent, ticketTiers } : checkoutEvent
   }
 
-  return undefined
+  return CHECKOUT_STANDALONE_EVENTS_BY_ID.get(eventId)
 }

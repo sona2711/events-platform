@@ -1,16 +1,19 @@
 import { App as AntApp, ConfigProvider } from 'antd'
 import enUS from 'antd/locale/en_US'
 import type { Locale } from 'antd/es/locale'
-import { type ReactNode, useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { SupportedLanguage } from '@/i18n'
 import { NotificationsProvider } from '@/providers/notifications'
 import { INTER_FONT_FAMILY, NOTIFICATION_VARIANT_COLORS } from '@/providers/notifications/consts'
+import { useTheme } from '@/providers/theme'
 import { colors } from '@/theme/colors'
 
-const APP_ANTD_THEME = {
+const DARK_ACTION_PRIMARY = '#22d3ee'
+
+const buildAppAntdTheme = (theme: 'light' | 'dark') => ({
   token: {
-    colorPrimary: colors.blue600,
+    colorPrimary: theme === 'dark' ? DARK_ACTION_PRIMARY : colors.blue600,
     colorSuccess: colors.lime400,
     colorError: colors.burgundy700,
     colorWarning: colors.orange500,
@@ -42,7 +45,7 @@ const APP_ANTD_THEME = {
       labelFontSize: 14,
     },
   },
-} as const
+})
 
 const loadAntdLocale = async (language: SupportedLanguage): Promise<Locale> => {
   switch (language) {
@@ -61,8 +64,10 @@ type AppLocaleProviderProps = {
 
 export function AppLocaleProvider({ children }: AppLocaleProviderProps) {
   const { i18n } = useTranslation()
+  const { theme } = useTheme()
   const language = i18n.language as SupportedLanguage
   const [antdLocale, setAntdLocale] = useState<Locale>(enUS)
+  const antdTheme = useMemo(() => buildAppAntdTheme(theme), [theme])
 
   useEffect(() => {
     document.documentElement.lang = language
@@ -83,7 +88,7 @@ export function AppLocaleProvider({ children }: AppLocaleProviderProps) {
   }, [language])
 
   return (
-    <ConfigProvider locale={antdLocale} theme={APP_ANTD_THEME}>
+    <ConfigProvider locale={antdLocale} theme={antdTheme}>
       <AntApp>
         <NotificationsProvider>{children}</NotificationsProvider>
       </AntApp>

@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { HomeEventCard } from '@/components/features/HomeEventCard'
+import { EventsCard } from '@/components/_shared/EventsCard'
 import { HomeSidebarCard } from '@/components/features/HomeSidebarCard'
 import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import { TRENDING_EVENTS, WEEKEND_EVENTS } from '@/components/features/homepage/homeContent'
@@ -47,14 +47,14 @@ export const ExploreAllEvents = () => {
 
             <div className={styles.featuredGrid}>
               {mainEvents.map((event) => (
-                <HomeEventCard key={event.id} event={event} onBook={handleBook} />
+                <EventsCard key={event.id} event={event} onBook={handleBook} />
               ))}
             </div>
 
             {gridEvents.length > 0 ? (
               <div className={styles.compactGrid}>
                 {gridEvents.map((event) => (
-                  <HomeEventCard key={event.id} event={event} onBook={handleBook} />
+                  <EventsCard key={event.id} event={event} onBook={handleBook} />
                 ))}
               </div>
             ) : null}

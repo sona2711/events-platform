@@ -30,7 +30,7 @@
   background: rgb(18 26 48 / 72%);
   border: 1px dashed rgb(255 255 255 / 14%);
   border-radius: 16px;
-  color: var(--color-home-text-muted);
+  color: var(--color-text-secondary);
   font-size: 15px;
   font-weight: 500;
   line-height: 1.5;
@@ -44,45 +44,9 @@
   justify-content: center;
 }
 
-.loadMoreButton:global(.ant-btn) {
-  border-radius: 999px;
-  box-shadow: none;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  height: 48px;
+.loadMoreButton {
   min-width: 160px;
   padding: 0 28px;
-}
-
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary),
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):hover,
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):focus-visible,
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):active {
-  background: transparent !important;
-  box-shadow: none;
-}
-
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary) {
-  border-color: var(--color-home-border);
-  color: var(--color-home-text);
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):hover,
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):focus-visible {
-  background: rgb(255 255 255 / 6%) !important;
-  border-color: var(--color-accent-bright) !important;
-  color: var(--color-accent-bright) !important;
-}
-
-.loadMoreButton:global(.ant-btn-variant-outlined.ant-btn-color-primary):active {
-  background: rgb(255 255 255 / 8%) !important;
-  border-color: var(--color-accent-bright) !important;
-  color: var(--color-accent-bright) !important;
 }
 
 @container results (min-width: 520px) {
@@ -119,7 +83,7 @@
     justify-content: stretch;
   }
 
-  .loadMoreButton:global(.ant-btn) {
+  .loadMoreButton {
     min-width: 0;
     width: 100%;
   }
@@ -136,9 +100,10 @@
     border-radius: 14px;
   }
 
-  .loadMoreButton:global(.ant-btn) {
+  .loadMoreButton {
     font-size: 14px;
     height: 44px;
+    min-height: 44px;
     min-width: 0;
   }
 }

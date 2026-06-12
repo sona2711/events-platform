@@ -9,9 +9,9 @@
   --header-surface-mobile: rgb(255 255 255 / 18%);
   --header-border: rgb(255 255 255 / 22%);
   --header-shadow: 0 16px 36px -28px rgb(0 0 0 / 66%);
-  --header-filled-bg: var(--color-accent-bright);
-  --header-filled-bg-hover: var(--color-lime-400-hover);
-  --header-filled-text: var(--color-home-surface);
+  --header-filled-bg: var(--button-primary-bg);
+  --header-filled-bg-hover: var(--button-primary-bg);
+  --header-filled-text: var(--button-primary-text);
   --header-toggle-hover-bg: rgb(var(--color-home-accent-cyan-rgb) / 14%);
   --header-divider: rgb(255 255 255 / 14%);
 
@@ -151,6 +151,7 @@
 .authLinkFilled:focus-visible {
   background: var(--header-filled-bg-hover);
   color: var(--header-filled-text);
+  filter: brightness(1.08);
 }
 
 .menuToggle:global(.ant-btn) {
@@ -215,6 +216,7 @@
 .logoutButton:focus-visible:not(:disabled) {
   background: var(--header-filled-bg-hover);
   color: var(--header-filled-text);
+  filter: brightness(1.08);
 }
 
 @media (max-width: 820px) {

@@ -7,6 +7,7 @@ import {
   HERO_FEATURED_EVENT,
   HERO_SECONDARY_EVENTS,
 } from '@/components/features/homepage/homeContent'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 const { Title, Text, Paragraph } = Typography
@@ -50,10 +51,10 @@ export const Hero = () => {
           </Flex>
 
           <Flex className={styles.actions} gap={12} wrap="wrap">
-            <Link className={styles.btnPrimary} to="/categories">
-              <span className={styles.btnPrimaryLabel}>{t('hero.primaryCta')}</span>
+            <Link className={buttonStyles.primaryLink} to="/categories">
+              <span>{t('hero.primaryCta')}</span>
               <svg
-                className={styles.btnPrimaryIcon}
+                className={styles.ctaIcon}
                 width="20"
                 height="20"
                 viewBox="0 0 20 20"
@@ -70,7 +71,7 @@ export const Hero = () => {
               </svg>
             </Link>
 
-            <Link className={styles.btnSecondary} to="/categories">
+            <Link className={buttonStyles.secondaryLink} to="/categories">
               {t('hero.secondaryCta')}
             </Link>
           </Flex>

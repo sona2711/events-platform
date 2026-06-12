@@ -8,7 +8,7 @@ import '@/i18n'
 import i18n from '@/i18n'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { favoritesReducer } from '@/store/favorites'
-import { HomeEventCard } from './index'
+import { EventCard } from './index'
 
 const event = EVENTS_CARD_DATA[0]
 
@@ -35,8 +35,9 @@ const renderCard = ({ onBook, initialPath = '/' }: RenderCardOptions = {}) => {
         <MemoryRouter initialEntries={[initialPath]}>
           <LocationProbe />
           <Routes>
-            <Route path="/" element={<HomeEventCard event={event} onBook={onBook} />} />
+            <Route path="/" element={<EventCard event={event} onBook={onBook} />} />
             <Route path="/event/:eventId" element={<div>Event details</div>} />
+            <Route path="/checkout/:eventId" element={<div>Checkout</div>} />
           </Routes>
         </MemoryRouter>
       </I18nextProvider>
@@ -44,7 +45,7 @@ const renderCard = ({ onBook, initialPath = '/' }: RenderCardOptions = {}) => {
   )
 }
 
-describe('HomeEventCard', () => {
+describe('EventCard', () => {
   it('links to the event detail page and supports keyboard navigation', () => {
     renderCard()
 
@@ -70,18 +71,15 @@ describe('HomeEventCard', () => {
     expect(screen.getByTestId('current-path')).toHaveTextContent('/')
   })
 
-  it('navigates to the event details page when onBook is not provided', async () => {
+  it('navigates to checkout when the book button is clicked without onBook', async () => {
     const user = userEvent.setup()
 
     renderCard()
 
-    const bookLink = screen.getByRole('link', { name: 'Book' })
-    expect(bookLink).toHaveAttribute('href', `/event/${event.id}`)
+    await user.click(screen.getByRole('button', { name: 'Book' }))
 
-    await user.click(bookLink)
-
-    expect(screen.getByTestId('current-path')).toHaveTextContent(`/event/${event.id}`)
-    expect(screen.getByText('Event details')).toBeTruthy()
+    expect(screen.getByTestId('current-path')).toHaveTextContent(`/checkout/${event.id}`)
+    expect(screen.getByText('Checkout')).toBeTruthy()
   })
 
   it('toggles favorite state independently from navigation', async () => {

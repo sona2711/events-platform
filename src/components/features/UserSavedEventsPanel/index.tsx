@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Empty, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { HomeEventCard } from '@/components/features/HomeEventCard'
+import { EventsCard } from '@/components/_shared/EventsCard'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { MOCK_CATEGORY_EVENTS } from '@/pages/categoriesPage/mockEvents'
 import { selectFavoriteEventIds } from '@/store/favorites'
@@ -31,7 +31,7 @@ export const UserSavedEventsPanel = () => {
         <ul className={styles.grid}>
           {favoriteEvents.map((event) => (
             <li key={event.id}>
-              <HomeEventCard event={event} size="compact" />
+              <EventsCard event={event} size="compact" />
             </li>
           ))}
         </ul>

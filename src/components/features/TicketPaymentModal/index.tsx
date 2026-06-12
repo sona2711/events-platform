@@ -18,7 +18,10 @@ import {
   MAX_TICKET_QUANTITY,
   PAYMENT_METHOD_LABELS,
 } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
+
+const modalPrimaryButtonClass = `${buttonStyles.primaryButton} ${buttonStyles.fullWidthButton} ${styles.modalPrimaryButton}`
 import type {
   ContactFormValues,
   PaymentFormValues,
@@ -213,7 +216,11 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
                 <Input placeholder="johndoe@example.com" />
               </Form.Item>
 
-              <Button type="primary" className={styles.primaryButton} onClick={handleContactSubmit}>
+              <Button
+                type="primary"
+                className={modalPrimaryButtonClass}
+                onClick={handleContactSubmit}
+              >
                 Continue to Payment
               </Button>
             </Form>
@@ -332,7 +339,7 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
 
               <Button
                 type="primary"
-                className={styles.primaryButton}
+                className={modalPrimaryButtonClass}
                 loading={isSubmitting}
                 disabled={isSubmitting}
                 onClick={() => {
@@ -377,7 +384,7 @@ export const TicketPaymentModal = ({ event, open, onClose }: TicketPaymentModalP
                 </div>
               </div>
 
-              <Button type="primary" className={styles.primaryButton} onClick={handleDone}>
+              <Button type="primary" className={modalPrimaryButtonClass} onClick={handleDone}>
                 Done
               </Button>
             </section>

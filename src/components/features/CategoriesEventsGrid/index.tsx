@@ -1,5 +1,6 @@
 import { Button } from 'antd'
-import { HomeEventCard } from '@/components/features/HomeEventCard'
+import { EventsCard } from '@/components/_shared/EventsCard'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import type { CategoriesEventsGridProps } from './types'
 import styles from './styles.module.css'
 
@@ -18,7 +19,7 @@ export const CategoriesEventsGrid = ({
         <ul className={styles.grid}>
           {events.map((event) => (
             <li key={event.id}>
-              <HomeEventCard event={event} size="compact" />
+              <EventsCard event={event} size="compact" />
             </li>
           ))}
         </ul>
@@ -33,7 +34,7 @@ export const CategoriesEventsGrid = ({
           <Button
             variant="outlined"
             color="primary"
-            className={styles.loadMoreButton}
+            className={`${buttonStyles.secondaryButton} ${styles.loadMoreButton}`}
             onClick={onLoadMore}
           >
             {loadMoreLabel}

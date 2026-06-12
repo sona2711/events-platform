@@ -5,9 +5,9 @@
 
 .card:global(.ant-card) {
   background: var(--color-surface-card);
-  border-color: rgb(var(--color-burgundy-700-rgb) / 8%);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgb(var(--color-burgundy-700-rgb) / 4%);
+  border-color: var(--color-border-subtle);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
 }
 
 .card:global(.ant-card) :global(.ant-card-body) {
@@ -26,19 +26,23 @@
 
 .name:global(.ant-typography) {
   color: var(--color-text-primary);
+  font-family: var(--font-family-display);
   font-size: 16px;
   font-weight: 700;
   margin: 0;
 }
 
 .description:global(.ant-typography) {
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0;
 }
 
 .price:global(.ant-typography) {
   color: var(--color-text-primary);
+  font-family: var(--font-family-body);
   font-size: 15px;
   margin: 8px 0 0;
 }
@@ -47,32 +51,9 @@
   flex-shrink: 0;
 }
 
-.actions :global(.ant-btn) {
-  border-radius: 999px;
-  box-shadow: none;
-  font-size: 14px;
-  font-weight: 600;
-  height: 40px;
-  min-width: 88px;
-  padding: 0 24px;
-}
-
-.actions :global(.ant-btn-default) {
-  background: var(--color-surface-card);
-  border-color: var(--color-action-primary);
-  color: var(--color-action-primary);
-}
-
-.actions :global(.ant-btn-default:hover),
-.actions :global(.ant-btn-default:focus) {
-  background: rgb(38 101 214 / 8%);
-  border-color: var(--color-action-primary);
-  color: var(--color-action-primary);
-}
-
 .quantityControl {
-  background: rgb(38 101 214 / 10%);
-  border-radius: 999px;
+  background: var(--color-action-primary-muted);
+  border-radius: var(--button-radius);
   gap: 4px;
   min-height: 40px;
   padding: 4px 8px;
@@ -82,7 +63,7 @@
   align-items: center;
   background: transparent;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--button-radius);
   color: var(--color-action-primary);
   display: inline-flex;
   font-size: 18px;
@@ -96,7 +77,7 @@
 }
 
 .quantityControl :global(.ant-btn:hover:not(:disabled)) {
-  background: rgb(38 101 214 / 12%);
+  background: rgb(var(--color-blue-600-rgb) / 12%);
   color: var(--color-action-primary);
 }
 
@@ -106,6 +87,7 @@
 
 .quantityValue:global(.ant-typography) {
   color: var(--color-action-primary);
+  font-family: var(--font-family-body);
   font-size: 16px;
   min-width: 28px;
   text-align: center;

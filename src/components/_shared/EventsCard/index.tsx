@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CalendarOutlined,
   EnvironmentOutlined,
@@ -11,13 +11,12 @@ import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { selectIsEventFavorite, toggleFavorite } from '@/store/favorites'
 import { getCategoryAccent } from '@/components/features/homepage/categoryAccents'
-import type { HomeEventCardProps } from './types'
+import { joinClassNames } from './utils'
+import type { EventCardProps } from './types'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 const { Text, Title } = Typography
-
-const joinClassNames = (...classes: (string | undefined)[]): string =>
-  classes.filter(Boolean).join(' ')
 
 type FavoriteButtonProps = {
   eventId: string
@@ -56,33 +55,39 @@ const FavoriteButton = memo(({ eventId, eventTitle, className }: FavoriteButtonP
 
 FavoriteButton.displayName = 'FavoriteButton'
 
-export const HomeEventCard = memo(
-  ({ event, onBook, noSwipeClassName, size = 'default' }: HomeEventCardProps) => {
+export const EventsCard = memo(
+  ({ event, onBook, noSwipeClassName, size = 'default', surface = 'dark' }: EventCardProps) => {
     const { t } = useTranslation('home')
+    const navigate = useNavigate()
     const accent = getCategoryAccent(event.categoryLabel)
     const isFreePrice = event.priceLabel === 'Free'
     const favoriteClassName = joinClassNames(styles.favoriteButton, noSwipeClassName)
-    const bookClassName = joinClassNames(styles.bookButton, noSwipeClassName)
+    const bookClassName = joinClassNames(
+      buttonStyles.primaryButton,
+      buttonStyles.cardPrimaryButton,
+      styles.bookButton,
+      noSwipeClassName,
+    )
     const eventPath = `/event/${event.id}`
 
     const handleBookClick = useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
         e.stopPropagation()
 
-        onBook?.(event.id)
+        if (onBook) {
+          onBook(event.id)
+          return
+        }
+
+        navigate(`/checkout/${event.id}`)
       },
-      [onBook, event.id],
+      [navigate, onBook, event.id],
     )
 
-    const bookControl = onBook ? (
+    const bookControl = (
       <Button type="primary" className={bookClassName} onClick={handleBookClick}>
         {t('eventsGrid.book')}
       </Button>
-    ) : (
-      <Link className={bookClassName} to={eventPath}>
-        {t('eventsGrid.book')}
-      </Link>
     )
 
     const card = (
@@ -90,6 +95,7 @@ export const HomeEventCard = memo(
         className={joinClassNames(
           styles.card,
           size === 'compact' ? styles.cardCompact : undefined,
+          surface === 'light' ? styles.cardLight : undefined,
           styles[`accent${accent.charAt(0).toUpperCase() + accent.slice(1)}`],
         )}
       >
@@ -148,4 +154,4 @@ export const HomeEventCard = memo(
   },
 )
 
-HomeEventCard.displayName = 'HomeEventCard'
+EventsCard.displayName = 'EventsCard'

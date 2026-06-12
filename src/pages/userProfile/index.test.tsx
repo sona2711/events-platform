@@ -9,6 +9,8 @@ import '@/i18n'
 import i18n from '@/i18n'
 import profileEn from '@/locales/profile/en.json'
 import { CheckoutPage } from '@/pages/CheckoutPage'
+import { ThemeScope } from '@/components/_shared/ThemeScope'
+import { ThemeProvider } from '@/providers/theme'
 import { favoritesReducer } from '@/store/favorites'
 import { profileReducer } from '@/store/profile'
 import type { UserProfile } from './types'
@@ -45,22 +47,30 @@ const renderPage = (profile: UserProfile = loggedInProfile, favoriteEventIds: st
     store,
     ...render(
       <Provider store={store}>
-        <I18nextProvider i18n={i18n}>
-          <ConfigProvider>
-            <MemoryRouter initialEntries={['/profile']}>
-              <Routes>
-                <Route path="/profile" element={<UserProfilePage />} />
-                <Route path="/checkout/:eventId" element={<CheckoutPage />} />
-              </Routes>
-            </MemoryRouter>
-          </ConfigProvider>
-        </I18nextProvider>
+        <ThemeProvider>
+          <I18nextProvider i18n={i18n}>
+            <ConfigProvider>
+              <MemoryRouter initialEntries={['/profile']}>
+                <ThemeScope>
+                  <Routes>
+                    <Route path="/profile" element={<UserProfilePage />} />
+                    <Route path="/checkout/:eventId" element={<CheckoutPage />} />
+                  </Routes>
+                </ThemeScope>
+              </MemoryRouter>
+            </ConfigProvider>
+          </I18nextProvider>
+        </ThemeProvider>
       </Provider>,
     ),
   }
 }
 
 describe('UserProfilePage', () => {
+  afterEach(() => {
+    jest.useRealTimers()
+  })
+
   it('shows logged-in user data in sidebar and settings', async () => {
     const user = userEvent.setup()
     renderPage()
@@ -109,11 +119,13 @@ describe('UserProfilePage', () => {
 
   it('shows favorite event cards when saved events exist', async () => {
     const user = userEvent.setup()
-    renderPage(loggedInProfile, ['1', '2'])
+    renderPage(loggedInProfile, ['event-jazz-fest', 'event-tech-meetup-tumo'])
 
     await user.click(screen.getByRole('button', { name: profileEn.nav.saved }))
 
-    expect(screen.getByRole('heading', { name: 'Jazz Night at Cascade' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: 'Yerevan Jazz Night at Cascade' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Tech Meetup Yerevan' })).toBeInTheDocument()
   })
 
@@ -125,7 +137,7 @@ describe('UserProfilePage', () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
       renderPage()
 
-      const jazzFestCard = await screen.findByText('Yerevan Jazz Fest 2026')
+      const jazzFestCard = await screen.findByText('Yerevan Jazz Night at Cascade')
       expect(jazzFestCard.closest('article')).not.toBeNull()
 
       await user.click(
@@ -135,7 +147,7 @@ describe('UserProfilePage', () => {
       )
 
       await waitFor(() => {
-        expect(screen.getByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+        expect(screen.getByText('Yerevan Jazz Night at Cascade')).toBeInTheDocument()
         expect(screen.getByText('General Admission')).toBeInTheDocument()
       })
     } finally {
@@ -150,7 +162,7 @@ describe('UserProfilePage', () => {
     try {
       renderPage()
 
-      expect(await screen.findByText('Yerevan Jazz Fest 2026')).toBeInTheDocument()
+      expect(await screen.findByText('Yerevan Jazz Night at Cascade')).toBeInTheDocument()
       expect(screen.getByText('Yerevan Marathon 2026')).toBeInTheDocument()
     } finally {
       jest.useRealTimers()
@@ -165,7 +177,7 @@ describe('UserProfilePage', () => {
       const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
       renderPage()
 
-      await screen.findByText('Yerevan Jazz Fest 2026')
+      await screen.findByText('Yerevan Jazz Night at Cascade')
 
       await user.click(screen.getByRole('tab', { name: profileEn.bookings.tabs.past }))
       expect(screen.getByText('Armenian Wine Tasting')).toBeInTheDocument()

@@ -1,8 +1,13 @@
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Card, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { MIN_TICKET_QUANTITY } from '@/pages/CheckoutPage/consts'
-import { formatCheckoutAmount } from '@/pages/CheckoutPage/utils'
+import {
+  formatCheckoutAmount,
+  getTicketTierDescription,
+  getTicketTierName,
+} from '@/pages/CheckoutPage/utils'
 import type { CheckoutTicketSelectorProps } from './types'
 import styles from './styles.module.css'
 
@@ -17,7 +22,8 @@ export const CheckoutTicketSelector = ({
     <Flex vertical gap={16} className={styles.list}>
       {tiers.map((tier) => {
         const quantity = selection[tier.id] ?? 0
-        const ticketName = tier.name
+        const ticketName = getTicketTierName(tier)
+        const ticketDescription = getTicketTierDescription(tier)
         const isAtMin = quantity <= MIN_TICKET_QUANTITY
         const isAtMax = quantity >= tier.maxQuantity
 
@@ -29,7 +35,7 @@ export const CheckoutTicketSelector = ({
                   {ticketName}
                 </Typography.Title>
                 <Typography.Text type="secondary" className={styles.description}>
-                  {tier.description}
+                  {ticketDescription}
                 </Typography.Text>
                 <Typography.Text strong className={styles.price}>
                   {formatCheckoutAmount(tier.priceAmd, t('summary.free'))}
@@ -44,7 +50,6 @@ export const CheckoutTicketSelector = ({
                       icon={<MinusOutlined aria-hidden />}
                       aria-label={t('tickets.decreaseQuantity', { ticket: ticketName })}
                       disabled={isAtMin}
-                      className={styles.quantityButton}
                       onClick={() => onQuantityChange(tier.id, quantity - 1)}
                     />
                     <Typography.Text strong className={styles.quantityValue} aria-live="polite">
@@ -55,12 +60,15 @@ export const CheckoutTicketSelector = ({
                       icon={<PlusOutlined aria-hidden />}
                       aria-label={t('tickets.increaseQuantity', { ticket: ticketName })}
                       disabled={isAtMax}
-                      className={styles.quantityButton}
                       onClick={() => onQuantityChange(tier.id, quantity + 1)}
                     />
                   </Flex>
                 ) : (
-                  <Button type="default" onClick={() => onQuantityChange(tier.id, 1)}>
+                  <Button
+                    type="default"
+                    className={`${buttonStyles.secondaryButton} ${buttonStyles.cardPrimaryButton}`}
+                    onClick={() => onQuantityChange(tier.id, 1)}
+                  >
                     {t('tickets.add')}
                   </Button>
                 )}

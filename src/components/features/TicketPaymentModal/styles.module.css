@@ -382,8 +382,16 @@
   line-height: 1.35;
 }
 
-.paymentStep .primaryButton {
+.modalPrimaryButton:global(.ant-btn) {
+  height: 44px;
+  min-height: 44px;
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.paymentStep .modalPrimaryButton:global(.ant-btn) {
   height: 40px;
+  min-height: 40px;
 }
 
 .terms {
@@ -391,28 +399,6 @@
   color: var(--modal-muted);
   font-size: 11px;
   line-height: 1.45;
-}
-
-.primaryButton {
-  width: 100%;
-  height: 44px;
-  margin-top: 4px;
-  border-radius: 12px;
-  border: 0;
-  background: linear-gradient(135deg, var(--color-action-primary), var(--color-blue-600));
-  color: var(--color-home-surface);
-  font-size: 14px;
-  font-weight: 800;
-  box-shadow: 0 16px 34px -22px rgb(var(--color-home-accent-cyan-rgb) / 90%);
-}
-
-.primaryButton:hover {
-  background: linear-gradient(
-    135deg,
-    var(--color-lime-400),
-    var(--color-action-primary)
-  ) !important;
-  color: var(--color-home-surface) !important;
 }
 
 .receiptStep .header {
@@ -441,9 +427,10 @@
   flex: 0 1 auto;
 }
 
-.receiptStep .primaryButton {
+.receiptStep .modalPrimaryButton:global(.ant-btn) {
   flex-shrink: 0;
   height: 40px;
+  min-height: 40px;
   margin-top: 0;
 }
 

@@ -8,6 +8,7 @@ import type { FilterState } from '@/components/EventFiltersSidebar/types'
 import { CategoryTabs } from '@/components/features/CategoryTabs'
 import { CategoriesEventsGrid } from '@/components/features/CategoriesEventsGrid'
 import { CategoriesPageHeader } from '@/components/features/CategoriesPageHeader'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { DEFAULT_FILTERS, INITIAL_VISIBLE_COUNT, LOAD_MORE_BATCH } from './consts'
 import { MOCK_CATEGORY_EVENTS } from './mockEvents'
 import {
@@ -145,8 +146,9 @@ export const CategoriesPage = () => {
         <div className={styles.resultsColumn}>
           <div className={styles.mobileFilterBar}>
             <Button
-              type="default"
-              className={styles.mobileFilterButton}
+              variant="outlined"
+              color="primary"
+              className={`${buttonStyles.secondaryButton} ${buttonStyles.compactButton} ${styles.mobileFilterButton}`}
               icon={<FilterOutlined aria-hidden="true" />}
               aria-label={t('filtersAriaLabel')}
               aria-expanded={filtersOpen}

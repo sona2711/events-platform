@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { clearError, loginWithEmail, loginWithGoogle } from '@/store/authSlice'
 import type { LoginFormValues } from '@/types'
 import { LOGIN_NOTIFICATION_COPY } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 
 const { Title, Text } = Typography
@@ -99,7 +100,7 @@ export default function LoginPage() {
               size="large"
               block={true}
               loading={auth.loading}
-              className={styles.submitButton}
+              className={`${buttonStyles.primaryButton} ${buttonStyles.fullWidthButton}`}
             >
               Sign in
             </Button>

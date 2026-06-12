@@ -2,15 +2,15 @@ import { useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Flex, Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { HomeEventCard } from '@/components/features/HomeEventCard'
+import { EventsCard } from '@/components/_shared/EventsCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperInstance } from 'swiper'
 import { useEventBookingModal } from '@/hooks/useEventBookingModal'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
-  EVENTS_CARD_DATA,
   EVENT_BY_ID,
+  EVENTS_CARD_DATA,
   EVENTS_NEXT_BUTTON_CLASS,
   EVENTS_PREV_BUTTON_CLASS,
   SLIDER_BREAKPOINTS,
@@ -107,7 +107,7 @@ export const EventsGrid = () => {
             >
               {EVENTS_CARD_DATA.map((event) => (
                 <SwiperSlide key={event.id} className={styles.slide}>
-                  <HomeEventCard
+                  <EventsCard
                     event={event}
                     noSwipeClassName={SWIPER_NO_SWIPING_CLASS}
                     onBook={handleBook}

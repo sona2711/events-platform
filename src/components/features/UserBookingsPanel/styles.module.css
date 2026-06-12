@@ -1,8 +1,8 @@
 .panel {
   background: var(--color-surface-card);
-  border: 1px solid rgb(var(--color-burgundy-700-rgb) / 8%);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 24px;
-  box-shadow: 0 8px 24px rgb(var(--color-burgundy-700-rgb) / 6%);
+  box-shadow: var(--shadow-card);
   padding: 24px;
 }
 
@@ -12,14 +12,27 @@
 }
 
 .panel :global(.ant-tabs-nav::before) {
-  border-bottom-color: rgb(var(--color-burgundy-700-rgb) / 8%);
+  border-bottom-color: var(--color-divider);
 }
 
 .panel :global(.ant-tabs-tab) {
+  color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 600;
   padding: 8px 0;
   white-space: nowrap;
+}
+
+.panel :global(.ant-tabs-tab:hover .ant-tabs-tab-btn) {
+  color: var(--color-text-primary);
+}
+
+.panel :global(.ant-tabs-tab-active .ant-tabs-tab-btn) {
+  color: var(--color-action-primary);
+}
+
+.panel :global(.ant-tabs-ink-bar) {
+  background: var(--color-action-primary);
 }
 
 .bookingList {

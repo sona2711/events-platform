@@ -1,4 +1,4 @@
-import type { EventCardData } from '@/components/features/EventCard/types'
+import type { EventCardData } from '@/components/_shared/EventsCard/types'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { EXPLORE_EVENTS_CARD_DATA } from '@/components/features/ExploreAllEvents/consts'
 

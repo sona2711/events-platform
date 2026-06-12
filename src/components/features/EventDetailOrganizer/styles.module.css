@@ -1,0 +1,24 @@
+.section {
+  padding: clamp(24px, 3vw, 32px) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.label:global(.ant-typography) {
+  display: block;
+  margin: 0 0 10px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.name:global(.ant-typography) {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-display);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+}

@@ -1,6 +1,7 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Button, DatePicker, Input, Select } from 'antd'
 import type { Dayjs } from 'dayjs'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import { CATEGORY_OPTIONS, EVENT_OPTIONS, SEARCH_PLACEHOLDER, STATUS_OPTIONS } from './consts'
 import styles from './styles.module.css'
 import type { RegistrationsFilterBarProps } from './types'
@@ -61,7 +62,7 @@ export const RegistrationsFilterBar = ({
       </div>
 
       <Button
-        className={styles.resetButton}
+        className={`${buttonStyles.secondaryButton} ${styles.resetButton}`}
         onClick={onReset}
         type="default"
         aria-label="Reset all filters"

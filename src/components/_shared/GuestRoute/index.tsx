@@ -1,11 +1,11 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Navigate, Outlet, useLocation, type Location } from 'react-router-dom'
 import { Loader } from '@/components/_shared/Loader'
 import { useAppSelector } from '@/store/hooks'
 import { POST_AUTH_REDIRECT_PATH } from './consts'
 import styles from './styles.module.css'
 
 interface GuestRouteLocationState {
-  from?: { pathname: string }
+  from?: Location
 }
 
 export function GuestRoute() {
@@ -22,8 +22,22 @@ export function GuestRoute() {
 
   if (user) {
     const state = location.state as GuestRouteLocationState | null
-    const redirectTo = state?.from?.pathname ?? POST_AUTH_REDIRECT_PATH
-    return <Navigate to={redirectTo} replace />
+
+    if (state?.from) {
+      return (
+        <Navigate
+          to={{
+            pathname: state.from.pathname,
+            search: state.from.search,
+            hash: state.from.hash,
+          }}
+          state={state.from.state}
+          replace
+        />
+      )
+    }
+
+    return <Navigate to={POST_AUTH_REDIRECT_PATH} replace />
   }
 
   return <Outlet />

@@ -19,7 +19,7 @@ export const CheckoutPaymentForm = ({ onValidChange }: CheckoutPaymentFormProps)
 
   return (
     <>
-      <Form form={form} layout="vertical" onValuesChange={emitValidValues}>
+      <Form className={styles.form} form={form} layout="vertical" onValuesChange={emitValidValues}>
         <Row gutter={[24, 20]}>
           <Col span={24}>
             <Form.Item

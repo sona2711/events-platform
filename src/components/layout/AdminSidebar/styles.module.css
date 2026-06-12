@@ -1,7 +1,7 @@
 /* ─── Sidebar shell ─────────────────────────────────────────── */
 .sidebar {
-  background: #770016;
-  color: #ffffff;
+  background: var(--color-burgundy-700);
+  color: var(--color-white);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -23,7 +23,8 @@
 }
 
 .brand {
-  color: #ffffff;
+  color: var(--color-white);
+  font-family: var(--font-family-display);
   font-size: 22px;
   font-weight: 600;
   letter-spacing: 0;
@@ -32,7 +33,8 @@
 }
 
 .subtitle {
-  color: #c299a2;
+  color: rgb(var(--color-white-rgb) / 68%);
+  font-family: var(--font-family-body);
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -52,8 +54,9 @@
 .navLink {
   align-items: center;
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--color-white);
   display: flex;
+  font-family: var(--font-family-body);
   font-size: 16px;
   font-weight: 400;
   gap: 12px;
@@ -63,16 +66,16 @@
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgb(var(--color-white-rgb) / 10%);
+  color: var(--color-white);
 }
 
 .activeNavLink {
-  background: #a04c5b;
+  background: var(--color-burgundy-600);
 }
 
 .activeNavLink:hover {
-  background: #a04c5b;
+  background: var(--color-burgundy-600);
 }
 
 .navIcon {
@@ -96,10 +99,11 @@
 
 .createEventBtn:global(.ant-btn) {
   align-items: center;
-  background: #ffffff;
-  border-color: #ffffff;
-  border-radius: 999px;
-  color: #770016;
+  background: var(--color-white);
+  border-color: var(--color-white);
+  border-radius: var(--button-radius);
+  color: var(--color-burgundy-700);
+  font-family: var(--font-family-body);
   font-weight: 600;
   height: 40px;
   margin-bottom: 48px;
@@ -127,9 +131,9 @@
 
 .createEventBtn:global(.ant-btn:hover),
 .createEventBtn:global(.ant-btn:focus) {
-  background: #f2f2f2;
-  border-color: #f2f2f2;
-  color: #770016;
+  background: rgb(var(--color-white-rgb) / 92%);
+  border-color: rgb(var(--color-white-rgb) / 92%);
+  color: var(--color-burgundy-700);
 }
 
 .avatarRow {
@@ -144,7 +148,8 @@
 }
 
 .adminName {
-  color: #ffffff;
+  color: var(--color-white);
+  font-family: var(--font-family-body);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -153,7 +158,7 @@
 .logoutBtn:global(.ant-btn) {
   align-items: center;
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--color-white);
   gap: 12px;
   height: auto;
   justify-content: flex-start;
@@ -161,6 +166,7 @@
 }
 
 .logoutBtn:global(.ant-btn) > :global(span:not(.ant-btn-icon)) {
+  font-family: var(--font-family-body);
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -170,9 +176,9 @@
 .logoutBtn:global(.ant-btn.ant-btn-text:focus),
 .logoutBtn:global(.ant-btn.ant-btn-variant-text:hover),
 .logoutBtn:global(.ant-btn.ant-btn-variant-text:focus) {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(var(--color-white-rgb) / 10%);
   border-color: transparent;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 /* ─── Mobile toggle ─────────────────────────────────────────── */
@@ -190,7 +196,7 @@
 
 /* ─── Overlay ───────────────────────────────────────────────── */
 .overlay {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0 0 0 / 50%);
   height: 100vh;
   left: 0;
   position: fixed;
@@ -216,7 +222,7 @@
     border: none;
     border-radius: 8px;
     box-shadow: none;
-    color: #770016;
+    color: var(--color-burgundy-700);
     display: inline-flex;
     font-size: 22px;
     height: 40px;
@@ -236,13 +242,13 @@
   .mobileToggle:global(.ant-btn.ant-btn-variant-text:hover),
   .mobileToggle:global(.ant-btn.ant-btn-variant-text:focus),
   .mobileToggle:global(.ant-btn:active) {
-    background: rgba(119, 0, 22, 0.08);
+    background: rgb(var(--color-burgundy-700-rgb) / 8%);
     box-shadow: none;
-    color: #770016;
+    color: var(--color-burgundy-700);
   }
 
   .mobileClose:global(.ant-btn) {
-    color: #ffffff;
+    color: var(--color-white);
     display: inline-flex;
   }
 
@@ -250,8 +256,8 @@
   .mobileClose:global(.ant-btn.ant-btn-text:focus),
   .mobileClose:global(.ant-btn.ant-btn-variant-text:hover),
   .mobileClose:global(.ant-btn.ant-btn-variant-text:focus) {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(var(--color-white-rgb) / 10%);
     border-color: transparent;
-    color: #ffffff;
+    color: var(--color-white);
   }
 }

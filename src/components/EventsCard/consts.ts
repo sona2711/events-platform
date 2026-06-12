@@ -1,10 +1,5 @@
-import ArtImage from '@/assets/svg/Art.webp'
-import HikingImage from '@/assets/svg/Hiking.webp'
-import JazzImage from '@/assets/svg/JazzNight.webp'
-import TechImage from '@/assets/svg/TechSummit.webp'
-import WineImage from '@/assets/svg/WineTasting.webp'
-import { mapEventsToCardData } from '@/components/features/EventCard/utils'
-import type { ListingEventInput } from '@/components/features/EventCard/types'
+import { mapEventsToCardData } from '@/components/_shared/EventsCard/utils'
+import { getHomepageListingEvents } from '@/mock-api/listingEventUtils'
 import { Navigation } from 'swiper/modules'
 import type { SliderBreakpointConfig } from './types'
 
@@ -22,57 +17,11 @@ export const EVENTS_LAYOUT = {
   cardGap: 24,
 } as const
 
-export const EVENTS: ListingEventInput[] = [
-  {
-    id: 1,
-    title: 'Jazz Night at Cascade',
-    category: 'Music',
-    location: 'Cascade Complex',
-    date: 'Oct 18, 2026',
-    price: '8,000 AMD',
-    image: JazzImage,
-  },
-  {
-    id: 2,
-    title: 'Tech Meetup Yerevan',
-    category: 'Technology',
-    location: 'TUMO Center',
-    date: 'Nov 2, 2026',
-    price: 'Free',
-    image: TechImage,
-  },
-  {
-    id: 3,
-    title: 'Wine & Food Festival',
-    category: 'Festival',
-    location: 'Republic Square',
-    date: 'Nov 10, 2026',
-    price: '12,000 AMD',
-    image: WineImage,
-  },
-  {
-    id: 4,
-    title: 'Morning Hike to Hatis',
-    category: 'Adventure',
-    location: 'Hatis Mountain',
-    date: 'Jul 10, 2026',
-    price: '10,000 AMD',
-    image: HikingImage,
-  },
-  {
-    id: 5,
-    title: 'Art Exhibition',
-    category: 'Art',
-    location: 'National Gallery',
-    date: 'Aug 15, 2026',
-    price: '2,000 AMD',
-    image: ArtImage,
-  },
-]
+export const EVENTS = getHomepageListingEvents()
 
 export const EVENTS_CARD_DATA = mapEventsToCardData(EVENTS)
 
-export const EVENT_BY_ID = new Map(EVENTS.map((event) => [String(event.id), event]))
+export const EVENT_BY_ID = new Map(EVENTS.map((event) => [event.id, event]))
 
 export const SLIDER_BREAKPOINTS: SliderBreakpointConfig = {
   0: {

@@ -5,6 +5,7 @@ import type { InputRef } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { showNotification } from '@/providers/notifications/utils'
 import { EMAIL_PATTERN } from './consts'
+import buttonStyles from '@/components/_shared/TemplateButtons/styles.module.css'
 import styles from './styles.module.css'
 import { saveSubscriptionEmail } from './utils'
 
@@ -107,7 +108,12 @@ export const SubscribeBanner = () => {
                 </Text>
               ) : null}
             </div>
-            <Button className={styles.button} htmlType="submit" size="large" type="primary">
+            <Button
+              className={`${buttonStyles.primaryButton} ${buttonStyles.largeButton} ${buttonStyles.fullWidthButton}`}
+              htmlType="submit"
+              size="large"
+              type="primary"
+            >
               {t('subscribe.buttonLabel')}
             </Button>
           </form>
