@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import type { EventDetail } from '@/mock-api/eventsData'
 import { fetchEventById } from '@/mock-api/resolveEventById'
 import type { SupportedLanguage } from '@/i18n'
+import { useAppSelector } from '@/store/hooks'
+import { selectPaidEventIds } from '@/store/paidBookings'
 import {
   MOCK_HISTORICAL_BOOKING_SNAPSHOTS,
   MOCK_UPCOMING_BOOKING_SEEDS,
@@ -93,6 +95,7 @@ const getCancelledBookings = (bookings: UserBooking[]) =>
 
 export const useProfilePageData = () => {
   const { t: tCommon } = useTranslation('common')
+  const paidEventIds = useAppSelector(selectPaidEventIds)
   const [resolvedUpcomingBookings, setResolvedUpcomingBookings] = useState<UserBooking[]>([])
 
   const languageOptions: LanguageOption[] = useMemo(
@@ -134,10 +137,12 @@ export const useProfilePageData = () => {
     }
   }, [])
 
-  const allBookings = useMemo(
-    () => [...resolvedUpcomingBookings, ...historicalBookings],
-    [historicalBookings, resolvedUpcomingBookings],
-  )
+  const allBookings = useMemo(() => {
+    const upcomingWithPaidStatus = resolvedUpcomingBookings.map((booking) =>
+      paidEventIds.includes(booking.eventId) ? { ...booking, status: 'paid' as const } : booking,
+    )
+    return [...upcomingWithPaidStatus, ...historicalBookings]
+  }, [historicalBookings, paidEventIds, resolvedUpcomingBookings])
 
   const upcomingBookings = useMemo(() => getUpcomingBookings(allBookings), [allBookings])
   const pastBookings = useMemo(() => getPastBookings(allBookings), [allBookings])

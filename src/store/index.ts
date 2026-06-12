@@ -15,12 +15,14 @@ import {
   updateProfileDetails,
 } from './profile'
 import type { ProfileState } from './profile'
+import { markAsPaid, paidBookingsReducer, savePaidEventIdsToStorage } from './paidBookings'
 import type { AuthUser } from '@/types'
 
 const persistListener = createListenerMiddleware<{
   auth: ReturnType<typeof authReducer>
   profile: ProfileState
   favorites: FavoritesState
+  paidBookings: ReturnType<typeof paidBookingsReducer>
 }>()
 
 export const store = configureStore({
@@ -28,6 +30,7 @@ export const store = configureStore({
     auth: authReducer,
     profile: profileReducer,
     favorites: favoritesReducer,
+    paidBookings: paidBookingsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(persistListener.middleware),
 })
@@ -69,6 +72,13 @@ persistListener.startListening({
   matcher: isAnyOf(toggleFavorite),
   effect: (_, listenerApi) => {
     saveFavoritesToStorage(listenerApi.getState().favorites)
+  },
+})
+
+persistListener.startListening({
+  matcher: isAnyOf(markAsPaid),
+  effect: (_, listenerApi) => {
+    savePaidEventIdsToStorage(listenerApi.getState().paidBookings.eventIds)
   },
 })
 
