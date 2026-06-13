@@ -1,20 +1,27 @@
-import type { ChatMessage } from './types'
-import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder'
+import type { ChatMessage } from './types.js'
+import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder.js'
 import {
   linkifyScheduleEventLinks,
   SCHEDULE_ASSISTANT_EVENTS,
-} from '../../src/data/scheduleAssistantEvents'
-import { buildGeminiHistory } from './chatHistory'
-import { getGeminiModelName, getGoogleGenAI } from './client'
+} from './data/scheduleAssistantEvents.js'
+import { buildGeminiHistory } from './chatHistory.js'
+import { getGeminiModelName, getGoogleGenAI } from './client.js'
 
-const schedule = buildEventSchedule(SCHEDULE_ASSISTANT_EVENTS)
-const scheduleContext = formatScheduleForPrompt(schedule)
-const eventsListContext = SCHEDULE_ASSISTANT_EVENTS.map(
-  (event) =>
-    `- ${event.title} | ${event.date} | ${event.time} | ${event.location} | ${event.category} | ${event.price} [id: ${event.id}]`,
-).join('\n')
+let systemInstruction: string | undefined
 
-const SYSTEM_INSTRUCTION = `You are the Yerevan Pulsar events assistant. Speak directly to the user in a warm, helpful tone.
+const getSystemInstruction = (): string => {
+  if (systemInstruction) {
+    return systemInstruction
+  }
+
+  const schedule = buildEventSchedule(SCHEDULE_ASSISTANT_EVENTS)
+  const scheduleContext = formatScheduleForPrompt(schedule)
+  const eventsListContext = SCHEDULE_ASSISTANT_EVENTS.map(
+    (event) =>
+      `- ${event.title} | ${event.date} | ${event.time} | ${event.location} | ${event.category} | ${event.price} [id: ${event.id}]`,
+  ).join('\n')
+
+  systemInstruction = `You are the Yerevan Pulsar events assistant. Speak directly to the user in a warm, helpful tone.
 
 Your job is to answer questions about existing events on the platform. You do NOT create, edit, or publish events.
 
@@ -41,6 +48,9 @@ Guidelines:
 - Format replies using Markdown: use **bold** for event titles, bullet lists for multiple events, and short paragraphs otherwise.
 - When you mention an event by title, use **bold** for the title so it can link to the event page.`
 
+  return systemInstruction
+}
+
 export const generateEventsChatReply = async (messages: ChatMessage[]): Promise<string> => {
   const ai = getGoogleGenAI()
   const lastMessage = messages.at(-1)
@@ -54,7 +64,7 @@ export const generateEventsChatReply = async (messages: ChatMessage[]): Promise<
     model: getGeminiModelName(),
     history,
     config: {
-      systemInstruction: SYSTEM_INSTRUCTION,
+      systemInstruction: getSystemInstruction(),
     },
   })
 

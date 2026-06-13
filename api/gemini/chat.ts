@@ -1,5 +1,17 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { handleGeminiRoute } from '../../server/gemini/handlers'
+import { handleGeminiRoute } from '../../server/gemini/handlers.js'
+
+const parseRequestBody = (body: unknown): unknown => {
+  if (typeof body === 'string' && body.length > 0) {
+    try {
+      return JSON.parse(body) as unknown
+    } catch {
+      return body
+    }
+  }
+
+  return body
+}
 
 export default async function handler(
   request: VercelRequest,
@@ -12,7 +24,11 @@ export default async function handler(
   }
 
   try {
-    const result = await handleGeminiRoute(request.method, '/api/gemini/chat', request.body)
+    const result = await handleGeminiRoute(
+      request.method,
+      '/api/gemini/chat',
+      parseRequestBody(request.body),
+    )
 
     if (!result) {
       response.status(404).json({ message: 'Not found.' })
@@ -21,6 +37,8 @@ export default async function handler(
 
     response.status(result.status).json(result.body)
   } catch (error) {
+    console.error('[api/gemini/chat]', error)
+
     const message =
       error instanceof Error ? error.message : 'Failed to handle Gemini API request.'
     response.status(500).json({ message })

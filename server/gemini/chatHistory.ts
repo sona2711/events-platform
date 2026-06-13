@@ -1,4 +1,4 @@
-import type { ChatMessage } from './types'
+import type { ChatMessage } from './types.js'
 
 const toGeminiRole = (role: ChatMessage['role']): 'user' | 'model' =>
   role === 'assistant' ? 'model' : 'user'
