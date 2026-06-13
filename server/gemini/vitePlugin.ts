@@ -1,7 +1,7 @@
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import type { Connect } from 'vite'
 import type { Plugin } from 'vite'
-import { handleGeminiRoute } from '../../api/gemini/_lib/handlers'
+import { handleGeminiRoute } from '../../api/gemini/_lib/handlers.js'
 import { loadGeminiEnv } from './loadEnv'
 
 const readRequestBody = (request: IncomingMessage): Promise<unknown> =>

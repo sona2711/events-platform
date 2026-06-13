@@ -1,11 +1,11 @@
-import type { ChatMessage } from './types'
-import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder'
+import type { ChatMessage } from './types.js'
+import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder.js'
 import {
   linkifyScheduleEventLinks,
   SCHEDULE_ASSISTANT_EVENTS,
-} from './data/scheduleAssistantEvents'
-import { buildGeminiHistory } from './chatHistory'
-import { generateGeminiChatCompletion, getGeminiModelName } from './client'
+} from './data/scheduleAssistantEvents.js'
+import { buildGeminiHistory } from './chatHistory.js'
+import { generateGeminiChatCompletion, getGeminiModelName } from './client.js'
 
 let systemInstruction: string | undefined
 
@@ -52,7 +52,7 @@ Guidelines:
 }
 
 export const generateEventsChatReply = async (messages: ChatMessage[]): Promise<string> => {
-  const lastMessage = messages.at(-1)
+  const lastMessage = messages[messages.length - 1]
 
   if (!lastMessage || lastMessage.role !== 'user') {
     throw new Error('The last message must be from the user.')

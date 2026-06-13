@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { handleGeminiRoute } from './_lib/handlers'
+import { handleGeminiRoute } from './_lib/handlers.js'
 
 const parseRequestBody = (body: unknown): unknown => {
   if (typeof body === 'string' && body.length > 0) {

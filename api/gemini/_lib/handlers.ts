@@ -1,5 +1,5 @@
-import type { ChatMessage, ChatRequestBody } from './types'
-import { generateEventsChatReply } from './eventsChat'
+import type { ChatMessage, ChatRequestBody } from './types.js'
+import { generateEventsChatReply } from './eventsChat.js'
 
 const isChatMessage = (value: unknown): value is ChatMessage => {
   if (!value || typeof value !== 'object') return false
