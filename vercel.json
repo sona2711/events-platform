@@ -6,7 +6,7 @@
     }
   ],
   "functions": {
-    "api/gemini/chat.cjs": {
+    "api/gemini/chat.ts": {
       "maxDuration": 30
     }
   }

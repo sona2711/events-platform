@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { handleGeminiRoute } from './handlers'
+import { handleGeminiRoute } from './_lib/handlers'
 
 const parseRequestBody = (body: unknown): unknown => {
   if (typeof body === 'string' && body.length > 0) {
@@ -13,7 +13,10 @@ const parseRequestBody = (body: unknown): unknown => {
   return body
 }
 
-async function handler(request: VercelRequest, response: VercelResponse): Promise<void> {
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse,
+): Promise<void> {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST')
     response.status(405).json({ message: 'Method not allowed.' })
@@ -41,5 +44,3 @@ async function handler(request: VercelRequest, response: VercelResponse): Promis
     response.status(500).json({ message })
   }
 }
-
-export default handler

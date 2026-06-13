@@ -1,6 +1,6 @@
-export type { ScheduleAssistantEvent } from '../../server/gemini/data/scheduleAssistantEvents'
+export type { ScheduleAssistantEvent } from '../../api/gemini/_lib/data/scheduleAssistantEvents'
 export {
   SCHEDULE_ASSISTANT_EVENTS,
   getEventDetailPath,
   linkifyScheduleEventLinks,
-} from '../../server/gemini/data/scheduleAssistantEvents'
+} from '../../api/gemini/_lib/data/scheduleAssistantEvents'
