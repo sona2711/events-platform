@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { render, screen } from '@testing-library/react'
 import '@/i18n'
 import i18n from '@/i18n'
+import { EXPLORE_ALL_EVENTS_SECTION_ID } from '@/components/features/homepage/consts'
 import { HERO_FEATURED_EVENT } from '@/components/features/homepage/homeContent'
 import { Hero } from './index'
 
@@ -37,7 +38,7 @@ describe('Hero', () => {
     )
     expect(screen.getByRole('link', { name: 'View This Week' })).toHaveAttribute(
       'href',
-      '/categories',
+      `#${EXPLORE_ALL_EVENTS_SECTION_ID}`,
     )
   })
 
@@ -49,7 +50,13 @@ describe('Hero', () => {
         name: `Featured event: ${HERO_FEATURED_EVENT.title}`,
       }),
     ).toHaveAttribute('href', `/event/${HERO_FEATURED_EVENT.id}`)
-    expect(screen.getByRole('link', { name: 'Music' })).toHaveAttribute('href', '/categories')
-    expect(screen.getByRole('link', { name: 'Technology' })).toHaveAttribute('href', '/categories')
+    expect(screen.getByRole('link', { name: 'Music' })).toHaveAttribute(
+      'href',
+      '/categories?category=music',
+    )
+    expect(screen.getByRole('link', { name: 'Arts' })).toHaveAttribute(
+      'href',
+      '/categories?category=arts',
+    )
   })
 })

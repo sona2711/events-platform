@@ -25,7 +25,20 @@ const postGeminiChat = async (body: ChatRequest): Promise<ScheduleChatResponse> 
     body: JSON.stringify(body),
   })
 
-  const payload: unknown = await response.json()
+  const responseText = await response.text()
+  let payload: unknown = null
+
+  if (responseText) {
+    try {
+      payload = JSON.parse(responseText) as unknown
+    } catch {
+      throw new Error(
+        response.ok
+          ? 'Invalid response from the events assistant.'
+          : responseText.slice(0, 200) || 'Failed to reach the events assistant.',
+      )
+    }
+  }
 
   if (!response.ok) {
     const message =

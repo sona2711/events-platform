@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { fileURLToPath } from 'url'
-import { geminiApiPlugin } from './api/gemini/vitePlugin'
+import { geminiApiPlugin } from './server/gemini/vitePlugin'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 

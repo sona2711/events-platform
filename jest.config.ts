@@ -29,6 +29,7 @@ const config: Config = {
     '**/__tests__/**/*.{ts,tsx}',
     '**/*.{spec,test}.{ts,tsx}',
     'api/**/*.{spec,test}.{ts,tsx}',
+    'server/**/*.{spec,test}.{ts,tsx}',
   ],
   testPathIgnorePatterns: ['/node_modules/', '/tests/'],
   coverageDirectory: 'coverage',
