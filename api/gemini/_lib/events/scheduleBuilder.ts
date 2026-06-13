@@ -1,12 +1,6 @@
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 import type { ScheduleDay, ScheduleEvent, SchedulePlace, ScheduleSlot } from '../types.js'
 
-dayjs.extend(customParseFormat)
-
-const EVENT_DATE_FORMAT = 'MMM D, YYYY'
-
-const parseEventDate = (date: string): dayjs.Dayjs => dayjs(date, EVENT_DATE_FORMAT)
+const parseEventDate = (date: string): number => Date.parse(date)
 
 const compareByTime = (left: ScheduleEvent, right: ScheduleEvent): number => {
   const leftMinutes = parseTimeToMinutes(left.time)
@@ -89,11 +83,11 @@ export const buildEventSchedule = (events: ScheduleEvent[]): ScheduleDay[] => {
       const left = parseEventDate(leftDate)
       const right = parseEventDate(rightDate)
 
-      if (!left.isValid() || !right.isValid()) {
+      if (Number.isNaN(left) || Number.isNaN(right)) {
         return leftDate.localeCompare(rightDate)
       }
 
-      return left.valueOf() - right.valueOf()
+      return left - right
     })
     .map(([date, dateEvents]) => ({
       date,
