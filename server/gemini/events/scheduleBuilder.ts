@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import type { ScheduleDay, ScheduleEvent, SchedulePlace, ScheduleSlot } from '../types.js'
+import type { ScheduleDay, ScheduleEvent, SchedulePlace, ScheduleSlot } from '../types'
 
 dayjs.extend(customParseFormat)
 

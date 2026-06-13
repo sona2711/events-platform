@@ -1,11 +1,11 @@
-import type { ChatMessage } from './types.js'
-import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder.js'
+import type { ChatMessage } from './types'
+import { buildEventSchedule, formatScheduleForPrompt } from './events/scheduleBuilder'
 import {
   linkifyScheduleEventLinks,
   SCHEDULE_ASSISTANT_EVENTS,
-} from './data/scheduleAssistantEvents.js'
-import { buildGeminiHistory } from './chatHistory.js'
-import { getGeminiModelName, getGoogleGenAI } from './client.js'
+} from './data/scheduleAssistantEvents'
+import { buildGeminiHistory } from './chatHistory'
+import { generateGeminiChatCompletion, getGeminiModelName } from './client'
 
 let systemInstruction: string | undefined
 
@@ -52,28 +52,18 @@ Guidelines:
 }
 
 export const generateEventsChatReply = async (messages: ChatMessage[]): Promise<string> => {
-  const ai = getGoogleGenAI()
   const lastMessage = messages.at(-1)
 
   if (!lastMessage || lastMessage.role !== 'user') {
     throw new Error('The last message must be from the user.')
   }
 
-  const history = buildGeminiHistory(messages)
-  const chat = ai.chats.create({
+  const reply = await generateGeminiChatCompletion({
     model: getGeminiModelName(),
-    history,
-    config: {
-      systemInstruction: getSystemInstruction(),
-    },
+    systemInstruction: getSystemInstruction(),
+    history: buildGeminiHistory(messages),
+    message: lastMessage.content,
   })
-
-  const response = await chat.sendMessage({ message: lastMessage.content })
-  const reply = response.text?.trim() ?? ''
-
-  if (!reply) {
-    throw new Error('Gemini returned an empty reply.')
-  }
 
   return linkifyScheduleEventLinks(reply)
 }

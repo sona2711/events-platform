@@ -6,9 +6,8 @@
     }
   ],
   "functions": {
-    "api/gemini/chat.ts": {
-      "maxDuration": 30,
-      "includeFiles": "server/gemini/**"
+    "api/gemini/chat.cjs": {
+      "maxDuration": 30
     }
   }
 }
