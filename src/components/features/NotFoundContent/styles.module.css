@@ -228,6 +228,7 @@
   .actions :global(a) {
     width: 100%;
     max-width: none;
+    height: var(--button-height-default);
     min-height: var(--button-height-default);
     padding: 0 24px;
     font-size: 16px;
