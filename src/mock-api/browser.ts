@@ -6,7 +6,7 @@ export const worker = setupWorker(...handlers)
 export const startMockWorker = () =>
   worker.start({
     onUnhandledRequest(request, print) {
-      if (request.url.includes('/api/gemini/')) {
+      if (request.url.includes('/api/gemini/') || request.url.includes('/api/telegram/')) {
         return
       }
 

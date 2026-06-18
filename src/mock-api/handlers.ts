@@ -16,14 +16,6 @@ const isSubscriptionRequestBody = (value: unknown): value is SubscriptionRequest
 }
 
 export const handlers = [
-  http.post(/https:\/\/api\.telegram\.org\/bot[^/]+\/sendMessage/, () => {
-    return HttpResponse.json({
-      ok: true,
-      result: {
-        message_id: Date.now(),
-      },
-    })
-  }),
   http.get('/api/events', () => {
     return HttpResponse.json(MOCK_EVENTS)
   }),
