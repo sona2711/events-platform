@@ -4,7 +4,7 @@ import { Typography } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { EventsCard } from '@/components/_shared/EventsCard'
 import { HomeSidebarCard } from '@/components/features/HomeSidebarCard'
-import { useEventBookingModal } from '@/hooks/useEventBookingModal'
+import { useResponsiveEventBooking } from '@/hooks/useResponsiveEventBooking'
 import { TRENDING_EVENTS, WEEKEND_EVENTS } from '@/components/features/homepage/homeContent'
 import { MOCK_CATEGORY_EVENTS } from '@/pages/categoriesPage/mockEvents'
 import { getCatalogCategoryItems } from '@/pages/categoriesPage/utils'
@@ -25,7 +25,7 @@ const CATEGORY_TILE_ACCENTS = [
 export const ExploreAllEvents = () => {
   const { t } = useTranslation('home')
   const resolveEvent = useCallback((eventId: string) => EXPLORE_EVENT_BY_ID.get(eventId), [])
-  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
+  const { handleBook, bookingModal } = useResponsiveEventBooking({ resolveEvent })
 
   const mainEvents = EXPLORE_EVENTS_CARD_DATA.slice(0, 4)
   const gridEvents = EXPLORE_EVENTS_CARD_DATA.slice(4)

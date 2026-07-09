@@ -26,7 +26,12 @@
   "header": {
     "toggleMenu": "Open navigation menu",
     "closeMenu": "Close navigation menu",
-    "openProfile": "Open profile for {{name}}"
+    "openProfile": "Open profile for {{name}}",
+    "openUserMenu": "Open menu for {{name}}",
+    "userMenu": {
+      "profile": "Profile",
+      "logout": "Logout"
+    }
   },
   "adminNav": {
     "dashboard": "Dashboard",

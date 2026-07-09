@@ -3,7 +3,7 @@
   --color-text-secondary: var(--color-home-text-muted);
   --color-text-on-brand: var(--color-home-surface);
   --header-brand: var(--color-home-accent-cyan);
-  --header-brand-hover: var(--color-accent-bright);
+  --header-brand-hover: var(--color-home-accent-cyan);
   --header-brand-rgb: var(--color-home-accent-cyan-rgb);
   --header-surface: rgb(255 255 255 / 14%);
   --header-surface-mobile: rgb(255 255 255 / 18%);
@@ -162,16 +162,44 @@
   display: none;
 }
 
-.userBlock {
+.userMenuTrigger {
   align-items: center;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid var(--header-border);
+  border-radius: 9999px;
   cursor: pointer;
   display: flex;
   gap: 12px;
-  text-decoration: none;
+  padding: 6px 16px 6px 6px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.userBlock:hover .userName {
+.userMenuTrigger:hover,
+.userMenuTrigger:focus-visible {
+  background: rgb(255 255 255 / 16%);
+  border-color: rgb(var(--header-brand-rgb) / 28%);
+}
+
+.userMenuTrigger:hover .userName,
+.userMenuTrigger:focus-visible .userName {
   color: var(--header-brand);
+}
+
+.userMenuTriggerLight {
+  background: var(--color-white);
+  border-color: rgb(var(--color-neutral-950-rgb) / 12%);
+}
+
+.userMenuTriggerLight:hover,
+.userMenuTriggerLight:focus-visible {
+  background: var(--color-white);
+  border-color: rgb(var(--color-home-accent-cyan-rgb) / 35%);
+}
+
+.userMenuTriggerLight .userName {
+  color: var(--color-light-text-primary);
 }
 
 .avatar {
@@ -194,32 +222,51 @@
   white-space: nowrap;
 }
 
-.logoutButton {
-  background: var(--header-filled-bg);
-  border: 0;
-  border-radius: 999px;
-  color: var(--header-filled-text);
-  cursor: pointer;
-  font-size: 16px;
+.userMenuOverlay:global(.ant-dropdown) :global(.ant-dropdown-menu) {
+  border-radius: 16px;
+  min-width: 160px;
+  padding: 6px;
+}
+
+.userMenuOverlay:global(.ant-dropdown) :global(.ant-dropdown-menu-item) {
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 14px 24px;
-  transition: background-color 0.2s ease;
-  white-space: nowrap;
 }
 
-.logoutButton:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
+.userMenuOverlayDark:global(.ant-dropdown) :global(.ant-dropdown-menu) {
+  background: var(--color-home-surface-elevated);
+  border: 1px solid var(--color-home-border);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 40%);
 }
 
-.logoutButton:hover:not(:disabled),
-.logoutButton:focus-visible:not(:disabled) {
-  background: var(--header-filled-bg-hover);
-  color: var(--header-filled-text);
-  filter: brightness(1.08);
+.userMenuOverlayDark:global(.ant-dropdown) :global(.ant-dropdown-menu-item) {
+  color: var(--color-home-text);
 }
 
-@media (max-width: 820px) {
+.userMenuOverlayDark:global(.ant-dropdown) :global(.ant-dropdown-menu-item:hover),
+.userMenuOverlayDark:global(.ant-dropdown) :global(.ant-dropdown-menu-item-active) {
+  background: rgb(var(--color-home-accent-cyan-rgb) / 14%);
+  color: var(--color-home-accent-cyan);
+}
+
+.userMenuOverlayLight:global(.ant-dropdown) :global(.ant-dropdown-menu) {
+  background: var(--color-white);
+  border: 1px solid rgb(var(--color-neutral-950-rgb) / 12%);
+  box-shadow: 0 12px 32px rgb(var(--color-neutral-950-rgb) / 12%);
+}
+
+.userMenuOverlayLight:global(.ant-dropdown) :global(.ant-dropdown-menu-item) {
+  color: var(--color-light-text-primary);
+}
+
+.userMenuOverlayLight:global(.ant-dropdown) :global(.ant-dropdown-menu-item:hover),
+.userMenuOverlayLight:global(.ant-dropdown) :global(.ant-dropdown-menu-item-active) {
+  background: rgb(var(--color-home-accent-cyan-rgb) / 10%);
+  color: var(--color-home-accent-cyan);
+}
+
+@media (max-width: 1179px) {
   .header {
     padding-block: 20px;
   }
@@ -316,6 +363,11 @@
     text-align: center;
   }
 
+  .userMenuTrigger {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
   .overlay {
     background: rgb(0 0 0 / 45%);
     display: block;
@@ -348,5 +400,10 @@
 
   .userName {
     max-width: 140px;
+  }
+
+  .userMenuTrigger {
+    justify-content: flex-start;
+    width: 100%;
   }
 }

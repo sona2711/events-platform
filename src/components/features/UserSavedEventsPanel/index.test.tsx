@@ -37,7 +37,7 @@ const renderPanel = (favoriteEventIds: string[] = []) =>
             <LocationProbe />
             <Routes>
               <Route path="/profile" element={<UserSavedEventsPanel />} />
-              <Route path="/checkout/:eventId" element={<div>Checkout</div>} />
+              <Route path="/event/:eventId" element={<div>Event details</div>} />
             </Routes>
           </MemoryRouter>
         </ConfigProvider>
@@ -73,14 +73,14 @@ describe('UserSavedEventsPanel', () => {
     expect(screen.queryByText(profileEn.sections.saved.description)).not.toBeInTheDocument()
   })
 
-  it('navigates to checkout when a saved event book button is clicked', async () => {
+  it('navigates to the event detail page when a saved event book button is clicked', async () => {
     const user = userEvent.setup()
     renderPanel(['event-modern-art'])
 
     const bookButtons = screen.getAllByRole('button', { name: 'Book' })
     await user.click(bookButtons[0])
 
-    expect(screen.getByTestId('current-path')).toHaveTextContent('/checkout/event-modern-art')
-    expect(screen.getByText('Checkout')).toBeInTheDocument()
+    expect(screen.getByTestId('current-path')).toHaveTextContent('/event/event-modern-art')
+    expect(screen.getByText('Event details')).toBeInTheDocument()
   })
 })

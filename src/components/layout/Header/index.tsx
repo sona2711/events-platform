@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Button, Dropdown } from 'antd'
+import type { MenuProps } from 'antd'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/_shared/LanguageSwitcher'
 import { ThemeToggle } from '@/components/_shared/ThemeToggle'
+import { useTheme } from '@/providers/theme'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { logout, selectAuthLoading, selectAuthUser } from '@/store/authSlice'
 import { selectProfile } from '@/store/profile'
@@ -20,7 +22,10 @@ const getNavLinkClassName =
 export function Header() {
   const { t } = useTranslation('common')
   const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const { theme } = useTheme()
   const showThemeToggle = pathname !== '/'
+  const isLightTheme = theme === 'light'
   const dispatch = useAppDispatch()
   const user = useAppSelector(selectAuthUser)
   const profile = useAppSelector(selectProfile)
@@ -35,6 +40,27 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const closeMobile = () => setMobileOpen(false)
+
+  const userMenuItems = useMemo<MenuProps['items']>(
+    () => [
+      { key: 'profile', label: t('header.userMenu.profile') },
+      { key: 'logout', label: t('header.userMenu.logout'), disabled: loading },
+    ],
+    [loading, t],
+  )
+
+  const handleUserMenuClick: MenuProps['onClick'] = ({ key }) => {
+    if (key === 'profile') {
+      navigate('/profile')
+      closeMobile()
+      return
+    }
+
+    if (key === 'logout') {
+      handleLogout()
+      closeMobile()
+    }
+  }
 
   useEffect(() => {
     if (!mobileOpen) {
@@ -90,25 +116,31 @@ export function Header() {
             {showThemeToggle ? <ThemeToggle /> : null}
             <LanguageSwitcher />
             {user ? (
-              <>
-                <Link
-                  className={styles.userBlock}
-                  to="/profile"
-                  onClick={closeMobile}
-                  aria-label={t('header.openProfile', { name: displayName })}
+              <Dropdown
+                menu={{ items: userMenuItems, onClick: handleUserMenuClick }}
+                trigger={['click']}
+                placement="bottomRight"
+                overlayClassName={
+                  isLightTheme
+                    ? `${styles.userMenuOverlay} ${styles.userMenuOverlayLight}`
+                    : `${styles.userMenuOverlay} ${styles.userMenuOverlayDark}`
+                }
+                getPopupContainer={(trigger) => trigger.closest('header') ?? document.body}
+              >
+                <button
+                  type="button"
+                  className={
+                    isLightTheme
+                      ? `${styles.userMenuTrigger} ${styles.userMenuTriggerLight}`
+                      : styles.userMenuTrigger
+                  }
+                  aria-label={t('header.openUserMenu', { name: displayName })}
+                  aria-haspopup="menu"
                 >
                   <img className={styles.avatar} src={avatarUrl} alt="" width={40} height={40} />
                   <span className={styles.userName}>{displayName}</span>
-                </Link>
-                <button
-                  type="button"
-                  className={styles.logoutButton}
-                  onClick={handleLogout}
-                  disabled={loading}
-                >
-                  {t('auth.logout')}
                 </button>
-              </>
+              </Dropdown>
             ) : (
               AUTH_LINKS.map((link) => (
                 <NavLink
