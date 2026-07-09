@@ -26,7 +26,12 @@
   "header": {
     "toggleMenu": "Բացել նավիգացիոն մենյուն",
     "closeMenu": "Փակել նավիգացիոն մենյուն",
-    "openProfile": "Բացել {{name}}-ի պրոֆիլը"
+    "openProfile": "Բացել {{name}}-ի պրոֆիլը",
+    "openUserMenu": "Բացել {{name}}-ի մենյուն",
+    "userMenu": {
+      "profile": "Պրոֆիլ",
+      "logout": "Ելք"
+    }
   },
   "adminNav": {
     "dashboard": "Վահանակ",

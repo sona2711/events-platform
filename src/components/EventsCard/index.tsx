@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { EventsCard } from '@/components/_shared/EventsCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperInstance } from 'swiper'
-import { useEventBookingModal } from '@/hooks/useEventBookingModal'
+import { useResponsiveEventBooking } from '@/hooks/useResponsiveEventBooking'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import {
@@ -24,7 +24,7 @@ const { Title, Text, Paragraph } = Typography
 export const EventsGrid = () => {
   const { t } = useTranslation('home')
   const resolveEvent = useCallback((eventId: string) => EVENT_BY_ID.get(eventId), [])
-  const { handleBook, bookingModal } = useEventBookingModal({ resolveEvent })
+  const { handleBook, bookingModal } = useResponsiveEventBooking({ resolveEvent })
   const navigationPrevRef = useRef<HTMLButtonElement>(null)
   const navigationNextRef = useRef<HTMLButtonElement>(null)
   const navigationConfigRef = useRef({

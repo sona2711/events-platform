@@ -26,7 +26,12 @@
   "header": {
     "toggleMenu": "Открыть меню навигации",
     "closeMenu": "Закрыть меню навигации",
-    "openProfile": "Открыть профиль {{name}}"
+    "openProfile": "Открыть профиль {{name}}",
+    "openUserMenu": "Открыть меню {{name}}",
+    "userMenu": {
+      "profile": "Профиль",
+      "logout": "Выход"
+    }
   },
   "adminNav": {
     "dashboard": "Дашборд",

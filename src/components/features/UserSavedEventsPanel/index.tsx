@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Empty, Typography } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { EventsCard } from '@/components/_shared/EventsCard'
+import { getEventDetailPath } from '@/hooks/useResponsiveEventBooking'
 import { EVENTS_CARD_DATA } from '@/components/EventsCard/consts'
 import { MOCK_CATEGORY_EVENTS } from '@/pages/categoriesPage/mockEvents'
 import { selectFavoriteEventIds } from '@/store/favorites'
@@ -14,7 +16,15 @@ const ALL_SAVED_EVENT_CARD_DATA = [...EVENTS_CARD_DATA, ...MOCK_CATEGORY_EVENTS]
 
 export const UserSavedEventsPanel = () => {
   const { t } = useTranslation('profile')
+  const navigate = useNavigate()
   const favoriteEventIds = useAppSelector(selectFavoriteEventIds)
+
+  const handleBook = useCallback(
+    (eventId: string) => {
+      navigate(getEventDetailPath(eventId))
+    },
+    [navigate],
+  )
 
   const favoriteEvents = useMemo(
     () => ALL_SAVED_EVENT_CARD_DATA.filter((event) => favoriteEventIds.includes(event.id)),
@@ -31,7 +41,7 @@ export const UserSavedEventsPanel = () => {
         <ul className={styles.grid}>
           {favoriteEvents.map((event) => (
             <li key={event.id}>
-              <EventsCard event={event} size="compact" />
+              <EventsCard event={event} size="compact" onBook={handleBook} />
             </li>
           ))}
         </ul>

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Grid } from 'antd'
 import { configureStore } from '@reduxjs/toolkit'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { ReactNode } from 'react'
@@ -50,7 +51,16 @@ jest.mock('@/components/features/TicketPaymentModal', () => ({
     ) : null,
 }))
 
-function renderEventsGrid() {
+const useBreakpointSpy = jest.spyOn(Grid, 'useBreakpoint')
+
+const LocationProbe = () => {
+  const { pathname } = useLocation()
+  return <span data-testid="current-path">{pathname}</span>
+}
+
+function renderEventsGrid({ desktop = true }: { desktop?: boolean } = {}) {
+  useBreakpointSpy.mockReturnValue(desktop ? { md: true } : { md: false })
+
   const store = configureStore({
     reducer: {
       favorites: favoritesReducer,
@@ -60,8 +70,12 @@ function renderEventsGrid() {
   return render(
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <EventsGrid />
+        <MemoryRouter initialEntries={['/']}>
+          <LocationProbe />
+          <Routes>
+            <Route path="/" element={<EventsGrid />} />
+            <Route path="/event/:eventId" element={<div>Event details</div>} />
+          </Routes>
         </MemoryRouter>
       </I18nextProvider>
     </Provider>,
@@ -91,11 +105,11 @@ describe('EventsGrid', () => {
     }
   })
 
-  it('opens and closes the payment modal for the booked event', async () => {
+  it('opens and closes the payment modal for the booked event on desktop', async () => {
     const user = userEvent.setup({ delay: null })
     const firstEvent = EVENTS_CARD_DATA[0]
 
-    renderEventsGrid()
+    renderEventsGrid({ desktop: true })
 
     await user.click(screen.getAllByRole('button', { name: 'Book' })[0])
 
@@ -108,4 +122,17 @@ describe('EventsGrid', () => {
 
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
   }, 10000)
+
+  it('navigates to the event detail page when book is clicked on mobile', async () => {
+    const user = userEvent.setup({ delay: null })
+    const firstEvent = EVENTS_CARD_DATA[0]
+
+    renderEventsGrid({ desktop: false })
+
+    await user.click(screen.getAllByRole('button', { name: 'Book' })[0])
+
+    expect(screen.getByTestId('current-path')).toHaveTextContent(`/event/${firstEvent.id}`)
+    expect(screen.getByText('Event details')).toBeTruthy()
+    expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
+  })
 })

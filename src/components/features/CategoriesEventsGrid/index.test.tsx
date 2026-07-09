@@ -69,7 +69,7 @@ describe('CategoriesEventsGrid', () => {
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
   })
 
-  it('navigates to checkout when a catalog card book button is clicked', async () => {
+  it('navigates to the event detail page when a catalog card book button is clicked', async () => {
     const user = userEvent.setup()
 
     renderGrid()
@@ -77,8 +77,8 @@ describe('CategoriesEventsGrid', () => {
     const bookButtons = screen.getAllByRole('button', { name: 'Book' })
     await user.click(bookButtons[0])
 
-    expect(screen.getByTestId('current-path')).toHaveTextContent(`/checkout/${firstEvent.id}`)
-    expect(screen.getByText('Checkout')).toBeTruthy()
+    expect(screen.getByTestId('current-path')).toHaveTextContent(`/event/${firstEvent.id}`)
+    expect(screen.getByText('Event details')).toBeTruthy()
     expect(screen.queryByRole('dialog', { name: /ticket payment/i })).toBeNull()
   })
 })
